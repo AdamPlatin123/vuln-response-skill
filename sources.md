@@ -47,7 +47,7 @@
 | S304 | LMCache GHSA-w5f2-9q9c-ff4h | 一手 | https://github.com/LMCache/LMCache/security/advisories/GHSA-w5f2-9q9c-ff4h | CVE-2026-105192；ZMQ 未认证 pickle RCE，CVSS 9.8；修 `0.5.6` | 已核实（侦察交件） |
 | S305 | CERT Polska 公告 CVE-2026-103663 | 一手 | https://cert.pl/en/posts/2026/10/CVE-2026-103663/ | Ollama **`>=0.34.2 <0.35.0`**（cvelistV5 semver，见 S315）；`/api/pull` 路径穿越 → **重启后**执行写入文件（`UI:P`，非即时）；条件 CVSS 4.0：无 `/usr/lib/ollama` 写权限 **6.9**、有写权限（多数 Docker 默认 root）**9.4**；CISA-ADP SSVC `Exploitation: none`；修复 `0.35.0`；披露 2026-10-08 | **CNA 记录**：`assignerShortName` = CERT-PL（原始 JSON 见 **S315**）；受区间按 semver `>=0.34.2 <0.35.0`；条件 CVSS 6.9 / 9.4；SSVC `Exploitation: none`；⚠️ Ollama release note 静默 |
 | S306 | ThaiCERT 转述 GitLab AI Gateway | 二手 | https://www.thaicert.or.th/en/2026/10/05/gitlab-patches-critical-ai-gateway-vulnerability-that-could-allow-command-execution-on-self-hosted-gateways/ | CVE-2026-90970；模板沙箱逃逸，CVSS 9.9；修 `19.2.4` / `19.3.2` / `19.4.1` | 二手；**已被 S308（GitLab 官方）替代**，仅留时间线 |
-| S307 | VulDB 候选（传闻，CVE-2026-114053 / 105754） | 未确认 | —（无一手 URL；GHSA-QX62 只对应 S303 的 105775） | CVE-2026-114053（AutoProcessor RCE）、CVE-2026-105754（多模态传输） | 未确认；未核实到官方 GHSA，不入结论 |
+| S307 | VulDB 候选（传闻，CVE-2026-114053 / 105754） | 未确认 | —（无一手 URL；GHSA-QX62 只对应 S303 的 105775） | CVE-2026-114053（AutoProcessor RCE）、CVE-2026-105754（多模态传输） | 未确认；未核实到官方 GHSA，不入结论 ；**105754 已于 W7 取得一手 GHSA（S437），升 verified；114053 仍未确认** |
 | S308 | GitLab 官方补丁发布页：AI Gateway 19.4.1 | 一手 | https://docs.gitlab.com/releases/patches/other-patches/patch-release-gitlab-ai-gateway-19-4-1-released/ | CVE-2026-90970；CVSS 3.1 **9.9**（`AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H`，**PR:L = 需 Duo Agent Platform 认证**）；受影响 18.1.6–<19.2.4 / 19.3.0–<19.3.2 / 19.4.0–<19.4.1；修复 `19.2.4` / `19.3.2` / `19.4.1` | 厂商一手（侦察交件） |
 | S309 | GitHub Advisory GHSA-53mr-6c8q-9789（CVE-2026-35029） | 一手 | https://github.com/advisories/GHSA-53mr-6c8q-9789 | LiteLLM `/config/update` 未校验 admin 角色 → 权限提升 / 任意文件读 / 接管 admin；prior to `1.83.0`；alias PYSEC-2026-2597 | 侦察交件；Chief 复核 advisory 页 200 + OSV alias |
 | S310 | GitHub Advisory GHSA-jjhc-v7c2-5hh6（CVE-2026-35030） | 一手 | https://github.com/advisories/GHSA-jjhc-v7c2-5hh6 | OIDC userinfo 缓存键碰撞（`token[:20]`）→ 认证绕过；需 `enable_jwt_auth`；修复 `1.83.0`；alias PYSEC-2026-390 | 同上 |
@@ -94,7 +94,7 @@
 | S416 | Plex 官方论坛版本公告 #712（Plex Media Server 1.43.3.10861） | 一手（厂商发布公告） | https://forums.plex.tv/t/plex-media-server/30447/712 | CVE-2026-96652/96654/96655/96656；`<1.43.3.10861` → `1.43.3.10861`；#712 为 Beta 公告，#713 起全量；社区流传 `v1.43.2` 是错的 | 2026-10-22 收原件；`10` 引用；#714 已到 10896（非本条必需） |
 | S417 | Fortinet PSIRT `FG-IR-26-175`（FortiMail 路径穿越 + NULL 字节） | 一手（厂商 PSIRT） | https://www.fortiguard.com/psirt/FG-IR-26-175 | CVE-2026-104286；受影响 `8.0.0–8.0.1`/`7.6.0–7.6.6`/`7.4.0–7.4.8`/`7.2.0–7.2.9`；修 `8.0.2`/`7.6.7`/`7.4.9`；**7.2 无同分支修复**；workaround 关 IBE；IoC `79.141.169.187`/`45.129.0.192` | 2026-10-22 收原件；`10` 引用 |
 | S418 | JVN#88474777（EG Secure Solutions SiteGuard Server Edition OS 命令注入） | 一手（JVN / IPA） | https://jvn.jp/en/jp/JVN88474777/ | CVE-2026-106931；受影响 `>=Ver2.20`（IIS 3.10–4.00U4 不受影响；需统计功能开启，默认开）；修 **Ver8.00 Update 5 / Ver7.00 Update 6**；CVSS 4.0 8.5 / 3.0 7.8；**已确认在野利用**；EOL 版本另有补丁 | 2026-10-22 收原件；`10` 引用；厂商页 302 已留证，以 JVN 为一手 |
-| S419 | Siemens ProductCERT `SSA-580366`（Software Center 不受控搜索路径） | 一手（厂商 PSIRT） | https://cert-portal.siemens.com/productcert/html/ssa-580366.html | CVE-2026-110936；`All versions < V4.0.9.8` → `V4.0.9.8`（启动时自动更新）；另 ProductCERT News 确认**在野利用** + IoC 章节 | 2026-10-22 收原件；`10` 引用 |
+| S419 | Siemens ProductCERT `SSA-580366`（Software Center 不受控搜索路径） | 一手（厂商 PSIRT） | https://cert-portal.siemens.com/productcert/html/ssa-580366.html | CVE-2026-110936；`All versions < V4.0.9.8` → `V4.0.9.8`（启动时自动更新）；另 ProductCERT News 确认**在野利用** + IoC 章节 | 2026-10-22 收原件；`10` 引用；ProductCERT News 独立 S 行见 S607 |
 | S420 | Palo Alto 官方安全公告 `CVE-2026-0322`（管理面认证 RCE，逐分支 Product Status） | 一手（厂商 PSIRT） | https://security.paloaltonetworks.com/CVE-2026-0322 | CVSS-BT **8.6 HIGH**、`E:A ATTACKED`、`PR:H`；**无官方 workaround**；逐分支修复线（12.2/12.1/11.2/11.1/10.2）；Threat ID 510046/510047 有限覆盖（需 SSL 解密） | 2026-10-22 收原件；`10` 引用 |
 | S421 | Palo Alto 官方安全公告 `CVE-2026-0257`（GlobalProtect 认证绕过） | 一手（厂商 PSIRT） | https://security.paloaltonetworks.com/CVE-2026-0257 | CVSS-BT **7.8 HIGH**、`E:A`；**有官方缓解**（关 Authentication Override / 专用证书）；逐分支修复线 + Prisma Access；**升级后 GP 用户需重认证一次** | 2026-10-22 收原件；`10` 引用 |
 | S422 | Debian DSA-6572-1 + 安全 tracker + Bug #1151413（ca-certificates 移除 eMudhra/Comodo 根） | 一手（发行版安全公告） | https://security-tracker.debian.org/tracker/ca-certificates | trixie `20250419+deb13u1`（DSA-6572-1，2026-10-20）；unstable `20260816+nmu1`（NMU 2026-10-20）；bookworm changelog 未取到 | 2026-10-22 收原件（`w3-2026-10-22/debian-dsa-6572-1.html` 等）；`09` 引用 |
@@ -135,7 +135,7 @@
 | S200–S299 | npm 供应链 |
 | S300–S399 | Python / LLM 基建 |
 | S400–S499 | PHP / 其他运行时（GPT 情报集 P1 新增） |
-| **S436–S441（例外）** | **LLM 10-15 批追加**（vLLM 6 条，2026-10-22 入库）：本应落 S3xx（Python/LLM），因 S300–S399 已用满且改号需动 6 行与逐句清单，按组长裁定就地归入 S4xx 并在此登记例外 |
+| **S436–S441（例外）** | **LLM 10-15 批追加**（vLLM 6 条，2026-10-22 入库）：本应落 S3xx（Python/LLM）；S3xx 编号预留，LLM 10-15 批按组长批准落 S436–S441，在此登记例外 |
 | S500–S599 | PKI / CA 证书事件（eMudhra 等，跨生态） |
 | S600–S699 | 网络 / 边界设备（Plex、PAN-OS、Forti*、Siemens 等） |
 | S900+ | 待确认 / 传闻 |
