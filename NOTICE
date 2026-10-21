@@ -1,0 +1,17 @@
+vuln-response-skill
+Copyright 2026 the vuln-response-skill contributors
+
+本仓库内容（SKILL.md、index.md、sources.md、playbooks/、bin/、evidence/README.md 与本 README）
+由本队自行撰写，以 Apache License 2.0 授权，全文见 LICENSE。
+
+例外与边界：
+
+1. evidence/ 下保存的原始数据（OSV / cvelistV5 的 JSON 与 SPKI 清单抄录）来自公开漏洞数据库与
+   公开邮件列表，版权归原始发布方；本项目仅作取证存档，不主张其版权。
+2. playbooks 与 sources.md 中引用的 CVE / GHSA / 公告内容，权利归各厂商与 CNA。
+   引用方式为「URL + 短语摘录」，不复制公告全文。
+3. ingest/ 目录（若存在）存放第三方生成的情报集，不属于本仓库授权范围，公开发布时已移除。
+4. 本项目不附带任何漏洞利用代码，也不提供攻击步骤；全部内容为防御性检测与修复流程。
+
+内容为 2026-10-21 的公开情报快照。漏洞数据会过期：使用前请重新核对一手来源，
+不要把它当作资产扫描结果或修复证明。
