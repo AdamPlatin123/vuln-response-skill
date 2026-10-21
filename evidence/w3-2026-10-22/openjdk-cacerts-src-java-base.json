@@ -1,0 +1,1794 @@
+[
+  {
+    "name": "README",
+    "path": "src/java.base/share/data/cacerts/README",
+    "sha": "25d2d779007bf09366bca02e04de737982ab4553",
+    "size": 567,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/README?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/README",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/25d2d779007bf09366bca02e04de737982ab4553",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/README",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/README?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/25d2d779007bf09366bca02e04de737982ab4553",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/README"
+    }
+  },
+  {
+    "name": "actalisauthenticationrootca",
+    "path": "src/java.base/share/data/cacerts/actalisauthenticationrootca",
+    "sha": "9c1d9a939ecb6523cdb24ae1ca8365a642abd0cd",
+    "size": 2459,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/actalisauthenticationrootca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/actalisauthenticationrootca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/9c1d9a939ecb6523cdb24ae1ca8365a642abd0cd",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/actalisauthenticationrootca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/actalisauthenticationrootca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/9c1d9a939ecb6523cdb24ae1ca8365a642abd0cd",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/actalisauthenticationrootca"
+    }
+  },
+  {
+    "name": "addtrustexternalca",
+    "path": "src/java.base/share/data/cacerts/addtrustexternalca",
+    "sha": "ad84cad9629b3b43488d3674c791a217a19d4b8a",
+    "size": 1916,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/addtrustexternalca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/addtrustexternalca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/ad84cad9629b3b43488d3674c791a217a19d4b8a",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/addtrustexternalca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/addtrustexternalca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/ad84cad9629b3b43488d3674c791a217a19d4b8a",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/addtrustexternalca"
+    }
+  },
+  {
+    "name": "addtrustqualifiedca",
+    "path": "src/java.base/share/data/cacerts/addtrustqualifiedca",
+    "sha": "0c62d44c7626da73fc5e1a4f25af2cb35cb8168f",
+    "size": 1868,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/addtrustqualifiedca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/addtrustqualifiedca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/0c62d44c7626da73fc5e1a4f25af2cb35cb8168f",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/addtrustqualifiedca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/addtrustqualifiedca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/0c62d44c7626da73fc5e1a4f25af2cb35cb8168f",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/addtrustqualifiedca"
+    }
+  },
+  {
+    "name": "amazonrootca1",
+    "path": "src/java.base/share/data/cacerts/amazonrootca1",
+    "sha": "9431a65c93e59ea10771d60731276dbefe13900b",
+    "size": 1520,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/amazonrootca1?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/amazonrootca1",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/9431a65c93e59ea10771d60731276dbefe13900b",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/amazonrootca1",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/amazonrootca1?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/9431a65c93e59ea10771d60731276dbefe13900b",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/amazonrootca1"
+    }
+  },
+  {
+    "name": "amazonrootca2",
+    "path": "src/java.base/share/data/cacerts/amazonrootca2",
+    "sha": "95e6f3270a9de148f750eb0e9d3f7abe23e7a4e4",
+    "size": 2226,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/amazonrootca2?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/amazonrootca2",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/95e6f3270a9de148f750eb0e9d3f7abe23e7a4e4",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/amazonrootca2",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/amazonrootca2?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/95e6f3270a9de148f750eb0e9d3f7abe23e7a4e4",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/amazonrootca2"
+    }
+  },
+  {
+    "name": "amazonrootca3",
+    "path": "src/java.base/share/data/cacerts/amazonrootca3",
+    "sha": "96a5c6313e2418277ec22cf87c898bf02c34f6b7",
+    "size": 980,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/amazonrootca3?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/amazonrootca3",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/96a5c6313e2418277ec22cf87c898bf02c34f6b7",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/amazonrootca3",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/amazonrootca3?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/96a5c6313e2418277ec22cf87c898bf02c34f6b7",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/amazonrootca3"
+    }
+  },
+  {
+    "name": "amazonrootca4",
+    "path": "src/java.base/share/data/cacerts/amazonrootca4",
+    "sha": "9a59ca249474566f241aa21e070f366b6d8cd109",
+    "size": 1062,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/amazonrootca4?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/amazonrootca4",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/9a59ca249474566f241aa21e070f366b6d8cd109",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/amazonrootca4",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/amazonrootca4?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/9a59ca249474566f241aa21e070f366b6d8cd109",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/amazonrootca4"
+    }
+  },
+  {
+    "name": "buypassclass2ca",
+    "path": "src/java.base/share/data/cacerts/buypassclass2ca",
+    "sha": "a2e9b2fd0149be53236b0e67d2f03ed50a4ff056",
+    "size": 2264,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/buypassclass2ca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/buypassclass2ca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/a2e9b2fd0149be53236b0e67d2f03ed50a4ff056",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/buypassclass2ca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/buypassclass2ca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/a2e9b2fd0149be53236b0e67d2f03ed50a4ff056",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/buypassclass2ca"
+    }
+  },
+  {
+    "name": "buypassclass3ca",
+    "path": "src/java.base/share/data/cacerts/buypassclass3ca",
+    "sha": "f74c6c2498f7f19ee7b240e8bb02d6a6287c6b3c",
+    "size": 2264,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/buypassclass3ca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/buypassclass3ca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/f74c6c2498f7f19ee7b240e8bb02d6a6287c6b3c",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/buypassclass3ca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/buypassclass3ca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/f74c6c2498f7f19ee7b240e8bb02d6a6287c6b3c",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/buypassclass3ca"
+    }
+  },
+  {
+    "name": "camerfirmachambersca",
+    "path": "src/java.base/share/data/cacerts/camerfirmachambersca",
+    "sha": "70d793e25ab33d079b63ccb437ab815b6f664a7f",
+    "size": 3153,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/camerfirmachambersca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/camerfirmachambersca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/70d793e25ab33d079b63ccb437ab815b6f664a7f",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/camerfirmachambersca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/camerfirmachambersca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/70d793e25ab33d079b63ccb437ab815b6f664a7f",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/camerfirmachambersca"
+    }
+  },
+  {
+    "name": "certainlyroote1",
+    "path": "src/java.base/share/data/cacerts/certainlyroote1",
+    "sha": "3f0d0face0eb74ae596e4b021363633dda5eb72e",
+    "size": 1070,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/certainlyroote1?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/certainlyroote1",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/3f0d0face0eb74ae596e4b021363633dda5eb72e",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/certainlyroote1",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/certainlyroote1?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/3f0d0face0eb74ae596e4b021363633dda5eb72e",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/certainlyroote1"
+    }
+  },
+  {
+    "name": "certainlyrootr1",
+    "path": "src/java.base/share/data/cacerts/certainlyrootr1",
+    "sha": "dbb99fad32c8ce156066e9094ef33c857c98c6fc",
+    "size": 2209,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/certainlyrootr1?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/certainlyrootr1",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/dbb99fad32c8ce156066e9094ef33c857c98c6fc",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/certainlyrootr1",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/certainlyrootr1?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/dbb99fad32c8ce156066e9094ef33c857c98c6fc",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/certainlyrootr1"
+    }
+  },
+  {
+    "name": "certignaca",
+    "path": "src/java.base/share/data/cacerts/certignaca",
+    "sha": "9e506339e84d3d5134e4325df0826154cce4af30",
+    "size": 1612,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/certignaca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/certignaca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/9e506339e84d3d5134e4325df0826154cce4af30",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/certignaca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/certignaca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/9e506339e84d3d5134e4325df0826154cce4af30",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/certignaca"
+    }
+  },
+  {
+    "name": "certignarootca",
+    "path": "src/java.base/share/data/cacerts/certignarootca",
+    "sha": "b79092d0cb5a72a8e5121892d60a63791be17c2e",
+    "size": 2628,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/certignarootca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/certignarootca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/b79092d0cb5a72a8e5121892d60a63791be17c2e",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/certignarootca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/certignarootca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/b79092d0cb5a72a8e5121892d60a63791be17c2e",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/certignarootca"
+    }
+  },
+  {
+    "name": "certumca",
+    "path": "src/java.base/share/data/cacerts/certumca",
+    "sha": "4149653397b7bf4b56ad7e789303780e33822161",
+    "size": 1426,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/certumca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/certumca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/4149653397b7bf4b56ad7e789303780e33822161",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/certumca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/certumca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/4149653397b7bf4b56ad7e789303780e33822161",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/certumca"
+    }
+  },
+  {
+    "name": "certumec384ca",
+    "path": "src/java.base/share/data/cacerts/certumec384ca",
+    "sha": "47a276e915ad26fcb41390216a491578a3c45b1f",
+    "size": 1334,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/certumec384ca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/certumec384ca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/47a276e915ad26fcb41390216a491578a3c45b1f",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/certumec384ca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/certumec384ca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/47a276e915ad26fcb41390216a491578a3c45b1f",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/certumec384ca"
+    }
+  },
+  {
+    "name": "certumtrustednetworkca",
+    "path": "src/java.base/share/data/cacerts/certumtrustednetworkca",
+    "sha": "db35af834ba1ae411a686d4c27d96dd9fab56080",
+    "size": 1780,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/certumtrustednetworkca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/certumtrustednetworkca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/db35af834ba1ae411a686d4c27d96dd9fab56080",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/certumtrustednetworkca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/certumtrustednetworkca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/db35af834ba1ae411a686d4c27d96dd9fab56080",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/certumtrustednetworkca"
+    }
+  },
+  {
+    "name": "certumtrustedrootca",
+    "path": "src/java.base/share/data/cacerts/certumtrustedrootca",
+    "sha": "fb1dc35f62cd7a398e6e74936c787054a9375d96",
+    "size": 2514,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/certumtrustedrootca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/certumtrustedrootca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/fb1dc35f62cd7a398e6e74936c787054a9375d96",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/certumtrustedrootca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/certumtrustedrootca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/fb1dc35f62cd7a398e6e74936c787054a9375d96",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/certumtrustedrootca"
+    }
+  },
+  {
+    "name": "chunghwaepkirootca",
+    "path": "src/java.base/share/data/cacerts/chunghwaepkirootca",
+    "sha": "a755a44f30a2dd0a377451c9c75e7d24b6df5f51",
+    "size": 2449,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/chunghwaepkirootca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/chunghwaepkirootca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/a755a44f30a2dd0a377451c9c75e7d24b6df5f51",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/chunghwaepkirootca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/chunghwaepkirootca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/a755a44f30a2dd0a377451c9c75e7d24b6df5f51",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/chunghwaepkirootca"
+    }
+  },
+  {
+    "name": "comodoaaaca",
+    "path": "src/java.base/share/data/cacerts/comodoaaaca",
+    "sha": "76fc7fcf5f6ab266c7703200cfb37b4ce9089353",
+    "size": 1922,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/comodoaaaca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/comodoaaaca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/76fc7fcf5f6ab266c7703200cfb37b4ce9089353",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/comodoaaaca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/comodoaaaca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/76fc7fcf5f6ab266c7703200cfb37b4ce9089353",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/comodoaaaca"
+    }
+  },
+  {
+    "name": "comodoeccca",
+    "path": "src/java.base/share/data/cacerts/comodoeccca",
+    "sha": "19f9f0b7ec2d81fb4120b9fa39eaf9d63be1b98b",
+    "size": 1401,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/comodoeccca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/comodoeccca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/19f9f0b7ec2d81fb4120b9fa39eaf9d63be1b98b",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/comodoeccca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/comodoeccca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/19f9f0b7ec2d81fb4120b9fa39eaf9d63be1b98b",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/comodoeccca"
+    }
+  },
+  {
+    "name": "comodorsaca",
+    "path": "src/java.base/share/data/cacerts/comodorsaca",
+    "sha": "f396f6d27d341d6d0cd2cd07485fb5e28bcffdf7",
+    "size": 2553,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/comodorsaca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/comodorsaca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/f396f6d27d341d6d0cd2cd07485fb5e28bcffdf7",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/comodorsaca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/comodorsaca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/f396f6d27d341d6d0cd2cd07485fb5e28bcffdf7",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/comodorsaca"
+    }
+  },
+  {
+    "name": "digicertassuredidg2",
+    "path": "src/java.base/share/data/cacerts/digicertassuredidg2",
+    "sha": "8b53c2c49f680fadce239ac851b3cb78a3a63c1b",
+    "size": 1710,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/digicertassuredidg2?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/digicertassuredidg2",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/8b53c2c49f680fadce239ac851b3cb78a3a63c1b",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/digicertassuredidg2",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/digicertassuredidg2?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/8b53c2c49f680fadce239ac851b3cb78a3a63c1b",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/digicertassuredidg2"
+    }
+  },
+  {
+    "name": "digicertassuredidg3",
+    "path": "src/java.base/share/data/cacerts/digicertassuredidg3",
+    "sha": "120e0a5fff24cbea3c51daae603f74d82e4587ad",
+    "size": 1260,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/digicertassuredidg3?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/digicertassuredidg3",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/120e0a5fff24cbea3c51daae603f74d82e4587ad",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/digicertassuredidg3",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/digicertassuredidg3?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/120e0a5fff24cbea3c51daae603f74d82e4587ad",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/digicertassuredidg3"
+    }
+  },
+  {
+    "name": "digicertassuredidrootca",
+    "path": "src/java.base/share/data/cacerts/digicertassuredidrootca",
+    "sha": "41edfc558097746559433d42a72e6292c7d51efa",
+    "size": 1752,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/digicertassuredidrootca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/digicertassuredidrootca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/41edfc558097746559433d42a72e6292c7d51efa",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/digicertassuredidrootca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/digicertassuredidrootca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/41edfc558097746559433d42a72e6292c7d51efa",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/digicertassuredidrootca"
+    }
+  },
+  {
+    "name": "digicertcseccrootg5",
+    "path": "src/java.base/share/data/cacerts/digicertcseccrootg5",
+    "sha": "04e1eb1be688ebb309b97947d882569b4355f52e",
+    "size": 1162,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/digicertcseccrootg5?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/digicertcseccrootg5",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/04e1eb1be688ebb309b97947d882569b4355f52e",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/digicertcseccrootg5",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/digicertcseccrootg5?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/04e1eb1be688ebb309b97947d882569b4355f52e",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/digicertcseccrootg5"
+    }
+  },
+  {
+    "name": "digicertcsrsarootg5",
+    "path": "src/java.base/share/data/cacerts/digicertcsrsarootg5",
+    "sha": "fd570aeee8b551c348f9da7fb3f71daf8de7485f",
+    "size": 2310,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/digicertcsrsarootg5?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/digicertcsrsarootg5",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/fd570aeee8b551c348f9da7fb3f71daf8de7485f",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/digicertcsrsarootg5",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/digicertcsrsarootg5?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/fd570aeee8b551c348f9da7fb3f71daf8de7485f",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/digicertcsrsarootg5"
+    }
+  },
+  {
+    "name": "digicertglobalrootca",
+    "path": "src/java.base/share/data/cacerts/digicertglobalrootca",
+    "sha": "2838b8ead5848b180843939050f9dcb1c7cd01b7",
+    "size": 1732,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/digicertglobalrootca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/digicertglobalrootca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/2838b8ead5848b180843939050f9dcb1c7cd01b7",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/digicertglobalrootca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/digicertglobalrootca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/2838b8ead5848b180843939050f9dcb1c7cd01b7",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/digicertglobalrootca"
+    }
+  },
+  {
+    "name": "digicertglobalrootg2",
+    "path": "src/java.base/share/data/cacerts/digicertglobalrootg2",
+    "sha": "99bc121c03c666c523f5c247a5f6f7b200b007b8",
+    "size": 1690,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/digicertglobalrootg2?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/digicertglobalrootg2",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/99bc121c03c666c523f5c247a5f6f7b200b007b8",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/digicertglobalrootg2",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/digicertglobalrootg2?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/99bc121c03c666c523f5c247a5f6f7b200b007b8",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/digicertglobalrootg2"
+    }
+  },
+  {
+    "name": "digicertglobalrootg3",
+    "path": "src/java.base/share/data/cacerts/digicertglobalrootg3",
+    "sha": "fbcfd3fc6e24c11ec6f3ebeef5bf0cb4e7aa3849",
+    "size": 1240,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/digicertglobalrootg3?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/digicertglobalrootg3",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/fbcfd3fc6e24c11ec6f3ebeef5bf0cb4e7aa3849",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/digicertglobalrootg3",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/digicertglobalrootg3?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/fbcfd3fc6e24c11ec6f3ebeef5bf0cb4e7aa3849",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/digicertglobalrootg3"
+    }
+  },
+  {
+    "name": "digicerthighassuranceevrootca",
+    "path": "src/java.base/share/data/cacerts/digicerthighassuranceevrootca",
+    "sha": "13e6d85a546b2a3107856703f3114303cf56771f",
+    "size": 1784,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/digicerthighassuranceevrootca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/digicerthighassuranceevrootca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/13e6d85a546b2a3107856703f3114303cf56771f",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/digicerthighassuranceevrootca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/digicerthighassuranceevrootca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/13e6d85a546b2a3107856703f3114303cf56771f",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/digicerthighassuranceevrootca"
+    }
+  },
+  {
+    "name": "digicerttlseccrootg5",
+    "path": "src/java.base/share/data/cacerts/digicerttlseccrootg5",
+    "sha": "9356292ef086c58548d41e8a0e8c246742994eef",
+    "size": 1168,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/digicerttlseccrootg5?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/digicerttlseccrootg5",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/9356292ef086c58548d41e8a0e8c246742994eef",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/digicerttlseccrootg5",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/digicerttlseccrootg5?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/9356292ef086c58548d41e8a0e8c246742994eef",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/digicerttlseccrootg5"
+    }
+  },
+  {
+    "name": "digicerttlsrsarootg5",
+    "path": "src/java.base/share/data/cacerts/digicerttlsrsarootg5",
+    "sha": "ac66e174f06baf775b8eda3c3f04073ff8957b16",
+    "size": 2312,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/digicerttlsrsarootg5?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/digicerttlsrsarootg5",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/ac66e174f06baf775b8eda3c3f04073ff8957b16",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/digicerttlsrsarootg5",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/digicerttlsrsarootg5?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/ac66e174f06baf775b8eda3c3f04073ff8957b16",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/digicerttlsrsarootg5"
+    }
+  },
+  {
+    "name": "digicerttrustedrootg4",
+    "path": "src/java.base/share/data/cacerts/digicerttrustedrootg4",
+    "sha": "3079e552a1e3222d50c3f5827b6cb77a19b13152",
+    "size": 2396,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/digicerttrustedrootg4?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/digicerttrustedrootg4",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/3079e552a1e3222d50c3f5827b6cb77a19b13152",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/digicerttrustedrootg4",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/digicerttrustedrootg4?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/3079e552a1e3222d50c3f5827b6cb77a19b13152",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/digicerttrustedrootg4"
+    }
+  },
+  {
+    "name": "dtrustclass3ca2",
+    "path": "src/java.base/share/data/cacerts/dtrustclass3ca2",
+    "sha": "321c8fd002cad0e73af26cabcaf0678bb79c0012",
+    "size": 1862,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/dtrustclass3ca2?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/dtrustclass3ca2",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/321c8fd002cad0e73af26cabcaf0678bb79c0012",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/dtrustclass3ca2",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/dtrustclass3ca2?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/321c8fd002cad0e73af26cabcaf0678bb79c0012",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/dtrustclass3ca2"
+    }
+  },
+  {
+    "name": "dtrustclass3ca2ev",
+    "path": "src/java.base/share/data/cacerts/dtrustclass3ca2ev",
+    "sha": "191a1882a3beb0b96547c4e9768a3726edff8d1d",
+    "size": 1888,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/dtrustclass3ca2ev?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/dtrustclass3ca2ev",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/191a1882a3beb0b96547c4e9768a3726edff8d1d",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/dtrustclass3ca2ev",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/dtrustclass3ca2ev?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/191a1882a3beb0b96547c4e9768a3726edff8d1d",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/dtrustclass3ca2ev"
+    }
+  },
+  {
+    "name": "emsigneccrootcag3",
+    "path": "src/java.base/share/data/cacerts/emsigneccrootcag3",
+    "sha": "a286f81c2f451665e44617c3c70b12f435a8724d",
+    "size": 1269,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/emsigneccrootcag3?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/emsigneccrootcag3",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/a286f81c2f451665e44617c3c70b12f435a8724d",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/emsigneccrootcag3",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/emsigneccrootcag3?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/a286f81c2f451665e44617c3c70b12f435a8724d",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/emsigneccrootcag3"
+    }
+  },
+  {
+    "name": "emsignrootcag1",
+    "path": "src/java.base/share/data/cacerts/emsignrootcag1",
+    "sha": "6b06f6689bc0ba078dcfe9c12c695adfc5a24e92",
+    "size": 1699,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/emsignrootcag1?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/emsignrootcag1",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/6b06f6689bc0ba078dcfe9c12c695adfc5a24e92",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/emsignrootcag1",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/emsignrootcag1?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/6b06f6689bc0ba078dcfe9c12c695adfc5a24e92",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/emsignrootcag1"
+    }
+  },
+  {
+    "name": "emsignrootcag2",
+    "path": "src/java.base/share/data/cacerts/emsignrootcag2",
+    "sha": "e4e4ddda65a69bb608fb8a7d6b888ed3ef646d9f",
+    "size": 2403,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/emsignrootcag2?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/emsignrootcag2",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/e4e4ddda65a69bb608fb8a7d6b888ed3ef646d9f",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/emsignrootcag2",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/emsignrootcag2?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/e4e4ddda65a69bb608fb8a7d6b888ed3ef646d9f",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/emsignrootcag2"
+    }
+  },
+  {
+    "name": "entrust2048ca",
+    "path": "src/java.base/share/data/cacerts/entrust2048ca",
+    "sha": "0dd198d3404dc801e90081a5e3f2f4d5d2ab3124",
+    "size": 2047,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/entrust2048ca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/entrust2048ca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/0dd198d3404dc801e90081a5e3f2f4d5d2ab3124",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/entrust2048ca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/entrust2048ca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/0dd198d3404dc801e90081a5e3f2f4d5d2ab3124",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/entrust2048ca"
+    }
+  },
+  {
+    "name": "entrustevca",
+    "path": "src/java.base/share/data/cacerts/entrustevca",
+    "sha": "6c2c50968b9688c6bf55e227a7221094fab620d0",
+    "size": 2173,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/entrustevca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/entrustevca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/6c2c50968b9688c6bf55e227a7221094fab620d0",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/entrustevca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/entrustevca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/6c2c50968b9688c6bf55e227a7221094fab620d0",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/entrustevca"
+    }
+  },
+  {
+    "name": "entrustrootcaec1",
+    "path": "src/java.base/share/data/cacerts/entrustrootcaec1",
+    "sha": "58d29d53ed4f9131aa823c3f627176fb864b7f3b",
+    "size": 1671,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/entrustrootcaec1?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/entrustrootcaec1",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/58d29d53ed4f9131aa823c3f627176fb864b7f3b",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/entrustrootcaec1",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/entrustrootcaec1?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/58d29d53ed4f9131aa823c3f627176fb864b7f3b",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/entrustrootcaec1"
+    }
+  },
+  {
+    "name": "entrustrootcag2",
+    "path": "src/java.base/share/data/cacerts/entrustrootcag2",
+    "sha": "48ac89267b9295c83cccf7808febc3473df1335a",
+    "size": 2091,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/entrustrootcag2?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/entrustrootcag2",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/48ac89267b9295c83cccf7808febc3473df1335a",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/entrustrootcag2",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/entrustrootcag2?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/48ac89267b9295c83cccf7808febc3473df1335a",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/entrustrootcag2"
+    }
+  },
+  {
+    "name": "geotrustglobalca",
+    "path": "src/java.base/share/data/cacerts/geotrustglobalca",
+    "sha": "7f8bf9a6634488e352dc5986b1394a30afb13581",
+    "size": 1532,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/geotrustglobalca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/geotrustglobalca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/7f8bf9a6634488e352dc5986b1394a30afb13581",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/geotrustglobalca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/geotrustglobalca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/7f8bf9a6634488e352dc5986b1394a30afb13581",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/geotrustglobalca"
+    }
+  },
+  {
+    "name": "geotrustprimaryca",
+    "path": "src/java.base/share/data/cacerts/geotrustprimaryca",
+    "sha": "0f680ca16a92d3040ba6fb1e9eb3e1ca2584e18a",
+    "size": 1657,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/geotrustprimaryca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/geotrustprimaryca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/0f680ca16a92d3040ba6fb1e9eb3e1ca2584e18a",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/geotrustprimaryca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/geotrustprimaryca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/0f680ca16a92d3040ba6fb1e9eb3e1ca2584e18a",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/geotrustprimaryca"
+    }
+  },
+  {
+    "name": "geotrustprimarycag2",
+    "path": "src/java.base/share/data/cacerts/geotrustprimarycag2",
+    "sha": "0d1020aac8879a5c3382d2f600a54a7ff77de160",
+    "size": 1503,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/geotrustprimarycag2?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/geotrustprimarycag2",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/0d1020aac8879a5c3382d2f600a54a7ff77de160",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/geotrustprimarycag2",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/geotrustprimarycag2?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/0d1020aac8879a5c3382d2f600a54a7ff77de160",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/geotrustprimarycag2"
+    }
+  },
+  {
+    "name": "geotrustprimarycag3",
+    "path": "src/java.base/share/data/cacerts/geotrustprimarycag3",
+    "sha": "1ccb56fb1726b23487ccc8bbd7bf4930309171e4",
+    "size": 1953,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/geotrustprimarycag3?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/geotrustprimarycag3",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/1ccb56fb1726b23487ccc8bbd7bf4930309171e4",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/geotrustprimarycag3",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/geotrustprimarycag3?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/1ccb56fb1726b23487ccc8bbd7bf4930309171e4",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/geotrustprimarycag3"
+    }
+  },
+  {
+    "name": "geotrustuniversalca",
+    "path": "src/java.base/share/data/cacerts/geotrustuniversalca",
+    "sha": "6e049bf707c4d3a4c36ef341b460ccc7d450d9e6",
+    "size": 2264,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/geotrustuniversalca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/geotrustuniversalca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/6e049bf707c4d3a4c36ef341b460ccc7d450d9e6",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/geotrustuniversalca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/geotrustuniversalca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/6e049bf707c4d3a4c36ef341b460ccc7d450d9e6",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/geotrustuniversalca"
+    }
+  },
+  {
+    "name": "globalsignca",
+    "path": "src/java.base/share/data/cacerts/globalsignca",
+    "sha": "48a7dec957087422d22a7e4047cc1f03a672d4db",
+    "size": 1624,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/globalsignca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/globalsignca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/48a7dec957087422d22a7e4047cc1f03a672d4db",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/globalsignca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/globalsignca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/48a7dec957087422d22a7e4047cc1f03a672d4db",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/globalsignca"
+    }
+  },
+  {
+    "name": "globalsigne46",
+    "path": "src/java.base/share/data/cacerts/globalsigne46",
+    "sha": "50c7dadefdd4e7bd69e3e7ecc975d6dc1608e13f",
+    "size": 1134,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/globalsigne46?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/globalsigne46",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/50c7dadefdd4e7bd69e3e7ecc975d6dc1608e13f",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/globalsigne46",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/globalsigne46?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/50c7dadefdd4e7bd69e3e7ecc975d6dc1608e13f",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/globalsigne46"
+    }
+  },
+  {
+    "name": "globalsigneccrootcar4",
+    "path": "src/java.base/share/data/cacerts/globalsigneccrootcar4",
+    "sha": "135c0c046a94c779c718e5a7b4c302a48194de99",
+    "size": 1095,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/globalsigneccrootcar4?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/globalsigneccrootcar4",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/135c0c046a94c779c718e5a7b4c302a48194de99",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/globalsigneccrootcar4",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/globalsigneccrootcar4?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/135c0c046a94c779c718e5a7b4c302a48194de99",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/globalsigneccrootcar4"
+    }
+  },
+  {
+    "name": "globalsigneccrootcar5",
+    "path": "src/java.base/share/data/cacerts/globalsigneccrootcar5",
+    "sha": "7156e83b9f9bdaeaf30c882fb5236b19c3d232a3",
+    "size": 1177,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/globalsigneccrootcar5?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/globalsigneccrootcar5",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/7156e83b9f9bdaeaf30c882fb5236b19c3d232a3",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/globalsigneccrootcar5",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/globalsigneccrootcar5?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/7156e83b9f9bdaeaf30c882fb5236b19c3d232a3",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/globalsigneccrootcar5"
+    }
+  },
+  {
+    "name": "globalsignr3ca",
+    "path": "src/java.base/share/data/cacerts/globalsignr3ca",
+    "sha": "44dce028abdefcfc73bbeb935595aca056cd044e",
+    "size": 1586,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/globalsignr3ca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/globalsignr3ca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/44dce028abdefcfc73bbeb935595aca056cd044e",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/globalsignr3ca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/globalsignr3ca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/44dce028abdefcfc73bbeb935595aca056cd044e",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/globalsignr3ca"
+    }
+  },
+  {
+    "name": "globalsignr46",
+    "path": "src/java.base/share/data/cacerts/globalsignr46",
+    "sha": "80d7d92d4fb63328a1fcd7e1718ce93370ceb265",
+    "size": 2286,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/globalsignr46?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/globalsignr46",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/80d7d92d4fb63328a1fcd7e1718ce93370ceb265",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/globalsignr46",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/globalsignr46?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/80d7d92d4fb63328a1fcd7e1718ce93370ceb265",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/globalsignr46"
+    }
+  },
+  {
+    "name": "globalsignrootcar6",
+    "path": "src/java.base/share/data/cacerts/globalsignrootcar6",
+    "sha": "50f748df2285833234ac06d52463a9ffd0499af4",
+    "size": 2347,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/globalsignrootcar6?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/globalsignrootcar6",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/50f748df2285833234ac06d52463a9ffd0499af4",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/globalsignrootcar6",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/globalsignrootcar6?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/50f748df2285833234ac06d52463a9ffd0499af4",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/globalsignrootcar6"
+    }
+  },
+  {
+    "name": "godaddyclass2ca",
+    "path": "src/java.base/share/data/cacerts/godaddyclass2ca",
+    "sha": "a5f5746563a11f243421b664996b809d0283d409",
+    "size": 1834,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/godaddyclass2ca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/godaddyclass2ca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/a5f5746563a11f243421b664996b809d0283d409",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/godaddyclass2ca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/godaddyclass2ca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/a5f5746563a11f243421b664996b809d0283d409",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/godaddyclass2ca"
+    }
+  },
+  {
+    "name": "godaddyrootg2ca",
+    "path": "src/java.base/share/data/cacerts/godaddyrootg2ca",
+    "sha": "5d60b3619361834da9748cbabb36f87219c45b44",
+    "size": 1792,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/godaddyrootg2ca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/godaddyrootg2ca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/5d60b3619361834da9748cbabb36f87219c45b44",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/godaddyrootg2ca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/godaddyrootg2ca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/5d60b3619361834da9748cbabb36f87219c45b44",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/godaddyrootg2ca"
+    }
+  },
+  {
+    "name": "gtsrootcar1",
+    "path": "src/java.base/share/data/cacerts/gtsrootcar1",
+    "sha": "ac879b232b26ea66c72d401e4f94d65f2b776c12",
+    "size": 2241,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/gtsrootcar1?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/gtsrootcar1",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/ac879b232b26ea66c72d401e4f94d65f2b776c12",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/gtsrootcar1",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/gtsrootcar1?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/ac879b232b26ea66c72d401e4f94d65f2b776c12",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/gtsrootcar1"
+    }
+  },
+  {
+    "name": "gtsrootcar2",
+    "path": "src/java.base/share/data/cacerts/gtsrootcar2",
+    "sha": "a71e7c5e9513a2d15a4c72515126e0fc86fd7eb4",
+    "size": 2241,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/gtsrootcar2?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/gtsrootcar2",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/a71e7c5e9513a2d15a4c72515126e0fc86fd7eb4",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/gtsrootcar2",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/gtsrootcar2?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/a71e7c5e9513a2d15a4c72515126e0fc86fd7eb4",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/gtsrootcar2"
+    }
+  },
+  {
+    "name": "gtsrootecccar3",
+    "path": "src/java.base/share/data/cacerts/gtsrootecccar3",
+    "sha": "38f7533ca58efe587a8c41413266cd3e57aa85fb",
+    "size": 1107,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/gtsrootecccar3?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/gtsrootecccar3",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/38f7533ca58efe587a8c41413266cd3e57aa85fb",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/gtsrootecccar3",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/gtsrootecccar3?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/38f7533ca58efe587a8c41413266cd3e57aa85fb",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/gtsrootecccar3"
+    }
+  },
+  {
+    "name": "gtsrootecccar4",
+    "path": "src/java.base/share/data/cacerts/gtsrootecccar4",
+    "sha": "e812a16c24bd11ee2c196c905b54142bc3fddd1d",
+    "size": 1107,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/gtsrootecccar4?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/gtsrootecccar4",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/e812a16c24bd11ee2c196c905b54142bc3fddd1d",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/gtsrootecccar4",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/gtsrootecccar4?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/e812a16c24bd11ee2c196c905b54142bc3fddd1d",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/gtsrootecccar4"
+    }
+  },
+  {
+    "name": "haricaeccrootca2015",
+    "path": "src/java.base/share/data/cacerts/haricaeccrootca2015",
+    "sha": "4337f68c64356c2b6fd33a7d13bf078d8cf29e2b",
+    "size": 1522,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/haricaeccrootca2015?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/haricaeccrootca2015",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/4337f68c64356c2b6fd33a7d13bf078d8cf29e2b",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/haricaeccrootca2015",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/haricaeccrootca2015?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/4337f68c64356c2b6fd33a7d13bf078d8cf29e2b",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/haricaeccrootca2015"
+    }
+  },
+  {
+    "name": "haricarootca2015",
+    "path": "src/java.base/share/data/cacerts/haricarootca2015",
+    "sha": "239ecf7d0a3ffe7bab204c11487595e2383db694",
+    "size": 2670,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/haricarootca2015?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/haricarootca2015",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/239ecf7d0a3ffe7bab204c11487595e2383db694",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/haricarootca2015",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/haricarootca2015?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/239ecf7d0a3ffe7bab204c11487595e2383db694",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/haricarootca2015"
+    }
+  },
+  {
+    "name": "identrustcommercial",
+    "path": "src/java.base/share/data/cacerts/identrustcommercial",
+    "sha": "8623d4b9b5868396914cd44d5c78793ec8bc405a",
+    "size": 2294,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/identrustcommercial?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/identrustcommercial",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/8623d4b9b5868396914cd44d5c78793ec8bc405a",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/identrustcommercial",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/identrustcommercial?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/8623d4b9b5868396914cd44d5c78793ec8bc405a",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/identrustcommercial"
+    }
+  },
+  {
+    "name": "identrustpublicca",
+    "path": "src/java.base/share/data/cacerts/identrustpublicca",
+    "sha": "f4034ea6d8b49e8d1b5a971faf213ee1547b634f",
+    "size": 2308,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/identrustpublicca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/identrustpublicca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/f4034ea6d8b49e8d1b5a971faf213ee1547b634f",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/identrustpublicca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/identrustpublicca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/f4034ea6d8b49e8d1b5a971faf213ee1547b634f",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/identrustpublicca"
+    }
+  },
+  {
+    "name": "letsencryptisrgx1",
+    "path": "src/java.base/share/data/cacerts/letsencryptisrgx1",
+    "sha": "9364e1df5d70ddcf3e3126225002a12a697103ba",
+    "size": 2321,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/letsencryptisrgx1?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/letsencryptisrgx1",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/9364e1df5d70ddcf3e3126225002a12a697103ba",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/letsencryptisrgx1",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/letsencryptisrgx1?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/9364e1df5d70ddcf3e3126225002a12a697103ba",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/letsencryptisrgx1"
+    }
+  },
+  {
+    "name": "letsencryptisrgx2",
+    "path": "src/java.base/share/data/cacerts/letsencryptisrgx2",
+    "sha": "455822e13a81047beadd46ac7df6c454ee9e9fd6",
+    "size": 1167,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/letsencryptisrgx2?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/letsencryptisrgx2",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/455822e13a81047beadd46ac7df6c454ee9e9fd6",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/letsencryptisrgx2",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/letsencryptisrgx2?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/455822e13a81047beadd46ac7df6c454ee9e9fd6",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/letsencryptisrgx2"
+    }
+  },
+  {
+    "name": "luxtrustglobalroot2ca",
+    "path": "src/java.base/share/data/cacerts/luxtrustglobalroot2ca",
+    "sha": "e04c3998ab7c6e88032abb7c3f90aa5049b4cb21",
+    "size": 2430,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/luxtrustglobalroot2ca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/luxtrustglobalroot2ca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/e04c3998ab7c6e88032abb7c3f90aa5049b4cb21",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/luxtrustglobalroot2ca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/luxtrustglobalroot2ca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/e04c3998ab7c6e88032abb7c3f90aa5049b4cb21",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/luxtrustglobalroot2ca"
+    }
+  },
+  {
+    "name": "microsoftecc2017",
+    "path": "src/java.base/share/data/cacerts/microsoftecc2017",
+    "sha": "8fc6733204553062c28370e20521db18b010824b",
+    "size": 1297,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/microsoftecc2017?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/microsoftecc2017",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/8fc6733204553062c28370e20521db18b010824b",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/microsoftecc2017",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/microsoftecc2017?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/8fc6733204553062c28370e20521db18b010824b",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/microsoftecc2017"
+    }
+  },
+  {
+    "name": "microsoftrsa2017",
+    "path": "src/java.base/share/data/cacerts/microsoftrsa2017",
+    "sha": "2d30c9688b7ab4cecd5ef21832b75dbfe59a35a1",
+    "size": 2449,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/microsoftrsa2017?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/microsoftrsa2017",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/2d30c9688b7ab4cecd5ef21832b75dbfe59a35a1",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/microsoftrsa2017",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/microsoftrsa2017?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/2d30c9688b7ab4cecd5ef21832b75dbfe59a35a1",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/microsoftrsa2017"
+    }
+  },
+  {
+    "name": "quovadisrootca",
+    "path": "src/java.base/share/data/cacerts/quovadisrootca",
+    "sha": "0c195ff51fcda7846cd8fefa174cc9a186d9ef07",
+    "size": 2521,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/quovadisrootca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/quovadisrootca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/0c195ff51fcda7846cd8fefa174cc9a186d9ef07",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/quovadisrootca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/quovadisrootca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/0c195ff51fcda7846cd8fefa174cc9a186d9ef07",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/quovadisrootca"
+    }
+  },
+  {
+    "name": "quovadisrootca1g3",
+    "path": "src/java.base/share/data/cacerts/quovadisrootca1g3",
+    "sha": "26e23ab8dc3bbd34c32663e09cbfccd30271b38e",
+    "size": 2299,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/quovadisrootca1g3?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/quovadisrootca1g3",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/26e23ab8dc3bbd34c32663e09cbfccd30271b38e",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/quovadisrootca1g3",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/quovadisrootca1g3?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/26e23ab8dc3bbd34c32663e09cbfccd30271b38e",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/quovadisrootca1g3"
+    }
+  },
+  {
+    "name": "quovadisrootca2",
+    "path": "src/java.base/share/data/cacerts/quovadisrootca2",
+    "sha": "c5b1f0709fcca220139001dc5df7b5668f46e64f",
+    "size": 2374,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/quovadisrootca2?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/quovadisrootca2",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/c5b1f0709fcca220139001dc5df7b5668f46e64f",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/quovadisrootca2",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/quovadisrootca2?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/c5b1f0709fcca220139001dc5df7b5668f46e64f",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/quovadisrootca2"
+    }
+  },
+  {
+    "name": "quovadisrootca2g3",
+    "path": "src/java.base/share/data/cacerts/quovadisrootca2g3",
+    "sha": "6d370f546b5ea256df0ca789ea771f9e09eb8337",
+    "size": 2299,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/quovadisrootca2g3?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/quovadisrootca2g3",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/6d370f546b5ea256df0ca789ea771f9e09eb8337",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/quovadisrootca2g3",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/quovadisrootca2g3?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/6d370f546b5ea256df0ca789ea771f9e09eb8337",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/quovadisrootca2g3"
+    }
+  },
+  {
+    "name": "quovadisrootca3",
+    "path": "src/java.base/share/data/cacerts/quovadisrootca3",
+    "sha": "0452ad92181aacb40bfa064f0ca49c7b67fa3dcb",
+    "size": 2692,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/quovadisrootca3?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/quovadisrootca3",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/0452ad92181aacb40bfa064f0ca49c7b67fa3dcb",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/quovadisrootca3",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/quovadisrootca3?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/0452ad92181aacb40bfa064f0ca49c7b67fa3dcb",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/quovadisrootca3"
+    }
+  },
+  {
+    "name": "quovadisrootca3g3",
+    "path": "src/java.base/share/data/cacerts/quovadisrootca3g3",
+    "sha": "b4eccae9c1193e9ab5b8a409d2f941756b6f3f15",
+    "size": 2299,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/quovadisrootca3g3?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/quovadisrootca3g3",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/b4eccae9c1193e9ab5b8a409d2f941756b6f3f15",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/quovadisrootca3g3",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/quovadisrootca3g3?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/b4eccae9c1193e9ab5b8a409d2f941756b6f3f15",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/quovadisrootca3g3"
+    }
+  },
+  {
+    "name": "secomscrootca2",
+    "path": "src/java.base/share/data/cacerts/secomscrootca2",
+    "sha": "d80846d9f2dad5e533a3f433eb6a6f7f11eda6e2",
+    "size": 1634,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/secomscrootca2?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/secomscrootca2",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/d80846d9f2dad5e533a3f433eb6a6f7f11eda6e2",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/secomscrootca2",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/secomscrootca2?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/d80846d9f2dad5e533a3f433eb6a6f7f11eda6e2",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/secomscrootca2"
+    }
+  },
+  {
+    "name": "sectigocodesignroote46",
+    "path": "src/java.base/share/data/cacerts/sectigocodesignroote46",
+    "sha": "7f13b28a40181495a25a44141643d61ac151c092",
+    "size": 1190,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/sectigocodesignroote46?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/sectigocodesignroote46",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/7f13b28a40181495a25a44141643d61ac151c092",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/sectigocodesignroote46",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/sectigocodesignroote46?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/7f13b28a40181495a25a44141643d61ac151c092",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/sectigocodesignroote46"
+    }
+  },
+  {
+    "name": "sectigocodesignrootr46",
+    "path": "src/java.base/share/data/cacerts/sectigocodesignrootr46",
+    "sha": "38270cb0c5265589387541cc5d2cbab9673da6e0",
+    "size": 2324,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/sectigocodesignrootr46?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/sectigocodesignrootr46",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/38270cb0c5265589387541cc5d2cbab9673da6e0",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/sectigocodesignrootr46",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/sectigocodesignrootr46?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/38270cb0c5265589387541cc5d2cbab9673da6e0",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/sectigocodesignrootr46"
+    }
+  },
+  {
+    "name": "sectigotlsroote46",
+    "path": "src/java.base/share/data/cacerts/sectigotlsroote46",
+    "sha": "60e0b83c97e434b809598a0da0eab66361aafef1",
+    "size": 1232,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/sectigotlsroote46?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/sectigotlsroote46",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/60e0b83c97e434b809598a0da0eab66361aafef1",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/sectigotlsroote46",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/sectigotlsroote46?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/60e0b83c97e434b809598a0da0eab66361aafef1",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/sectigotlsroote46"
+    }
+  },
+  {
+    "name": "sectigotlsrootr46",
+    "path": "src/java.base/share/data/cacerts/sectigotlsrootr46",
+    "sha": "7ec1b263de7430be57fdeb3b9b9dcea1bfe7277e",
+    "size": 2366,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/sectigotlsrootr46?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/sectigotlsrootr46",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/7ec1b263de7430be57fdeb3b9b9dcea1bfe7277e",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/sectigotlsrootr46",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/sectigotlsrootr46?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/7ec1b263de7430be57fdeb3b9b9dcea1bfe7277e",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/sectigotlsrootr46"
+    }
+  },
+  {
+    "name": "securetrustca",
+    "path": "src/java.base/share/data/cacerts/securetrustca",
+    "sha": "a08e2467f4afa5b6367f15568f07794374a5188f",
+    "size": 1706,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/securetrustca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/securetrustca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/a08e2467f4afa5b6367f15568f07794374a5188f",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/securetrustca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/securetrustca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/a08e2467f4afa5b6367f15568f07794374a5188f",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/securetrustca"
+    }
+  },
+  {
+    "name": "sslrooteccca",
+    "path": "src/java.base/share/data/cacerts/sslrooteccca",
+    "sha": "9943012ed8edc017c0b139241b63641ad976310b",
+    "size": 1359,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/sslrooteccca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/sslrooteccca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/9943012ed8edc017c0b139241b63641ad976310b",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/sslrooteccca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/sslrooteccca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/9943012ed8edc017c0b139241b63641ad976310b",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/sslrooteccca"
+    }
+  },
+  {
+    "name": "sslrootevrsaca",
+    "path": "src/java.base/share/data/cacerts/sslrootevrsaca",
+    "sha": "c009aa081e1659bca66a77fa0c6da84d5e3e78ba",
+    "size": 2559,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/sslrootevrsaca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/sslrootevrsaca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/c009aa081e1659bca66a77fa0c6da84d5e3e78ba",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/sslrootevrsaca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/sslrootevrsaca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/c009aa081e1659bca66a77fa0c6da84d5e3e78ba",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/sslrootevrsaca"
+    }
+  },
+  {
+    "name": "sslrootrsaca",
+    "path": "src/java.base/share/data/cacerts/sslrootrsaca",
+    "sha": "b7982751e2461c2a90cddde769cfc4c789452b0e",
+    "size": 2527,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/sslrootrsaca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/sslrootrsaca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/b7982751e2461c2a90cddde769cfc4c789452b0e",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/sslrootrsaca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/sslrootrsaca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/b7982751e2461c2a90cddde769cfc4c789452b0e",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/sslrootrsaca"
+    }
+  },
+  {
+    "name": "ssltlsrootecc2022",
+    "path": "src/java.base/share/data/cacerts/ssltlsrootecc2022",
+    "sha": "706e6aefb4ee007cd617948fa75fc389cbc900a9",
+    "size": 1198,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/ssltlsrootecc2022?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/ssltlsrootecc2022",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/706e6aefb4ee007cd617948fa75fc389cbc900a9",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/ssltlsrootecc2022",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/ssltlsrootecc2022?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/706e6aefb4ee007cd617948fa75fc389cbc900a9",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/ssltlsrootecc2022"
+    }
+  },
+  {
+    "name": "ssltlsrootrsa2022",
+    "path": "src/java.base/share/data/cacerts/ssltlsrootrsa2022",
+    "sha": "ad456b0b5f4729fcfa1245029d3fbb52a23c4d74",
+    "size": 2332,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/ssltlsrootrsa2022?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/ssltlsrootrsa2022",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/ad456b0b5f4729fcfa1245029d3fbb52a23c4d74",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/ssltlsrootrsa2022",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/ssltlsrootrsa2022?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/ad456b0b5f4729fcfa1245029d3fbb52a23c4d74",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/ssltlsrootrsa2022"
+    }
+  },
+  {
+    "name": "starfieldclass2ca",
+    "path": "src/java.base/share/data/cacerts/starfieldclass2ca",
+    "sha": "d87e609ee37caf0ad3396153a01a54ad3df56448",
+    "size": 1864,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/starfieldclass2ca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/starfieldclass2ca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/d87e609ee37caf0ad3396153a01a54ad3df56448",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/starfieldclass2ca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/starfieldclass2ca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/d87e609ee37caf0ad3396153a01a54ad3df56448",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/starfieldclass2ca"
+    }
+  },
+  {
+    "name": "starfieldrootg2ca",
+    "path": "src/java.base/share/data/cacerts/starfieldrootg2ca",
+    "sha": "bea888c4a99a67807a55e6cef42eb335906979b4",
+    "size": 1848,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/starfieldrootg2ca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/starfieldrootg2ca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/bea888c4a99a67807a55e6cef42eb335906979b4",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/starfieldrootg2ca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/starfieldrootg2ca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/bea888c4a99a67807a55e6cef42eb335906979b4",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/starfieldrootg2ca"
+    }
+  },
+  {
+    "name": "starfieldservicesrootg2ca",
+    "path": "src/java.base/share/data/cacerts/starfieldservicesrootg2ca",
+    "sha": "7303f09f6c8f654e590e8c7615607f7a9fc32884",
+    "size": 1892,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/starfieldservicesrootg2ca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/starfieldservicesrootg2ca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/7303f09f6c8f654e590e8c7615607f7a9fc32884",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/starfieldservicesrootg2ca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/starfieldservicesrootg2ca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/7303f09f6c8f654e590e8c7615607f7a9fc32884",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/starfieldservicesrootg2ca"
+    }
+  },
+  {
+    "name": "swisssigngoldg2ca",
+    "path": "src/java.base/share/data/cacerts/swisssigngoldg2ca",
+    "sha": "3558909b89ec6a9a1fa313d5535853386d5855b1",
+    "size": 2391,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/swisssigngoldg2ca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/swisssigngoldg2ca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/3558909b89ec6a9a1fa313d5535853386d5855b1",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/swisssigngoldg2ca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/swisssigngoldg2ca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/3558909b89ec6a9a1fa313d5535853386d5855b1",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/swisssigngoldg2ca"
+    }
+  },
+  {
+    "name": "swisssignplatinumg2ca",
+    "path": "src/java.base/share/data/cacerts/swisssignplatinumg2ca",
+    "sha": "774bef80dbc6852e54f01bf24193ac9f8482a634",
+    "size": 2411,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/swisssignplatinumg2ca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/swisssignplatinumg2ca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/774bef80dbc6852e54f01bf24193ac9f8482a634",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/swisssignplatinumg2ca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/swisssignplatinumg2ca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/774bef80dbc6852e54f01bf24193ac9f8482a634",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/swisssignplatinumg2ca"
+    }
+  },
+  {
+    "name": "swisssignsilverg2ca",
+    "path": "src/java.base/share/data/cacerts/swisssignsilverg2ca",
+    "sha": "7a1eed1c0f2e425358c82ef4b9fe4d9fe9495ce1",
+    "size": 2399,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/swisssignsilverg2ca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/swisssignsilverg2ca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/7a1eed1c0f2e425358c82ef4b9fe4d9fe9495ce1",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/swisssignsilverg2ca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/swisssignsilverg2ca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/7a1eed1c0f2e425358c82ef4b9fe4d9fe9495ce1",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/swisssignsilverg2ca"
+    }
+  },
+  {
+    "name": "teliarootcav2",
+    "path": "src/java.base/share/data/cacerts/teliarootcav2",
+    "sha": "24ed624291f8e0928fbd4ef937ac6024d4dab064",
+    "size": 2310,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/teliarootcav2?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/teliarootcav2",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/24ed624291f8e0928fbd4ef937ac6024d4dab064",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/teliarootcav2",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/teliarootcav2?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/24ed624291f8e0928fbd4ef937ac6024d4dab064",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/teliarootcav2"
+    }
+  },
+  {
+    "name": "teliasonerarootcav1",
+    "path": "src/java.base/share/data/cacerts/teliasonerarootcav1",
+    "sha": "26512c9b110e90356f7e4dbd811f865f4b2a47f3",
+    "size": 2215,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/teliasonerarootcav1?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/teliasonerarootcav1",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/26512c9b110e90356f7e4dbd811f865f4b2a47f3",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/teliasonerarootcav1",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/teliasonerarootcav1?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/26512c9b110e90356f7e4dbd811f865f4b2a47f3",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/teliasonerarootcav1"
+    }
+  },
+  {
+    "name": "thawteprimaryrootca",
+    "path": "src/java.base/share/data/cacerts/thawteprimaryrootca",
+    "sha": "9dc4dd8552c1ffeedf6f486c6c56151675db97b8",
+    "size": 2031,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/thawteprimaryrootca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/thawteprimaryrootca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/9dc4dd8552c1ffeedf6f486c6c56151675db97b8",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/thawteprimaryrootca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/thawteprimaryrootca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/9dc4dd8552c1ffeedf6f486c6c56151675db97b8",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/thawteprimaryrootca"
+    }
+  },
+  {
+    "name": "thawteprimaryrootcag2",
+    "path": "src/java.base/share/data/cacerts/thawteprimaryrootcag2",
+    "sha": "d604e2f345fc57c443adebaca117e776d60dab47",
+    "size": 1421,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/thawteprimaryrootcag2?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/thawteprimaryrootcag2",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/d604e2f345fc57c443adebaca117e776d60dab47",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/thawteprimaryrootcag2",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/thawteprimaryrootcag2?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/d604e2f345fc57c443adebaca117e776d60dab47",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/thawteprimaryrootcag2"
+    }
+  },
+  {
+    "name": "thawteprimaryrootcag3",
+    "path": "src/java.base/share/data/cacerts/thawteprimaryrootcag3",
+    "sha": "396fc17a0d3074fb1d5581efaa3aad835f80f6e9",
+    "size": 2055,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/thawteprimaryrootcag3?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/thawteprimaryrootcag3",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/396fc17a0d3074fb1d5581efaa3aad835f80f6e9",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/thawteprimaryrootcag3",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/thawteprimaryrootcag3?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/396fc17a0d3074fb1d5581efaa3aad835f80f6e9",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/thawteprimaryrootcag3"
+    }
+  },
+  {
+    "name": "ttelesecglobalrootclass2ca",
+    "path": "src/java.base/share/data/cacerts/ttelesecglobalrootclass2ca",
+    "sha": "1e057df874b0bacde9fa2095969d1a471923bd9c",
+    "size": 1800,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/ttelesecglobalrootclass2ca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/ttelesecglobalrootclass2ca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/1e057df874b0bacde9fa2095969d1a471923bd9c",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/ttelesecglobalrootclass2ca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/ttelesecglobalrootclass2ca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/1e057df874b0bacde9fa2095969d1a471923bd9c",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/ttelesecglobalrootclass2ca"
+    }
+  },
+  {
+    "name": "ttelesecglobalrootclass3ca",
+    "path": "src/java.base/share/data/cacerts/ttelesecglobalrootclass3ca",
+    "sha": "8985014b09a7ee261e73de19ae9e6a1703b51809",
+    "size": 1800,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/ttelesecglobalrootclass3ca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/ttelesecglobalrootclass3ca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/8985014b09a7ee261e73de19ae9e6a1703b51809",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/ttelesecglobalrootclass3ca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/ttelesecglobalrootclass3ca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/8985014b09a7ee261e73de19ae9e6a1703b51809",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/ttelesecglobalrootclass3ca"
+    }
+  },
+  {
+    "name": "twcaglobalrootca",
+    "path": "src/java.base/share/data/cacerts/twcaglobalrootca",
+    "sha": "0c7552e2c8b12ff931c9e17fc612c9ab39d5cbf3",
+    "size": 2228,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/twcaglobalrootca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/twcaglobalrootca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/0c7552e2c8b12ff931c9e17fc612c9ab39d5cbf3",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/twcaglobalrootca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/twcaglobalrootca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/0c7552e2c8b12ff931c9e17fc612c9ab39d5cbf3",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/twcaglobalrootca"
+    }
+  },
+  {
+    "name": "usertrusteccca",
+    "path": "src/java.base/share/data/cacerts/usertrusteccca",
+    "sha": "9af9c946cf5bfc3503c7e3d62a07458d4e334413",
+    "size": 1415,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/usertrusteccca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/usertrusteccca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/9af9c946cf5bfc3503c7e3d62a07458d4e334413",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/usertrusteccca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/usertrusteccca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/9af9c946cf5bfc3503c7e3d62a07458d4e334413",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/usertrusteccca"
+    }
+  },
+  {
+    "name": "usertrustrsaca",
+    "path": "src/java.base/share/data/cacerts/usertrustrsaca",
+    "sha": "fe9ae79029b25d955272f253b71a095da16384a4",
+    "size": 2566,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/usertrustrsaca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/usertrustrsaca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/fe9ae79029b25d955272f253b71a095da16384a4",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/usertrustrsaca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/usertrustrsaca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/fe9ae79029b25d955272f253b71a095da16384a4",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/usertrustrsaca"
+    }
+  },
+  {
+    "name": "utnuserfirstobjectca",
+    "path": "src/java.base/share/data/cacerts/utnuserfirstobjectca",
+    "sha": "80a0b5c23cd227ff85a4753be9edfa5baeeb751f",
+    "size": 2063,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/utnuserfirstobjectca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/utnuserfirstobjectca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/80a0b5c23cd227ff85a4753be9edfa5baeeb751f",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/utnuserfirstobjectca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/utnuserfirstobjectca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/80a0b5c23cd227ff85a4753be9edfa5baeeb751f",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/utnuserfirstobjectca"
+    }
+  },
+  {
+    "name": "verisignclass3g3ca",
+    "path": "src/java.base/share/data/cacerts/verisignclass3g3ca",
+    "sha": "b9c36ed50f468aaee939df6076549ad17906b1e3",
+    "size": 2087,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/verisignclass3g3ca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/verisignclass3g3ca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/b9c36ed50f468aaee939df6076549ad17906b1e3",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/verisignclass3g3ca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/verisignclass3g3ca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/b9c36ed50f468aaee939df6076549ad17906b1e3",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/verisignclass3g3ca"
+    }
+  },
+  {
+    "name": "verisignclass3g4ca",
+    "path": "src/java.base/share/data/cacerts/verisignclass3g4ca",
+    "sha": "b52ee80d50e0fb138e82251a82ed22979dd9f539",
+    "size": 1895,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/verisignclass3g4ca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/verisignclass3g4ca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/b52ee80d50e0fb138e82251a82ed22979dd9f539",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/verisignclass3g4ca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/verisignclass3g4ca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/b52ee80d50e0fb138e82251a82ed22979dd9f539",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/verisignclass3g4ca"
+    }
+  },
+  {
+    "name": "verisignclass3g5ca",
+    "path": "src/java.base/share/data/cacerts/verisignclass3g5ca",
+    "sha": "417c8915171585c84e8f7624817628e3c6f173aa",
+    "size": 2339,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/verisignclass3g5ca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/verisignclass3g5ca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/417c8915171585c84e8f7624817628e3c6f173aa",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/verisignclass3g5ca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/verisignclass3g5ca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/417c8915171585c84e8f7624817628e3c6f173aa",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/verisignclass3g5ca"
+    }
+  },
+  {
+    "name": "verisignuniversalrootca",
+    "path": "src/java.base/share/data/cacerts/verisignuniversalrootca",
+    "sha": "f364256a0ebc5c8841f9e7d80a9c39a0d2c67d42",
+    "size": 2283,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/verisignuniversalrootca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/verisignuniversalrootca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/f364256a0ebc5c8841f9e7d80a9c39a0d2c67d42",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/verisignuniversalrootca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/verisignuniversalrootca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/f364256a0ebc5c8841f9e7d80a9c39a0d2c67d42",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/verisignuniversalrootca"
+    }
+  },
+  {
+    "name": "wisekeyglobalrootgbca",
+    "path": "src/java.base/share/data/cacerts/wisekeyglobalrootgbca",
+    "sha": "5c2c35d04c1db441874457930cd99d96ee4ee872",
+    "size": 1770,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/wisekeyglobalrootgbca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/wisekeyglobalrootgbca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/5c2c35d04c1db441874457930cd99d96ee4ee872",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/wisekeyglobalrootgbca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/wisekeyglobalrootgbca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/5c2c35d04c1db441874457930cd99d96ee4ee872",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/wisekeyglobalrootgbca"
+    }
+  },
+  {
+    "name": "wisekeyglobalrootgcca",
+    "path": "src/java.base/share/data/cacerts/wisekeyglobalrootgcca",
+    "sha": "e42432b95a64ced9840bba06633c26ceb859bdfb",
+    "size": 1324,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/wisekeyglobalrootgcca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/wisekeyglobalrootgcca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/e42432b95a64ced9840bba06633c26ceb859bdfb",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/wisekeyglobalrootgcca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/wisekeyglobalrootgcca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/e42432b95a64ced9840bba06633c26ceb859bdfb",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/wisekeyglobalrootgcca"
+    }
+  },
+  {
+    "name": "xrampglobalca",
+    "path": "src/java.base/share/data/cacerts/xrampglobalca",
+    "sha": "347f1437c29851e79a9dd47914e161e8038fad22",
+    "size": 1977,
+    "url": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/xrampglobalca?ref=master",
+    "html_url": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/xrampglobalca",
+    "git_url": "https://api.github.com/repos/openjdk/jdk/git/blobs/347f1437c29851e79a9dd47914e161e8038fad22",
+    "download_url": "https://raw.githubusercontent.com/openjdk/jdk/master/src/java.base/share/data/cacerts/xrampglobalca",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/openjdk/jdk/contents/src/java.base/share/data/cacerts/xrampglobalca?ref=master",
+      "git": "https://api.github.com/repos/openjdk/jdk/git/blobs/347f1437c29851e79a9dd47914e161e8038fad22",
+      "html": "https://github.com/openjdk/jdk/blob/master/src/java.base/share/data/cacerts/xrampglobalca"
+    }
+  }
+]

@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import re
 import sys
+from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -25,6 +26,8 @@ CODE_SEC = ["检测", "修复", "验证"]
 ECOS = {"node", "npm", "go", "python", "python-llm", "php", "pki", "generic"}
 STATUS = {"draft", "verified"}
 PLACEHOLDERS = ["TODO", "TBD", "XXX", "待填", "待补写"]
+# updated 校验白名单：模板与文档不是「件」
+UPDATED_WHITELIST = {"00-TEMPLATE.md", "README.md"}
 NAME_RE = re.compile(r"^(\d{2})-[a-z0-9]+(?:-[a-z0-9]+)*\.md$")
 CVE_RE = re.compile(r"CVE-\d{4}-\d{4,}")
 URL_RE = re.compile(r"https?://\S+")
@@ -93,6 +96,25 @@ def check_file(path: Path, strict: bool) -> tuple[list[str], set[str]]:
     for k in REQ_FM:
         if not fm.get(k):
             errs.append(f"frontmatter 缺字段或为空: {k}")
+
+    # updated: 必须 ≥ 本件最后实质修改日（mtime），且不得是未来日期
+    if path.name not in UPDATED_WHITELIST:
+        upd = fm.get("updated", "")
+        if upd:
+            try:
+                upd_d = date.fromisoformat(upd)
+            except ValueError:
+                errs.append(f"updated={upd!r} 不是 YYYY-MM-DD")
+                upd_d = None
+            if upd_d:
+                today = date.today()
+                if upd_d > today:
+                    errs.append(f"updated={upd} 是未来日期（今天 {today.isoformat()}）")
+                mt = date.fromtimestamp(path.stat().st_mtime)
+                if mt > upd_d:
+                    errs.append(
+                        f"updated={upd} 早于本件最后修改日 {mt.isoformat()}（改了件没更新 updated）"
+                    )
 
     fid = fm.get("id", "")
     if nn and fid and fid != nn:

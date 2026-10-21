@@ -1,0 +1,3431 @@
+ <!DOCTYPE html>
+		<html
+			class="layout layout-holy-grail   show-table-of-contents conceptual show-breadcrumb default-focus"
+			lang="en-us"
+			dir="ltr"
+			data-authenticated="false"
+			data-auth-status-determined="false"
+			data-target="docs"
+			x-ms-format-detection="none"
+		>
+			
+		<head>
+			<title>Cross-platform cryptography - .NET | Microsoft Learn</title>
+			<meta charset="utf-8" />
+			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+			<meta name="color-scheme" content="light dark" />
+
+			<meta name="description" content="Learn about cryptographic capabilities on platforms supported by .NET." />
+			<link rel="canonical" href="https://learn.microsoft.com/en-us/dotnet/standard/security/cross-platform-cryptography" /> 
+
+			<!-- Non-customizable open graph and sharing-related metadata -->
+			<meta name="twitter:card" content="summary" />
+			<meta name="twitter:site" content="@MicrosoftLearn" />
+			<meta property="og:type" content="website" />
+			<meta property="og:image:alt" content="Cross-platform cryptography - .NET | Microsoft Learn" />
+			<meta property="og:image" content="https://learn.microsoft.com/dotnet/media/dot-net-cross-platform.png" />
+			<!-- Page specific open graph and sharing-related metadata -->
+			<meta property="og:title" content="Cross-platform cryptography - .NET" />
+			<meta property="og:url" content="https://learn.microsoft.com/en-us/dotnet/standard/security/cross-platform-cryptography" />
+			<meta property="og:description" content="Learn about cryptographic capabilities on platforms supported by .NET." />
+			<meta name="platform_id" content="430f5f98-c25b-cffd-3f7c-adc3493ca4a4" /> <meta name="scope" content=".NET" />
+			<meta name="locale" content="en-us" />
+			 
+			<meta name="uhfHeaderId" content="MSDocsHeader-DotNet" />
+
+			<meta name="page_type" content="conceptual" />
+
+			<!--page specific meta tags-->
+			
+
+			<!-- custom meta tags -->
+			
+		<meta name="apiPlatform" content="dotnet" />
+	
+		<meta name="author" content="BillWagner" />
+	
+		<meta name="breadcrumb_path" content="/dotnet/breadcrumb/toc.json" />
+	
+		<meta name="feedback_system" content="OpenSource" />
+	
+		<meta name="feedback_product_url" content="https://aka.ms/feedback/report?space=61" />
+	
+		<meta name="ms.author" content="wiwagn" />
+	
+		<meta name="ms.devlang" content="dotnet" />
+	
+		<meta name="ms.service" content="dotnet" />
+	
+		<meta name="ms.topic" content="reference" />
+	
+		<meta name="show_latex" content="true" />
+	
+		<meta name="ms.subservice" content="standard-library" />
+	
+		<meta name="ms.date" content="2026-08-03T00:00:00Z" />
+	
+		<meta name="ai-usage" content="ai-assisted" />
+	
+		<meta name="document_id" content="7dba5d39-737f-cfa3-b1e4-c997e55312a8" />
+	
+		<meta name="document_version_independent_id" content="95e31f6e-9a36-913e-6a02-7fb1606e5a52" />
+	
+		<meta name="updated_at" content="2026-08-07T15:27:00Z" />
+	
+		<meta name="original_content_git_url" content="https://github.com/dotnet/docs/blob/live/docs/standard/security/cross-platform-cryptography.md" />
+	
+		<meta name="gitcommit" content="https://github.com/dotnet/docs/blob/38d3754e66e1b6c992af95a07a8199c7d4283acd/docs/standard/security/cross-platform-cryptography.md" />
+	
+		<meta name="git_commit_id" content="38d3754e66e1b6c992af95a07a8199c7d4283acd" />
+	
+		<meta name="site_name" content="Docs" />
+	
+		<meta name="depot_name" content="VS.core-docs" />
+	
+		<meta name="schema" content="Conceptual" />
+	
+		<meta name="toc_rel" content="../../navigate/security/toc.json" />
+	
+		<meta name="pdf_url_template" content="https://learn.microsoft.com/pdfstore/en-us/VS.core-docs/{branchName}{pdfName}" />
+	
+		<meta name="feedback_help_link_type" content="" />
+	
+		<meta name="feedback_help_link_url" content="" />
+	
+		<meta name="search.mshattr.devlang" content="csharp" />
+	
+		<meta name="word_count" content="4059" />
+	
+		<meta name="asset_id" content="standard/security/cross-platform-cryptography" />
+	
+		<meta name="moniker_range_name" content="" />
+	
+		<meta name="item_type" content="Content" />
+	
+		<meta name="source_path" content="docs/standard/security/cross-platform-cryptography.md" />
+	
+		<meta name="previous_tlsh_hash" content="AB9C73C2738DEFF3FF82491A2CDFAE4195F0C44C1DA0995C1427A0FE420B3F5A3E9312B68EB293512E77C69331B3611E05D6AB394616112F13F25099B54879D6ADFC2BA6CE" />
+	
+		<meta name="github_feedback_content_git_url" content="https://github.com/dotnet/docs/blob/main/docs/standard/security/cross-platform-cryptography.md" />
+	
+		<meta name="markdown_url" content="https://learn.microsoft.com/en-us/dotnet/standard/security/cross-platform-cryptography?accept=text/markdown" />
+	 
+		<meta name="cmProducts" content="https://authoring-docs-microsoft.poolparty.biz/devrel/7696cda6-0510-47f6-8302-71bb5d2e28cf" data-source="generated" />
+	
+		<meta name="cmProducts" content="https://authoring-docs-microsoft.poolparty.biz/devrel/bcbcbad5-4208-4783-8035-8481272c98b8" data-source="generated" />
+	
+		<meta name="cmProducts" content="https://microsoft-devrel.poolparty.biz/DevRelOfferingOntology/19ec6774-09b8-473e-a17e-b17b518bbad7" data-source="generated" />
+	
+		<meta name="spProducts" content="https://authoring-docs-microsoft.poolparty.biz/devrel/69c76c32-967e-4c65-b89a-74cc527db725" data-source="generated" />
+	
+		<meta name="spProducts" content="https://authoring-docs-microsoft.poolparty.biz/devrel/43b2e5aa-8a6d-4de2-a252-692232e5edc8" data-source="generated" />
+	
+		<meta name="spProducts" content="https://microsoft-devrel.poolparty.biz/DevRelOfferingOntology/ade36b61-c646-4bd8-87ee-f3a843461962" data-source="generated" />
+	
+
+			<!-- Apply persisted/system theme before first paint to prevent wrong-theme flash when scripts are deferred. -->
+			<script id="theme-preference">
+				(function () {
+			try {
+				var stored = localStorage.getItem('theme');
+				var theme = /^(light|dark|high-contrast)$/.test(stored)
+					? stored
+					: matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+				document.documentElement.classList.add('theme-' + theme);
+			} catch (e) {}
+		})();;
+			</script>
+
+			<script id="atlas-layout-preferences">
+				(function () {
+			try {
+				var state = JSON.parse(localStorage.getItem('atlas-layout-preferences') || '{}');
+				var view = state["docs-layout-persistence"] || {};
+				var excludesKey = "";
+				var blocked = {};
+				if (excludesKey) {
+					var exclusions = JSON.parse(localStorage.getItem('atlas-layout-exclusions') || '{}');
+					if (Object.prototype.hasOwnProperty.call(exclusions, excludesKey)) {
+						var scoped = exclusions[excludesKey];
+						if (scoped) {
+							if (typeof scoped === 'object') blocked = scoped;
+						}
+					}
+				}
+				var html = document.documentElement;
+				for (var c in view) {
+					if (Object.prototype.hasOwnProperty.call(blocked, c)) continue;
+					if (view[c]) html.classList.add(c);
+					else html.classList.remove(c);
+				}
+			} catch (e) {}
+		})();;
+			</script>
+
+			<!-- assets and js globals -->
+			
+			<link rel="stylesheet" href="/static/assets/0.4.03574.8308-9505b1c8/styles/site.css" />
+			
+			<script src="https://wcpstatic.microsoft.com/mscc/lib/v2/wcp-consent.js"></script>
+			<!-- Keep this URL in sync with oneDSScriptSelector in instrumentation/one-ds.ts. -->
+			<script async src="https://js.monitor.azure.com/scripts/c/ms.jsll-4.min.js"></script>
+			
+
+			<!-- msdocs global object -->
+			<script id="msdocs-script">
+		var msDocs = {
+  "environment": {
+    "accessLevel": "online",
+    "azurePortalHostname": "portal.azure.com",
+    "reviewFeatures": false,
+    "supportLevel": "production",
+    "systemContent": true,
+    "siteName": "learn",
+    "legacyHosting": false
+  },
+  "data": {
+    "contentLocale": "en-us",
+    "contentDir": "ltr",
+    "userLocale": "en-us",
+    "userDir": "ltr",
+    "pageTemplate": "Conceptual",
+    "layoutStateStorageKey": "docs-layout-persistence",
+    "brand": "",
+    "context": {},
+    "standardFeedback": false,
+    "showFeedbackReport": false,
+    "feedbackHelpLinkType": "",
+    "feedbackHelpLinkUrl": "",
+    "feedbackSystem": "OpenSource",
+    "feedbackGitHubRepo": "dotnet/docs",
+    "feedbackProductUrl": "https://aka.ms/feedback/report?space=61",
+    "extendBreadcrumb": false,
+    "isEditDisplayable": true,
+    "isPrivateUnauthorized": false,
+    "hideViewSource": false,
+    "isPermissioned": false,
+    "hasRecommendations": false,
+    "mathjax": {},
+    "openSourceFeedbackIssueUrl": "https://github.com/dotnet/docs/issues/new?template=z-customer-feedback.yml",
+    "openSourceFeedbackIssueTitle": ""
+  },
+  "functions": {}
+};;
+	</script>
+
+			<!-- base scripts, msdocs global should be before this -->
+			<script
+				src="/static/assets/0.4.03574.8308-9505b1c8/scripts/en-us/index-docs.js"
+				async
+			></script>
+			
+
+			<!-- json-ld -->
+			
+		<script >bazadebezolkohpepadr="1033157884"</script><script type="text/javascript" src="https://learn.microsoft.com/akam/13/3d94bf71"  defer></script></head>
+	
+			<body
+				id="body"
+				data-bi-name="body"
+				class="layout-body "
+				lang="en-us"
+				dir="ltr"
+			>
+				<header class="layout-body-header background-color-body-medium">
+		<div class="header-holder has-default-focus">
+			
+		<a
+			href="#main"
+			
+			style="z-index: 1070"
+			class="outline-color-text visually-hidden-until-focused position-fixed inner-focus focus-visible top-0 left-0 right-0 padding-xs text-align-center background-color-body"
+			
+		>
+			Skip to main content
+		</a>
+	
+		<a
+			href="#"
+			data-skip-to-ask-learn
+			style="z-index: 1070"
+			class="outline-color-text visually-hidden-until-focused position-fixed inner-focus focus-visible top-0 left-0 right-0 padding-xs text-align-center background-color-body"
+			hidden
+		>
+			Skip to Ask Learn chat experience
+		</a>
+	
+
+			<div hidden id="cookie-consent-holder" data-test-id="cookie-consent-container"></div>
+			<!-- Unsupported browser warning -->
+			<div
+				id="unsupported-browser"
+				style="background-color: white; color: black; padding: 16px; border-bottom: 1px solid grey;"
+				hidden
+			>
+				<div style="max-width: 800px; margin: 0 auto;">
+					<p style="font-size: 24px">This browser is no longer supported.</p>
+					<p style="font-size: 16px; margin-top: 16px;">
+						Upgrade to Microsoft Edge to take advantage of the latest features, security updates, and technical support.
+					</p>
+					<div style="margin-top: 12px;">
+						<a
+							href="https://go.microsoft.com/fwlink/p/?LinkID=2092881 "
+							style="background-color: #0078d4; border: 1px solid #0078d4; color: white; padding: 6px 12px; border-radius: 2px; display: inline-block;"
+						>
+							Download Microsoft Edge
+						</a>
+						<a
+							href="https://learn.microsoft.com/en-us/lifecycle/faq/internet-explorer-microsoft-edge"
+							style="background-color: white; padding: 6px 12px; border: 1px solid #505050; color: #171717; border-radius: 2px; display: inline-block;"
+						>
+							More info about Internet Explorer and Microsoft Edge
+						</a>
+					</div>
+				</div>
+			</div>
+			<!-- site header -->
+			<div
+				id="ms--site-header"
+				data-test-id="site-header-wrapper"
+				itemscope="itemscope"
+				itemtype="http://schema.org/Organization"
+			>
+				<div
+					id="ms--mobile-nav"
+					class="site-header display-none-tablet padding-inline-none gap-none"
+					data-bi-name="mobile-header"
+					data-test-id="mobile-header"
+				></div>
+				<div
+					id="ms--primary-nav"
+					class="site-header display-none display-flex-tablet"
+					data-bi-name="L1-header"
+					data-test-id="primary-header"
+				></div>
+				<div
+					id="ms--secondary-nav"
+					class="site-header display-none display-flex-tablet"
+					data-bi-name="L2-header"
+					data-test-id="secondary-header"
+					
+				></div>
+			</div>
+			
+		<!-- banner -->
+		<div data-banner>
+			<div id="disclaimer-holder"></div>
+			
+		</div>
+		<!-- banner end -->
+	
+		</div>
+	</header>
+				 <section
+					id="layout-body-menu"
+					class="layout-body-menu border-right display-flex background-color-body-medium"
+					data-bi-name="menu"
+			  >
+					
+		<div
+			id="left-container"
+			class="left-container display-none padding-none display-block-tablet width-full display-none-until-layout-restored"
+			data-toc-container="true"
+		>
+			<div
+				id="ms--toc-content"
+				class="padding-left-sm padding-right-none padding-bottom-sm height-full"
+			>
+				<nav
+					id="affixed-left-container"
+					class="margin-top-xxs-tablet position-sticky display-flex flex-direction-column width-full"
+					aria-label="Primary"
+					data-bi-name="left-toc"
+					role="navigation"
+				>
+					<div
+						id="ms--collapsible-toc-header"
+						class="display-flex flex-direction-row-reverse justify-content-center align-items-center margin-bottom-xxs margin-right-xxs"
+					>
+						<button
+							type="button"
+							class="button button-clear button-sm inner-focus"
+							data-collapsible-toc-toggle
+							aria-expanded="true"
+							hidden
+							aria-controls="ms--toc-content"
+							aria-label="Table of contents"
+						>
+							<span class="icon icon-mirrored-rtl" aria-hidden="true">
+								<span
+									class="docon docon-panel-left-contract display-none-layout-menu-collapsed"
+								></span>
+								<span
+									class="docon docon-panel-left-expand display-none display-inline-layout-menu-collapsed"
+								></span>
+							</span>
+						</button>
+						<div
+							id="ms--collapsible-toc-moniker-slot"
+							class="flex-grow-1 display-none-layout-menu-collapsed"
+						></div>
+					</div>
+				</nav>
+			</div>
+		</div>
+	
+			  </section>
+
+				<main
+					id="main"
+					role="main"
+					class="layout-body-main "
+					data-bi-name="content"
+					lang="en-us"
+					dir="ltr"
+				>
+					
+			<div
+		id="ms--content-header"
+		class="content-header default-focus border-bottom-none"
+		data-bi-name="content-header"
+	>
+		<div class="content-header-controls margin-xxs margin-inline-sm-tablet">
+			<button
+				type="button"
+				class="contents-button button button-sm margin-right-xxs"
+				data-bi-name="contents-expand"
+				aria-haspopup="true"
+				data-contents-button
+			>
+				<span class="icon" aria-hidden="true"><span class="docon docon-menu"></span></span>
+				<span class="contents-expand-title"> Table of contents </span>
+			</button>
+			<button
+				type="button"
+				class="ap-collapse-behavior ap-expanded button button-sm"
+				data-bi-name="ap-collapse"
+				aria-controls="action-panel"
+			>
+				<span class="icon" aria-hidden="true"><span class="docon docon-exit-mode"></span></span>
+				<span>Exit editor mode</span>
+			</button>
+		</div>
+	</div> 
+		<div
+			id="action-panel"
+			role="region"
+			aria-label="Action Panel"
+			class="action-panel"
+			tabindex="-1"
+		></div>
+	
+			<div
+				data-main-column
+				class="reading-width margin-inline-auto layout-padding padding-top-none padding-top-sm-tablet padding-bottom-sm"
+			>
+				<div>
+					
+		<div id="article-header" class="background-color-body margin-bottom-xs display-none-print">
+			<div class="display-flex align-items-center justify-content-space-between">
+				
+		<details
+			id="article-header-breadcrumbs-overflow-popover"
+			class="popover popover-left"
+			data-for="article-header-breadcrumbs"
+		>
+			<summary
+				class="button button-clear button-primary button-sm inner-focus"
+				aria-label="All breadcrumbs"
+			>
+				<span class="icon" aria-hidden="true">
+					<span class="docon docon-more"></span>
+				</span>
+			</summary>
+			<div id="article-header-breadcrumbs-overflow" class="popover-content"></div>
+		</details>
+
+		<bread-crumbs
+			id="article-header-breadcrumbs"
+			role="group"
+			aria-label="Breadcrumbs"
+			data-test-id="article-header-breadcrumbs"
+			class="overflow-hidden flex-grow-1 margin-right-sm margin-right-md-tablet margin-right-lg-desktop margin-left-negative-xxs padding-left-xxs"
+		></bread-crumbs>
+	 
+		<div
+			id="article-header-page-actions"
+			class="opacity-none margin-left-auto display-flex flex-wrap-no-wrap align-items-stretch"
+		>
+			
+		<button
+			class="button button-sm border-none inner-focus display-none-tablet flex-shrink-0 "
+			data-bi-name="ask-learn-assistant-entry"
+			data-test-id="ask-learn-assistant-modal-entry-mobile"
+			data-ask-learn-modal-entry
+			
+			type="button"
+			style="min-width: max-content;"
+			aria-expanded="false"
+			aria-label="Ask Learn"
+			hidden
+		>
+			<span class="icon" aria-hidden="true">
+				<span class="docon docon-chat-sparkle-fill gradient-ask-learn-logo"></span>
+			</span>
+		</button>
+		<button
+			class="button button-sm display-none display-inline-flex-tablet display-none-desktop flex-shrink-0 margin-right-xxs border-color-ask-learn "
+			data-bi-name="ask-learn-assistant-entry"
+			
+			data-test-id="ask-learn-assistant-modal-entry-tablet"
+			data-ask-learn-modal-entry
+			type="button"
+			style="min-width: max-content;"
+			aria-expanded="false"
+			hidden
+		>
+			<span class="icon font-size-lg" aria-hidden="true">
+				<span class="docon docon-chat-sparkle-fill gradient-ask-learn-logo"></span>
+			</span>
+			<span>Ask Learn</span>
+		</button>
+		<button
+			class="button button-sm display-none flex-shrink-0 display-inline-flex-desktop margin-right-xxs border-color-ask-learn "
+			data-bi-name="ask-learn-assistant-entry"
+			
+			data-test-id="ask-learn-assistant-flyout-entry"
+			data-ask-learn-flyout-entry
+			data-flyout-button="toggle"
+			type="button"
+			style="min-width: max-content;"
+			aria-expanded="false"
+			aria-controls="ask-learn-flyout"
+			hidden
+		>
+			<span class="icon font-size-lg" aria-hidden="true">
+				<span class="docon docon-chat-sparkle-fill gradient-ask-learn-logo"></span>
+			</span>
+			<span>Ask Learn</span>
+		</button>
+	 
+
+			<details class="popover popover-right" id="article-header-page-actions-overflow">
+				<summary
+					class="justify-content-flex-start button button-clear button-sm button-primary inner-focus"
+					aria-label="More actions"
+					aria-expanded="false"
+					title="More actions"
+				>
+					<span class="icon" aria-hidden="true">
+						<span class="docon docon-more-vertical"></span>
+					</span>
+				</summary>
+				<div class="popover-content">
+					
+		<button
+			type="button"
+			id="ms--focus-mode-button"
+			data-focus-mode
+			data-bi-name="focus-mode-entry"
+			data-page-action-item="overflow-all"
+			data-popover-close
+			class="button button-clear button-sm button-block justify-content-flex-start text-align-left inner-focus display-none display-inline-flex-tablet"
+		>
+			<span class="icon" aria-hidden="true">
+				<span class="docon docon-glasses"></span>
+			</span>
+			<span>Reading mode</span>
+		</button>
+	 
+		<button
+			data-page-action-item="overflow-mobile"
+			type="button"
+			class="display-block-layout-menu-collapsed button-block button-sm inner-focus button button-clear display-none-tablet justify-content-flex-start text-align-left"
+			data-bi-name="contents-expand"
+			data-contents-button
+			data-popover-close
+		>
+			<span class="icon" aria-hidden="true"
+				><span class="docon docon-editor-list-bullet"></span
+			></span>
+			<span class="contents-expand-title">Table of contents</span>
+		</button>
+	 
+		<a
+			id="lang-link-overflow"
+			class="button-sm inner-focus button button-clear button-block justify-content-flex-start text-align-left"
+			data-bi-name="language-toggle"
+			data-page-action-item="overflow-all"
+			data-check-hidden="true"
+			data-read-in-link
+			href="#"
+			hidden
+		>
+			<span class="icon" aria-hidden="true" data-read-in-link-icon>
+				<span class="docon docon-locale-globe"></span>
+			</span>
+			<span data-read-in-link-text>Read in English</span>
+		</a>
+	
+					
+		<button
+			type="button"
+			class="collection button button-clear button-sm button-block justify-content-flex-start text-align-left inner-focus"
+			data-list-type="collection"
+			data-bi-name="collection"
+			data-page-action-item="overflow-all"
+			data-check-hidden="true"
+			data-popover-close
+		>
+			<span class="icon" aria-hidden="true">
+				<span class="docon docon-circle-addition"></span>
+			</span>
+			<span class="collection-status">Add</span>
+		</button>
+	 
+		<button
+			type="button"
+			class="collection button button-block button-clear button-sm justify-content-flex-start text-align-left inner-focus"
+			data-list-type="plan"
+			data-bi-name="plan"
+			data-page-action-item="overflow-all"
+			data-check-hidden="true"
+			data-popover-close
+			hidden
+		>
+			<span class="icon" aria-hidden="true">
+				<span class="docon docon-circle-addition"></span>
+			</span>
+			<span class="plan-status">Add to Plans</span>
+		</button>
+	 
+					
+		<a
+			data-contenteditbtn
+			class="button button-clear button-block button-sm inner-focus justify-content-flex-start text-align-left text-decoration-none"
+			data-bi-name="edit"
+			data-page-action-item="overflow-all"
+			data-check-hidden="true"
+			
+			href="https://github.com/dotnet/docs/blob/main/docs/standard/security/cross-platform-cryptography.md"
+			data-original_content_git_url="https://github.com/dotnet/docs/blob/live/docs/standard/security/cross-platform-cryptography.md"
+			data-original_content_git_url_template="{repo}/blob/{branch}/docs/standard/security/cross-platform-cryptography.md"
+			data-pr_repo=""
+			data-pr_branch=""
+		>
+			<span class="icon" aria-hidden="true">
+				<span class="docon docon-edit-outline"></span>
+			</span>
+			<span>Edit</span>
+		</a>
+	  
+		<hr class="margin-block-xxs" />
+		
+				<button
+					class="button button-block button-clear button-sm justify-content-flex-start text-align-left inner-focus"
+					type="button"
+					data-bi-name="copy-markdown"
+					data-page-action-item="overflow-all"
+					data-copy-markdown
+					data-copy-state="idle"
+					data-check-hidden="true"
+				>
+					<span class="icon color-primary" aria-hidden="true">
+						<span data-show-when="idle" class="docon docon-code-lang"></span>
+						<span data-show-when="loading" class="loader" hidden></span>
+						<span data-show-when="success" class="docon docon-check-mark" hidden></span>
+					</span>
+					<span>Copy Markdown</span>
+				</button>
+		   
+				<button
+					class="button button-block button-clear button-sm justify-content-flex-start text-align-left inner-focus"
+					type="button"
+					data-bi-name="print"
+					data-page-action-item="overflow-all"
+					data-popover-close
+					data-print-page
+					data-check-hidden="true"
+				>
+					<span class="icon color-primary" aria-hidden="true">
+						<span class="docon docon-print"></span>
+					</span>
+					<span>Print</span>
+				</button>
+		  
+	
+				</div>
+			</details>
+		</div>
+	
+			</div>
+		</div>
+	  
+		<!-- privateUnauthorizedTemplate is hidden by default -->
+		<div unauthorized-private-section data-bi-name="permission-content-unauthorized-private" hidden>
+			<hr class="hr margin-top-xs margin-bottom-sm" />
+			<div class="notification notification-info">
+				<div class="notification-content">
+					<p class="margin-top-none notification-title">
+						<span class="icon" aria-hidden="true"
+							><span class="docon docon-exclamation-circle-solid"></span
+						></span>
+						<span>Note</span>
+					</p>
+					<p class="margin-top-none authentication-determined not-authenticated">
+						Access to this page requires authorization. You can try <a class="docs-sign-in" href="#" data-bi-name="permission-content-sign-in">signing in</a> or <a  class="docs-change-directory" data-bi-name="permisson-content-change-directory">changing directories</a>.
+					</p>
+					<p class="margin-top-none authentication-determined authenticated">
+						Access to this page requires authorization. You can try <a class="docs-change-directory" data-bi-name="permisson-content-change-directory">changing directories</a>.
+					</p>
+				</div>
+			</div>
+		</div>
+	
+					<div class="content"><h1 id="cross-platform-cryptography-in-net">Cross-platform cryptography in .NET</h1></div>
+					
+		<div
+			id="article-metadata"
+			data-bi-name="article-metadata"
+			data-test-id="article-metadata"
+			class="page-metadata-container display-flex gap-xxs justify-content-space-between align-items-center flex-wrap-wrap"
+		>
+			 
+				<div
+					id="user-feedback"
+					class="margin-block-xxs display-none display-none-print"
+					hidden
+					data-hide-on-archived
+				>
+					
+		<button
+			id="user-feedback-button"
+			data-test-id="conceptual-feedback-button"
+			class="button button-sm button-clear button-primary display-none"
+			type="button"
+			data-bi-name="user-feedback-button"
+			data-user-feedback-button
+			hidden
+		>
+			<span class="icon" aria-hidden="true">
+				<span class="docon docon-like"></span>
+			</span>
+			<span>Feedback</span>
+		</button>
+	
+				</div>
+		  
+		</div>
+	 
+		<div data-id="ai-summary" class="display-none-print">
+			<div id="ms--ai-summary-cta" class="margin-top-xs display-flex align-items-center">
+				<span class="icon" aria-hidden="true">
+					<span class="docon docon-sparkle-fill gradient-text-vivid"></span>
+				</span>
+				<button
+					id="ms--ai-summary"
+					type="button"
+					class="tag tag-sm tag-suggestion margin-left-xxs"
+					data-test-id="ai-summary-cta"
+					data-bi-name="ai-summary-cta"
+					data-an="ai-summary"
+				>
+					<span class="ai-summary-cta-text">
+						Summarize this article for me
+					</span>
+				</button>
+			</div>
+			<!-- Slot where the client will render the summary card after the user clicks the CTA -->
+			<div id="ms--ai-summary-header" class="margin-top-xs"></div>
+		</div>
+	 
+		<nav
+			id="center-doc-outline"
+			class="doc-outline display-none-desktop display-none-print margin-bottom-sm"
+			data-bi-name="intopic toc"
+			aria-label="In this article"
+		>
+			<h2 id="ms--in-this-article" class="title is-6 margin-block-xs">
+				In this article
+			</h2>
+		</nav>
+	 <div class="content"><p>Cryptographic operations in .NET are done by operating system (OS) libraries. This dependency has advantages:</p>
+<ul>
+<li>.NET apps benefit from OS reliability. Keeping cryptography libraries safe from vulnerabilities is a high priority for OS vendors. To do that, they provide updates that system administrators should be applying.</li>
+<li>.NET apps have access to FIPS-validated algorithms if the OS libraries are FIPS-validated.</li>
+</ul>
+<p>The dependency on OS libraries also means that .NET apps can only use cryptographic features that the OS supports. While all platforms support certain core features, some features that .NET supports can't be used on some platforms. This article identifies the features that are supported on each platform.</p>
+<p>This article assumes you have a working familiarity with cryptography in .NET. For more information, see <a href="cryptography-model" data-linktype="relative-path">.NET Cryptography Model</a> and <a href="cryptographic-services" data-linktype="relative-path">.NET Cryptographic Services</a>.</p>
+<h2 id="hash-and-message-authentication-algorithms">Hash and Message Authentication Algorithms</h2>
+<p>All hash algorithm and hash-based message authentication (HMAC) classes, including the <code>*Managed</code> classes, defer to the OS libraries with the exception of .NET on Browser WASM. In Browser WASM, SHA-1, SHA-2-256, SHA-2-384, SHA-2-512 and the HMAC equivalents are implemented using managed code.</p>
+<table>
+<thead>
+<tr>
+<th>Algorithm</th>
+<th>Windows</th>
+<th>Linux</th>
+<th>macOS</th>
+<th>iOS, tvOS, MacCatalyst</th>
+<th>Android</th>
+<th>Browser</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MD5</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>SHA-1</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>SHA-2-256</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>SHA-2-384</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>SHA-2-512</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>SHA-3-256</td>
+<td>Windows 11 Build 25324+</td>
+<td>OpenSSL 1.1.1+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>SHA-3-384</td>
+<td>Windows 11 Build 25324+</td>
+<td>OpenSSL 1.1.1+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>SHA-3-512</td>
+<td>Windows 11 Build 25324+</td>
+<td>OpenSSL 1.1.1+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>SHAKE-128</td>
+<td>Windows 11 Build 25324+</td>
+<td>OpenSSL 1.1.1+<sup>2</sup></td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>SHAKE-256</td>
+<td>Windows 11 Build 25324+</td>
+<td>OpenSSL 1.1.1+<sup>2</sup></td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>HMAC-MD5</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>HMAC-SHA-1</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>HMAC-SHA-2-256</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>HMAC-SHA-2-384</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>HMAC-SHA-2-512</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>HMAC-SHA-3-256</td>
+<td>Windows 11 Build 25324+</td>
+<td>OpenSSL 1.1.1+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>HMAC-SHA-3-384</td>
+<td>Windows 11 Build 25324+</td>
+<td>OpenSSL 1.1.1+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>HMAC-SHA-3-512</td>
+<td>Windows 11 Build 25324+</td>
+<td>OpenSSL 1.1.1+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>KMAC-128<sup>1</sup></td>
+<td>Windows 11 Build 26016+</td>
+<td>OpenSSL 3.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>KMAC-256<sup>1</sup></td>
+<td>Windows 11 Build 26016+</td>
+<td>OpenSSL 3.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>KMAC-XOF-128<sup>1</sup></td>
+<td>Windows 11 Build 26016+</td>
+<td>OpenSSL 3.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>KMAC-XOF-256<sup>1</sup></td>
+<td>Windows 11 Build 26016+</td>
+<td>OpenSSL 3.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<p><sup>1</sup>Available starting in .NET 9.</p>
+<p><sup>2</sup>Streaming extensible output function (XOF) is available starting in .NET 9. On Linux, this requires OpenSSL 3.3.</p>
+<h2 id="symmetric-encryption">Symmetric encryption</h2>
+<p>The underlying ciphers and chaining are done by the system libraries.</p>
+<table>
+<thead>
+<tr>
+<th>Cipher + Mode</th>
+<th>Windows</th>
+<th>Linux</th>
+<th>macOS</th>
+<th>iOS, tvOS, MacCatalyst</th>
+<th>Android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AES-CBC</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>AES-ECB</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>AES-CFB8</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>AES-CFB128</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>3DES-CBC</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>3DES-ECB</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>3DES-CFB8</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>3DES-CFB64</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>DES-CBC</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>DES-ECB</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>DES-CFB8</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>RC2-CBC</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>RC2-ECB</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>RC2-CFB</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<h2 id="authenticated-encryption">Authenticated encryption</h2>
+<p>Authenticated encryption (AE) support is provided for AES-CCM, AES-GCM, and ChaCha20Poly1305 via the <a href="/en-us/dotnet/api/system.security.cryptography.aesccm" class="no-loc" data-linktype="absolute-path">System.Security.Cryptography.AesCcm</a>, <a href="/en-us/dotnet/api/system.security.cryptography.aesgcm" class="no-loc" data-linktype="absolute-path">System.Security.Cryptography.AesGcm</a>, and <a href="/en-us/dotnet/api/system.security.cryptography.chacha20poly1305" class="no-loc" data-linktype="absolute-path">System.Security.Cryptography.ChaCha20Poly1305</a> classes, respectively.</p>
+<p>Since authenticated encryption requires newer platform APIs to support the algorithm, support might not be present on all platforms. To detect at runtime whether the current platform supports the algorithm, you can use the <code>IsSupported</code> static property on the class for the algorithm.</p>
+<table>
+<thead>
+<tr>
+<th>Cipher + Mode</th>
+<th>Windows</th>
+<th>Linux</th>
+<th>macOS</th>
+<th>iOS, tvOS, MacCatalyst</th>
+<th>Android</th>
+<th>Browser</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AES-GCM</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>⚠️</td>
+<td>✔️</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>AES-CCM</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>❌</td>
+<td>❌</td>
+<td>✔️</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>ChaCha20Poly1305</td>
+<td>Windows 10 Build 20142+</td>
+<td>OpenSSL 1.1.0+</td>
+<td>✔️</td>
+<td>⚠️</td>
+<td>API Level 28+</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<h3 id="aes-ccm-on-macos">AES-CCM on macOS</h3>
+<p>Prior to .NET 10, AES-CCM worked if a supported version of OpenSSL was present and the dynamic library loader could locate it. OpenSSL support on macOS was removed in .NET 10.</p>
+<h3 id="aes-gcm-and-chacha20poly1305-on-ios-tvos-and-maccatalyst">AES-GCM and ChaCha20Poly1305 on iOS, tvOS, and MacCatalyst</h3>
+<p>Support for AES-GCM and ChaCha20Poly1305 is available starting in .NET 9 on iOS and tvOS 13.0 and later, and all versions of MacCatalyst.</p>
+<h3 id="aes-ccm-keys-nonces-and-tags">AES-CCM keys, nonces, and tags</h3>
+<ul>
+<li><p>Key Sizes</p>
+<p>AES-CCM works with 128, 192, and 256-bit keys.</p>
+</li>
+<li><p>Nonce Sizes</p>
+<p>The <a href="/en-us/dotnet/api/system.security.cryptography.aesccm" class="no-loc" data-linktype="absolute-path">AesCcm</a> class supports 56, 64, 72, 80, 88, 96, and 104-bit (7, 8, 9, 10, 11, 12, and 13-byte) nonces.</p>
+</li>
+<li><p>Tag Sizes</p>
+<p>The <a href="/en-us/dotnet/api/system.security.cryptography.aesccm" class="no-loc" data-linktype="absolute-path">AesCcm</a> class supports creating or processing 32, 48, 64, 80, 96, 112, and 128-bit (4, 8, 10, 12, 14, and 16-byte) tags.</p>
+</li>
+</ul>
+<h3 id="aes-gcm-keys-nonces-and-tags">AES-GCM keys, nonces, and tags</h3>
+<ul>
+<li><p>Key Sizes</p>
+<p>AES-GCM works with 128, 192, and 256-bit keys.</p>
+</li>
+<li><p>Nonce Sizes</p>
+<p>The <a href="/en-us/dotnet/api/system.security.cryptography.aesgcm" class="no-loc" data-linktype="absolute-path">AesGcm</a> class supports only 96-bit (12-byte) nonces.</p>
+</li>
+<li><p>Tag Sizes</p>
+<p>On Windows and Linux, the <a href="/en-us/dotnet/api/system.security.cryptography.aesgcm" class="no-loc" data-linktype="absolute-path">AesGcm</a> class supports creating or processing 96, 104, 112, 120, and 128-bit (12, 13, 14, 15, and 16-byte) tags. On Apple platforms, the tag size is limited to 128-bit (16-byte) due to limitations of the CryptoKit framework.</p>
+</li>
+</ul>
+<h3 id="chacha20poly1305-keys-nonces-and-tags">ChaCha20Poly1305 keys, nonces, and tags</h3>
+<p>ChaCha20Poly1305 has a fixed size for the key, nonce, and authentication tag. ChaCha20Poly1305 always uses a 256-bit key, a 96-bit (12-byte) nonce, and 128-bit (16-byte) tag.</p>
+<h2 id="asymmetric-cryptography">Asymmetric cryptography</h2>
+<p>This section includes the following subsections:</p>
+<ul>
+<li><a href="#rsa" data-linktype="self-bookmark">RSA</a></li>
+<li><a href="#ecdsa" data-linktype="self-bookmark">ECDSA</a></li>
+<li><a href="#ecdh" data-linktype="self-bookmark">ECDH</a></li>
+<li><a href="#dsa" data-linktype="self-bookmark">DSA</a></li>
+</ul>
+<h3 id="rsa">RSA</h3>
+<p>RSA (Rivest–Shamir–Adleman) key generation is performed by the OS libraries and is subject to their size limitations and performance characteristics.</p>
+<p>RSA key operations are performed by the OS libraries, and the types of key that can be loaded are subject to OS requirements.</p>
+<p>.NET does not expose "raw" (unpadded) RSA operations.</p>
+<p>Padding and digest support vary by platform:</p>
+<table>
+<thead>
+<tr>
+<th>Padding Mode</th>
+<th>Windows (CNG)</th>
+<th>Linux (OpenSSL)</th>
+<th>macOS</th>
+<th>iOS, tvOS, MacCatalyst</th>
+<th>Android</th>
+<th>Windows (CAPI)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PKCS1 Encryption</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>OAEP - SHA-1</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>OAEP - SHA-2</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>OAEP - SHA-3</td>
+<td>Windows 11 Build 25324+</td>
+<td>OpenSSL 1.1.1+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>PKCS1 Signature (MD5, SHA-1)</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>PKCS1 Signature (SHA-2)</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>⚠️<sup>1</sup></td>
+</tr>
+<tr>
+<td>PKCS1 Signature (SHA-3)</td>
+<td>Windows 11 Build 25324+</td>
+<td>OpenSSL 1.1.1+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>PSS</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<p><sup>1</sup> Windows CryptoAPI (CAPI) is capable of PKCS1 signature with a SHA-2 algorithm. But the individual RSA object may be loaded in a cryptographic service provider (CSP) that doesn't support it.</p>
+<h4 id="rsa-on-windows">RSA on Windows</h4>
+<ul>
+<li>Windows CryptoAPI (CAPI) is used whenever <a href="/en-us/dotnet/api/system.security.cryptography.rsacryptoserviceprovider" data-linktype="absolute-path"><code>new RSACryptoServiceProvider()</code></a> is used.</li>
+<li>Windows Cryptography API Next Generation (CNG) is used whenever <a href="/en-us/dotnet/api/system.security.cryptography.rsacng" data-linktype="absolute-path"><code>new RSACng()</code></a> is used.</li>
+<li>The object returned by <a href="/en-us/dotnet/api/system.security.cryptography.rsa.create" class="no-loc" data-linktype="absolute-path">RSA.Create</a> is internally powered by Windows CNG. This use of Windows CNG is an implementation detail and is subject to change.</li>
+<li>The <a href="/en-us/dotnet/api/system.security.cryptography.x509certificates.rsacertificateextensions.getrsapublickey" class="no-loc" data-linktype="absolute-path">GetRSAPublicKey</a> extension method for <a href="/en-us/dotnet/api/system.security.cryptography.x509certificates.x509certificate2" class="no-loc" data-linktype="absolute-path">X509Certificate2</a> returns an <a href="/en-us/dotnet/api/system.security.cryptography.rsacng" class="no-loc" data-linktype="absolute-path">RSACng</a> instance. This use of <a href="/en-us/dotnet/api/system.security.cryptography.rsacng" class="no-loc" data-linktype="absolute-path">RSACng</a> is an implementation detail and is subject to change.</li>
+<li>The <a href="/en-us/dotnet/api/system.security.cryptography.x509certificates.rsacertificateextensions.getrsaprivatekey" class="no-loc" data-linktype="absolute-path">GetRSAPrivateKey</a> extension method for <a href="/en-us/dotnet/api/system.security.cryptography.x509certificates.x509certificate2" class="no-loc" data-linktype="absolute-path">X509Certificate2</a> currently prefers an <a href="/en-us/dotnet/api/system.security.cryptography.rsacng" class="no-loc" data-linktype="absolute-path">RSACng</a> instance, but if <a href="/en-us/dotnet/api/system.security.cryptography.rsacng" class="no-loc" data-linktype="absolute-path">RSACng</a> can't open the key, <a href="/en-us/dotnet/api/system.security.cryptography.rsacryptoserviceprovider" class="no-loc" data-linktype="absolute-path">RSACryptoServiceProvider</a> will be attempted. The preferred provider is an implementation detail and is subject to change.</li>
+</ul>
+<h4 id="rsa-native-interop">RSA native interop</h4>
+<p>.NET exposes types to allow programs to interoperate with the OS libraries that the .NET cryptography code uses. The types involved do not translate between platforms, and should only be directly used when necessary.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Windows</th>
+<th>Linux</th>
+<th>macOS</th>
+<th>iOS, tvOS, MacCatalyst</th>
+<th>Android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/en-us/dotnet/api/system.security.cryptography.rsacryptoserviceprovider" class="no-loc" data-linktype="absolute-path">RSACryptoServiceProvider</a></td>
+<td>✔️</td>
+<td>⚠️<sup>1</sup></td>
+<td>⚠️<sup>1</sup></td>
+<td>⚠️<sup>1</sup></td>
+<td>⚠️<sup>1</sup></td>
+</tr>
+<tr>
+<td><a href="/en-us/dotnet/api/system.security.cryptography.rsacng" class="no-loc" data-linktype="absolute-path">RSACng</a></td>
+<td>✔️</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><a href="/en-us/dotnet/api/system.security.cryptography.rsaopenssl" class="no-loc" data-linktype="absolute-path">RSAOpenSsl</a></td>
+<td>❌</td>
+<td>✔️</td>
+<td>❌<sup>2</sup></td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<p><sup>1</sup> On non-Windows, <a href="/en-us/dotnet/api/system.security.cryptography.rsacryptoserviceprovider" class="no-loc" data-linktype="absolute-path">RSACryptoServiceProvider</a> can be used for compatibility with existing programs. In that case, any method that requires OS interop, such as opening a named key, throws a <a href="/en-us/dotnet/api/system.platformnotsupportedexception" class="no-loc" data-linktype="absolute-path">PlatformNotSupportedException</a>.</p>
+<p><sup>2</sup> On macOS, prior to .NET 10, <a href="/en-us/dotnet/api/system.security.cryptography.rsaopenssl" class="no-loc" data-linktype="absolute-path">RSAOpenSsl</a> worked if OpenSSL was installed and an appropriate libcrypto dylib could be found via dynamic library loading. This support was removed in .NET 10.</p>
+<h3 id="ecdsa">ECDSA</h3>
+<p>ECDSA (Elliptic Curve Digital Signature Algorithm) key generation is done by the OS libraries and is subject to their size limitations and performance characteristics.</p>
+<p>ECDSA key curves are defined by the OS libraries and are subject to their limitations.</p>
+<table>
+<thead>
+<tr>
+<th>Elliptic Curve</th>
+<th>Windows 10</th>
+<th>Windows 7 - 8.1</th>
+<th>Linux</th>
+<th>macOS</th>
+<th>iOS, tvOS, MacCatalyst</th>
+<th>Android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NIST P-256 (secp256r1)</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>NIST P-384 (secp384r1)</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>NIST P-521 (secp521r1)</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>Brainpool curves (as named curves)</td>
+<td>✔️</td>
+<td>❌</td>
+<td>⚠️<sup>1</sup></td>
+<td>❌</td>
+<td>❌</td>
+<td>⚠️<sup>4</sup></td>
+</tr>
+<tr>
+<td>Other named curves</td>
+<td>⚠️<sup>2</sup></td>
+<td>❌</td>
+<td>⚠️<sup>1</sup></td>
+<td>❌</td>
+<td>❌</td>
+<td>⚠️<sup>4</sup></td>
+</tr>
+<tr>
+<td>Explicit curves</td>
+<td>✔️</td>
+<td>❌</td>
+<td>✔️</td>
+<td>❌</td>
+<td>❌</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>Export or import as explicit</td>
+<td>✔️</td>
+<td>❌<sup>3</sup></td>
+<td>✔️</td>
+<td>❌<sup>3</sup></td>
+<td>❌<sup>3</sup></td>
+<td>✔️</td>
+</tr>
+</tbody>
+</table>
+<p><sup>1</sup> Linux distributions don't all have support for the same named curves.</p>
+<p><sup>2</sup> Support for named curves was added to Windows CNG in Windows 10. For more information, see <a href="/en-us/windows/win32/seccng/cng-named-elliptic-curves" data-linktype="absolute-path">CNG Named Elliptic Curves</a>. Named curves are not available in earlier versions of Windows, except for three curves in Windows 7.</p>
+<p><sup>3</sup> Exporting with explicit curve parameters requires OS library support, which is not available on Apple platforms or earlier versions of Windows.</p>
+<p><sup>4</sup> Android support for some curves depends on the Android version. Android distributors may choose to add or remove curves from their Android build as well.</p>
+<h4 id="ecdsa-native-interop">ECDSA Native Interop</h4>
+<p>.NET exposes types to allow programs to interoperate with the OS libraries that the .NET cryptography code uses. The types involved don't translate between platforms and should only be directly used when necessary.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Windows</th>
+<th>Linux</th>
+<th>macOS</th>
+<th>iOS, tvOS, MacCatalyst</th>
+<th>Android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/en-us/dotnet/api/system.security.cryptography.ecdsacng" class="no-loc" data-linktype="absolute-path">ECDsaCng</a></td>
+<td>✔️</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><a href="/en-us/dotnet/api/system.security.cryptography.ecdsaopenssl" class="no-loc" data-linktype="absolute-path">ECDsaOpenSsl</a></td>
+<td>❌</td>
+<td>✔️</td>
+<td>❌*</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<p>* On macOS, prior to .NET 10, <a href="/en-us/dotnet/api/system.security.cryptography.ecdsaopenssl" class="no-loc" data-linktype="absolute-path">ECDsaOpenSsl</a> worked if OpenSSL was installed and an appropriate libcrypto dylib could be found via dynamic library loading. This support was removed in .NET 10.</p>
+<h3 id="ecdh">ECDH</h3>
+<p>ECDH (Elliptic Curve Diffie-Hellman) key generation is done by the OS libraries and is subject to their size limitations and performance characteristics.</p>
+<p>The <a href="/en-us/dotnet/api/system.security.cryptography.ecdiffiehellman" class="no-loc" data-linktype="absolute-path">ECDiffieHellman</a> class supports the "raw" value of the ECDH computation as well as through the following key derivation functions:</p>
+<ul>
+<li>HASH(Z)</li>
+<li>HASH(prepend || Z || append)</li>
+<li>HMAC(key, Z)</li>
+<li>HMAC(key, prepend || Z || append)</li>
+<li>HMAC(Z, Z)</li>
+<li>HMAC(Z, prepend || Z || append)</li>
+<li>Tls11Prf(label, seed)</li>
+</ul>
+<p>ECDH key curves are defined by the OS libraries and are subject to their limitations.</p>
+<table>
+<thead>
+<tr>
+<th>Elliptic Curve</th>
+<th>Windows 10+</th>
+<th>Windows 7 - 8.1</th>
+<th>Linux</th>
+<th>macOS</th>
+<th>iOS, tvOS, MacCatalyst</th>
+<th>Android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NIST P-256 (secp256r1)</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>NIST P-384 (secp384r1)</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>NIST P-521 (secp521r1)</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>Brainpool curves (as named curves)</td>
+<td>✔️</td>
+<td>❌</td>
+<td>⚠️<sup>1</sup></td>
+<td>❌</td>
+<td>❌</td>
+<td>⚠️<sup>4</sup></td>
+</tr>
+<tr>
+<td>Other named curves</td>
+<td>⚠️<sup>2</sup></td>
+<td>❌</td>
+<td>⚠️<sup>1</sup></td>
+<td>❌</td>
+<td>❌</td>
+<td>⚠️<sup>4</sup></td>
+</tr>
+<tr>
+<td>Explicit curves</td>
+<td>✔️</td>
+<td>❌</td>
+<td>✔️</td>
+<td>❌</td>
+<td>❌</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>Export or import as explicit</td>
+<td>✔️</td>
+<td>❌<sup>3</sup></td>
+<td>✔️</td>
+<td>❌<sup>3</sup></td>
+<td>❌<sup>3</sup></td>
+<td>✔️</td>
+</tr>
+</tbody>
+</table>
+<p><sup>1</sup> Linux distributions don't all have support for the same named curves.</p>
+<p><sup>2</sup> Support for named curves was added to Windows CNG in Windows 10. For more information, see <a href="/en-us/windows/win32/seccng/cng-named-elliptic-curves" data-linktype="absolute-path">CNG Named Elliptic Curves</a>. Named curves are not available in earlier versions of Windows, except for three curves in Windows 7.</p>
+<p><sup>3</sup> Exporting with explicit curve parameters requires OS library support, which is not available on Apple platforms or earlier versions of Windows.</p>
+<p><sup>4</sup> Android support for some curves depends on the Android version. Android distributors may choose to add or remove curves from their Android build as well.</p>
+<h4 id="ecdh-native-interop">ECDH native interop</h4>
+<p>.NET exposes types to allow programs to interoperate with the OS libraries that .NET uses. The types involved don't translate between platforms and should only be directly used when necessary.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Windows</th>
+<th>Linux</th>
+<th>macOS</th>
+<th>iOS, tvOS, MacCatalyst</th>
+<th>Android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/en-us/dotnet/api/system.security.cryptography.ecdiffiehellmancng" class="no-loc" data-linktype="absolute-path">ECDiffieHellmanCng</a></td>
+<td>✔️</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><a href="/en-us/dotnet/api/system.security.cryptography.ecdiffiehellmanopenssl" class="no-loc" data-linktype="absolute-path">ECDiffieHellmanOpenSsl</a></td>
+<td>❌</td>
+<td>✔️</td>
+<td>❌*</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<p>* On macOS, prior to .NET 10, <a href="/en-us/dotnet/api/system.security.cryptography.ecdiffiehellmanopenssl" class="no-loc" data-linktype="absolute-path">ECDiffieHellmanOpenSsl</a> worked if OpenSSL was installed and an appropriate libcrypto dylib could be found via dynamic library loading. This support was removed in .NET 10.</p>
+<h3 id="dsa">DSA</h3>
+<p>DSA (Digital Signature Algorithm) key generation is performed by the system libraries and is subject to their size limitations and performance characteristics.</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Windows CNG</th>
+<th>Linux</th>
+<th>macOS</th>
+<th>Windows CAPI</th>
+<th>iOS, tvOS, MacCatalyst</th>
+<th>Android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Key creation (&lt;= 1024 bits)</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>❌</td>
+<td>✔️</td>
+<td>❌</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>Key creation (&gt; 1024 bits)</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>Loading keys (&lt;= 1024 bits)</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>❌</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>Loading keys (&gt; 1024 bits)</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>⚠️*</td>
+<td>❌</td>
+<td>❌</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>FIPS 186-2</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>❌</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>FIPS 186-3 (SHA-2 signatures)</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>✔️</td>
+</tr>
+</tbody>
+</table>
+<p>* macOS loads DSA keys bigger than 1024 bits, but the behavior of those keys is undefined. They don't behave according to FIPS 186-3.</p>
+<h4 id="dsa-on-windows">DSA on Windows</h4>
+<ul>
+<li>Windows CryptoAPI (CAPI) is used whenever <a href="/en-us/dotnet/api/system.security.cryptography.dsacryptoserviceprovider" data-linktype="absolute-path"><code>new DSACryptoServiceProvider()</code></a> is used.</li>
+<li>Windows Cryptography API Next Generation (CNG) is used whenever <a href="/en-us/dotnet/api/system.security.cryptography.dsacng" data-linktype="absolute-path"><code>new DSACng()</code></a> is used.</li>
+<li>The object returned by <a href="/en-us/dotnet/api/system.security.cryptography.dsa.create" class="no-loc" data-linktype="absolute-path">DSA.Create</a> is internally powered by Windows CNG. This use of Windows CNG is an implementation detail and is subject to change.</li>
+<li>The <a href="/en-us/dotnet/api/system.security.cryptography.x509certificates.dsacertificateextensions.getdsapublickey" class="no-loc" data-linktype="absolute-path">GetDSAPublicKey</a> extension method for <a href="/en-us/dotnet/api/system.security.cryptography.x509certificates.x509certificate2" class="no-loc" data-linktype="absolute-path">X509Certificate2</a> returns a <a href="/en-us/dotnet/api/system.security.cryptography.dsacng" class="no-loc" data-linktype="absolute-path">DSACng</a> instance. This use of <a href="/en-us/dotnet/api/system.security.cryptography.dsacng" class="no-loc" data-linktype="absolute-path">DSACng</a> is an implementation detail and is subject to change.</li>
+<li>The <a href="/en-us/dotnet/api/system.security.cryptography.x509certificates.dsacertificateextensions.getdsaprivatekey" class="no-loc" data-linktype="absolute-path">GetDSAPrivateKey</a> extension method for <a href="/en-us/dotnet/api/system.security.cryptography.x509certificates.x509certificate2" class="no-loc" data-linktype="absolute-path">X509Certificate2</a> prefers an <a href="/en-us/dotnet/api/system.security.cryptography.dsacng" class="no-loc" data-linktype="absolute-path">DSACng</a> instance, but if <a href="/en-us/dotnet/api/system.security.cryptography.dsacng" class="no-loc" data-linktype="absolute-path">DSACng</a> can't open the key, <a href="/en-us/dotnet/api/system.security.cryptography.dsacryptoserviceprovider" class="no-loc" data-linktype="absolute-path">DSACryptoServiceProvider</a> will be attempted.  The preferred provider is an implementation detail and is subject to change.</li>
+</ul>
+<h4 id="dsa-native-interop">DSA native interop</h4>
+<p>.NET exposes types to allow programs to interoperate with the OS libraries that the .NET cryptography code uses. The types involved don't translate between platforms and should only be directly used when necessary.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Windows</th>
+<th>Linux</th>
+<th>macOS</th>
+<th>iOS, tvOS, MacCatalyst</th>
+<th>Android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/en-us/dotnet/api/system.security.cryptography.dsacryptoserviceprovider" class="no-loc" data-linktype="absolute-path">DSACryptoServiceProvider</a></td>
+<td>✔️</td>
+<td>⚠️<sup>1</sup></td>
+<td>⚠️<sup>1</sup></td>
+<td>❌</td>
+<td>⚠️<sup>1</sup></td>
+</tr>
+<tr>
+<td><a href="/en-us/dotnet/api/system.security.cryptography.dsacng" class="no-loc" data-linktype="absolute-path">DSACng</a></td>
+<td>✔️</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><a href="/en-us/dotnet/api/system.security.cryptography.dsaopenssl" class="no-loc" data-linktype="absolute-path">DSAOpenSsl</a></td>
+<td>❌</td>
+<td>✔️</td>
+<td>❌<sup>2</sup></td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<p><sup>1</sup> On non-Windows, <a href="/en-us/dotnet/api/system.security.cryptography.dsacryptoserviceprovider" class="no-loc" data-linktype="absolute-path">DSACryptoServiceProvider</a> can be used for compatibility with existing programs. In that case, any method that requires system interop, such as opening a named key, throws a <a href="/en-us/dotnet/api/system.platformnotsupportedexception" class="no-loc" data-linktype="absolute-path">PlatformNotSupportedException</a>.</p>
+<p><sup>2</sup> On macOS, prior to .NET 10, <a href="/en-us/dotnet/api/system.security.cryptography.dsaopenssl" class="no-loc" data-linktype="absolute-path">DSAOpenSsl</a> worked if OpenSSL was installed and an appropriate libcrypto dylib could be found via dynamic library loading. This support was removed in .NET 10.</p>
+<h2 id="post-quantum-cryptography">Post-quantum cryptography</h2>
+<p>Post-quantum algorithms are available starting in .NET 10. They're also available for .NET Framework using the Microsoft.Bcl.Cryptography NuGet package. The following support table indicates the platform support for the built-in operating system cryptographic components, such as those created from <code>Generate</code> or <code>ImportFromPem</code>. Implementations that derive from the base class might have different support behaviors.</p>
+<p>For the built-in algorithms, an <code>IsSupported</code> static property is available to determine if the platform supports any of the parameter sets.</p>
+<p>The native interop types for post-quantum algorithms do not support key generation or importing. They exist specifically for interop scenarios with the native platform types, such as an <code>EVP_PKEY</code> on OpenSSL or <code>CngKey</code> on Windows.</p>
+<h3 id="ml-kem">ML-KEM</h3>
+<table>
+<thead>
+<tr>
+<th>Algorithm</th>
+<th>Windows</th>
+<th>Linux</th>
+<th>Apple</th>
+<th>Android</th>
+<th>Browser</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ML-KEM-512</td>
+<td>Windows 11 Insiders (Latest)</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>ML-KEM-768</td>
+<td>Windows 11 Insiders (Latest)</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>ML-KEM-1024</td>
+<td>Windows 11 Insiders (Latest)</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<h4 id="native-interop-ml-kem">Native interop ML-KEM</h4>
+<ul>
+<li><a href="/en-us/dotnet/api/system.security.cryptography.mlkemopenssl" class="no-loc" data-linktype="absolute-path">MLKemOpenSsl</a>: OpenSSL 3.5.0+</li>
+<li><a href="/en-us/dotnet/api/system.security.cryptography.mlkemcng" class="no-loc" data-linktype="absolute-path">MLKemCng</a>: Windows 11 Insiders (Latest)</li>
+</ul>
+<h3 id="ml-dsa">ML-DSA</h3>
+<p>ML-DSA has a pure and prehash variant (HashML-DSA). The following table reflects both the pure and prehash variants.</p>
+<table>
+<thead>
+<tr>
+<th>Algorithm</th>
+<th>Windows</th>
+<th>Linux</th>
+<th>Apple</th>
+<th>Android</th>
+<th>Browser</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ML-DSA-44</td>
+<td>Windows 11 Insiders (Latest)</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>ML-DSA-65</td>
+<td>Windows 11 Insiders (Latest)</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>ML-DSA-87</td>
+<td>Windows 11 Insiders (Latest)</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>ML-DSA-44 External Mu (μ)<sup>1</sup></td>
+<td>❌</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>ML-DSA-65 External Mu (μ)<sup>1</sup></td>
+<td>❌</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>ML-DSA-87 External Mu (μ)<sup>1</sup></td>
+<td>❌</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<p><sup>1</sup> External Mu support is for signing and verifying Mu only. Computation of Mu isn't supported.</p>
+<h4 id="native-interop-ml-dsa">Native interop ML-DSA</h4>
+<ul>
+<li><a href="/en-us/dotnet/api/system.security.cryptography.mldsaopenssl" class="no-loc" data-linktype="absolute-path">MLDsaOpenSsl</a>: OpenSSL 3.5.0+</li>
+<li><a href="/en-us/dotnet/api/system.security.cryptography.mldsacng" class="no-loc" data-linktype="absolute-path">MLDsaCng</a>: Windows 11 Insiders (latest)</li>
+</ul>
+<h3 id="slh-dsa">SLH-DSA</h3>
+<p>SLH-DSA has a pure and prehash variant (HashSLH-DSA). The following table reflects both the pure and prehash variants.</p>
+<table>
+<thead>
+<tr>
+<th>Algorithm</th>
+<th>Windows</th>
+<th>Linux</th>
+<th>Apple</th>
+<th>Android</th>
+<th>Browser</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SLH-DSA-SHA2-128f</td>
+<td>❌</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>SLH-DSA-SHA2-128s</td>
+<td>❌</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>SLH-DSA-SHA2-192f</td>
+<td>❌</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>SLH-DSA-SHA2-192s</td>
+<td>❌</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>SLH-DSA-SHA2-256f</td>
+<td>❌</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>SLH-DSA-SHA2-256s</td>
+<td>❌</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>SLH-DSA-SHAKE-128f</td>
+<td>❌</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>SLH-DSA-SHAKE-128s</td>
+<td>❌</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>SLH-DSA-SHAKE-192f</td>
+<td>❌</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>SLH-DSA-SHAKE-192s</td>
+<td>❌</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>SLH-DSA-SHAKE-256f</td>
+<td>❌</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>SLH-DSA-SHAKE-256s</td>
+<td>❌</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<h4 id="native-interop-slh-dsa">Native interop SLH-DSA</h4>
+<ul>
+<li><a href="/en-us/dotnet/api/system.security.cryptography.slhdsaopenssl" class="no-loc" data-linktype="absolute-path">SlhDsaOpenSsl</a>: OpenSSL 3.5.0+</li>
+<li><a href="/en-us/dotnet/api/system.security.cryptography.slhdsacng" class="no-loc" data-linktype="absolute-path">SlhDsaCng</a>: Not supported</li>
+</ul>
+<h3 id="composite-ml-dsa">Composite ML-DSA</h3>
+<table>
+<thead>
+<tr>
+<th>Algorithm</th>
+<th>Windows</th>
+<th>Linux</th>
+<th>Apple</th>
+<th>Android</th>
+<th>Browser</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MLDSA44-RSA2048-PSS-SHA256</td>
+<td>❌</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>MLDSA44-RSA2048-PKCS15-SHA256</td>
+<td>❌</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>MLDSA44-Ed25519-SHA512</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>MLDSA44-ECDSA-P256-SHA256</td>
+<td>Windows 11 Insiders (Latest)</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>MLDSA65-RSA3072-PSS-SHA512</td>
+<td>❌</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>MLDSA65-RSA3072-PKCS15-SHA512</td>
+<td>❌</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>MLDSA65-RSA4096-PSS-SHA512</td>
+<td>❌</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>MLDSA65-RSA4096-PKCS15-SHA512</td>
+<td>❌</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>MLDSA65-ECDSA-P256-SHA512</td>
+<td>Windows 11 Insiders (Latest)</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>MLDSA65-ECDSA-P384-SHA512</td>
+<td>Windows 11 Insiders (Latest)</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>MLDSA65-ECDSA-brainpoolP256r1-SHA512</td>
+<td>❌</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>MLDSA65-Ed25519-SHA512</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>MLDSA87-ECDSA-P384-SHA512</td>
+<td>Windows 11 Insiders (Latest)</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>MLDSA87-ECDSA-brainpoolP384r1-SHA512</td>
+<td>❌</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>MLDSA87-Ed448-SHAKE256</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>MLDSA87-RSA3072-PSS-SHA512</td>
+<td>❌</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>MLDSA87-RSA4096-PSS-SHA512</td>
+<td>❌</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>MLDSA87-ECDSA-P521-SHA512</td>
+<td>❌</td>
+<td>OpenSSL 3.5.0+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<h4 id="native-interop-composite-ml-dsa">Native interop composite ML-DSA</h4>
+<ul>
+<li><a href="/en-us/dotnet/api/system.security.cryptography.compositemldsacng" class="no-loc" data-linktype="absolute-path">CompositeMLDsaCng</a>: Not supported</li>
+</ul>
+<h2 id="x509-certificates">X.509 Certificates</h2>
+<p>The majority of support for X.509 certificates in .NET comes from OS libraries. To load a certificate into an <a href="/en-us/dotnet/api/system.security.cryptography.x509certificates.x509certificate2" class="no-loc" data-linktype="absolute-path">X509Certificate2</a> or <a href="/en-us/dotnet/api/system.security.cryptography.x509certificates.x509certificate" class="no-loc" data-linktype="absolute-path">X509Certificate</a> instance in .NET, the certificate must be loaded by the underlying OS library.</p>
+<h3 id="read-a-pkcs12pfx">Read a PKCS12/PFX</h3>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Windows</th>
+<th>Linux</th>
+<th>macOS</th>
+<th>iOS, tvOS, MacCatalyst</th>
+<th>Android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Empty</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>One certificate, no private key</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>One certificate, with private key</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>Multiple certificates, no private keys</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>Multiple certificates, one private key</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>Multiple certificates, multiple private keys</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+</tbody>
+</table>
+<h3 id="write-a-pkcs12pfx">Write a PKCS12/PFX</h3>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Windows</th>
+<th>Linux</th>
+<th>macOS</th>
+<th>iOS, tvOS, MacCatalyst</th>
+<th>Android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Empty</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>One certificate, no private key</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>One certificate, with private key</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>Multiple certificates, no private keys</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>Multiple certificates, one private key</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>Multiple certificates, multiple private keys</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>Ephemeral loading</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>❌</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+</tbody>
+</table>
+<p>macOS can't load certificate private keys without a keychain object, which requires writing to disk. Keychains are created automatically for PFX loading, and are deleted when no longer in use. Since the <a href="/en-us/dotnet/api/system.security.cryptography.x509certificates.x509keystorageflags#system-security-cryptography-x509certificates-x509keystorageflags-ephemeralkeyset" class="no-loc" data-linktype="absolute-path">X509KeyStorageFlags.EphemeralKeySet</a> option means that the private key should not be written to disk, asserting that flag on macOS results in a <a href="/en-us/dotnet/api/system.platformnotsupportedexception" class="no-loc" data-linktype="absolute-path">PlatformNotSupportedException</a>.</p>
+<h3 id="write-a-pkcs7-certificate-collection">Write a PKCS7 certificate collection</h3>
+<p>Windows and Linux both emit DER-encoded PKCS7 blobs. macOS emits indefinite-length-CER-encoded PKCS7 blobs.</p>
+<h3 id="x509store">X509Store</h3>
+<p>On Windows, the <a href="/en-us/dotnet/api/system.security.cryptography.x509certificates.x509store" class="no-loc" data-linktype="absolute-path">X509Store</a> class is a representation of the Windows Certificate Store APIs. Those APIs work the same in .NET as they do in .NET Framework.</p>
+<p>On non-Windows, the <a href="/en-us/dotnet/api/system.security.cryptography.x509certificates.x509store" class="no-loc" data-linktype="absolute-path">X509Store</a> class is a projection of system trust decisions (read-only), user trust decisions (read-write), and user key storage (read-write).</p>
+<p>The following tables show which scenarios are supported in each platform. For unsupported scenarios (❌ in the tables), a <a href="/en-us/dotnet/api/system.security.cryptography.cryptographicexception" class="no-loc" data-linktype="absolute-path">CryptographicException</a> is thrown.</p>
+<h4 id="the-my-store">The My store</h4>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Windows</th>
+<th>Linux</th>
+<th>macOS</th>
+<th>iOS, tvOS, MacCatalyst</th>
+<th>Android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Open CurrentUser\My (ReadOnly)</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>Open CurrentUser\My (ReadWrite)</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>Open CurrentUser\My (ExistingOnly)</td>
+<td>✔️</td>
+<td>⚠️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>Open LocalMachine\My</td>
+<td>✔️</td>
+<td>❌</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+</tbody>
+</table>
+<p>On Linux, stores are created on first write, and no user stores exist by default, so opening <code>CurrentUser\My</code> with <code>ExistingOnly</code> may fail.</p>
+<p>On macOS, the <code>CurrentUser\My</code> store is the user's default keychain, which is <code>login.keychain</code> by default. The <code>LocalMachine\My</code> store is <code>System.keychain</code>.</p>
+<h4 id="the-root-store">The Root store</h4>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Windows</th>
+<th>Linux</th>
+<th>macOS</th>
+<th>iOS, tvOS, MacCatalyst</th>
+<th>Android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Open CurrentUser\Root (ReadOnly)</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>❌</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>Open CurrentUser\Root (ReadWrite)</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Open CurrentUser\Root (ExistingOnly)</td>
+<td>✔️</td>
+<td>⚠️</td>
+<td>✔️ (if ReadOnly)</td>
+<td>❌</td>
+<td>✔️ (if ReadOnly)</td>
+</tr>
+<tr>
+<td>Open LocalMachine\Root (ReadOnly)</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>❌</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>Open LocalMachine\Root (ReadWrite)</td>
+<td>✔️</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Open LocalMachine\Root (ExistingOnly)</td>
+<td>✔️</td>
+<td>⚠️</td>
+<td>✔️ (if ReadOnly)</td>
+<td>❌</td>
+<td>✔️ (if ReadOnly)</td>
+</tr>
+</tbody>
+</table>
+<p>On Linux, the <code>LocalMachine\Root</code> store is an interpretation of the CA bundle in the default path for OpenSSL.</p>
+<p>On macOS, the <code>CurrentUser\Root</code> store is an interpretation of the <code>SecTrustSettings</code> results for the user trust domain. The <code>LocalMachine\Root</code> store is an interpretation of the <code>SecTrustSettings</code> results for the admin and system trust domains.</p>
+<h5 id="trusted-root-certificate-locations-on-linux">Trusted root certificate locations on Linux</h5>
+<p>On Linux, .NET uses OpenSSL (libssl) to locate trusted root certificates. OpenSSL determines the certificate store location using environment variables (<code>SSL_CERT_FILE</code> and <code>SSL_CERT_DIR</code>) and distribution-specific default paths. When the root store directory configured for OpenSSL doesn't contain any certificates, .NET falls back to checking <code>/etc/ssl/certs</code>. This fallback ensures compatibility with distributions like SUSE Linux Enterprise Server (SLES) where the directory specified by <code>SSL_CERT_DIR</code> might only contain certificates with the <code>BEGIN TRUSTED CERTIFICATE</code> format, which .NET doesn't support as root certificates.</p>
+<p>This fallback only occurs when:</p>
+<ol>
+<li>The <code>SSL_CERT_DIR</code> environment variable isn't explicitly set.</li>
+<li>The default certificate directory contains no usable certificates.</li>
+</ol>
+<p>If your certificates aren't loading correctly, verify that:</p>
+<ul>
+<li>Your certificate files are in PEM format with the <code>BEGIN CERTIFICATE</code> marker (not <code>BEGIN TRUSTED CERTIFICATE</code>).</li>
+<li>The <code>SSL_CERT_DIR</code> and <code>SSL_CERT_FILE</code> environment variables point to the correct locations, if set.</li>
+<li>The certificate bundle file or directory has the appropriate read permissions.</li>
+</ul>
+<h4 id="the-intermediate-store">The Intermediate store</h4>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Windows</th>
+<th>Linux</th>
+<th>macOS</th>
+<th>iOS, tvOS, MacCatalyst</th>
+<th>Android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Open CurrentUser\Intermediate (ReadOnly)</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Open CurrentUser\Intermediate (ReadWrite)</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Open CurrentUser\Intermediate (ExistingOnly)</td>
+<td>✔️</td>
+<td>⚠️</td>
+<td>✔️ (if ReadOnly)</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Open LocalMachine\Intermediate (ReadOnly)</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Open LocalMachine\Intermediate (ReadWrite)</td>
+<td>✔️</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Open LocalMachine\Intermediate (ExistingOnly)</td>
+<td>✔️</td>
+<td>⚠️</td>
+<td>✔️ (if ReadOnly)</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<p>On Linux, the <code>CurrentUser\Intermediate</code> store is used as a cache when downloading intermediate CAs by their Authority Information Access records on successful X509Chain builds. The <code>LocalMachine\Intermediate</code> store is an interpretation of the CA bundle in the default path for OpenSSL.</p>
+<p>On macOS, the <code>CurrentUser\Intermediate</code> store is treated as a custom store. Certificates added to this store do not affect X.509 chain building.</p>
+<h4 id="the-disallowed-store">The Disallowed store</h4>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Windows</th>
+<th>Linux</th>
+<th>macOS</th>
+<th>iOS, tvOS, MacCatalyst</th>
+<th>Android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Open CurrentUser\Disallowed (ReadOnly)</td>
+<td>✔️</td>
+<td>⚠️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>Open CurrentUser\Disallowed (ReadWrite)</td>
+<td>✔️</td>
+<td>⚠️</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Open CurrentUser\Disallowed (ExistingOnly)</td>
+<td>✔️</td>
+<td>⚠️</td>
+<td>✔️ (if ReadOnly)</td>
+<td>✔️ (if ReadOnly)</td>
+<td>✔️ (if ReadOnly)</td>
+</tr>
+<tr>
+<td>Open LocalMachine\Disallowed (ReadOnly)</td>
+<td>✔️</td>
+<td>❌</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>Open LocalMachine\Disallowed (ReadWrite)</td>
+<td>✔️</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Open LocalMachine\Disallowed (ExistingOnly)</td>
+<td>✔️</td>
+<td>❌</td>
+<td>✔️ (if ReadOnly)</td>
+<td>✔️ (if ReadOnly)</td>
+<td>✔️ (if ReadOnly)</td>
+</tr>
+</tbody>
+</table>
+<p>On Linux, the <code>Disallowed</code> store is not used in chain building, and attempting to add contents to it results in a <a href="/en-us/dotnet/api/system.security.cryptography.cryptographicexception" class="no-loc" data-linktype="absolute-path">CryptographicException</a>. A <a href="/en-us/dotnet/api/system.security.cryptography.cryptographicexception" class="no-loc" data-linktype="absolute-path">CryptographicException</a> is thrown when opening the <code>Disallowed</code> store if it has already acquired contents.</p>
+<p>On macOS, the CurrentUser\Disallowed and LocalMachine\Disallowed stores are interpretations of the appropriate SecTrustSettings results for certificates whose trust is set to <code>Always Deny</code>.</p>
+<h4 id="nonexistent-store">Nonexistent store</h4>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Windows</th>
+<th>Linux</th>
+<th>macOS</th>
+<th>iOS, tvOS, MacCatalyst</th>
+<th>Android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Open non-existent store (ExistingOnly)</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Open CurrentUser non-existent store (ReadWrite)</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>⚠️</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Open LocalMachine non-existent store (ReadWrite)</td>
+<td>✔️</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<p>On macOS, custom store creation with the X509Store API is supported only for <code>CurrentUser</code> location. It will create a new keychain with no password in the user's keychain directory (<em>~/Library/Keychains</em>). To create a keychain with password, a P/Invoke to <code>SecKeychainCreate</code> could be used. Similarly, <code>SecKeychainOpen</code> could be used to open keychains in different locations. The resulting <code>IntPtr</code> can be passed to <a href="/en-us/dotnet/api/system.security.cryptography.x509certificates.x509store.-ctor#system-security-cryptography-x509certificates-x509store-ctor(system-intptr)" data-linktype="absolute-path"><code>new X509Store(IntPtr)</code></a> to obtain a read/write-capable store, subject to the current user's permissions.</p>
+<h3 id="x509chain">X509Chain</h3>
+<p>macOS doesn't support Offline CRL utilization, so <code>X509RevocationMode.Offline</code> is treated as <code>X509RevocationMode.Online</code>.</p>
+<p>macOS doesn't support a user-initiated timeout on CRL (Certificate Revocation List) / OCSP (Online Certificate Status Protocol) / AIA (Authority Information Access) downloading, so <code>X509ChainPolicy.UrlRetrievalTimeout</code> is ignored.</p>
+<h3 id="post-quantum-cryptography-certificates-and-pkcs12pfx">Post-quantum cryptography certificates and PKCS12/PFX</h3>
+<p>Post-quantum certificate support also requires support from the primitive algorithm.</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Algorithm</th>
+<th>Windows</th>
+<th>Linux</th>
+<th>Apple</th>
+<th>Android</th>
+<th>Browser</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PKCS#12 Import</td>
+<td>ML-DSA</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>PKCS#12 Export</td>
+<td>ML-DSA</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Private Key Association</td>
+<td>ML-DSA</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>PKCS#12 Import</td>
+<td>ML-KEM</td>
+<td>❌</td>
+<td>✔️</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>PKCS#12 Export</td>
+<td>ML-KEM</td>
+<td>❌</td>
+<td>✔️</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Private Key Association</td>
+<td>ML-KEM</td>
+<td>❌</td>
+<td>✔️</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>PKCS#12 Import</td>
+<td>SLH-DSA</td>
+<td>❌</td>
+<td>✔️</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>PKCS#12 Export</td>
+<td>SLH-DSA</td>
+<td>❌</td>
+<td>✔️</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Private Key Association</td>
+<td>SLH-DSA</td>
+<td>❌</td>
+<td>✔️</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<h2 id="additional-resources">Additional resources</h2>
+<ul>
+<li><a href="cryptography-model" data-linktype="relative-path">.NET Cryptography Model</a></li>
+<li><a href="cryptographic-services" data-linktype="relative-path">.NET Cryptographic Services</a></li>
+<li><a href="vulnerabilities-cbc-mode" data-linktype="relative-path">Timing vulnerabilities with CBC-mode symmetric decryption using padding</a></li>
+<li><a href="/en-us/aspnet/core/security/data-protection/introduction" data-linktype="absolute-path">ASP.NET Core Data Protection</a></li>
+</ul>
+</div>
+					
+		<div
+			id="ms--inline-notifications"
+			class="margin-block-xs"
+			data-bi-name="inline-notification"
+		></div>
+	 
+		<div
+			id="assertive-live-region"
+			role="alert"
+			aria-live="assertive"
+			class="visually-hidden"
+			aria-relevant="additions"
+			aria-atomic="true"
+		></div>
+		<div
+			id="polite-live-region"
+			role="status"
+			aria-live="polite"
+			class="visually-hidden"
+			aria-relevant="additions"
+			aria-atomic="true"
+		></div>
+	
+					
+			
+		<!-- feedback section -->
+		<section
+			class="feedback-section position-relative margin-top-lg border border-radius padding-xxs display-none-print"
+			data-bi-name="open-source-feedback-section"
+			data-open-source-feedback-section
+			hidden
+		>
+			<div class="display-flex flex-direction-column flex-direction-row-tablet">
+				<div
+					class="width-450-tablet padding-inline-xs padding-inline-xs-tablet padding-top-xs padding-bottom-sm padding-top-xs-tablet background-color-body-medium"
+				>
+					<div class="display-flex flex-direction-column">
+						<div class="padding-bottom-xxs">
+							<span class="icon margin-right-xxs" aria-hidden="true">
+								<span class="docon docon-brand-github"></span>
+							</span>
+							<span class="font-weight-semibold">
+								Collaborate with us on GitHub
+							</span>
+						</div>
+						<span class="line-height-normal">
+							The source for this content can be found on GitHub, where you can also create and review issues and pull requests. For more information, see <a href="https://learn.microsoft.com/contribute/content/dotnet/dotnet-contribute">our contributor guide</a>.
+						</span>
+					</div>
+				</div>
+				<div
+					class="display-flex gap-xs width-full-tablet flex-direction-column padding-xs justify-content-space-evenly"
+				>
+					<div class="media">
+						
+					<div class="media-left">
+						<div class="image image-36x36" hidden data-open-source-image-container>
+							<img
+								class="theme-display is-light"
+								src="https://learn.microsoft.com/media/logos/logo_net.svg"
+								aria-hidden="true"
+								data-open-source-image-light
+							/>
+							<img
+								class="theme-display is-dark is-high-contrast"
+								src="https://learn.microsoft.com/media/logos/logo_net.svg"
+								aria-hidden="true"
+								data-open-source-image-dark
+							/>
+						</div>
+					</div>
+			  
+
+						<div class="media-content">
+							<p
+								class="font-size-xl font-weight-semibold margin-bottom-xxs"
+								data-open-source-product-title
+							>
+								.NET
+							</p>
+							<div class="display-flex gap-xs flex-direction-column">
+								<p class="line-height-normal" data-open-source-product-description></p>
+								<div class="display-flex gap-xs flex-direction-column">
+									<a href="#" data-github-link>
+										<span class="icon margin-right-xxs" aria-hidden="true">
+											<span class="docon docon-bug"></span>
+										</span>
+										<span>Open a documentation issue</span>
+									</a>
+									<a
+										href="https://aka.ms/feedback/report?space=61"
+										class="display-block margin-top-auto font-size-md"
+										data-feedback-product-url
+									>
+										<span class="icon margin-right-xxs" aria-hidden="true">
+											<span class="docon docon-feedback"></span>
+										</span>
+										<span>Provide product feedback</span>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- end feedback section -->
+	
+			
+		<!-- feedback section -->
+		<section
+			id="site-user-feedback-footer"
+			class="font-size-sm margin-top-md display-none-print display-none-desktop"
+			data-test-id="site-user-feedback-footer"
+			data-bi-name="site-feedback-section"
+		>
+			<hr class="hr" />
+			<h2 id="ms--feedback" class="title is-3">Feedback</h2>
+			<div class="display-flex flex-wrap-wrap align-items-center">
+				<p class="font-weight-semibold margin-xxs margin-left-none">
+					Was this page helpful?
+				</p>
+				<div class="buttons">
+					<button
+						class="thumb-rating-button like button button-primary button-sm"
+						data-test-id="footer-rating-yes"
+						data-binary-rating-response="rating-yes"
+						type="button"
+						title="This article is helpful"
+						data-bi-name="button-rating-yes"
+						aria-pressed="false"
+					>
+						<span class="icon" aria-hidden="true">
+							<span class="docon docon-like"></span>
+						</span>
+						<span>Yes</span>
+					</button>
+					<button
+						class="thumb-rating-button dislike button button-primary button-sm"
+						id="standard-rating-no-button"
+						hidden
+						data-test-id="footer-rating-no"
+						data-binary-rating-response="rating-no"
+						type="button"
+						title="This article is not helpful"
+						data-bi-name="button-rating-no"
+						aria-pressed="false"
+					>
+						<span class="icon" aria-hidden="true">
+							<span class="docon docon-dislike"></span>
+						</span>
+						<span>No</span>
+					</button>
+					<details
+						class="popover popover-top"
+						id="mobile-help-popover"
+						data-test-id="footer-feedback-popover"
+					>
+						<summary
+							class="thumb-rating-button dislike button button-primary button-sm"
+							data-test-id="details-footer-rating-no"
+							data-binary-rating-response="rating-no"
+							title="This article is not helpful"
+							data-bi-name="button-rating-no"
+							aria-pressed="false"
+							data-bi-an="feedback-unhelpful-popover"
+						>
+							<span class="icon" aria-hidden="true">
+								<span class="docon docon-dislike"></span>
+							</span>
+							<span>No</span>
+						</summary>
+						<div
+							class="popover-content width-200 width-300-tablet"
+							role="dialog"
+							aria-labelledby="popover-heading"
+							aria-describedby="popover-description"
+						>
+							<p id="popover-heading" class="font-size-lg margin-bottom-xxs font-weight-semibold">
+								Need help with this topic?
+							</p>
+							<p id="popover-description" class="font-size-sm margin-bottom-xs">
+								Want to try using Ask Learn to clarify or guide you through this topic?
+							</p>
+							
+		<div class="buttons flex-direction-row flex-wrap justify-content-center gap-xxs">
+			<div>
+		<button
+			class="button button-sm border inner-focus display-none margin-right-xxs"
+			data-bi-name="ask-learn-assistant-entry-troubleshoot"
+			data-test-id="ask-learn-assistant-modal-entry-mobile-feedback"
+			data-ask-learn-modal-entry-feedback
+			data-bi-an=feedback-unhelpful-popover
+			type="button"
+			style="min-width: max-content;"
+			aria-expanded="false"
+			aria-label="Ask Learn"
+			hidden
+		>
+			<span class="icon" aria-hidden="true">
+				<span class="docon docon-chat-sparkle-fill gradient-ask-learn-logo"></span>
+			</span>
+		</button>
+		<button
+			class="button button-sm display-inline-flex display-none-desktop flex-shrink-0 margin-right-xxs border-color-ask-learn margin-right-xxs"
+			data-bi-name="ask-learn-assistant-entry-troubleshoot"
+			data-bi-an=feedback-unhelpful-popover
+			data-test-id="ask-learn-assistant-modal-entry-tablet-feedback"
+			data-ask-learn-modal-entry-feedback
+			type="button"
+			style="min-width: max-content;"
+			aria-expanded="false"
+			hidden
+		>
+			<span class="icon font-size-lg" aria-hidden="true">
+				<span class="docon docon-chat-sparkle-fill gradient-ask-learn-logo"></span>
+			</span>
+			<span>Ask Learn</span>
+		</button>
+		<button
+			class="button button-sm display-none flex-shrink-0 display-inline-flex-desktop margin-right-xxs border-color-ask-learn margin-right-xxs"
+			data-bi-name="ask-learn-assistant-entry-troubleshoot"
+			data-bi-an=feedback-unhelpful-popover
+			data-test-id="ask-learn-assistant-flyout-entry-feedback"
+			data-ask-learn-flyout-entry-show-only
+			data-flyout-button="toggle"
+			type="button"
+			style="min-width: max-content;"
+			aria-expanded="false"
+			aria-controls="ask-learn-flyout"
+			hidden
+		>
+			<span class="icon font-size-lg" aria-hidden="true">
+				<span class="docon docon-chat-sparkle-fill gradient-ask-learn-logo"></span>
+			</span>
+			<span>Ask Learn</span>
+		</button>
+	</div>
+			<button
+				type="button"
+				class="button button-sm margin-right-xxs"
+				data-help-option="suggest-fix"
+				data-bi-name="feedback-suggest"
+				data-bi-an="feedback-unhelpful-popover"
+				data-test-id="suggest-fix"
+			>
+				<span class="icon" aria-hidden="true">
+					<span class="docon docon-feedback"></span>
+				</span>
+				<span> Suggest a fix? </span>
+			</button>
+		</div>
+	
+						</div>
+					</details>
+				</div>
+			</div>
+		</section>
+		<!-- end feedback section -->
+	
+		
+				</div>
+				
+		<div id="ms--additional-resources-mobile" class="display-none-print">
+			<hr class="hr" hidden />
+			<h2 id="ms--additional-resources-mobile-heading" class="title is-3" hidden>
+				Additional resources
+			</h2>
+			 
+		<section
+			id="right-rail-training-mobile"
+			class=""
+			data-bi-name="learning-resource-card"
+			hidden
+		></section>
+	 
+		<section
+			id="right-rail-events-mobile"
+			class=""
+			data-bi-name="events-card"
+			hidden
+		></section>
+	
+		</div>
+	 
+		<div
+			id="article-metadata-footer"
+			data-bi-name="article-metadata-footer"
+			data-test-id="article-metadata-footer"
+			class="page-metadata-container"
+		>
+			<hr class="hr" />
+			<ul class="metadata page-metadata" data-bi-name="page info" lang="en-us" dir="ltr">
+				<li class="visibility-hidden-visual-diff">
+			<span class="badge badge-sm text-wrap-pretty">
+				<span>Last updated on <local-time format="twoDigitNumeric"
+		datetime="2026-08-03T08:00:00.000Z"
+		data-article-date-source="calculated"
+		class="is-invisible"
+	>
+		2026-08-03
+	</local-time></span>
+			</span>
+		</li>
+			</ul>
+		</div>
+	
+			</div>
+		
+				</main>
+				<aside
+					id="layout-body-aside"
+					class="layout-body-aside  "
+					data-bi-name="aside"
+					aria-label="Additional resources"
+			  >
+					
+		<div
+			id="ms--additional-resources"
+			class="right-container padding-sm display-none display-block-desktop height-full"
+			data-bi-name="pageactions"
+		>
+			<div id="affixed-right-container" data-bi-name="right-column">
+				
+		<nav
+			id="side-doc-outline"
+			class="doc-outline border-bottom padding-bottom-xs margin-bottom-xs scrollbar-width-thin"
+			data-bi-name="intopic toc"
+			aria-label="In this article"
+		>
+			<h3>In this article</h3>
+		</nav>
+	
+				<!-- Feedback -->
+				
+		<section
+			id="ms--site-user-feedback-right-rail"
+			class="font-size-sm display-none-print"
+			data-test-id="site-user-feedback-right-rail"
+			data-bi-name="site-feedback-right-rail"
+		>
+			<div class="display-flex flex-wrap-wrap align-items-center">
+				<p class="font-weight-semibold margin-xxs margin-left-none">
+					Was this page helpful?
+				</p>
+				<div class="display-flex flex-wrap-nowrap">
+					<button
+						class="thumb-rating-button like inner-focus"
+						data-test-id="right-rail-rating-yes"
+						data-binary-rating-response="rating-yes"
+						type="button"
+						title="This article is helpful"
+						aria-label="This article is helpful"
+						data-bi-name="button-rating-yes"
+						aria-pressed="false"
+					>
+						<span class="icon" aria-hidden="true">
+							<span class="docon docon-like"></span>
+						</span>
+					</button>
+					<button
+						class="thumb-rating-button dislike inner-focus"
+						id="right-rail-no-button"
+						hidden
+						data-test-id="right-rail-rating-no"
+						data-binary-rating-response="rating-no"
+						type="button"
+						title="This article is not helpful"
+						aria-label="This article is not helpful"
+						data-bi-name="button-rating-no"
+						aria-pressed="false"
+					>
+						<span class="icon" aria-hidden="true">
+							<span class="docon docon-dislike"></span>
+						</span>
+					</button>
+					<details class="popover popover-right" id="help-popover" data-test-id="feedback-popover">
+						<summary
+							tabindex="0"
+							class="thumb-rating-button dislike inner-focus"
+							data-test-id="details-right-rail-rating-no"
+							data-binary-rating-response="rating-no"
+							title="This article is not helpful"
+							aria-label="This article is not helpful"
+							data-bi-name="button-rating-no"
+							aria-pressed="false"
+							data-bi-an="feedback-unhelpful-popover"
+						>
+							<span class="icon" aria-hidden="true">
+								<span class="docon docon-dislike"></span>
+							</span>
+						</summary>
+						<div
+							class="popover-content width-200 width-300-tablet"
+							role="dialog"
+							aria-labelledby="popover-heading-right-rail"
+							aria-describedby="popover-description-right-rail"
+						>
+							<p
+								id="popover-heading-right-rail"
+								class="font-size-lg margin-bottom-xxs font-weight-semibold"
+							>
+								Need help with this topic?
+							</p>
+							<p id="popover-description-right-rail" class="font-size-sm margin-bottom-xs">
+								Want to try using Ask Learn to clarify or guide you through this topic?
+							</p>
+							
+		<div class="buttons flex-direction-row flex-wrap justify-content-center gap-xxs">
+			<div>
+		<button
+			class="button button-sm border inner-focus display-none margin-right-xxs"
+			data-bi-name="ask-learn-assistant-entry-troubleshoot"
+			data-test-id="ask-learn-assistant-modal-entry-mobile-feedback"
+			data-ask-learn-modal-entry-feedback
+			data-bi-an=feedback-unhelpful-popover
+			type="button"
+			style="min-width: max-content;"
+			aria-expanded="false"
+			aria-label="Ask Learn"
+			hidden
+		>
+			<span class="icon" aria-hidden="true">
+				<span class="docon docon-chat-sparkle-fill gradient-ask-learn-logo"></span>
+			</span>
+		</button>
+		<button
+			class="button button-sm display-inline-flex display-none-desktop flex-shrink-0 margin-right-xxs border-color-ask-learn margin-right-xxs"
+			data-bi-name="ask-learn-assistant-entry-troubleshoot"
+			data-bi-an=feedback-unhelpful-popover
+			data-test-id="ask-learn-assistant-modal-entry-tablet-feedback"
+			data-ask-learn-modal-entry-feedback
+			type="button"
+			style="min-width: max-content;"
+			aria-expanded="false"
+			hidden
+		>
+			<span class="icon font-size-lg" aria-hidden="true">
+				<span class="docon docon-chat-sparkle-fill gradient-ask-learn-logo"></span>
+			</span>
+			<span>Ask Learn</span>
+		</button>
+		<button
+			class="button button-sm display-none flex-shrink-0 display-inline-flex-desktop margin-right-xxs border-color-ask-learn margin-right-xxs"
+			data-bi-name="ask-learn-assistant-entry-troubleshoot"
+			data-bi-an=feedback-unhelpful-popover
+			data-test-id="ask-learn-assistant-flyout-entry-feedback"
+			data-ask-learn-flyout-entry-show-only
+			data-flyout-button="toggle"
+			type="button"
+			style="min-width: max-content;"
+			aria-expanded="false"
+			aria-controls="ask-learn-flyout"
+			hidden
+		>
+			<span class="icon font-size-lg" aria-hidden="true">
+				<span class="docon docon-chat-sparkle-fill gradient-ask-learn-logo"></span>
+			</span>
+			<span>Ask Learn</span>
+		</button>
+	</div>
+			<button
+				type="button"
+				class="button button-sm margin-right-xxs"
+				data-help-option="suggest-fix"
+				data-bi-name="feedback-suggest"
+				data-bi-an="feedback-unhelpful-popover"
+				data-test-id="suggest-fix"
+			>
+				<span class="icon" aria-hidden="true">
+					<span class="docon docon-feedback"></span>
+				</span>
+				<span> Suggest a fix? </span>
+			</button>
+		</div>
+	
+						</div>
+					</details>
+				</div>
+			</div>
+		</section>
+	
+			</div>
+		</div>
+	
+			  </aside> <section
+					id="layout-body-flyout"
+					class="layout-body-flyout "
+					data-bi-name="flyout"
+			  >
+					 <div
+	class="height-full border-left background-color-body-medium"
+	id="ask-learn-flyout"
+></div>
+			  </section> <div class="layout-body-footer " data-bi-name="layout-footer">
+		<footer
+			id="footer"
+			data-test-id="footer"
+			data-bi-name="footer"
+			class="footer-layout padding-xs padding-sm-desktop has-default-focus border-top"
+			role="contentinfo"
+		>
+			<div class="display-flex gap-xs flex-wrap-wrap is-full-height padding-right-lg-desktop">
+				
+		<a
+			data-mscc-ic="false"
+			href="#"
+			data-bi-name="select-locale"
+			class="locale-selector-link flex-shrink-0 button button-sm button-clear external-link-indicator"
+			id=""
+			title=""
+			><span class="icon" aria-hidden="true"
+				><span class="docon docon-world"></span></span
+			><span class="local-selector-link-text">en-us</span></a
+		>
+	 <div class="ccpa-privacy-link" data-ccpa-privacy-link hidden>
+		
+		<a
+			data-mscc-ic="false"
+			href="https://aka.ms/yourcaliforniaprivacychoices"
+			data-bi-name="your-privacy-choices"
+			class="button button-sm button-clear flex-shrink-0 external-link-indicator"
+			id=""
+			title=""
+			>
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			viewBox="0 0 30 14"
+			xml:space="preserve"
+			height="16"
+			width="43"
+			aria-hidden="true"
+			focusable="false"
+		>
+			<path
+				d="M7.4 12.8h6.8l3.1-11.6H7.4C4.2 1.2 1.6 3.8 1.6 7s2.6 5.8 5.8 5.8z"
+				style="fill-rule:evenodd;clip-rule:evenodd;fill:#fff"
+			></path>
+			<path
+				d="M22.6 0H7.4c-3.9 0-7 3.1-7 7s3.1 7 7 7h15.2c3.9 0 7-3.1 7-7s-3.2-7-7-7zm-21 7c0-3.2 2.6-5.8 5.8-5.8h9.9l-3.1 11.6H7.4c-3.2 0-5.8-2.6-5.8-5.8z"
+				style="fill-rule:evenodd;clip-rule:evenodd;fill:#06f"
+			></path>
+			<path
+				d="M24.6 4c.2.2.2.6 0 .8L22.5 7l2.2 2.2c.2.2.2.6 0 .8-.2.2-.6.2-.8 0l-2.2-2.2-2.2 2.2c-.2.2-.6.2-.8 0-.2-.2-.2-.6 0-.8L20.8 7l-2.2-2.2c-.2-.2-.2-.6 0-.8.2-.2.6-.2.8 0l2.2 2.2L23.8 4c.2-.2.6-.2.8 0z"
+				style="fill:#fff"
+			></path>
+			<path
+				d="M12.7 4.1c.2.2.3.6.1.8L8.6 9.8c-.1.1-.2.2-.3.2-.2.1-.5.1-.7-.1L5.4 7.7c-.2-.2-.2-.6 0-.8.2-.2.6-.2.8 0L8 8.6l3.8-4.5c.2-.2.6-.2.9 0z"
+				style="fill:#06f"
+			></path>
+		</svg>
+	
+			<span>Your Privacy Choices</span></a
+		>
+	
+	</div>
+				<div class="flex-shrink-0">
+		<div class="dropdown has-caret-up">
+			<button
+				data-test-id="theme-selector-button"
+				class="dropdown-trigger button button-clear button-sm inner-focus theme-dropdown-trigger"
+				aria-controls="{{ themeMenuId }}"
+				aria-haspopup="true"
+				aria-expanded="false"
+				data-bi-name="theme"
+			>
+				<span class="icon" aria-hidden="true"><span class="docon docon-sun"></span></span>
+				<span>Theme</span>
+				<span class="icon expanded-indicator" aria-hidden="true">
+					<span class="docon docon-chevron-down-light"></span>
+				</span>
+			</button>
+			<div class="dropdown-menu" id="{{ themeMenuId }}" role="menu">
+				<ul class="theme-selector padding-xxs" data-test-id="theme-dropdown-menu" role="none">
+					<li class="theme display-block" role="none">
+						<button
+							class="button button-clear button-sm theme-control button-block justify-content-flex-start text-align-left"
+							role="menuitemradio"
+							aria-checked="false"
+							data-theme-to="light"
+							tabindex="-1"
+						>
+							<span class="theme-light margin-right-xxs">
+								<span
+									class="theme-selector-icon border display-inline-block has-body-background"
+									aria-hidden="true"
+								>
+									<svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 14">
+										<rect width="22" height="14" class="has-fill-body-background" />
+										<rect x="5" y="5" width="12" height="4" class="has-fill-secondary" />
+										<rect x="5" y="2" width="2" height="1" class="has-fill-secondary" />
+										<rect x="8" y="2" width="2" height="1" class="has-fill-secondary" />
+										<rect x="11" y="2" width="3" height="1" class="has-fill-secondary" />
+										<rect x="1" y="1" width="2" height="2" class="has-fill-secondary" />
+										<rect x="5" y="10" width="7" height="2" rx="0.3" class="has-fill-primary" />
+										<rect x="19" y="1" width="2" height="2" rx="1" class="has-fill-secondary" />
+									</svg>
+								</span>
+							</span>
+							<span> Light </span>
+						</button>
+					</li>
+					<li class="theme display-block" role="none">
+						<button
+							class="button button-clear button-sm theme-control button-block justify-content-flex-start text-align-left"
+							role="menuitemradio"
+							aria-checked="false"
+							data-theme-to="dark"
+							tabindex="-1"
+						>
+							<span class="theme-dark margin-right-xxs">
+								<span
+									class="border theme-selector-icon display-inline-block has-body-background"
+									aria-hidden="true"
+								>
+									<svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 14">
+										<rect width="22" height="14" class="has-fill-body-background" />
+										<rect x="5" y="5" width="12" height="4" class="has-fill-secondary" />
+										<rect x="5" y="2" width="2" height="1" class="has-fill-secondary" />
+										<rect x="8" y="2" width="2" height="1" class="has-fill-secondary" />
+										<rect x="11" y="2" width="3" height="1" class="has-fill-secondary" />
+										<rect x="1" y="1" width="2" height="2" class="has-fill-secondary" />
+										<rect x="5" y="10" width="7" height="2" rx="0.3" class="has-fill-primary" />
+										<rect x="19" y="1" width="2" height="2" rx="1" class="has-fill-secondary" />
+									</svg>
+								</span>
+							</span>
+							<span> Dark </span>
+						</button>
+					</li>
+					<li class="theme display-block" role="none">
+						<button
+							class="button button-clear button-sm theme-control button-block justify-content-flex-start text-align-left"
+							role="menuitemradio"
+							aria-checked="false"
+							data-theme-to="high-contrast"
+							tabindex="-1"
+						>
+							<span class="theme-high-contrast margin-right-xxs">
+								<span
+									class="border theme-selector-icon display-inline-block has-body-background"
+									aria-hidden="true"
+								>
+									<svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 14">
+										<rect width="22" height="14" class="has-fill-body-background" />
+										<rect x="5" y="5" width="12" height="4" class="has-fill-secondary" />
+										<rect x="5" y="2" width="2" height="1" class="has-fill-secondary" />
+										<rect x="8" y="2" width="2" height="1" class="has-fill-secondary" />
+										<rect x="11" y="2" width="3" height="1" class="has-fill-secondary" />
+										<rect x="1" y="1" width="2" height="2" class="has-fill-secondary" />
+										<rect x="5" y="10" width="7" height="2" rx="0.3" class="has-fill-primary" />
+										<rect x="19" y="1" width="2" height="2" rx="1" class="has-fill-secondary" />
+									</svg>
+								</span>
+							</span>
+							<span> High contrast </span>
+						</button>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+			</div>
+			<ul class="links" data-bi-name="footerlinks">
+				<li class="manage-cookies-holder" hidden=""></li>
+				<li>
+		
+		<a
+			data-mscc-ic="false"
+			href="https://learn.microsoft.com/en-us/principles-for-ai-generated-content"
+			data-bi-name="aiDisclaimer"
+			class=" external-link-indicator"
+			id=""
+			title=""
+			>AI Disclaimer</a
+		>
+	
+	</li><li>
+		
+		<a
+			data-mscc-ic="false"
+			href="https://learn.microsoft.com/en-us/previous-versions/"
+			data-bi-name="archivelink"
+			class=" external-link-indicator"
+			id=""
+			title=""
+			>Previous Versions</a
+		>
+	
+	</li> <li>
+		
+		<a
+			data-mscc-ic="false"
+			href="https://techcommunity.microsoft.com/t5/microsoft-learn-blog/bg-p/MicrosoftLearnBlog"
+			data-bi-name="bloglink"
+			class=" external-link-indicator"
+			id=""
+			title=""
+			>Blog</a
+		>
+	
+	</li> <li>
+		
+		<a
+			data-mscc-ic="false"
+			href="https://learn.microsoft.com/en-us/contribute"
+			data-bi-name="contributorGuide"
+			class=" external-link-indicator"
+			id=""
+			title=""
+			>Contribute</a
+		>
+	
+	</li><li>
+		
+		<a
+			data-mscc-ic="false"
+			href="https://go.microsoft.com/fwlink/?LinkId=521839"
+			data-bi-name="privacy"
+			class=" external-link-indicator"
+			id=""
+			title=""
+			>Privacy</a
+		>
+	
+	</li><li>
+		
+		<a
+			data-mscc-ic="false"
+			href="https://go.microsoft.com/fwlink/?linkid=2259814"
+			data-bi-name="consumer-health-privacy"
+			class=" external-link-indicator"
+			id=""
+			title=""
+			>Consumer Health Privacy</a
+		>
+	
+	</li><li>
+		
+		<a
+			data-mscc-ic="false"
+			href="https://learn.microsoft.com/en-us/legal/termsofuse"
+			data-bi-name="termsofuse"
+			class=" external-link-indicator"
+			id=""
+			title=""
+			>Terms of Use</a
+		>
+	
+	</li><li>
+		
+		<a
+			data-mscc-ic="false"
+			href="https://www.microsoft.com/legal/intellectualproperty/Trademarks/"
+			data-bi-name="trademarks"
+			class=" external-link-indicator"
+			id=""
+			title=""
+			>Trademarks</a
+		>
+	
+	</li>
+				<li>&copy; Microsoft 2026</li>
+			</ul>
+		</footer>
+	</footer>
+			<noscript><img src="https://learn.microsoft.com/akam/13/pixel_3d94bf71?a=dD05MTQ1NTU2ZjhkZjVkODcxNGJkNWE5M2ZmNmU2NjI3YWM4MDU2NGFhJmpzPW9mZg==" style="visibility: hidden; position: absolute; left: -999px; top: -999px;" /></noscript></body>
+		</html>

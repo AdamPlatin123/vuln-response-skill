@@ -4,7 +4,7 @@ title: eMudhra 中间 CA 弱密钥（P384 私钥可秒级恢复）· PKI 处置�
 ecosystem: pki
 cve: ["CVE-2026-111943", "CVE-2026-113470", "CVE-2026-105221", "CVE-2026-85086", "CVE-2026-113812"]
 aliases: ["RUSTSEC-2026-0381", "RUSTSEC-2026-0382", "RUSTSEC-2026-0383", "GHSA-phqh-xp3p-h6mr", "GHSA-6q48-6c7w-9gw2", "GHSA-hq85-5cpj-mr62"]
-affects: "① 信任库面：证书链经过 3 个根（AAA Certificate Services / emSign Root TLS CA - G3 / emSign ECC Root CA - G3）的中间 CA；受影响的是**信任库**而非某个软件版本：Go <1.26.10 / <1.27.3、Rust webpki-roots <1.0.10（`=0.26.11` 是 unaffected 兼容包，**不是修复版**）、rustls-webpki `<0.103.16` 或 `0.104.0-alpha.1–<0.104.0-alpha.8`（两段，取「或」）、webpki-root-certs <1.0.10、Node 22/24/26 修复线之前、Perl `Mozilla::CA` <20261020、Python `certifi >=2019.03.09 <2026.10.19`（修 `2026.10.19`）、`uv <0.13.4`（修 `0.13.4`）；Java cacerts / Debian ca-certificates / .NET 处置版本**未确认**。② 应用层 TLS 校验关断面（与信任库无关）：gist RubyGem `<6.1.0`、Apache Thrift perl bindings `<0.25.0`"
+affects: "① 信任库面：证书链经过 3 个根（AAA Certificate Services / emSign Root TLS CA - G3 / emSign ECC Root CA - G3）的中间 CA；受影响的是**信任库**而非某个软件版本：Go <1.26.10 / <1.27.3、Rust webpki-roots <1.0.10（`=0.26.11` 是 unaffected 兼容包，**不是修复版**）、rustls-webpki `<0.103.16` 或 `0.104.0-alpha.1–<0.104.0-alpha.8`（两段，取「或」）、webpki-root-certs <1.0.10、Node 22/24/26 修复线之前、Perl `Mozilla::CA` <20261020、Python `certifi >=2019.03.09 <2026.10.19`（修 `2026.10.19`）、`uv <0.13.4`（修 `0.13.4`）；Java cacerts **无厂商修复版本**（OpenJDK master 源码树仍含 `emsigneccrootcag3` / `emsignrootcag1` / `emsignrootcag2`，处置为手工删别名或指向清洗后 trustStore）、Debian ca-certificates `20250419+deb13u1`（trixie；unstable `20260816+nmu1`；**bookworm 未确认**）、.NET 随 OS 信任库（Windows Cert Store / Linux OpenSSL / macOS Keychain），**无独立处置版本**。② 应用层 TLS 校验关断面（与信任库无关）：gist RubyGem `<6.1.0`、Apache Thrift perl bindings `<0.25.0`"
 fixed: ["Go 1.26.10", "Go 1.27.3", "webpki-roots 1.0.10", "webpki-root-certs 1.0.10", "rustls-webpki 0.103.16", "rustls-webpki 0.104.0-alpha.8", "Node 22.23.4", "Node 24.22.1", "Node 26.12.1", "Firefox 158.0.1", "Firefox ESR 115.43.1", "Firefox ESR 153.5.1", "Firefox Android 158.0.2", "NSS 3.131.1", "gist 6.1.0", "Thrift 0.25.0", "Mozilla::CA 20261020"]
 severity: "高危（伪造 HTTPS 证书做中间人；私钥已广为人知，CT 日志暂未见签发记录，但厂商明确「近期很可能被滥用」）；另含两条应用层 TLS 校验关断：gist 4.0 **9.1** / Thrift 4.0 **6.9**"
 status: verified
@@ -16,7 +16,7 @@ updated: 2026-10-22
 
 > **覆盖说明（三条）**
 > 1. **包级事实 verified**：本件 CVE 号、受影响区间、修复版本均有一手来源（oss-security / RUSTSEC / OSV / MFSA / NVD / CNA 记录 / GHSA）。
-> 2. **三套信任库的 fixed 版本未在本件确认**：Debian ca-certificates / Java cacerts / .NET 需按各自发行版与厂商公告核对；**Python 侧已确认**：`certifi 2026.10.19`、`uv 0.13.4`。
+> 2. **三套信任库收口（W3）**：Debian ca-certificates **已确认**——stable/trixie `20250419+deb13u1`（DSA-6572-1，2026-10-20）、unstable/testing `20260816+nmu1`（NMU 2026-10-20，changelog 明写黑名单 `emSign ECC Root CA - G3` + `Comodo AAA Services root`），**bookworm 未确认**；Java cacerts **无厂商修复版本**（Oracle CPU 0 命中、OpenJDK master 仍含 3 张 emSign 根）→ 处置为手工 `keytool -delete` 或指向清洗后 trustStore；.NET **无独立处置版本**，随 OS/基础镜像 trust store 更新。
 > 3. 本件按「verified + 未确认子项」归档：**不下调 status、不改统计口径**，缺口在 `index.md` 未闭环清单单列。
 
 > 措辞口径：根因是**弱密钥**（私钥本身可被秒级恢复，见下「根因」段），不是普通「私钥被盗」。标题与正文按根因写，别再叫「私钥泄露」。
@@ -52,10 +52,10 @@ updated: 2026-10-22
 | Firefox / NSS | OneCRL 未生效或自定义设置阻断更新 | `158.0.1` / ESR `115.43.1`·`153.5.1` / Android `158.0.2` / NSS `3.131.1`（**CVE-2026-113470**，MFSA 2026-111，high） | 一手（Mozilla 博客 + MFSA） |
 | Python `certifi` | `>=2019.03.09 <2026.10.19`（打包 emSign 根证书） | `2026.10.19` | 一手（GHSA-6q48-6c7w-9gw2，critical） |
 | Python `uv`（内置 CA store） | `<0.13.4` | `0.13.4` | 一手（GHSA-hq85-5cpj-mr62） |
-| **Java cacerts** | 版本未知 | **未确认** | 待核 |
-| **Linux ca-certificates** | 发行版各自 | **未确认**（按发行版 tracker） | 待核 |
+| Debian `ca-certificates` | 仍含 `emSign ECC Root CA - G3` / `Comodo AAA Services root` 的旧包 | trixie `20250419+deb13u1`；unstable/testing `20260816+nmu1`；**bookworm 未确认** | 一手（DSA-6572-1 + unstable changelog） |
+| **Java cacerts** | **无厂商修复版本**；OpenJDK master cacerts 仍含 `emsigneccrootcag3`/`emsignrootcag1`/`emsignrootcag2` | **手工处置**：`keytool -delete -alias` 清 3 个别名，或 `-Djavax.net.ssl.trustStore` 指向清洗后 store；GraalVM native image 必须用清洗后 cacerts **重编译** | 一手（JDK-8319187 + Oracle 25.0.4 relnotes + GraalVM 文档） |
 | **Chrome / Android** | CRLSets 阻断 | 侦察交件；Google 原文正文未能抓取 | **待核** |
-| **.NET / 其他** | 自带 trust store | **未确认** | 待核 |
+| **.NET** | 不自带 bundle：Windows → Windows Cert Store；Linux → OpenSSL（`SSL_CERT_FILE`/`SSL_CERT_DIR`，空则 `/etc/ssl/certs`）；macOS → Keychain | **无独立处置版本**：更新 OS / 基础镜像 trust store（Linux 走 Debian 那条，Windows 走 Root 更新） | 一手（.NET 文档 + dotnet/announcements 0 命中） |
 
 **判断命令（先看版本，再看信任库内容）**
 
@@ -146,8 +146,18 @@ for(const p of require("tls").rootCertificates){try{
 }catch(e){}}
 console.log("rootCertificates",require("tls").rootCertificates.length,"hits",hits.length,hits);'
 
-# Java cacerts（keytool 打的是证书 SHA-256，需另备一份证书指纹清单）
+# Debian ca-certificates：版本 + 包内是否仍含被移除的根
+dpkg-query -W -f='${Version}\n' ca-certificates
+grep -icE 'emSign ECC Root CA - G3|Comodo AAA Services' /usr/share/ca-certificates/mozilla/*.crt 2>/dev/null || true
+
+# Java cacerts：**按别名精确查这 3 张根**（alias 小写、无分隔符）
+keytool -list -cacerts -storepass changeit 2>/dev/null | grep -iE 'emsigneccrootcag3|emsignrootcag1|emsignrootcag2|comodoaaaca'
 keytool -list -cacerts -storepass changeit 2>/dev/null | grep -iE 'emSign|eMudhra|AAA Certificate' | head
+
+# .NET：不自带 bundle，查它实际读的 OS store
+dotnet --version >/dev/null 2>&1 && echo "dotnet present（trust store 走 OS）"
+echo "SSL_CERT_FILE=${SSL_CERT_FILE:-<unset, 默认 /etc/ssl/certs>} SSL_CERT_DIR=${SSL_CERT_DIR:-<unset>}"
+openssl version -d
 
 # Rust
 cargo tree -i webpki-roots 2>/dev/null; cargo tree -i rustls-webpki 2>/dev/null; cargo tree -i webpki-root-certs 2>/dev/null
@@ -222,8 +232,9 @@ perl -MThrift::Socket -e 'print "socket ok\n"' 2>/dev/null
 ### 4.1 信任库：五套分别更新
 
 ```bash
-# 1) 系统（Debian/Ubuntu 示例）—— 先确认发行版已移除，再升级
+# 1) Debian ca-certificates（已确认版本：trixie 20250419+deb13u1 / unstable 20260816+nmu1；bookworm 未确认）
 apt-get update && apt-get -y install --only-upgrade ca-certificates
+dpkg-query -W -f='${Version}\n' ca-certificates     # trixie 期望 20250419+deb13u1；unstable 期望 20260816+nmu1
 update-ca-certificates
 # 回扫：应无输出
 bash -c 'openssl crl2pkcs7 -nocrl -certfile /etc/ssl/certs/ca-certificates.crt | openssl pkcs7 -print_certs -noout' \
@@ -246,11 +257,20 @@ python3 -c 'import certifi;print(certifi.__version__, certifi.where())'      # �
 python3 -m pip install 'uv==0.13.4'   # uv 若单独装（内置 CA store 需 ≥0.13.4）
 uv --version
 
-# 6) Java：更新 cacerts（版本未确认，先按发行版/JDK 安全公告处置）
-keytool -list -cacerts -storepass changeit | grep -icE 'emSign|eMudhra|AAA Certificate'
+# 6) Java：**没有厂商修复版本**（一手否定）→ 手工清别名，或指向清洗后的 trustStore
+#    a. 删除 3 个别名（先备份 cacerts）
+cp "$JAVA_HOME/lib/security/cacerts" "/secure/change/$CHG/cacerts.bak"
+for a in emsigeccrootcag3 emsignrootcag1 emsignrootcag2; do
+  keytool -delete -cacerts -storepass changeit -alias "$a" 2>/dev/null && echo "deleted $a" || echo "absent $a"
+done
+keytool -list -cacerts -storepass changeit | grep -icE 'emsigneccrootcag3|emsignrootcag1|emsignrootcag2'   # 期望 0
+#    b. 或运行期指定清洗后的 store：-Djavax.net.ssl.trustStore=/secure/cacerts-clean
+#    c. **GraalVM native image**：构建期捕获宿主 TrustStore 并把 blacklisted.certs 编进二进制
+#       → 必须用**清洗后 cacerts 的构建机**重编译；改运行机无效
+#       native-image 需重建：./mvnw -Pnative native:compile / gradle nativeCompile
 ```
 
-> **Java cacerts / .NET / Debian ca-certificates 三套的精确处置版本本稿未确认**——必须按各自官方公告与发行版 tracker 定，不在这里编版本号；Python 侧已确认（`certifi 2026.10.19`、`uv 0.13.4`）。
+> **W3 收口状态**：Debian 已确认（trixie `20250419+deb13u1` / unstable `20260816+nmu1`，**bookworm 未确认**——DSA 只列 trixie）；Java **无厂商修复版本** → 手工处置（删别名 / 指定 trustStore / GraalVM 重编译）；.NET **无独立处置版本** → 随 OS/基础镜像 trust store 更新。
 
 ### 4.2 对外证书：换 CA 重签（与信任库更新无关）
 
@@ -318,8 +338,18 @@ for(const p of require("tls").rootCertificates){try{
 }catch(e){}}
 console.log("rootCertificates",require("tls").rootCertificates.length,"hits",hits.length,hits);'
 
-# 2b) Java cacerts：keytool 只能查证书指纹，用 subject 近似（精确 SPKI 需导出后算）
-keytool -list -cacerts -storepass changeit 2>/dev/null | grep -icE 'emSign|eMudhra|AAA Certificate'   # 期望 0
+# 2b) Java cacerts：**按别名精确查**（手工处置后必须为 0）
+keytool -list -cacerts -storepass changeit 2>/dev/null \
+  | grep -icE 'emsigneccrootcag3|emsignrootcag1|emsignrootcag2'   # 期望 0
+#     GraalVM native image：确认二进制是用**清洗后 cacerts 的构建机**重编译的（构建日志 + 产物时间）
+
+# 2c) Debian 包版本身份（已确认版本）
+dpkg-query -W -f='${Version}\n' ca-certificates    # trixie 20250419+deb13u1 / unstable 20260816+nmu1
+
+# 2d) .NET：无独立版本，确认它读的 OS store 已清
+echo "SSL_CERT_FILE=${SSL_CERT_FILE:-<unset>} SSL_CERT_DIR=${SSL_CERT_DIR:-<unset>}"   # Linux 默认 /etc/ssl/certs
+openssl crl2pkcs7 -nocrl -certfile /etc/ssl/certs/ca-certificates.crt \
+  | openssl pkcs7 -print_certs -noout | grep -icE 'emSign|eMudhra|AAA Certificate'      # 期望 0
 
 # 3) 端到端：测试主机握手应被拒
 openssl s_client -connect emudhra.we-have-a-problem.com:443 -verify_return_error </dev/null 2>&1 \
@@ -346,8 +376,11 @@ uv --version 2>/dev/null                                              # 期望 0
 4. 业务 TLS 全链路回归通过，无新增证书告警；
 5. 对外证书已换 CA（若原链涉及 eMudhra）并有新证书链留档；
 6. 代码签名策略已评估（2 张被攻破的 CS 中间 CA）；
-7. `gist` ≥ `6.1.0` 且源码中 `VERIFY_NONE` 命中数为 0；perl `Thrift` ≥ `0.25.0`（两条与信任库无关，必须单独出证据）；
-8. `certifi` = `2026.10.19`、`uv` ≥ `0.13.4`（Python 侧已确认项，单独出证据；三套未确认项按 `index.md` 未闭环清单跟踪）。
+7. Debian：`ca-certificates` 版本 = 已确认修复版（trixie `20250419+deb13u1` / unstable `20260816+nmu1`）；若在 **bookworm** 上，标注「未确认」并单独跟踪；
+8. Java：`keytool` 三个别名（`emsigneccrootcag3` / `emsignrootcag1` / `emsignrootcag2`）回扫为 0；用 GraalVM native image 的，构建机 cacerts 已清洗且产物已重编译；
+9. .NET：OS/基础镜像 store 回扫为 0（Linux 走 `/etc/ssl/certs` 或 `SSL_CERT_FILE`），**不找 .NET 版本号**；
+10. `gist` ≥ `6.1.0` 且源码中 `VERIFY_NONE` 命中数为 0；perl `Thrift` ≥ `0.25.0`（两条与信任库无关，必须单独出证据）；
+11. `certifi` = `2026.10.19`、`uv` ≥ `0.13.4`（Python 侧已确认项）；bookworm 缺口按 `index.md` 未闭环清单跟踪。
 
 ## 回退
 
@@ -377,9 +410,15 @@ python3 -m pip install "certifi==$PRE_CERTIFI"        # 再用 4.1 第 5 条重�
 
 ## 条目
 
+> **同一 `CVE-2026-111943`，按信任库分行承载；生态级修复见 04，信任库级处置见本件。**
+> （`inventory.tsv` 的「一 CVE 一行」不套用到本表：各承载物不同、处置不同，合并会丢处置差异。跨生态/跨信任库允许分行。）
+
 | 编号 | 对象 | 影响区间 | 修复 | 来源 |
 |---|---|---|---|---|
 | CVE-2026-111943 | Go / Rust / Node 内置 CA（同根因跨生态，merge_key 相同） | Go `<1.26.10`/`<1.27.3`；webpki-roots `<1.0.10`（`=0.26.11` unaffected）；rustls-webpki `<0.103.16` 或 `0.104.0-alpha.1–<0.104.0-alpha.8`；webpki-root-certs `<1.0.10`；Node 22/24/26 修复线之前 | Go `1.26.10`/`1.27.3`；webpki-roots `1.0.10`；rustls-webpki `0.103.16`/`0.104.0-alpha.8`；webpki-root-certs `1.0.10`；Node `22.23.4`/`24.22.1`/`26.12.1` | S501–S508 / GO-2026-6809 |
+| CVE-2026-111943（Debian 承载） | Debian `ca-certificates`（系统 trust store） | 仍含 `emSign ECC Root CA - G3` / `Comodo AAA Services root` 的旧包 | trixie `20250419+deb13u1`（DSA-6572-1）/ unstable `20260816+nmu1`；**bookworm 未确认** | tracker + DSA-6572-1 |
+| CVE-2026-111943（Java 承载） | `cacerts`（JDK 内置） | **无厂商修复版本**；OpenJDK master 仍含 3 张 emSign 根 | 手工 `keytool -delete -alias` 清 `emsigeccrootcag3`/`emsignrootcag1`/`emsignrootcag2`，或指向清洗后 trustStore；GraalVM native image 重编译 | JDK-8319187 + GraalVM 文档 |
+| CVE-2026-111943（.NET 承载） | .NET（无 bundle，随 OS） | Windows Cert Store / Linux OpenSSL / macOS Keychain | **无独立版本**：更新 OS/基础镜像 store | MS Learn cross-platform-crypto |
 | CVE-2026-113470 | Firefox / NSS OneCRL | OneCRL 未生效或自定义设置阻断更新 | `158.0.1` / ESR `115.43.1`·`153.5.1` / Android `158.0.2` / NSS `3.131.1` | MFSA 2026-111 |
 | CVE-2026-105221 | `gist` RubyGem（硬编码 `VERIFY_NONE`） | `<6.1.0` | `6.1.0` | NVD / 上游 commit |
 | CVE-2026-85086 | Apache Thrift perl bindings（不安全 TLS 默认） | `<0.25.0` | `0.25.0`（**依据 CVE 记录 CNA=apache + NVD**；Apache 公告页正文需 JS 未取到） | NVD / CNA 记录 |
@@ -401,6 +440,11 @@ python3 -m pip install "certifi==$PRE_CERTIFI"        # 再用 4.1 第 5 条重�
 | 一手（Node.js 安全公告：ca-cert 随 22.23.4 / 24.22.1 / 26.12.1 更新） | https://nodejs.org/en/blog/vulnerability/october-2026-security-releases |
 | 一手（MFSA 2026-111：CVE-2026-113470，high，Firefox 158.0.1 内更新 OneCRL 阻断列表） | https://www.mozilla.org/en-US/security/advisories/mfsa2026-111/ |
 | 一手（Bugzilla 2083449：根因 = 私钥为 <256 的整数，可秒级恢复；Sectigo 交叉签当时仍未吊销） | https://bugzilla.mozilla.org/show_bug.cgi?id=2083449 |
+| 一手（Debian 安全 tracker：`ca-certificates` 各发行版版本 + DSA/DLA 索引） | https://security-tracker.debian.org/tracker/ca-certificates |
+| 一手（Debian Bug #1151413：eMudhra 中间 CA 被攻破 → 移除 `emSign ECC Root CA - G3` / `Comodo AAA Services root`；severity grave） | https://bugs.debian.org/1151413 |
+| 一手（OpenJDK JDK-8319187：`Add three eMudhra emSign roots`——证明 Java cacerts 含这 3 张根；master 源码树仍含对应文件） | https://bugs.openjdk.org/browse/JDK-8319187 |
+| 一手（GraalVM Native Image · Certificate Management：构建期捕获宿主 TrustStore、`blacklisted.certs` 构建期加载 → native image 必须重编译） | https://www.graalvm.org/latest/reference-manual/native-image/dynamic-features/CertificateManagement/ |
+| 一手（MS Learn：.NET 跨平台加密 = Windows Cert Store / Linux OpenSSL / macOS Keychain，无独立 bundle） | https://learn.microsoft.com/en-us/dotnet/standard/security/cross-platform-cryptography |
 | 一手（NVD：CVE-2026-105221，gist `<6.1.0` → `6.1.0`，CWE-295，CVSS 3.1 7.4 / 4.0 9.1） | https://nvd.nist.gov/vuln/detail/CVE-2026-105221 |
 | 一手（上游 commit：gist 移除 `VERIFY_NONE`） | https://github.com/defunkt/gist/commit/07ccc1a6d46e9d36f0e85d0b1c5d795890ae6bcf |
 | 一手（CVE 记录 CNA=apache：CVE-2026-85086，`<0.25.0` → `0.25.0`，含 lists.apache.org 线程引用） | https://lists.apache.org/thread/33otcgbqd27wf6qq810q56znzbomnhg1 |

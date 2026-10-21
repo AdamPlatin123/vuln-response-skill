@@ -61,7 +61,7 @@ KNOWN_ECOS = {"nodejs", "node", "npm", "go", "pypi", "python", "python-llm", "ph
               "generic", "plex", "pan-os", "fortimail", "siteguard", "siemens"}
 IN_THE_WILD = {"KEV", "vendor-confirmed", "poc-only", "unknown"}
 STATUSES = {"verified", "partial", "draft", "observe"}
-PB_NUMS = {f"{i:02d}" for i in range(1, 12)}
+PB_NUMS = {f"{i:02d}" for i in range(1, 13)}  # 01..12（新件从 11 起，别再写死上限）
 
 ID_RE = re.compile(r"^W1-(\d{3})$")
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")

@@ -252,7 +252,7 @@ python3 -c 'import importlib.metadata as m;print(m.version("litellm"))'   # 必�
 |---|---|---|
 | GHSA-7hp6-4w63-5g45 | salt key 伪造 admin → RCE | 二手定位，修复版本与 CVE 号待补；不写进处置步骤 |
 | GHSA-g5ff-… | viewer LFI | 待补精确编号与修复版本 |
-| Check Point 研究原文 | https://research.checkpoint.com/2026/when-llm-gateways-go-wrong-findings-from-litellm/ | 正文未抓取，不作引用 |
+| Check Point 研究原文 | https://research.checkpoint.com/2026/when-llm-gateways-go-wrong-findings-from-litellm/ | **正文已抓（2026-10-13，评估对象 LiteLLM v1.77.7）**：攻击链 `/config/update` 缺 RBAC → `UI_LOGO_PATH` 任意文件读 → admin 接管 → 云存储模块 RCE；另有 Clientside Credentials SSRF 外泄 provider key。**其中 `CVE-2026-35029` / `CVE-2026-59823` 均已在 1.83.9 修复** → 作本件佐证，**综述本身不入条目表** |
 
 ## 来源
 
@@ -267,3 +267,4 @@ python3 -c 'import importlib.metadata as m;print(m.version("litellm"))'   # 必�
 | 一手（GHSA-69x8-hrgq-fjj8：密码哈希泄露，修 1.83.0，无 CVE） | https://github.com/advisories/GHSA-69x8-hrgq-fjj8 |
 | 一手（官方 3 月供应链事件：1.82.7/1.82.8、时间窗、IoC、clean=1.83.0） | https://docs.litellm.ai/blog/security-update-march-2026 |
 | 一手（CISA KEV：42208 已被利用） | https://www.cisa.gov/known-exploited-vulnerabilities-catalog |
+| 一手（Check Point Research 正文，2026-10-13：LiteLLM 攻击链佐证；35029/59823 修于 1.83.9） | https://research.checkpoint.com/2026/when-llm-gateways-go-wrong-findings-from-litellm/ |

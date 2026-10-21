@@ -5,6 +5,8 @@ description: 互联网漏洞情报 → 检测 / 影响判定 / 修复 / 验证 �
 
 # 漏洞响应 Skill
 
+> 包版本：`v0.3.0`（W3 收口 · 快照 2026-10-22）。升级只换 tar + 本版本行，loader 内容不动。
+
 ## 何时用（触发条件）
 
 命中任一条即加载：
@@ -109,7 +111,7 @@ bash bin/seal.sh                               # 生成 sha256 清单
   客户端把整个目录当 Skill 加载后，命中触发词即进本文件；不需要联网。
 - 进来先做两件事：① 按「决策树」判档；② 按 `index.md` 找件。**不要跳过 index 直接猜 playbook 编号**。
 
-### 2. 11 份 playbook 的适用面
+### 2. 12 份 playbook 的适用面
 
 | 编号 | 文件 | 什么时候用 | 状态 |
 |---|---|---|---|
@@ -121,9 +123,10 @@ bash bin/seal.sh                               # 生成 sha256 清单
 | 06 | `playbooks/06-credential-rotation.md` | 任意凭据轮换（先加后减、双读窗口、回退） | verified |
 | 07 | `playbooks/07-production-remediation.md` | **入口件**：定档 P0–P3、六段四门、动生产库姿势 | verified |
 | 08 | `playbooks/08-php-runtime.md` | PHP 运行时未认证 RCE（8.5.12 / 8.4.27 / 8.3.36 / 8.2.35） | verified |
-| 09 | `playbooks/09-pki-ca-rollover.md` | eMudhra 中间 CA 弱密钥 / 五套信任库（含 Ruby gist、Perl Thrift） | verified（**三套** store 未确认：Debian ca-certificates / Java cacerts / .NET；Python `certifi 2026.10.19`、`uv 0.13.4` 已确认） |
+| 09 | `playbooks/09-pki-ca-rollover.md` | eMudhra 中间 CA 弱密钥 / 五套信任库（含 Ruby gist、Perl Thrift） | verified（**W3 收口**：Debian ca-certificates 已确认 `20250419+deb13u1` / `20260816+nmu1`（bookworm 未确认）；Java cacerts、.NET 无厂商修复版本 → 手工清理/随 OS 更新；Python `certifi 2026.10.19`、`uv 0.13.4`） |
 | 10 | `playbooks/10-boundary-devices.md` | KEV 在野利用簇：边界/媒体设备 9 条（逐分支 fixed 已按厂商公告核） | verified |
 | 11 | `playbooks/11-dotnet-runtime.md` | .NET / ASP.NET Core 6 条（Kestrel 走私 9.4 领衔） | verified |
+| 12 | `playbooks/12-vyper-source-gate.md` | Vyper 6 条 GHSA：**无已发布修复版本** → 源码闸门（非 ASCII 标识符 / 8 种行分隔符 / `msg.value \|` 折叠 / 导入常量与默认参数名 / `create_from_blueprint` 偏移）；不给升级命令 | verified（闸门≠修复版本） |
 
 > `10` 已转 `verified`（fixed 来自五家厂商 PSIRT，逐分支；Plex 仅 Beta 通道，稳定通道待核）。`playbooks/_draft/` 现为空，包内不再有草稿区。
 
