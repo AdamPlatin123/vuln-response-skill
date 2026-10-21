@@ -1,0 +1,114 @@
+{
+  "ghsa_id": "GHSA-6j9c-gvcw-74fj",
+  "cve_id": null,
+  "url": "https://api.github.com/repos/vyperlang/vyper/security-advisories/GHSA-6j9c-gvcw-74fj",
+  "html_url": "https://github.com/vyperlang/vyper/security/advisories/GHSA-6j9c-gvcw-74fj",
+  "summary": "Optimizer replaces `msg.value | K` and `len(msg.data) | K`with `1` in ternary branches",
+  "description": "## Summary\r\n\r\nWith optimization on (`-O gas`, the default, or `-O codesize`), `(msg.value | K)` used as a branch of a ternary expression compiles to the constant `1`, whatever amount was sent. `K` is any nonzero integer literal. `len(msg.data) | K` is affected the same way. There is no warning or revert. `-O none` produces the correct value.\r\n\r\n## Details\r\n\r\nThe optimizer rewrites `(or x K)` to `1` (`vyper/ir/optimizer.py:396-398`). This is only valid where the result is used for its truthiness, i.e. as a condition. Whether a node is in such a position is decided from its parent's opcode alone (`optimizer.py:242`). As a result, both value branches of an `if` are treated as if they were the condition.\r\n\r\nFor most operands, `finalize` rolls the rewrite back. It does not for `callvalue` and `calldatasize`: both are in `do_not_cache` (`codegen/ir_node.py:392`), so `is_complex_ir` does not treat them as complex.\r\n\r\n## PoC\r\n\r\n```vyper\r\n@external\r\n@payable\r\ndef f(c: bool) -> uint256:\r\n    return (msg.value | 2) if c else 5\r\n```\r\n\r\n`f(True)` with `msg.value = 5` returns `1` at the default level and `7` at `-O none`.\r\n\r\nThe IR at the default level:\r\n\r\n```\r\n[if, [iszero, [mload, 64 <c>]], 5 <5>, 1 <msg.value | 2 (msg.value|2)>]\r\n```\r\n\r\n## Impact\r\n\r\nThe wrong value goes wherever the expression is used: storage writes, arithmetic, array indexes, return values and event fields. For example, `self.deposits[msg.sender] = (msg.value | 1) if flag else msg.value` records every deposit made with `flag` set as `1`, so the funds stay in the contract and nobody can withdraw them.\r\n",
+  "severity": "medium",
+  "author": null,
+  "publisher": {
+    "login": "pcaversaccio",
+    "id": 25297591,
+    "node_id": "MDQ6VXNlcjI1Mjk3NTkx",
+    "avatar_url": "https://avatars.githubusercontent.com/u/25297591?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/pcaversaccio",
+    "html_url": "https://github.com/pcaversaccio",
+    "followers_url": "https://api.github.com/users/pcaversaccio/followers",
+    "following_url": "https://api.github.com/users/pcaversaccio/following{/other_user}",
+    "gists_url": "https://api.github.com/users/pcaversaccio/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/pcaversaccio/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/pcaversaccio/subscriptions",
+    "organizations_url": "https://api.github.com/users/pcaversaccio/orgs",
+    "repos_url": "https://api.github.com/users/pcaversaccio/repos",
+    "events_url": "https://api.github.com/users/pcaversaccio/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/pcaversaccio/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "identifiers": [
+    {
+      "value": "GHSA-6j9c-gvcw-74fj",
+      "type": "GHSA"
+    }
+  ],
+  "state": "published",
+  "created_at": null,
+  "updated_at": "2026-10-02T17:27:11Z",
+  "published_at": "2026-10-02T17:27:11Z",
+  "closed_at": null,
+  "withdrawn_at": null,
+  "submission": null,
+  "vulnerabilities": [
+    {
+      "package": {
+        "ecosystem": "pip",
+        "name": "vyper"
+      },
+      "vulnerable_version_range": ">= 0.3.8",
+      "patched_versions": "",
+      "vulnerable_functions": [
+
+      ]
+    }
+  ],
+  "cvss_severities": {
+    "cvss_v3": {
+      "vector_string": null,
+      "score": null
+    },
+    "cvss_v4": {
+      "vector_string": null,
+      "score": null
+    }
+  },
+  "cwes": [
+
+  ],
+  "cwe_ids": [
+
+  ],
+  "credits": [
+    {
+      "login": "DELENE-TCHIO-ROMUALD",
+      "type": "finder"
+    }
+  ],
+  "credits_detailed": [
+    {
+      "user": {
+        "login": "DELENE-TCHIO-ROMUALD",
+        "id": 119831304,
+        "node_id": "U_kgDOByR7CA",
+        "avatar_url": "https://avatars.githubusercontent.com/u/119831304?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/DELENE-TCHIO-ROMUALD",
+        "html_url": "https://github.com/DELENE-TCHIO-ROMUALD",
+        "followers_url": "https://api.github.com/users/DELENE-TCHIO-ROMUALD/followers",
+        "following_url": "https://api.github.com/users/DELENE-TCHIO-ROMUALD/following{/other_user}",
+        "gists_url": "https://api.github.com/users/DELENE-TCHIO-ROMUALD/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/DELENE-TCHIO-ROMUALD/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/DELENE-TCHIO-ROMUALD/subscriptions",
+        "organizations_url": "https://api.github.com/users/DELENE-TCHIO-ROMUALD/orgs",
+        "repos_url": "https://api.github.com/users/DELENE-TCHIO-ROMUALD/repos",
+        "events_url": "https://api.github.com/users/DELENE-TCHIO-ROMUALD/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/DELENE-TCHIO-ROMUALD/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "type": "finder",
+      "state": "accepted"
+    }
+  ],
+  "collaborating_users": null,
+  "collaborating_teams": null,
+  "private_fork": null,
+  "comments": 3,
+  "cvss": {
+    "vector_string": null,
+    "score": null
+  }
+}

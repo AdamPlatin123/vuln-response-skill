@@ -4,7 +4,7 @@ title: eMudhra 中间 CA 弱密钥（P384 私钥可秒级恢复）· PKI 处置�
 ecosystem: pki
 cve: ["CVE-2026-111943", "CVE-2026-113470", "CVE-2026-105221", "CVE-2026-85086", "CVE-2026-113812"]
 aliases: ["RUSTSEC-2026-0381", "RUSTSEC-2026-0382", "RUSTSEC-2026-0383", "GHSA-phqh-xp3p-h6mr", "GHSA-6q48-6c7w-9gw2", "GHSA-hq85-5cpj-mr62"]
-affects: "① 信任库面：证书链经过 3 个根（AAA Certificate Services / emSign Root TLS CA - G3 / emSign ECC Root CA - G3）的中间 CA；受影响的是**信任库**而非某个软件版本：Go <1.26.10 / <1.27.3、Rust webpki-roots <1.0.10（`=0.26.11` 是 unaffected 兼容包，**不是修复版**）、rustls-webpki `<0.103.16` 或 `0.104.0-alpha.1–<0.104.0-alpha.8`（两段，取「或」）、webpki-root-certs <1.0.10、Node 22/24/26 修复线之前、Perl `Mozilla::CA` <20261020、Python `certifi >=2019.03.09 <2026.10.19`（修 `2026.10.19`）、`uv <0.13.4`（修 `0.13.4`）；Java cacerts **无厂商修复版本**（OpenJDK master 源码树仍含 `emsigneccrootcag3` / `emsignrootcag1` / `emsignrootcag2`，处置为手工删别名或指向清洗后 trustStore）、Debian ca-certificates `20250419+deb13u1`（trixie；unstable `20260816+nmu1`；**bookworm 未确认**）、.NET 随 OS 信任库（Windows Cert Store / Linux OpenSSL / macOS Keychain），**无独立处置版本**。② 应用层 TLS 校验关断面（与信任库无关）：gist RubyGem `<6.1.0`、Apache Thrift perl bindings `<0.25.0`"
+affects: "① 信任库面：证书链经过 3 个根（AAA Certificate Services / emSign Root TLS CA - G3 / emSign ECC Root CA - G3）的中间 CA；受影响的是**信任库**而非某个软件版本：Go <1.26.10 / <1.27.3、Rust webpki-roots <1.0.10（`=0.26.11` 是 unaffected 兼容包，**不是修复版**）、rustls-webpki `<0.103.16` 或 `0.104.0-alpha.1–<0.104.0-alpha.8`（两段，取「或」）、webpki-root-certs <1.0.10、Node 22/24/26 修复线之前、Perl `Mozilla::CA` <20261020、Python `certifi >=2019.03.09 <2026.10.19`（修 `2026.10.19`）、`uv <0.13.4`（修 `0.13.4`）；Java cacerts **分两条路**（**发行版 JDK**：随 `ca-certificates-java` 钩子 / `java-*-openjdk` 包随 OS 更新；**Oracle JDK**：无厂商修复版本，源码树仍含 `emsigneccrootcag3`/`emsignrootcag1`/`emsignrootcag2` → 手工删别名）、Debian ca-certificates **三线全有版本**：trixie `20250419+deb13u1` / bookworm-security `20250419~deb12u2` / unstable `20260816+nmu1`、.NET 随 OS 信任库（Windows Cert Store / Linux OpenSSL / macOS Keychain），**无独立处置版本**。② 应用层 TLS 校验关断面（与信任库无关）：gist RubyGem `<6.1.0`、Apache Thrift perl bindings `<0.25.0`"
 fixed: ["Go 1.26.10", "Go 1.27.3", "webpki-roots 1.0.10", "webpki-root-certs 1.0.10", "rustls-webpki 0.103.16", "rustls-webpki 0.104.0-alpha.8", "Node 22.23.4", "Node 24.22.1", "Node 26.12.1", "Firefox 158.0.1", "Firefox ESR 115.43.1", "Firefox ESR 153.5.1", "Firefox Android 158.0.2", "NSS 3.131.1", "gist 6.1.0", "Thrift 0.25.0", "Mozilla::CA 20261020"]
 severity: "高危（伪造 HTTPS 证书做中间人；私钥已广为人知，CT 日志暂未见签发记录，但厂商明确「近期很可能被滥用」）；另含两条应用层 TLS 校验关断：gist 4.0 **9.1** / Thrift 4.0 **6.9**"
 status: verified
@@ -16,7 +16,7 @@ updated: 2026-10-22
 
 > **覆盖说明（三条）**
 > 1. **包级事实 verified**：本件 CVE 号、受影响区间、修复版本均有一手来源（oss-security / RUSTSEC / OSV / MFSA / NVD / CNA 记录 / GHSA）。
-> 2. **三套信任库收口（W3）**：Debian ca-certificates **已确认**——stable/trixie `20250419+deb13u1`（DSA-6572-1，2026-10-20）、unstable/testing `20260816+nmu1`（NMU 2026-10-20，changelog 明写黑名单 `emSign ECC Root CA - G3` + `Comodo AAA Services root`），**bookworm 未确认**；Java cacerts **无厂商修复版本**（Oracle CPU 0 命中、OpenJDK master 仍含 3 张 emSign 根）→ 处置为手工 `keytool -delete` 或指向清洗后 trustStore；.NET **无独立处置版本**，随 OS/基础镜像 trust store 更新。
+> 2. **三套信任库收口（W4）**：Debian ca-certificates **三线全有版本**——trixie `20250419+deb13u1`（**DSA-6572-1，2026-10-20，仅列 trixie**）、**bookworm-security `20250419~deb12u2`**（NMU 2026-10-20 21:45:34 +0200；**来源 = bookworm-security 源包 changelog + Debian tracker 版本表，不在 DSA-6572-1 正文内**）、unstable/testing `20260816+nmu1`；Java cacerts **分两条路**——**发行版 JDK 随 OS 包修**（**RHEL 已实证**：`java-21-openjdk.spec:2251` `ln -sf /etc/pki/java/cacerts .`；**Debian/Ubuntu 仅实证钩子机制**，以 `keytool -list -cacerts` 实际路径为准），**Oracle JDK 无厂商修复版本** → 兜底：**优先** `-Djavax.net.ssl.trustStore=` 指向清洗后副本（可回退），**次选** `keytool -delete`（Oracle CPU 0 命中、OpenJDK master 仍含 3 张 emSign 根）；.NET **无独立处置版本**，随 OS/基础镜像 trust store 更新。
 > 3. 本件按「verified + 未确认子项」归档：**不下调 status、不改统计口径**，缺口在 `index.md` 未闭环清单单列。
 
 > 措辞口径：根因是**弱密钥**（私钥本身可被秒级恢复，见下「根因」段），不是普通「私钥被盗」。标题与正文按根因写，别再叫「私钥泄露」。
@@ -52,8 +52,8 @@ updated: 2026-10-22
 | Firefox / NSS | OneCRL 未生效或自定义设置阻断更新 | `158.0.1` / ESR `115.43.1`·`153.5.1` / Android `158.0.2` / NSS `3.131.1`（**CVE-2026-113470**，MFSA 2026-111，high） | 一手（Mozilla 博客 + MFSA） |
 | Python `certifi` | `>=2019.03.09 <2026.10.19`（打包 emSign 根证书） | `2026.10.19` | 一手（GHSA-6q48-6c7w-9gw2，critical） |
 | Python `uv`（内置 CA store） | `<0.13.4` | `0.13.4` | 一手（GHSA-hq85-5cpj-mr62） |
-| Debian `ca-certificates` | 仍含 `emSign ECC Root CA - G3` / `Comodo AAA Services root` 的旧包 | trixie `20250419+deb13u1`；unstable/testing `20260816+nmu1`；**bookworm 未确认** | 一手（DSA-6572-1 + unstable changelog） |
-| **Java cacerts** | **无厂商修复版本**；OpenJDK master cacerts 仍含 `emsigneccrootcag3`/`emsignrootcag1`/`emsignrootcag2` | **手工处置**：`keytool -delete -alias` 清 3 个别名，或 `-Djavax.net.ssl.trustStore` 指向清洗后 store；GraalVM native image 必须用清洗后 cacerts **重编译** | 一手（JDK-8319187 + Oracle 25.0.4 relnotes + GraalVM 文档） |
+| Debian `ca-certificates` | 仍含 `emSign ECC Root CA - G3` / `Comodo AAA Services root` 的旧包 | trixie `20250419+deb13u1`（DSA-6572-1）/ **bookworm-security `20250419~deb12u2`**（NMU，snapshot `20261020T211310Z`）/ unstable `20260816+nmu1` | 一手（trixie：DSA-6572-1；bookworm：bookworm-security 源包 changelog + tracker 版本表；unstable：changelog） |
+| **Java cacerts** | ① 发行版 JDK：**RHEL 已实证**（`java-21-openjdk.spec:2251` `ln -sf /etc/pki/java/cacerts .`，JDK cacerts 即 OS store）；**Debian/Ubuntu 仅实证钩子机制**（`ca-certificates-java` 描述原文「uses the hooks of the ca-certificates package to update the cacerts JKS keystore」），**未逐包核 openjdk 的 cacerts 是否真指向该 JKS → 以 `keytool -list -cacerts` 实际路径为准** ② **Oracle JDK：无厂商修复版本**，OpenJDK master 仍含 `emsigneccrootcag3`/`emsignrootcag1`/`emsignrootcag2` | ① 升 OS 包（`ca-certificates` + `ca-certificates-java` / `java-*-openjdk`）② Oracle JDK 兜底顺序：**优先** `-Djavax.net.ssl.trustStore=` 指向清洗后副本（可回退）；**次选** `keytool -delete -alias`（不易回退、升级可能被覆盖）；**GraalVM native image 必须用清洗后 cacerts 重编译** | 一手（DSA-6572-1 + 发行版打包机制 + JDK-8319187 + Oracle 25.0.4 relnotes + GraalVM 文档） |
 | **Chrome / Android** | CRLSets 阻断 | 侦察交件；Google 原文正文未能抓取 | **待核** |
 | **.NET** | 不自带 bundle：Windows → Windows Cert Store；Linux → OpenSSL（`SSL_CERT_FILE`/`SSL_CERT_DIR`，空则 `/etc/ssl/certs`）；macOS → Keychain | **无独立处置版本**：更新 OS / 基础镜像 trust store（Linux 走 Debian 那条，Windows 走 Root 更新） | 一手（.NET 文档 + dotnet/announcements 0 命中） |
 
@@ -150,6 +150,11 @@ console.log("rootCertificates",require("tls").rootCertificates.length,"hits",hit
 dpkg-query -W -f='${Version}\n' ca-certificates
 grep -icE 'emSign ECC Root CA - G3|Comodo AAA Services' /usr/share/ca-certificates/mozilla/*.crt 2>/dev/null || true
 
+# Java：先判是「发行版 JDK」还是「Oracle JDK」（决定修复路径）
+which java; readlink -f "$(which java)"; java -version 2>&1 | head -2
+#   发行版 JDK（包管理安装、/usr/lib/jvm/*-openjdk-*）→ 修 OS 包即可
+#   Oracle JDK（/usr/lib/jvm/jdk-* 或 /opt/*）→ 只能手工删别名（见修复 4.1 第 6 条）
+
 # Java cacerts：**按别名精确查这 3 张根**（alias 小写、无分隔符）
 keytool -list -cacerts -storepass changeit 2>/dev/null | grep -iE 'emsigneccrootcag3|emsignrootcag1|emsignrootcag2|comodoaaaca'
 keytool -list -cacerts -storepass changeit 2>/dev/null | grep -iE 'emSign|eMudhra|AAA Certificate' | head
@@ -232,7 +237,7 @@ perl -MThrift::Socket -e 'print "socket ok\n"' 2>/dev/null
 ### 4.1 信任库：五套分别更新
 
 ```bash
-# 1) Debian ca-certificates（已确认版本：trixie 20250419+deb13u1 / unstable 20260816+nmu1；bookworm 未确认）
+# 1) Debian ca-certificates（三线已确认：trixie 20250419+deb13u1 / bookworm-security 20250419~deb12u2 / unstable 20260816+nmu1）
 apt-get update && apt-get -y install --only-upgrade ca-certificates
 dpkg-query -W -f='${Version}\n' ca-certificates     # trixie 期望 20250419+deb13u1；unstable 期望 20260816+nmu1
 update-ca-certificates
@@ -257,10 +262,17 @@ python3 -c 'import certifi;print(certifi.__version__, certifi.where())'      # �
 python3 -m pip install 'uv==0.13.4'   # uv 若单独装（内置 CA store 需 ≥0.13.4）
 uv --version
 
-# 6) Java：**没有厂商修复版本**（一手否定）→ 手工清别名，或指向清洗后的 trustStore
-#    a. 删除 3 个别名（先备份 cacerts）
+# 6) Java：**先走发行版路径，再考虑手工**（两条路，别直接跳到 keytool）
+#    A. 发行版 JDK（Debian/Ubuntu）——钩子机制已实证，但「升包即修」**未逐包核实**，以实际路径为准：
+#       apt-get -y install --only-upgrade ca-certificates ca-certificates-java
+#       钩子会用 ca-certificates 重建 JKS cacerts；升完用 2b 的 keytool 回扫验证
+#    A2. RHEL 系：JDK cacerts 指向 /etc/pki/java/cacerts → `update-ca-trust` + 升 `java-*-openjdk`
+#    B. Oracle JDK / 自带 cacerts 的 JDK——**没有厂商修复版本**：
+#    a. **首选**（可回退）：复制 cacerts 到独立文件、删别名后，用 -Djavax.net.ssl.trustStore= 指向它
+#       不直接改 $JAVA_HOME 下的 cacerts，升级/重装不会覆盖，回退 = 去掉该 JVM 参数
+#    b. 次选：直接删 $JAVA_HOME 下 cacerts 的 3 个别名（先备份；升级可能被覆盖）
 cp "$JAVA_HOME/lib/security/cacerts" "/secure/change/$CHG/cacerts.bak"
-for a in emsigeccrootcag3 emsignrootcag1 emsignrootcag2; do
+for a in emsigneccrootcag3 emsignrootcag1 emsignrootcag2; do
   keytool -delete -cacerts -storepass changeit -alias "$a" 2>/dev/null && echo "deleted $a" || echo "absent $a"
 done
 keytool -list -cacerts -storepass changeit | grep -icE 'emsigneccrootcag3|emsignrootcag1|emsignrootcag2'   # 期望 0
@@ -270,7 +282,7 @@ keytool -list -cacerts -storepass changeit | grep -icE 'emsigneccrootcag3|emsign
 #       native-image 需重建：./mvnw -Pnative native:compile / gradle nativeCompile
 ```
 
-> **W3 收口状态**：Debian 已确认（trixie `20250419+deb13u1` / unstable `20260816+nmu1`，**bookworm 未确认**——DSA 只列 trixie）；Java **无厂商修复版本** → 手工处置（删别名 / 指定 trustStore / GraalVM 重编译）；.NET **无独立处置版本** → 随 OS/基础镜像 trust store 更新。
+> **W4 收口状态**：Debian 三线全有版本（trixie `20250419+deb13u1` / bookworm-security `20250419~deb12u2` / unstable `20260816+nmu1`）；Java **双路径**（发行版 JDK 随 OS 包修；Oracle JDK 手工删别名 + GraalVM 重编译）；.NET **无独立处置版本** → 随 OS/基础镜像 trust store 更新。
 
 ### 4.2 对外证书：换 CA 重签（与信任库更新无关）
 
@@ -376,11 +388,11 @@ uv --version 2>/dev/null                                              # 期望 0
 4. 业务 TLS 全链路回归通过，无新增证书告警；
 5. 对外证书已换 CA（若原链涉及 eMudhra）并有新证书链留档；
 6. 代码签名策略已评估（2 张被攻破的 CS 中间 CA）；
-7. Debian：`ca-certificates` 版本 = 已确认修复版（trixie `20250419+deb13u1` / unstable `20260816+nmu1`）；若在 **bookworm** 上，标注「未确认」并单独跟踪；
-8. Java：`keytool` 三个别名（`emsigneccrootcag3` / `emsignrootcag1` / `emsignrootcag2`）回扫为 0；用 GraalVM native image 的，构建机 cacerts 已清洗且产物已重编译；
+7. Debian：`ca-certificates` 版本 = 已确认修复版（trixie `20250419+deb13u1` / **bookworm `20250419~deb12u2`** / unstable `20260816+nmu1`）；三条线都要出证据；
+8. Java：**先确认 `keytool -list -cacerts` 的实际 keystore 路径**（证伪「升包没生效」）；发行版 JDK 三别名回扫为 0；**Oracle JDK 优先走 `-Djavax.net.ssl.trustStore=` 指向清洗副本**（并留回退记录），次选删别名；GraalVM native image 用清洗后 cacerts 重编译；
 9. .NET：OS/基础镜像 store 回扫为 0（Linux 走 `/etc/ssl/certs` 或 `SSL_CERT_FILE`），**不找 .NET 版本号**；
 10. `gist` ≥ `6.1.0` 且源码中 `VERIFY_NONE` 命中数为 0；perl `Thrift` ≥ `0.25.0`（两条与信任库无关，必须单独出证据）；
-11. `certifi` = `2026.10.19`、`uv` ≥ `0.13.4`（Python 侧已确认项）；bookworm 缺口按 `index.md` 未闭环清单跟踪。
+11. `certifi` = `2026.10.19`、`uv` ≥ `0.13.4`（Python 侧已确认项）。
 
 ## 回退
 
@@ -416,8 +428,8 @@ python3 -m pip install "certifi==$PRE_CERTIFI"        # 再用 4.1 第 5 条重�
 | 编号 | 对象 | 影响区间 | 修复 | 来源 |
 |---|---|---|---|---|
 | CVE-2026-111943 | Go / Rust / Node 内置 CA（同根因跨生态，merge_key 相同） | Go `<1.26.10`/`<1.27.3`；webpki-roots `<1.0.10`（`=0.26.11` unaffected）；rustls-webpki `<0.103.16` 或 `0.104.0-alpha.1–<0.104.0-alpha.8`；webpki-root-certs `<1.0.10`；Node 22/24/26 修复线之前 | Go `1.26.10`/`1.27.3`；webpki-roots `1.0.10`；rustls-webpki `0.103.16`/`0.104.0-alpha.8`；webpki-root-certs `1.0.10`；Node `22.23.4`/`24.22.1`/`26.12.1` | S501–S508 / GO-2026-6809 |
-| CVE-2026-111943（Debian 承载） | Debian `ca-certificates`（系统 trust store） | 仍含 `emSign ECC Root CA - G3` / `Comodo AAA Services root` 的旧包 | trixie `20250419+deb13u1`（DSA-6572-1）/ unstable `20260816+nmu1`；**bookworm 未确认** | tracker + DSA-6572-1 |
-| CVE-2026-111943（Java 承载） | `cacerts`（JDK 内置） | **无厂商修复版本**；OpenJDK master 仍含 3 张 emSign 根 | 手工 `keytool -delete -alias` 清 `emsigeccrootcag3`/`emsignrootcag1`/`emsignrootcag2`，或指向清洗后 trustStore；GraalVM native image 重编译 | JDK-8319187 + GraalVM 文档 |
+| CVE-2026-111943（Debian 承载） | Debian `ca-certificates`（系统 trust store） | 仍含 `emSign ECC Root CA - G3` / `Comodo AAA Services root` 的旧包 | trixie `20250419+deb13u1`（DSA-6572-1）/ bookworm-security `20250419~deb12u2` / unstable `20260816+nmu1` | trixie：DSA-6572-1；bookworm：源包 changelog + tracker |
+| CVE-2026-111943（Java 承载） | `cacerts`（JDK 内置） | ① 发行版 JDK 随 OS ca-certificates ② Oracle JDK 无厂商修复版本、仍含 3 张 emSign 根 | ① 升 `ca-certificates`+`ca-certificates-java`/`java-*-openjdk` ② Oracle JDK：**优先** `-Djavax.net.ssl.trustStore=` 指向清洗副本，次选 `keytool -delete` 三别名；GraalVM 重编译 | 发行版打包机制 + JDK-8319187 + GraalVM 文档 |
 | CVE-2026-111943（.NET 承载） | .NET（无 bundle，随 OS） | Windows Cert Store / Linux OpenSSL / macOS Keychain | **无独立版本**：更新 OS/基础镜像 store | MS Learn cross-platform-crypto |
 | CVE-2026-113470 | Firefox / NSS OneCRL | OneCRL 未生效或自定义设置阻断更新 | `158.0.1` / ESR `115.43.1`·`153.5.1` / Android `158.0.2` / NSS `3.131.1` | MFSA 2026-111 |
 | CVE-2026-105221 | `gist` RubyGem（硬编码 `VERIFY_NONE`） | `<6.1.0` | `6.1.0` | NVD / 上游 commit |
@@ -445,6 +457,9 @@ python3 -m pip install "certifi==$PRE_CERTIFI"        # 再用 4.1 第 5 条重�
 | 一手（OpenJDK JDK-8319187：`Add three eMudhra emSign roots`——证明 Java cacerts 含这 3 张根；master 源码树仍含对应文件） | https://bugs.openjdk.org/browse/JDK-8319187 |
 | 一手（GraalVM Native Image · Certificate Management：构建期捕获宿主 TrustStore、`blacklisted.certs` 构建期加载 → native image 必须重编译） | https://www.graalvm.org/latest/reference-manual/native-image/dynamic-features/CertificateManagement/ |
 | 一手（MS Learn：.NET 跨平台加密 = Windows Cert Store / Linux OpenSSL / macOS Keychain，无独立 bundle） | https://learn.microsoft.com/en-us/dotnet/standard/security/cross-platform-cryptography |
+| 一手（Debian **bookworm-security** 源包 changelog：`20250419~deb12u2` NMU 2026-10-20 21:45:34 +0200，`Blacklist "emSign ECC Root CA - G3" and "Comodo AAA Services root" (Closes: #1151413)`；取 snapshot `20261020T211310Z`） | S432（snapshot 源包 changelog；证据 `evidence/w4-2026-10-22/bookworm-debian-tar.xz`） |
+| 一手（Debian `ca-certificates-java` 包描述：`uses the hooks of the ca-certificates package to update the cacerts JKS keystore`——**仅实证钩子机制**） | S433（包描述原文；证据 `evidence/w4-2026-10-22/debian-ca-certificates-java.html`） |
+| 一手（RHEL `java-21-openjdk.spec:2251`：`ln -sf /etc/pki/java/cacerts .`——JDK cacerts 即 OS store，**已实证**） | S434（spec 原文；证据 `evidence/w4-2026-10-22/redhat-java21-openjdk.spec`） |
 | 一手（NVD：CVE-2026-105221，gist `<6.1.0` → `6.1.0`，CWE-295，CVSS 3.1 7.4 / 4.0 9.1） | https://nvd.nist.gov/vuln/detail/CVE-2026-105221 |
 | 一手（上游 commit：gist 移除 `VERIFY_NONE`） | https://github.com/defunkt/gist/commit/07ccc1a6d46e9d36f0e85d0b1c5d795890ae6bcf |
 | 一手（CVE 记录 CNA=apache：CVE-2026-85086，`<0.25.0` → `0.25.0`，含 lists.apache.org 线程引用） | https://lists.apache.org/thread/33otcgbqd27wf6qq810q56znzbomnhg1 |

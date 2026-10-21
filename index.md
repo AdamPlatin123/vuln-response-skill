@@ -136,9 +136,9 @@
 
 > 来源 S501–S507（Mozilla 博客、MFSA 2026-111、RUSTSEC-2026-0381/0382/0383、Bugzilla 2083449）。**W3 收口口径见下。**
 >
-> **三套信任库收口（W3）**：Debian ca-certificates **已确认**——stable/trixie `20250419+deb13u1`（DSA-6572-1，2026-10-20）、unstable/testing `20260816+nmu1`（NMU 2026-10-20，changelog 明写黑名单 `emSign ECC Root CA - G3` + `Comodo AAA Services root`），**bookworm 未确认**；Java cacerts **无厂商修复版本**（Oracle CPU 0 命中、OpenJDK master 仍含 3 张 emSign 根）→ 处置为手工 `keytool -delete` 或指向清洗后 trustStore；.NET **无独立处置版本**，随 OS/基础镜像 trust store 更新。
+> **三套信任库收口（W4）**：Debian ca-certificates **三线全有版本**——trixie `20250419+deb13u1`（**DSA-6572-1，2026-10-20，仅列 trixie**）、**bookworm-security `20250419~deb12u2`**（NMU 2026-10-20 21:45:34 +0200；**来源 = bookworm-security 源包 changelog + Debian tracker 版本表，不在 DSA-6572-1 正文内**）、unstable/testing `20260816+nmu1`；Java cacerts **分两条路**——**发行版 JDK 随 OS 包修**（**RHEL 已实证**：`java-21-openjdk.spec:2251` `ln -sf /etc/pki/java/cacerts .`；**Debian/Ubuntu 仅实证钩子机制**，以 `keytool -list -cacerts` 实际路径为准），**Oracle JDK 无厂商修复版本** → 兜底：**优先** `-Djavax.net.ssl.trustStore=` 指向清洗后副本（可回退），**次选** `keytool -delete`（Oracle CPU 0 命中、OpenJDK master 仍含 3 张 emSign 根）；.NET **无独立处置版本**，随 OS/基础镜像 trust store 更新。
 >
-> **状态口径（组长裁定 2026-10-22，W3 更新）**：09 保持 `verified`。漏洞条目的 `fixed` 由 SPKI 移除信任确定；上列**Java cacerts / .NET 无厂商修复版本、Debian bookworm 未确认属执行侧子项缺口**，不因此降 `partial`——引用时必须带上这句限定。
+> **状态口径（组长裁定 2026-10-22，W4 更新）**：09 保持 `verified`。漏洞条目的 `fixed` 由 SPKI 移除信任确定；上列**Java cacerts（Oracle JDK）/ .NET 无厂商修复版本属执行侧子项缺口**，Debian 三线已确认，不因此降 `partial`——引用时必须带上这句限定。
 
 - **SPKI 检测锚点**：3 根 + 8 张中间 CA 的 SPKI SHA-256 全表在 `evidence/spki-emudhra-2026-10-21.md`（源 = oss-security 一手）。Sectigo 交叉签名同 SPKI → **检测只认 SPKI，不看签发路径**。
 - **归并口径**：同一 `CVE-2026-111943` 在 09 按**信任库分行承载**（生态级修复见 04，信任库级处置见 09）；`inventory.tsv` 的「一 CVE 一行」不套用到本表——各承载物不同、处置不同，合并会丢处置差异。**跨生态/跨信任库允许分行。**

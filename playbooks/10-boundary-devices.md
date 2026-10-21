@@ -4,7 +4,7 @@ title: 在野利用簇 · 边界与媒体设备应急（KEV 9 条 · 逐分支�
 ecosystem: generic
 cve: ["CVE-2026-106931", "CVE-2026-96652", "CVE-2026-96654", "CVE-2026-96655", "CVE-2026-96656", "CVE-2026-110936", "CVE-2026-0322", "CVE-2026-0257", "CVE-2026-104286"]
 affects: "按「分支 + hotfix 线」逐条判定（非合并 semver）：Plex `<1.43.3.10861`；FortiMail `8.0.0–8.0.1` / `7.6.0–7.6.6` / `7.4.0–7.4.8` / `7.2.0–7.2.9`；SiteGuard `>=Ver2.20`（IIS 3.10–4.00U4 不受影响）；Siemens `<V4.0.9.8`；PAN-OS `0322` 12.2.0–12.2.3 / 12.1.2–12.1.10-h* / 11.2.0–11.2.15 / 11.1.0–11.1.16-h* / 10.2.0–10.2.18-h*，`0257` 12.1.2–12.1.6 / 11.2.0–11.2.12 / 11.1.0–11.1.15 / 10.2.0–10.2.18-h* + Prisma Access"
-fixed: ["Plex 1.43.3.10861（发布时为 Plex Pass Beta 通道；稳定通道待核）", "FortiMail 逐线 8.0.2 / 7.6.7 / 7.4.9（7.2 无同分支修复，需跨分支升 7.4+）", "SiteGuard Ver8.00 Update 5（8.00U5，Apache/Nginx/IIS）/ Ver7.00 Update 6（7.00U6，FreeBSD）+ EOL 补丁", "Siemens V4.0.9.8", "PAN-OS CVE-2026-0322 逐分支：12.2.4｜12.1.4-h12/12.1.7-h8/12.1.10-h2｜11.2.4-h22/11.2.7-h21/11.2.10-h15/11.2.13-h3/11.2.16｜11.1.4-h37/11.1.6-h39/11.1.7-h11/11.1.10-h35/11.1.13-h15/11.1.16-h3｜10.2.7-h38/10.2.10-h41/10.2.13-h26/10.2.16-h11/10.2.18-h12", "PAN-OS CVE-2026-0257 逐分支：12.1.4-h6/12.1.7｜11.2.4-h17/11.2.7-h14/11.2.10-h7/11.2.12｜11.1.4-h33/11.1.6-h32/11.1.7-h6/11.1.10-h25/11.1.13-h5/11.1.15｜10.2.7-h34/10.2.10-h36/10.2.13-h21/10.2.16-h7/10.2.18-h6｜Prisma 11.2.7-h13/10.2.10-h36"]
+fixed: ["Plex 1.43.3.10861（2026-08-04 16:09 起全量可用；KEV 于 2026-10-20 收录时该版本已发布两个多月）", "FortiMail 逐线 8.0.2 / 7.6.7 / 7.4.9（7.2 无同分支修复，需跨分支升 7.4+）", "SiteGuard Ver8.00 Update 5（8.00U5，Apache/Nginx/IIS）/ Ver7.00 Update 6（7.00U6，FreeBSD）+ EOL 补丁", "Siemens V4.0.9.8", "PAN-OS CVE-2026-0322 逐分支：12.2.4｜12.1.4-h12/12.1.7-h8/12.1.10-h2｜11.2.4-h22/11.2.7-h21/11.2.10-h15/11.2.13-h3/11.2.16｜11.1.4-h37/11.1.6-h39/11.1.7-h11/11.1.10-h35/11.1.13-h15/11.1.16-h3｜10.2.7-h38/10.2.10-h41/10.2.13-h26/10.2.16-h11/10.2.18-h12", "PAN-OS CVE-2026-0257 逐分支：12.1.4-h6/12.1.7｜11.2.4-h17/11.2.7-h14/11.2.10-h7/11.2.12｜11.1.4-h33/11.1.6-h32/11.1.7-h6/11.1.10-h25/11.1.13-h5/11.1.15｜10.2.7-h34/10.2.10-h36/10.2.13-h21/10.2.16-h7/10.2.18-h6｜Prisma 11.2.7-h13/10.2.10-h36"]
 severity: "严重（9 条全部在 CISA KEV = 已被实际利用；3 条 dueDate 已逾期，3 条 2026-10-23 到期；PAN-OS `0322` CVSS-BT 8.6、`0257` 7.8，均 `E:A`；SiteGuard 4.0 8.5 / 3.0 7.8，厂商确认在野）"
 status: verified
 sources: ["https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json", "https://forums.plex.tv/t/plex-media-server/30447/712", "https://www.fortiguard.com/psirt/FG-IR-26-175", "https://jvn.jp/en/jp/JVN88474777/", "https://cert-portal.siemens.com/productcert/html/ssa-580366.html", "https://security.paloaltonetworks.com/CVE-2026-0322", "https://security.paloaltonetworks.com/CVE-2026-0257"]
@@ -16,7 +16,7 @@ updated: 2026-10-22
 **一句话**：这 9 条**全部在 CISA KEV**（= 已被实际利用）。五家厂商的修复版本已**逐条取到一手**；本件最关键的不是记住某个版本号，而是**逐分支/逐线对表**——Plex / FortiMail / SiteGuard / PAN-OS 都是分支制，写成「升到最新版」会把已经在自己分支打过补丁的用户误标未修。
 
 > **四条硬规则**
-> 1. **fixed 来自厂商公告，不来自 KEV**（KEV 没有 fixed 字段）。社区流传的 Plex `v1.43.2` **是错的**，正确是 `1.43.3.10861`。
+> 1. **fixed 来自厂商公告，不来自 KEV**（KEV 没有 fixed 字段）。社区流传的 Plex `v1.43.2` **是错的**，正确是 `1.43.3.10861`（2026-08-04 起全量，早于 KEV 收录）。
 > 2. **分支/hotfix 不能合并成单区间**：同一分支上有多条 `<` 线，**任一条命中即受影响**；判据 = 拿自己分支的当前串对表。
 > 3. **同厂商相邻 CVE 分行**：PAN-OS `0322`（10 月批，认证后 RCE）与 `0257`（5 月批，GlobalProtect 认证绕过）是两条不同漏洞，缓解与公告都不同。
 > 4. **版本只用于「是否已修」**；定级看暴露面与 KEV，不看版本。
@@ -41,7 +41,7 @@ updated: 2026-10-22
 
 | 产品 | 受影响 | 修复 | 依据 |
 |---|---|---|---|
-| Plex Media Server | `<1.43.3.10861`（四条 CVE 同区间） | **`1.43.3.10861`**（发布时 **Plex Pass Beta 通道**；稳定通道待核） | 厂商版本公告 + CNA/NVD 记录 |
+| Plex Media Server | `<1.43.3.10861`（四条 CVE 同区间） | **`1.43.3.10861`**——forums #712 为 Plex Pass **Beta** 通道公告；**#713 明确「now available to everyone」（2026-08-04 16:09）** | 厂商版本公告 #712/#713 + CNA/NVD 记录 |
 | FortiMail | `8.0.0–8.0.1` / `7.6.0–7.6.6` / `7.4.0–7.4.8` / `7.2.0–7.2.9` | **逐线** `8.0.2` / `7.6.7` / `7.4.9`；**7.2 无同分支修复 → 跨分支升 7.4+** | FG-IR-26-175 |
 | SiteGuard Server Edition | `>=Ver2.20`（IIS **3.10–4.00U4 不受影响**；需统计功能开启，**默认开**） | **Ver8.00 Update 5**（Apache/Nginx/IIS）/ **Ver7.00 Update 6**（FreeBSD）；EOL 版本另有补丁 | JVN#88474777 |
 | Siemens Software Center | `All versions < V4.0.9.8` | **`V4.0.9.8`**（启动时自动更新） | SSA-580366 |
@@ -162,7 +162,7 @@ PY
 - 只在 KEV 里看到名字、自家没部署该产品 → 不适用，别开工单；
 - **SiteGuard IIS 3.10–4.00U4 不受影响**（JVN 原文），别把整站都算命中；
 - `96656` 需 admin、`96655` 需认证：内部已无相关账号 → 风险显著下降，但仍要升级（账号可能是共享/弱口令）；
-- Plex 稳定通道用户暂时拿不到 `1.43.3.10861` → 不是「不受影响」，是「修复通道待核」，按暴露面先行收敛；
+- Plex 时间线要对：**2026-08-04 16:09 起全量**（#713），**比 KEV 收录（2026-10-20）早两个多月**——所以这是「老修复、后在野」，不是「近期才修」；
 - 设备型号不同、固件分支不同 → 版本比较无意义，必须对同一分支线取厂商公告。
 
 ## 修复
@@ -183,7 +183,7 @@ PY
 ### 4.2 Plex
 
 ```bash
-# 升级到 1.43.3.10861（发布时走 Plex Pass Beta 通道；稳定通道到位时间待核）
+# 升级到 1.43.3.10861（2026-08-04 16:09 起全量；#712 当时的 Beta 通道说明已过时）
 # 容器：换镜像 tag 并认 digest；裸机：用官方安装包，保留旧版本包用于回退
 docker pull "${PLEX_IMAGE:?export PLEX_IMAGE=plexinc/pms-docker:1.43.3.10861}"
 docker inspect -f '{{index .RepoDigests 0}}' "$PLEX_IMAGE"
@@ -316,7 +316,7 @@ docker pull "<旧镜像 digest>"
 | 编号 | 组件 | 受影响 | 修复 | 来源 |
 |---|---|---|---|---|
 | CVE-2026-106931 | SiteGuard Server Edition | `>=Ver2.20`（IIS 3.10–4.00U4 不受影响；统计功能默认开） | `8.00U5` / `7.00U6`（+ EOL 补丁） | https://jvn.jp/en/jp/JVN88474777/ |
-| CVE-2026-96652 | Plex Media Server（SSRF） | `<1.43.3.10861` | `1.43.3.10861` | https://forums.plex.tv/t/plex-media-server/30447/712 |
+| CVE-2026-96652 | Plex Media Server（SSRF） | `<1.43.3.10861` | `1.43.3.10861`（2026-08-04 起全量） | #712（Beta）/ #713（全量） |
 | CVE-2026-96654 | Plex Media Server（URI scheme） | `<1.43.3.10861` | `1.43.3.10861` | 同上 |
 | CVE-2026-96655 | Plex Media Server（SSRF，需认证） | `<1.43.3.10861` | `1.43.3.10861` | 同上 |
 | CVE-2026-96656 | Plex Media Server（路径控制，需 admin） | `<1.43.3.10861` | `1.43.3.10861` | 同上 |
@@ -331,7 +331,7 @@ docker pull "<旧镜像 digest>"
 
 | 项 | 状态 | 说明 |
 |---|---|---|
-| Plex 稳定通道版本 | **待核** | `1.43.3.10861` 发布时为 Plex Pass Beta 通道；post #713 同为 10861，post #714 已到 `1.43.3.10896` |
+| Plex 版本通道 | **已闭环** | #713（2026-08-04 16:09）「1.43.3.10861 is now available to everyone」→ 全量可用；#714 已到 `1.43.3.10896`（更新版本，非本条必需） |
 | Plex「4 CVE ↔ 1.43.3.10861」的对应粒度 | 已注明 | 版本公告**未逐条点名**四个 CVE，是 CNA/NVD 描述 + 版本公告两处拼合；措辞按「CNA 记录 + 版本公告」，不写「厂商逐条确认」 |
 | SiteGuard 厂商页 | 已留证 | `eg-secure.co.jp/siteguard/news/alert-202610-1` 302 跳首页；以 **JVN 一手**为准，厂商页恢复后补原文 |
 | Siemens IoC 细节 | 待侦察补 | ProductCERT News 有 IoC 章节，本件只引用「厂商确认在野利用」 |
@@ -341,7 +341,8 @@ docker pull "<旧镜像 digest>"
 | 类型 | URL |
 |---|---|
 | 一手（CISA KEV catalog JSON；catalogVersion 2026.10.21，count 1754，9 条逐条核对） | https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json |
-| 一手（Plex 版本公告 #712，1.43.3.10861 发布原文） | https://forums.plex.tv/t/plex-media-server/30447/712 |
+| 一手（Plex 版本公告 #712：1.43.3.10861 原发布，Plex Pass Beta 通道） | https://forums.plex.tv/t/plex-media-server/30447/712 |
+| 一手（Plex 版本公告 #713：2026-08-04 16:09「now available to everyone」= 全量） | https://forums.plex.tv/t/plex-media-server/30447/713 |
 | 一手（Fortinet PSIRT FG-IR-26-175：受影响矩阵 / 逐线 fixed / IBE workaround / IoC） | https://www.fortiguard.com/psirt/FG-IR-26-175 |
 | 一手（JVN#88474777：受影响条件 / Update 号 / CVSS / 在野确认 / EOL 补丁） | https://jvn.jp/en/jp/JVN88474777/ |
 | 一手（Siemens SSA-580366：`<V4.0.9.8` → `V4.0.9.8`）+ ProductCERT News 在野确认 | https://cert-portal.siemens.com/productcert/html/ssa-580366.html |

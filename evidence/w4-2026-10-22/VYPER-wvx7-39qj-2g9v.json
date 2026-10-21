@@ -1,0 +1,125 @@
+{
+  "ghsa_id": "GHSA-wvx7-39qj-2g9v",
+  "cve_id": null,
+  "url": "https://api.github.com/repos/vyperlang/vyper/security-advisories/GHSA-wvx7-39qj-2g9v",
+  "html_url": "https://github.com/vyperlang/vyper/security/advisories/GHSA-wvx7-39qj-2g9v",
+  "summary": "Line-separator characters can silently change literal values and types",
+  "description": "# Line-separator characters can silently change literal values and types\r\n\r\n## Summary\r\n\r\nVyper's inconsistent handling of line separators can make numeric literals compile with incorrect values or types and bypass literal validation. Trigger characters shift source lookups to earlier text, with cumulative displacement when multiple characters occur. Crafted source can therefore compile to behavior different from what its literal expressions show, without a compiler warning.\r\n\r\n## Details\r\n\r\nIn `vyper/ast/parse.py`, the source-line table uses `str.splitlines(keepends=True)`, which recognizes eight additional line separators that the Python parser does not count as newlines: `U+000B`, `U+000C`, `U+001C`, `U+001D`, `U+001E`, `U+0085`, `U+2028` and `U+2029`.\r\n\r\nEach trigger adds an extra split, cumulatively redirecting source lookups to earlier lines; lookups immediately after a trigger can also shift within a line. `visit_Num` uses this incorrect text to classify numeric literals, reconstruct hexadecimal, binary and decimal values, and validate literal widths. Plain integers can therefore become hexadecimal or binary literals, and invalid literals can be accepted. Strings and `x\"\"` hex-string literals retain their parser-provided values.\r\n\r\nAll eight characters can trigger the issue in comments or docstrings. The five ASCII characters also work in strings and byte literals; form feed additionally works as indentation whitespace.\r\n\r\nDiagnostics, AST output and default-value metadata can also reflect incorrect source text.\r\n\r\n## Proof of concept\r\n\r\nThe source declares `TREASURY` as `0x…dEaD`, but Vyper uses `0x…c0Ffee11` from the comment immediately above it. The two addresses start in the same column; a form-feed character in the first comment causes the incorrect lookup.\r\n\r\nRun this Python script with an affected Vyper installation. Python converts `\\x0c` into the actual form-feed byte in the Vyper source:\r\n\r\n```python\r\nimport vyper\r\n\r\nsource = \"\"\"# \\x0c\r\n#                             0x00000000000000000000000000000000c0Ffee11\r\nTREASURY: constant(address) = 0x000000000000000000000000000000000000dEaD\r\n\r\n@external\r\n@view\r\ndef treasury() -> address:\r\n    return TREASURY\r\n\"\"\"\r\n\r\nclean = source.replace(\"\\x0c\", \"\")\r\n\r\n# The getter's runtime bytecode matches an explicitly substituted contract.\r\nsubstituted = clean.replace(\r\n    \"0x000000000000000000000000000000000000dEaD\",\r\n    \"0x00000000000000000000000000000000c0Ffee11\",\r\n)\r\ndef runtime(code):\r\n    return vyper.compile_code(code, output_formats=[\"bytecode_runtime\"])[\"bytecode_runtime\"]\r\n\r\nassert runtime(source) == runtime(substituted)\r\nassert runtime(source) != runtime(clean)\r\n```\r\n\r\nBoth assertions pass: the compiled getter matches the substituted-address contract and differs from the intended-address contract.\r\n\r\n## Impact\r\n\r\nAn attacker able to contribute source code can hide a trigger in comments, docstrings, strings, byte literals or form-feed indentation to change an address, selector, byte sequence, integer or decimal constant. Depending on how the literal is used, this can redirect funds or alter contract behavior. Exploitation requires crafted source to be accepted and compiled. The reported scan found none of the eight trigger characters in 45,774 deployed-contract and repository source files across all compiler versions; this finding is limited to the scanned dataset.\r\n\r\n## Affected versions\r\n\r\n- **0.4.1 through 0.5.0b1** are affected. The issue is also unpatched on the inspected `master` checkout (`17e925db`).\r\n- **0.1.0b17 through 0.4.0** are unaffected.\r\n- **0.1.0b1 through 0.1.0b16** have a related manifestation: decimal and binary values can change; hexadecimal values retain their parsed value, but their type and checksum validation can change. The address PoC above is not applicable to these versions.\r\n\r\n## Remediation\r\n\r\nBuild source offsets using the same newline rules as the parser, and apply consistent handling to diagnostics. Until a fix is available, reject the eight characters in source files before compilation. Previously compiled contracts require assessment and, where affected, recompilation and redeployment or an upgrade.\r\n",
+  "severity": "low",
+  "author": null,
+  "publisher": {
+    "login": "charles-cooper",
+    "id": 3867501,
+    "node_id": "MDQ6VXNlcjM4Njc1MDE=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/3867501?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/charles-cooper",
+    "html_url": "https://github.com/charles-cooper",
+    "followers_url": "https://api.github.com/users/charles-cooper/followers",
+    "following_url": "https://api.github.com/users/charles-cooper/following{/other_user}",
+    "gists_url": "https://api.github.com/users/charles-cooper/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/charles-cooper/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/charles-cooper/subscriptions",
+    "organizations_url": "https://api.github.com/users/charles-cooper/orgs",
+    "repos_url": "https://api.github.com/users/charles-cooper/repos",
+    "events_url": "https://api.github.com/users/charles-cooper/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/charles-cooper/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "identifiers": [
+    {
+      "value": "GHSA-wvx7-39qj-2g9v",
+      "type": "GHSA"
+    }
+  ],
+  "state": "published",
+  "created_at": null,
+  "updated_at": "2026-10-06T09:04:44Z",
+  "published_at": "2026-10-06T09:04:44Z",
+  "closed_at": null,
+  "withdrawn_at": null,
+  "submission": null,
+  "vulnerabilities": [
+    {
+      "package": {
+        "ecosystem": "pip",
+        "name": "vyper"
+      },
+      "vulnerable_version_range": ">= 0.1.0b1, < 0.1.0b17",
+      "patched_versions": "0.1.0b17",
+      "vulnerable_functions": [
+
+      ]
+    },
+    {
+      "package": {
+        "ecosystem": "pip",
+        "name": "vyper"
+      },
+      "vulnerable_version_range": ">= 0.4.1",
+      "patched_versions": "",
+      "vulnerable_functions": [
+
+      ]
+    }
+  ],
+  "cvss_severities": {
+    "cvss_v3": {
+      "vector_string": null,
+      "score": null
+    },
+    "cvss_v4": {
+      "vector_string": null,
+      "score": null
+    }
+  },
+  "cwes": [
+
+  ],
+  "cwe_ids": [
+
+  ],
+  "credits": [
+    {
+      "login": "DELENE-TCHIO-ROMUALD",
+      "type": "reporter"
+    }
+  ],
+  "credits_detailed": [
+    {
+      "user": {
+        "login": "DELENE-TCHIO-ROMUALD",
+        "id": 119831304,
+        "node_id": "U_kgDOByR7CA",
+        "avatar_url": "https://avatars.githubusercontent.com/u/119831304?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/DELENE-TCHIO-ROMUALD",
+        "html_url": "https://github.com/DELENE-TCHIO-ROMUALD",
+        "followers_url": "https://api.github.com/users/DELENE-TCHIO-ROMUALD/followers",
+        "following_url": "https://api.github.com/users/DELENE-TCHIO-ROMUALD/following{/other_user}",
+        "gists_url": "https://api.github.com/users/DELENE-TCHIO-ROMUALD/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/DELENE-TCHIO-ROMUALD/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/DELENE-TCHIO-ROMUALD/subscriptions",
+        "organizations_url": "https://api.github.com/users/DELENE-TCHIO-ROMUALD/orgs",
+        "repos_url": "https://api.github.com/users/DELENE-TCHIO-ROMUALD/repos",
+        "events_url": "https://api.github.com/users/DELENE-TCHIO-ROMUALD/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/DELENE-TCHIO-ROMUALD/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "type": "reporter",
+      "state": "accepted"
+    }
+  ],
+  "collaborating_users": null,
+  "collaborating_teams": null,
+  "private_fork": null,
+  "comments": 7,
+  "cvss": {
+    "vector_string": null,
+    "score": null
+  }
+}

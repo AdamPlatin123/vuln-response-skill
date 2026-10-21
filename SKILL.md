@@ -5,7 +5,7 @@ description: 互联网漏洞情报 → 检测 / 影响判定 / 修复 / 验证 �
 
 # 漏洞响应 Skill
 
-> 包版本：`v0.3.1`（W4 收口 · 快照 2026-10-22）。升级只换 tar + 本版本行，loader 内容不动。
+> 包版本：`v0.3.2`（W4 收口 · 快照 2026-10-22）。升级只换 tar + 本版本行，loader 内容不动。
 
 ## 何时用（触发条件）
 
@@ -123,7 +123,7 @@ bash bin/seal.sh                               # 生成 sha256 清单
 | 06 | `playbooks/06-credential-rotation.md` | 任意凭据轮换（先加后减、双读窗口、回退） | verified |
 | 07 | `playbooks/07-production-remediation.md` | **入口件**：定档 P0–P3、六段四门、动生产库姿势 | verified |
 | 08 | `playbooks/08-php-runtime.md` | PHP 运行时未认证 RCE（8.5.12 / 8.4.27 / 8.3.36 / 8.2.35） | verified |
-| 09 | `playbooks/09-pki-ca-rollover.md` | eMudhra 中间 CA 弱密钥 / 五套信任库（含 Ruby gist、Perl Thrift） | verified（**W3 收口**：Debian ca-certificates 已确认 `20250419+deb13u1` / `20260816+nmu1`（bookworm 未确认）；Java cacerts、.NET 无厂商修复版本 → 手工清理/随 OS 更新；Python `certifi 2026.10.19`、`uv 0.13.4`） |
+| 09 | `playbooks/09-pki-ca-rollover.md` | eMudhra 中间 CA 弱密钥 / 五套信任库（含 Ruby gist、Perl Thrift） | verified（**W4 收口**：Debian 三线全有版本——trixie `20250419+deb13u1`（DSA-6572-1）、bookworm-security `20250419~deb12u2`、unstable/testing `20260816+nmu1`；Java cacerts 分两条路——发行版 JDK 随 OS 包修（以 `keytool -list -cacerts` 实际路径为准），Oracle JDK 无厂商版本 → 优先 `-Djavax.net.ssl.trustStore=` 指向清洗副本，次选 `keytool -delete`；.NET 随 OS/基础镜像更新） |
 | 10 | `playbooks/10-boundary-devices.md` | KEV 在野利用簇：边界/媒体设备 9 条（逐分支 fixed 已按厂商公告核） | verified |
 | 11 | `playbooks/11-dotnet-runtime.md` | .NET / ASP.NET Core 6 条（Kestrel 走私 9.4 领衔） | verified |
 | 12 | `playbooks/12-vyper-source-gate.md` | Vyper 6 条 GHSA：**无已发布修复版本** → 源码闸门（非 ASCII 标识符 / 8 种行分隔符 / `msg.value \|` 折叠 / 导入常量与默认参数名 / `create_from_blueprint` 偏移）；不给升级命令 | verified（闸门≠修复版本） |

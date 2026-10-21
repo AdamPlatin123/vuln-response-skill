@@ -1,0 +1,86 @@
+[
+  {
+    "sha": "0d1b5e73ec2c2cd0f9991aa7ed2dffb92209c600",
+    "node_id": "C_kwDOCONrotoAKDBkMWI1ZTczZWMyYzJjZDBmOTk5MWFhN2VkMmRmZmI5MjIwOWM2MDA",
+    "commit": {
+      "author": {
+        "name": "Rajan Halade",
+        "email": "rhalade@openjdk.org",
+        "date": "2026-10-12T16:31:52Z"
+      },
+      "committer": {
+        "name": "Rajan Halade",
+        "email": "rhalade@openjdk.org",
+        "date": "2026-10-12T16:31:52Z"
+      },
+      "message": "8392771: Add 2 Certum roots\n\nReviewed-by: mullan",
+      "tree": {
+        "sha": "2145881e26f8b743c2824dae706f2b9a9e4c789c",
+        "url": "https://api.github.com/repos/openjdk/jdk/git/trees/2145881e26f8b743c2824dae706f2b9a9e4c789c"
+      },
+      "url": "https://api.github.com/repos/openjdk/jdk/git/commits/0d1b5e73ec2c2cd0f9991aa7ed2dffb92209c600",
+      "comment_count": 3,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/openjdk/jdk/commits/0d1b5e73ec2c2cd0f9991aa7ed2dffb92209c600",
+    "html_url": "https://github.com/openjdk/jdk/commit/0d1b5e73ec2c2cd0f9991aa7ed2dffb92209c600",
+    "comments_url": "https://api.github.com/repos/openjdk/jdk/commits/0d1b5e73ec2c2cd0f9991aa7ed2dffb92209c600/comments",
+    "author": null,
+    "committer": null,
+    "parents": [
+      {
+        "sha": "444fccb4b38cb83adb3830528227630f16891a70",
+        "url": "https://api.github.com/repos/openjdk/jdk/commits/444fccb4b38cb83adb3830528227630f16891a70",
+        "html_url": "https://github.com/openjdk/jdk/commit/444fccb4b38cb83adb3830528227630f16891a70"
+      }
+    ]
+  },
+  {
+    "sha": "a34a1fed2ef0999c90e6c6b9b4f2c28a627612bb",
+    "node_id": "C_kwDOCONrotoAKGEzNGExZmVkMmVmMDk5OWM5MGU2YzZiOWI0ZjJjMjhhNjI3NjEyYmI",
+    "commit": {
+      "author": {
+        "name": "Rajan Halade",
+        "email": "rhalade@openjdk.org",
+        "date": "2026-09-30T17:27:33Z"
+      },
+      "committer": {
+        "name": "Rajan Halade",
+        "email": "rhalade@openjdk.org",
+        "date": "2026-09-30T17:27:33Z"
+      },
+      "message": "8386371: Remove Entrust G4 root CA\n\nReviewed-by: mullan",
+      "tree": {
+        "sha": "94073a04e9fe190cdcea08af252b386e18a24605",
+        "url": "https://api.github.com/repos/openjdk/jdk/git/trees/94073a04e9fe190cdcea08af252b386e18a24605"
+      },
+      "url": "https://api.github.com/repos/openjdk/jdk/git/commits/a34a1fed2ef0999c90e6c6b9b4f2c28a627612bb",
+      "comment_count": 3,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/openjdk/jdk/commits/a34a1fed2ef0999c90e6c6b9b4f2c28a627612bb",
+    "html_url": "https://github.com/openjdk/jdk/commit/a34a1fed2ef0999c90e6c6b9b4f2c28a627612bb",
+    "comments_url": "https://api.github.com/repos/openjdk/jdk/commits/a34a1fed2ef0999c90e6c6b9b4f2c28a627612bb/comments",
+    "author": null,
+    "committer": null,
+    "parents": [
+      {
+        "sha": "e7b7beee0ba842769b9e6c30317ad4405a38a5f2",
+        "url": "https://api.github.com/repos/openjdk/jdk/commits/e7b7beee0ba842769b9e6c30317ad4405a38a5f2",
+        "html_url": "https://github.com/openjdk/jdk/commit/e7b7beee0ba842769b9e6c30317ad4405a38a5f2"
+      }
+    ]
+  }
+]

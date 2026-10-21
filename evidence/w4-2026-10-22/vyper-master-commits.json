@@ -1,0 +1,1642 @@
+[
+  {
+    "sha": "baf5482601355e4c31aeafbfd0b87d6d5bd4e98f",
+    "node_id": "C_kwDOBGDvrNoAKGJhZjU0ODI2MDEzNTVlNGMzMWFlYWZiZmQwYjg3ZDZkNWJkNGU5OGY",
+    "commit": {
+      "author": {
+        "name": "banteg",
+        "email": "4562643+banteg@users.noreply.github.com",
+        "date": "2026-10-21T08:56:15Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-10-21T08:56:15Z"
+      },
+      "message": "fix[tool]: raise user errors for malformed input files (#5080)\n\nStorage layout override files and imported JSON ABI files are user\ninput, but several malformed files crashed through internal-error paths:\nbad layout overrides could raise CompilerPanic, TypeError or KeyError,\nand invalid JSON ABI stateMutability values reached StringEnum._missing_\nand raised CompilerPanic.\n\nValidate storage-layout traversal and slot values before reserving\nslots, downgrade reachable layout roundtrip mismatches to\nStorageLayoutException, and validate JSON ABI stateMutability before\nconstructing the internal enum.\n\nValid files still compile, and malformed files are still rejected. The\nchange is that user input errors now produce typed user-facing\nexceptions instead of internal compiler errors.",
+      "tree": {
+        "sha": "8adfbf59b906854e51d5fcc392bca677c11fb245",
+        "url": "https://api.github.com/repos/vyperlang/vyper/git/trees/8adfbf59b906854e51d5fcc392bca677c11fb245"
+      },
+      "url": "https://api.github.com/repos/vyperlang/vyper/git/commits/baf5482601355e4c31aeafbfd0b87d6d5bd4e98f",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJq2H4vCRC1aQ7uu5UhlAAAy6YQAIvzwGfE2+GlM7eeYYArDlAU\nC0Ber4f+z7N+vQQECVZv1Df1Ce2LTUjWJ1bmObzjqrg3yhwrtYNb9VQ5wrq6AfU9\nup6rKfBGTX5rgPXbAHz6MA8rL4o5znzWqa5MpQ8B0ysLGUGfO52U5256gIlCJ1pa\n6p/SkkE2r4377kg9A8fLZENLglthpqSTC1+R82p32nWP/t+oGT7bzP81u8bxihna\n5kP/pSsnUR4l/u6xs5p3ZpH3rs9iSyTEbp3ACTXItPJ2w/cJ2NkUd6V+0RWJStc9\nOodbQWCi7naKQumBXXOGSLr5I6e23zPGnettg4JAVEAlAOZOaOJ276vxFd+BA1el\nmaO8ftJFKVC0O/RRztXlRrzKwSirSxCxs862/CUfMjJYx6hy5zKHvNnvlOf5a1Cc\nPfATcncvI469vZlN/M6TKdbjQdP/97Lw6QdrFlJwh69oCgeWzJinYzjYNZj2KPxj\ndVNWdgb26Bl/q8x/hhMQQ8JwGJArZvn78uKOs4BehmMGTs60CY05EZqZe0cf9VMF\n77c1/tBNYJ1k2cbrJGqM019HJBMqjLkz/mNQHRQDEq16lX4YH+cU/HZDvV5fOoKl\nFbaRvDUzdF0UUyOAgnWOGiv5PS4R6VuqY5CnA7pv2+sPZ6ZYCthcSUFUIQTOPnWG\nYXMqaQWvCDv0z9prdYkt\n=Jbl2\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 8adfbf59b906854e51d5fcc392bca677c11fb245\nparent edd143099e64a8412a02662342b6a0c416be5e82\nauthor banteg <4562643+banteg@users.noreply.github.com> 1792572975 +0400\ncommitter GitHub <noreply@github.com> 1792572975 +0000\n\nfix[tool]: raise user errors for malformed input files (#5080)\n\nStorage layout override files and imported JSON ABI files are user\ninput, but several malformed files crashed through internal-error paths:\nbad layout overrides could raise CompilerPanic, TypeError or KeyError,\nand invalid JSON ABI stateMutability values reached StringEnum._missing_\nand raised CompilerPanic.\n\nValidate storage-layout traversal and slot values before reserving\nslots, downgrade reachable layout roundtrip mismatches to\nStorageLayoutException, and validate JSON ABI stateMutability before\nconstructing the internal enum.\n\nValid files still compile, and malformed files are still rejected. The\nchange is that user input errors now produce typed user-facing\nexceptions instead of internal compiler errors.",
+        "verified_at": "2026-10-21T08:56:16Z"
+      }
+    },
+    "url": "https://api.github.com/repos/vyperlang/vyper/commits/baf5482601355e4c31aeafbfd0b87d6d5bd4e98f",
+    "html_url": "https://github.com/vyperlang/vyper/commit/baf5482601355e4c31aeafbfd0b87d6d5bd4e98f",
+    "comments_url": "https://api.github.com/repos/vyperlang/vyper/commits/baf5482601355e4c31aeafbfd0b87d6d5bd4e98f/comments",
+    "author": {
+      "login": "banteg",
+      "id": 4562643,
+      "node_id": "MDQ6VXNlcjQ1NjI2NDM=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4562643?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/banteg",
+      "html_url": "https://github.com/banteg",
+      "followers_url": "https://api.github.com/users/banteg/followers",
+      "following_url": "https://api.github.com/users/banteg/following{/other_user}",
+      "gists_url": "https://api.github.com/users/banteg/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/banteg/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/banteg/subscriptions",
+      "organizations_url": "https://api.github.com/users/banteg/orgs",
+      "repos_url": "https://api.github.com/users/banteg/repos",
+      "events_url": "https://api.github.com/users/banteg/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/banteg/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "edd143099e64a8412a02662342b6a0c416be5e82",
+        "url": "https://api.github.com/repos/vyperlang/vyper/commits/edd143099e64a8412a02662342b6a0c416be5e82",
+        "html_url": "https://github.com/vyperlang/vyper/commit/edd143099e64a8412a02662342b6a0c416be5e82"
+      }
+    ]
+  },
+  {
+    "sha": "edd143099e64a8412a02662342b6a0c416be5e82",
+    "node_id": "C_kwDOBGDvrNoAKGVkZDE0MzA5OWU2NGE4NDEyYTAyNjYyMzQyYjZhMGM0MTZiZTVlODI",
+    "commit": {
+      "author": {
+        "name": "Quentin Bernet",
+        "email": "quentin.bernet@bluewin.ch",
+        "date": "2026-10-20T15:03:57Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-10-20T15:03:57Z"
+      },
+      "message": "fix[parser]: wrap unhandled parser exceptions in `CompilerPanic` (#5191)\n\nthis commit wraps any non-Vyper exception raised out of `_parse_to_ast`\nin a `CompilerPanic` so users get a useful compiler error instead.",
+      "tree": {
+        "sha": "26d5b27ded56d971b09aecc250f9b491ffaa9e93",
+        "url": "https://api.github.com/repos/vyperlang/vyper/git/trees/26d5b27ded56d971b09aecc250f9b491ffaa9e93"
+      },
+      "url": "https://api.github.com/repos/vyperlang/vyper/git/commits/edd143099e64a8412a02662342b6a0c416be5e82",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJq14LdCRC1aQ7uu5UhlAAAeHkQAENNJA3qJtOp7Z4NYSNJbcYh\nQpF5gQT1QwzYj1k2IBwGWZDg4ZkxpnDbTZ4P5RzA9M7ruBQ2MzpWkbgUIVTwYkMG\n2knzrMioiElHEpvQdLyUN3hGwx/KGrFMrLo8HEbIxUh10eFO6T32kHEaL5nylvCA\nzOZj6gp6A9T/M4CryNKxQ+XlBpA5POLjeupGQ84O6KM2mnwIapmsaLmzD+nfJKP6\nOwMeeVxLZ9WdXun6OmzL4dsTkvP+ZNkFN29AKllJXuMDQpOew4huRIYuwIA1ahm2\n+SfKgJdFKf54/riJ9ZnULvmhJkM2UZHtZbon6VoJzWXEriO9sQmWviETDR8Pr3X8\nmY8B4H+N07BFUSZceHzEfZziHgdqaNeyRrxle6VJhQrqpZ/nOwbzgkxrHSIkCWmz\nL/Tt5SUqUGV3hN6AYA3xFkPKB41xvdoDJun74oYtk35fbiVXiYbFewa2mKxk5I05\nEfj7GO/tdRFnn2KseNX3lS3OcW7b7sSjzAI4uBo84jXLOtBhIswtjhBv8nlBkYCt\nGQC1wV75nc9hFfXuYBiK/8Ml9l/nOZaDl+CadJdO8zNalYONkVNWPhLPcXpDliE8\n/YvI9H4MQwN3DMeCHbIy3TbblMw3pKv6dnGnE8PWMt5bU6qYZABSAZANovnlmQwr\nRELaXhKbs7koiBSeWFW7\n=Cn44\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 26d5b27ded56d971b09aecc250f9b491ffaa9e93\nparent 980f335eb6aaa8910ee7a1142d5319cec937ae77\nauthor Quentin Bernet <quentin.bernet@bluewin.ch> 1792508637 +0200\ncommitter GitHub <noreply@github.com> 1792508637 +0000\n\nfix[parser]: wrap unhandled parser exceptions in `CompilerPanic` (#5191)\n\nthis commit wraps any non-Vyper exception raised out of `_parse_to_ast`\nin a `CompilerPanic` so users get a useful compiler error instead.",
+        "verified_at": "2026-10-20T15:04:05Z"
+      }
+    },
+    "url": "https://api.github.com/repos/vyperlang/vyper/commits/edd143099e64a8412a02662342b6a0c416be5e82",
+    "html_url": "https://github.com/vyperlang/vyper/commit/edd143099e64a8412a02662342b6a0c416be5e82",
+    "comments_url": "https://api.github.com/repos/vyperlang/vyper/commits/edd143099e64a8412a02662342b6a0c416be5e82/comments",
+    "author": {
+      "login": "Sporarum",
+      "id": 28290641,
+      "node_id": "MDQ6VXNlcjI4MjkwNjQx",
+      "avatar_url": "https://avatars.githubusercontent.com/u/28290641?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Sporarum",
+      "html_url": "https://github.com/Sporarum",
+      "followers_url": "https://api.github.com/users/Sporarum/followers",
+      "following_url": "https://api.github.com/users/Sporarum/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Sporarum/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Sporarum/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Sporarum/subscriptions",
+      "organizations_url": "https://api.github.com/users/Sporarum/orgs",
+      "repos_url": "https://api.github.com/users/Sporarum/repos",
+      "events_url": "https://api.github.com/users/Sporarum/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Sporarum/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "980f335eb6aaa8910ee7a1142d5319cec937ae77",
+        "url": "https://api.github.com/repos/vyperlang/vyper/commits/980f335eb6aaa8910ee7a1142d5319cec937ae77",
+        "html_url": "https://github.com/vyperlang/vyper/commit/980f335eb6aaa8910ee7a1142d5319cec937ae77"
+      }
+    ]
+  },
+  {
+    "sha": "980f335eb6aaa8910ee7a1142d5319cec937ae77",
+    "node_id": "C_kwDOBGDvrNoAKDk4MGYzMzVlYjZhYWE4OTEwZWU3YTExNDJkNTMxOWNlYzkzN2FlNzc",
+    "commit": {
+      "author": {
+        "name": "HodanPlodky",
+        "email": "36966616+HodanPlodky@users.noreply.github.com",
+        "date": "2026-10-20T13:37:18Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-10-20T13:37:18Z"
+      },
+      "message": "fix[venom]: fix for the sstore remove in dse (#5297)\n\nfix for the `sstore`/`tstore` remove in dse if there was \n`retfmp` and `dret`. Only `ret` was not handled in the\ncases so it just returned `EMPTY`. I added the handling\nfor it and also sanity check that why I split `STORAGE` \nand `TRANSIENT`",
+      "tree": {
+        "sha": "92377883a0df9c762582b2adb9b94cb3c0a5404c",
+        "url": "https://api.github.com/repos/vyperlang/vyper/git/trees/92377883a0df9c762582b2adb9b94cb3c0a5404c"
+      },
+      "url": "https://api.github.com/repos/vyperlang/vyper/git/commits/980f335eb6aaa8910ee7a1142d5319cec937ae77",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJq126OCRC1aQ7uu5UhlAAAdnEQAKtNxKnNwqcTc5Dbz6IAqVgp\n2QsnitBYcy8oZR9uiTuC61dPh/7yt+gp9rr9BblIZkc16pfBHDiOJVeoHr/rDh1J\nCO5BMV/V0IBiXxL96yEk9mUl8pkg2PPS4atTncxUfGThgeeXpVYIQIWON7lqd26i\nMAQ9HyNEBKm68ssSqVm3kgZiw2jj9Xb6/FiGLvOmEpbtG6b9uQsH36wQykOQiVjq\nFz7CDC6N5DcsR02xFzHrtvum1UbEPmtqyPT9oYax+DBzLDNUQz7HOASQunZUo6QK\no0ZYEVAmo/T0X//0dplpZFxBi7Pi8MBviIe7B8IsFP8BnOV6x805xIL875b4HxDC\nGTRJbtCYfJAVRBmFcuGK1MxZn0iOvSS5g+eq8/wHWpcRAOjl4KHVSSqHysK/0w5h\n7fxcYZyuTuviKlflJWakQtFxqCAROS/ZhrVxAONAZDTqx+bN299tegMmBrcEuRh4\nviC8JwClg6Qv/PnGgJdOfWWF4Y0wTJhp6h6+G2HFmKxrne4U2im0+SNv8d8I5uS3\nzOVwEF4w5LaftJ/W7jnuvkb9CX76LSx3B4ha7R0Ij38SJV6sFW9aztm4s2wfF5I0\nF4WT3s8cpgFWDct7Rg/6bfPu9mosP4fD/FucGQEC3COp5rJY2kYeR2T0+FESMnHb\n1NHNic6L3moDZSkqdx4S\n=M1hY\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 92377883a0df9c762582b2adb9b94cb3c0a5404c\nparent f23fed5b3ce628ebe199d92a33693d89c0656af2\nauthor HodanPlodky <36966616+HodanPlodky@users.noreply.github.com> 1792503438 +0000\ncommitter GitHub <noreply@github.com> 1792503438 +0300\n\nfix[venom]: fix for the sstore remove in dse (#5297)\n\nfix for the `sstore`/`tstore` remove in dse if there was \n`retfmp` and `dret`. Only `ret` was not handled in the\ncases so it just returned `EMPTY`. I added the handling\nfor it and also sanity check that why I split `STORAGE` \nand `TRANSIENT`",
+        "verified_at": "2026-10-20T13:37:18Z"
+      }
+    },
+    "url": "https://api.github.com/repos/vyperlang/vyper/commits/980f335eb6aaa8910ee7a1142d5319cec937ae77",
+    "html_url": "https://github.com/vyperlang/vyper/commit/980f335eb6aaa8910ee7a1142d5319cec937ae77",
+    "comments_url": "https://api.github.com/repos/vyperlang/vyper/commits/980f335eb6aaa8910ee7a1142d5319cec937ae77/comments",
+    "author": {
+      "login": "HodanPlodky",
+      "id": 36966616,
+      "node_id": "MDQ6VXNlcjM2OTY2NjE2",
+      "avatar_url": "https://avatars.githubusercontent.com/u/36966616?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/HodanPlodky",
+      "html_url": "https://github.com/HodanPlodky",
+      "followers_url": "https://api.github.com/users/HodanPlodky/followers",
+      "following_url": "https://api.github.com/users/HodanPlodky/following{/other_user}",
+      "gists_url": "https://api.github.com/users/HodanPlodky/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/HodanPlodky/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/HodanPlodky/subscriptions",
+      "organizations_url": "https://api.github.com/users/HodanPlodky/orgs",
+      "repos_url": "https://api.github.com/users/HodanPlodky/repos",
+      "events_url": "https://api.github.com/users/HodanPlodky/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/HodanPlodky/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "f23fed5b3ce628ebe199d92a33693d89c0656af2",
+        "url": "https://api.github.com/repos/vyperlang/vyper/commits/f23fed5b3ce628ebe199d92a33693d89c0656af2",
+        "html_url": "https://github.com/vyperlang/vyper/commit/f23fed5b3ce628ebe199d92a33693d89c0656af2"
+      }
+    ]
+  },
+  {
+    "sha": "f23fed5b3ce628ebe199d92a33693d89c0656af2",
+    "node_id": "C_kwDOBGDvrNoAKGYyM2ZlZDViM2NlNjI4ZWJlMTk5ZDkyYTMzNjkzZDg5YzA2NTZhZjI",
+    "commit": {
+      "author": {
+        "name": "Harry Kalogirou",
+        "email": "harry@kalogirou.net",
+        "date": "2026-10-19T09:29:35Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-10-19T09:29:35Z"
+      },
+      "message": "fix[venom]: widen for-loop elements by memory layout (#5311)\n\nFor storage, transient and immutable sources, copy the element into a\nbuffer typed as the element type and store it into the loop variable\nwith a type-aware copy, instead of copying element stri\nbuffer read with the loop variable's wider layout.",
+      "tree": {
+        "sha": "32db17f0a0b2baef77c15f7527c35c8d1cf86f72",
+        "url": "https://api.github.com/repos/vyperlang/vyper/git/trees/32db17f0a0b2baef77c15f7527c35c8d1cf86f72"
+      },
+      "url": "https://api.github.com/repos/vyperlang/vyper/git/commits/f23fed5b3ce628ebe199d92a33693d89c0656af2",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJq1eL/CRC1aQ7uu5UhlAAAhSUQAGt/Y2gDbnmoQIy7sb5nhSso\n8SpnGYS5RfqMtp4GxBW3rdFIddZJoXXTaXyoHYexEcsj6VYqugNYlVyhaX8+AFyQ\nb8Zup/Bugyp9fdUg2D5nxpCN3ml/TXxpgXdzjEnnA96YfdCmyKwZzhVeoTt+7pht\nLK8kyshj+uK6O1CU7lBZemFHu+Zu1wKClYzmMOMHCau78F3svWBGimW7C2Q8YcWJ\nVU510bnqZTb5P+TptUpKoskYugtNh6GOK+YFLfcv79DSeqtXLXv067CoC9icV+jc\nAEVyiI7mhmY9+1CyfMkm5iPA0Nqr5crM88d4Zo64K+Ds4bBaYvnsqKT0hLqzwL1K\n+J5rD8q8yPKwx6KG2lNCvgN41vBoNIYhGs8oZEXwES3Az7ne0PLhbGdSO0r5x5Vj\nXIKjnfM6n4SCnWL48JJfDHJ8eLhl0U4Y8OTIKFPDgQFVp5uUJ1DoP3oIRjAx35bi\nDrCfh3YqxwIjqLV8tcwJ69XyftBy70h3CBPj5NqsPEnqxqgoOOa0T8QLkCA9hIqH\n1dRvfaXfMqVTd6rrTtZcOdZCpaTfOwafqZP1tCOt2FlSeLNPW9WAHmi2jagL2qvg\nFq/yNr/yQBBZRwXeSldLelDhVYSjbXwP/nuLLCUkxpbaL3/ThGhgg64RWIsMS3nB\nPT7dQswrO2axuo6IV2W+\n=xMa2\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 32db17f0a0b2baef77c15f7527c35c8d1cf86f72\nparent 08c2841623c5c0cc2850cc49dbeb79f13d77f940\nauthor Harry Kalogirou <harry@kalogirou.net> 1792402175 +0300\ncommitter GitHub <noreply@github.com> 1792402175 +0300\n\nfix[venom]: widen for-loop elements by memory layout (#5311)\n\nFor storage, transient and immutable sources, copy the element into a\nbuffer typed as the element type and store it into the loop variable\nwith a type-aware copy, instead of copying element stri\nbuffer read with the loop variable's wider layout.",
+        "verified_at": "2026-10-19T09:29:35Z"
+      }
+    },
+    "url": "https://api.github.com/repos/vyperlang/vyper/commits/f23fed5b3ce628ebe199d92a33693d89c0656af2",
+    "html_url": "https://github.com/vyperlang/vyper/commit/f23fed5b3ce628ebe199d92a33693d89c0656af2",
+    "comments_url": "https://api.github.com/repos/vyperlang/vyper/commits/f23fed5b3ce628ebe199d92a33693d89c0656af2/comments",
+    "author": {
+      "login": "harkal",
+      "id": 5312224,
+      "node_id": "MDQ6VXNlcjUzMTIyMjQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5312224?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/harkal",
+      "html_url": "https://github.com/harkal",
+      "followers_url": "https://api.github.com/users/harkal/followers",
+      "following_url": "https://api.github.com/users/harkal/following{/other_user}",
+      "gists_url": "https://api.github.com/users/harkal/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/harkal/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/harkal/subscriptions",
+      "organizations_url": "https://api.github.com/users/harkal/orgs",
+      "repos_url": "https://api.github.com/users/harkal/repos",
+      "events_url": "https://api.github.com/users/harkal/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/harkal/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "08c2841623c5c0cc2850cc49dbeb79f13d77f940",
+        "url": "https://api.github.com/repos/vyperlang/vyper/commits/08c2841623c5c0cc2850cc49dbeb79f13d77f940",
+        "html_url": "https://github.com/vyperlang/vyper/commit/08c2841623c5c0cc2850cc49dbeb79f13d77f940"
+      }
+    ]
+  },
+  {
+    "sha": "08c2841623c5c0cc2850cc49dbeb79f13d77f940",
+    "node_id": "C_kwDOBGDvrNoAKDA4YzI4NDE2MjNjNWMwY2MyODUwY2M0OWRiZWI3OWYxM2Q3N2Y5NDA",
+    "commit": {
+      "author": {
+        "name": "Harry Kalogirou",
+        "email": "harry@kalogirou.net",
+        "date": "2026-10-16T11:33:05Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-10-16T11:33:05Z"
+      },
+      "message": "feat[venom]: unbounded sequence members in memory structs (#5282)\n\nAllow DynArray[T, INF], Bytes[INF] and String[INF] fields in memory\nstructs, including function calls and returns, ABI encoding and\ndecoding, and arrays of these structs.",
+      "tree": {
+        "sha": "f39d29427094d1ee551c00ce0cf46f1e13663ce3",
+        "url": "https://api.github.com/repos/vyperlang/vyper/git/trees/f39d29427094d1ee551c00ce0cf46f1e13663ce3"
+      },
+      "url": "https://api.github.com/repos/vyperlang/vyper/git/commits/08c2841623c5c0cc2850cc49dbeb79f13d77f940",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJq0gtxCRC1aQ7uu5UhlAAA8ZsQABWUbIMG3/t+ifvCSh7whrBU\nw+r04yy7Po7GdpXgjO8J0Y3v9GrDNaURQOaKs38x3bbQrBNS8DZi+aEasMzCyisC\nY6WO9PK1471zvm/AGB4BGcbxKhAb1bXAL++8akxATL9hwQrfETqHMkrWTdvQC1Uc\n9H9IrpCYEEcoryI3mX4lTR+NZ1aXpy/sdvNY+SrPqEiIfeHS2lCBvPdW+0OB24IV\n2B9B2u1TY24hukMKPk7u/9k9bU1meN8IB5WyGGa+u04YmQpOzegBKfHWr8sNwqM/\nvn98T9mHLzgmt+DgPlTxAPWfcRlH0BWJavmsN02/aamCNOcdX263hrlMsuqAw12E\nc6OkB3HYJA8uyPdbDo3jHbqOkDwzt3E+XpUS3UbAoTQ5FdBTR6ZiUmONPEnO0+d/\nPGC5i6V1GE9pfM43nYOtPB0bpqHmyRpWjOZC16BIGirQiqDVwSnPhTJ0bDUsPIbs\nDEfOlVLqORX+8R5nl8hKfCR2YtDxJpAaB1w90Xv4QrQNiX0Y5mAmZLaMJ5wOktyM\n8OVf6ASiv5+1awb14DX/fobwDakDDsBEk4j5eZ3BYp5Q6kuNfnw0VjS434suk71q\nVjrjGg4EOgsd6+RMxVxvD89k8GAAR/6M4blrKt3/lj8AsyaYX8eKrGfrQNe5TylE\nfJBC2A2titC4Gc/NCQVh\n=ohmC\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree f39d29427094d1ee551c00ce0cf46f1e13663ce3\nparent 6d5443efafe7eb4e6c7492c809f9cc634592bede\nauthor Harry Kalogirou <harry@kalogirou.net> 1792150385 +0300\ncommitter GitHub <noreply@github.com> 1792150385 +0300\n\nfeat[venom]: unbounded sequence members in memory structs (#5282)\n\nAllow DynArray[T, INF], Bytes[INF] and String[INF] fields in memory\nstructs, including function calls and returns, ABI encoding and\ndecoding, and arrays of these structs.",
+        "verified_at": "2026-10-16T11:33:06Z"
+      }
+    },
+    "url": "https://api.github.com/repos/vyperlang/vyper/commits/08c2841623c5c0cc2850cc49dbeb79f13d77f940",
+    "html_url": "https://github.com/vyperlang/vyper/commit/08c2841623c5c0cc2850cc49dbeb79f13d77f940",
+    "comments_url": "https://api.github.com/repos/vyperlang/vyper/commits/08c2841623c5c0cc2850cc49dbeb79f13d77f940/comments",
+    "author": {
+      "login": "harkal",
+      "id": 5312224,
+      "node_id": "MDQ6VXNlcjUzMTIyMjQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5312224?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/harkal",
+      "html_url": "https://github.com/harkal",
+      "followers_url": "https://api.github.com/users/harkal/followers",
+      "following_url": "https://api.github.com/users/harkal/following{/other_user}",
+      "gists_url": "https://api.github.com/users/harkal/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/harkal/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/harkal/subscriptions",
+      "organizations_url": "https://api.github.com/users/harkal/orgs",
+      "repos_url": "https://api.github.com/users/harkal/repos",
+      "events_url": "https://api.github.com/users/harkal/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/harkal/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "6d5443efafe7eb4e6c7492c809f9cc634592bede",
+        "url": "https://api.github.com/repos/vyperlang/vyper/commits/6d5443efafe7eb4e6c7492c809f9cc634592bede",
+        "html_url": "https://github.com/vyperlang/vyper/commit/6d5443efafe7eb4e6c7492c809f9cc634592bede"
+      }
+    ]
+  },
+  {
+    "sha": "6d5443efafe7eb4e6c7492c809f9cc634592bede",
+    "node_id": "C_kwDOBGDvrNoAKDZkNTQ0M2VmYWZlN2ViNGU2Yzc0OTJjODA5ZjljYzYzNDU5MmJlZGU",
+    "commit": {
+      "author": {
+        "name": "banteg",
+        "email": "4562643+banteg@users.noreply.github.com",
+        "date": "2026-10-15T17:23:32Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-10-15T17:23:32Z"
+      },
+      "message": "fix[venom]: register self in global analyses cache fallback (#5084)\n\nFallback global-analysis initialization can create a function cache\nseparate from the one used by the active pass. Invalidation then leaves\nglobal consumers reading stale local analysis results.\n\nGive each function a stable canonical cache within the global registry.\nBind local consumers once per registry and delegate requests,\ninvalidations and forced refreshes to the canonical cache. Rebind when\ncompiler phases replace the registry and register newly added functions\nbefore fresh global analyses.\n\nUse isolated caches in validators so stale pass results cannot hide\nmalformed IR after a missed invalidation.\n\n---------\n\nCo-authored-by: Harry Kalogirou <harry@kalogirou.net>\nCo-authored-by: Harry Kalogirou <harkal@nlogn.eu>",
+      "tree": {
+        "sha": "c512cd5823a041f97acf0994582930d0397358f8",
+        "url": "https://api.github.com/repos/vyperlang/vyper/git/trees/c512cd5823a041f97acf0994582930d0397358f8"
+      },
+      "url": "https://api.github.com/repos/vyperlang/vyper/git/commits/6d5443efafe7eb4e6c7492c809f9cc634592bede",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJq0QwUCRC1aQ7uu5UhlAAAFTYQAIzItixjG5jrm61w3PFFJsEM\nczFlMZAzA9jholrhQg5RUP7xemDuO5nNA3bys0AYLqFucTJoQTmPbPwLa6qQ0I2E\nlp3PCofT8khL1JtrQ53wzjZtvpGhIqWuMGjP0rWXn2nAhrxPUelcXTJxMHI5SAiV\ny0qz83wBgoXkpQfCc+3oRssb3yoMZUimIHfr0/vuSn1PvZPlvLPLXzwf0zz2TZTI\nVbXwoIGgw3zwa5Q4z59vLTrRziuoG73pZfVp7NWUSu+0TpflPr3ueIHcpbCxsIzP\nsv8Oyvq36UBhYLOmcPJsb65RXUhWW8zyR0bOV50NIbWpAtayOO5jvs2Pu6dwNOQN\nLOPe8+9vntF/VmQpPb0UlujYykHcQnSvxhZAOokpp8RPQnq+yAyGpTm/Ci+7v6D/\n9cVJP9JyQ+XtGaZ/xrXtdqJHKAqIbTJRO0FFw2a70vaMENR8DiCP0OvFw4vIE8J4\niwvWh9yXP3iQLK2m3CU+uIeDztZI39yA1QZyx8IN3S6sAMLtYodszMn0yv/SEL+R\nSyPvotbTZ8wJzvJEqq8VbrKuVDw+P1zgr2H1LjKKeiegF1OzbD/xG2uEn4czCphV\nx20+3mtl/WGhbSheuaq1igZMqPmHUFDAtrVZtCWQh/OnLJQg9Jet0ZoaMo5e94vB\npmn7oePU3iOInsAuFmdS\n=7lEL\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree c512cd5823a041f97acf0994582930d0397358f8\nparent f72c68bf758246c3391284e721ac332a7a0732b5\nauthor banteg <4562643+banteg@users.noreply.github.com> 1792085012 +0400\ncommitter GitHub <noreply@github.com> 1792085012 +0300\n\nfix[venom]: register self in global analyses cache fallback (#5084)\n\nFallback global-analysis initialization can create a function cache\nseparate from the one used by the active pass. Invalidation then leaves\nglobal consumers reading stale local analysis results.\n\nGive each function a stable canonical cache within the global registry.\nBind local consumers once per registry and delegate requests,\ninvalidations and forced refreshes to the canonical cache. Rebind when\ncompiler phases replace the registry and register newly added functions\nbefore fresh global analyses.\n\nUse isolated caches in validators so stale pass results cannot hide\nmalformed IR after a missed invalidation.\n\n---------\n\nCo-authored-by: Harry Kalogirou <harry@kalogirou.net>\nCo-authored-by: Harry Kalogirou <harkal@nlogn.eu>",
+        "verified_at": "2026-10-15T17:23:33Z"
+      }
+    },
+    "url": "https://api.github.com/repos/vyperlang/vyper/commits/6d5443efafe7eb4e6c7492c809f9cc634592bede",
+    "html_url": "https://github.com/vyperlang/vyper/commit/6d5443efafe7eb4e6c7492c809f9cc634592bede",
+    "comments_url": "https://api.github.com/repos/vyperlang/vyper/commits/6d5443efafe7eb4e6c7492c809f9cc634592bede/comments",
+    "author": {
+      "login": "banteg",
+      "id": 4562643,
+      "node_id": "MDQ6VXNlcjQ1NjI2NDM=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4562643?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/banteg",
+      "html_url": "https://github.com/banteg",
+      "followers_url": "https://api.github.com/users/banteg/followers",
+      "following_url": "https://api.github.com/users/banteg/following{/other_user}",
+      "gists_url": "https://api.github.com/users/banteg/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/banteg/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/banteg/subscriptions",
+      "organizations_url": "https://api.github.com/users/banteg/orgs",
+      "repos_url": "https://api.github.com/users/banteg/repos",
+      "events_url": "https://api.github.com/users/banteg/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/banteg/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "f72c68bf758246c3391284e721ac332a7a0732b5",
+        "url": "https://api.github.com/repos/vyperlang/vyper/commits/f72c68bf758246c3391284e721ac332a7a0732b5",
+        "html_url": "https://github.com/vyperlang/vyper/commit/f72c68bf758246c3391284e721ac332a7a0732b5"
+      }
+    ]
+  },
+  {
+    "sha": "f72c68bf758246c3391284e721ac332a7a0732b5",
+    "node_id": "C_kwDOBGDvrNoAKGY3MmM2OGJmNzU4MjQ2YzMzOTEyODRlNzIxYWMzMzJhN2EwNzMyYjU",
+    "commit": {
+      "author": {
+        "name": "HodanPlodky",
+        "email": "36966616+HodanPlodky@users.noreply.github.com",
+        "date": "2026-10-15T16:36:30Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-10-15T16:36:30Z"
+      },
+      "message": "fix[codegen]: fix `convert()` codegen in venom pipeline (#4979)\n\nthe venom pipeline `convert()` had several mismatches with the legacy\npipeline:\n\n- decimal bounds checking used integer division for pre-multiplication\n  clamping, which truncated towards negative infinity instead of towards\n  zero. for negative inputs close to `DECIMAL_MIN / DECIMAL_DIVISOR`,\n  this could produce a pre-lo bound that was one unit too high, allowing\n  out-of-range values to pass the clamp and wrap around after scaling.\n\n- `_check_literal_int_bounds` only handled plain int/bool constants. hex\n  literals (`0xff`), bytes constants, and bytestring constants were\n  silently skipped, so `convert(0xffff, uint8)` compiled without error\n  instead of raising InvalidLiteral. additionally, sign extension was\n  missing for hex/bytes-to-signed-integer conversions (e.g.\n  `convert(0xff <bytes1>, int16)` should yield -1, not 255).\n\n- there was no `_check_literal_decimal_bounds` at all, so compile-time\n  overflow checks for decimal conversions (e.g. converting a too-large\n  int136 to decimal) were absent in the venom pipeline.\n\nrefactor `_get_folded_value` to return the AST node instead of the\npython value, so literal-kind information (hex vs decimal vs bytes) is\navailable for legacy-compatible sign-extension and bounds checks. add\nsign extension for hex/bytes constants converted to signed types. add a\nseparate `_check_literal_decimal_bounds` with correct round-towards-zero\ndivision. use `arg_node.reduced()` to resolve constant variable\nreferences before type-checking bytestring inputs.",
+      "tree": {
+        "sha": "a3dcb9fb53a34e33da87886f144a4b514d24b540",
+        "url": "https://api.github.com/repos/vyperlang/vyper/git/trees/a3dcb9fb53a34e33da87886f144a4b514d24b540"
+      },
+      "url": "https://api.github.com/repos/vyperlang/vyper/git/commits/f72c68bf758246c3391284e721ac332a7a0732b5",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJq0QEOCRC1aQ7uu5UhlAAAU90QAIHV2BCESTIctswgyXAP+Y93\nLQSZmJfbZBcz1N9sI0egvBEC0AvRd5CQtWTuxtaoBrw9eV+Nue3Ab9Rj0z/d+m5u\nAsRlUHHN/6FmB0FCUBjI0WRNiD8f0BgQQfMNn0fVF/t6k5Vp6uWtY7QXsnWvWEM3\n+5ZYVJHfEF9KragDrTT3GjAKVhePv4UmJw4nXTsBoCm/0KXxRpZBgXlBNnMq3hDj\n3E/BaqBmYsAN46E/AwabR4r2i66MBo6KJ5/s54WkvOj+3JAPqt6NcYpYXgw/zxQf\neS47CWgr0uee1FjjE57gHfoOnL4ItazDGhMETDfbvoKnhty15lPXEIut61P6NV3e\nqc9UFXbG8jcn1GjnMQ769zFGqcYcsM/LTRzD96yJpijGuxM4p1fGB9aztii8lO8O\n6dR+bWv+bS+g+Hl0qgNeXG7J4ppUBY/vkqjt5U2mEEeK++cbsZgMJRBucVwwIv0D\n5j1a00R6S2m3b8Qrc5I2GT+dVHtejhQXeE5IrLkxljV2hFiUY6826XiyN/Y40Mta\n4XEEFJfLk0a42Pqi23p/GiGF0eV4Ld4xWNhkvKe15idfMzSVgBwsgfdVaWKR03TH\nn0yVaUdJUV4ia+nvQ4VkYa8MJblibAcKop+e4tdhGwX69sPz6rya4fLPxgXffOIW\nhWDfABOyW6rkZee0dg01\n=yCPc\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree a3dcb9fb53a34e33da87886f144a4b514d24b540\nparent bb7ee4955b65b3e7ab45f21562e8f03b3e6ac493\nauthor HodanPlodky <36966616+HodanPlodky@users.noreply.github.com> 1792082190 +0000\ncommitter GitHub <noreply@github.com> 1792082190 +0300\n\nfix[codegen]: fix `convert()` codegen in venom pipeline (#4979)\n\nthe venom pipeline `convert()` had several mismatches with the legacy\npipeline:\n\n- decimal bounds checking used integer division for pre-multiplication\n  clamping, which truncated towards negative infinity instead of towards\n  zero. for negative inputs close to `DECIMAL_MIN / DECIMAL_DIVISOR`,\n  this could produce a pre-lo bound that was one unit too high, allowing\n  out-of-range values to pass the clamp and wrap around after scaling.\n\n- `_check_literal_int_bounds` only handled plain int/bool constants. hex\n  literals (`0xff`), bytes constants, and bytestring constants were\n  silently skipped, so `convert(0xffff, uint8)` compiled without error\n  instead of raising InvalidLiteral. additionally, sign extension was\n  missing for hex/bytes-to-signed-integer conversions (e.g.\n  `convert(0xff <bytes1>, int16)` should yield -1, not 255).\n\n- there was no `_check_literal_decimal_bounds` at all, so compile-time\n  overflow checks for decimal conversions (e.g. converting a too-large\n  int136 to decimal) were absent in the venom pipeline.\n\nrefactor `_get_folded_value` to return the AST node instead of the\npython value, so literal-kind information (hex vs decimal vs bytes) is\navailable for legacy-compatible sign-extension and bounds checks. add\nsign extension for hex/bytes constants converted to signed types. add a\nseparate `_check_literal_decimal_bounds` with correct round-towards-zero\ndivision. use `arg_node.reduced()` to resolve constant variable\nreferences before type-checking bytestring inputs.",
+        "verified_at": "2026-10-15T16:36:31Z"
+      }
+    },
+    "url": "https://api.github.com/repos/vyperlang/vyper/commits/f72c68bf758246c3391284e721ac332a7a0732b5",
+    "html_url": "https://github.com/vyperlang/vyper/commit/f72c68bf758246c3391284e721ac332a7a0732b5",
+    "comments_url": "https://api.github.com/repos/vyperlang/vyper/commits/f72c68bf758246c3391284e721ac332a7a0732b5/comments",
+    "author": {
+      "login": "HodanPlodky",
+      "id": 36966616,
+      "node_id": "MDQ6VXNlcjM2OTY2NjE2",
+      "avatar_url": "https://avatars.githubusercontent.com/u/36966616?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/HodanPlodky",
+      "html_url": "https://github.com/HodanPlodky",
+      "followers_url": "https://api.github.com/users/HodanPlodky/followers",
+      "following_url": "https://api.github.com/users/HodanPlodky/following{/other_user}",
+      "gists_url": "https://api.github.com/users/HodanPlodky/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/HodanPlodky/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/HodanPlodky/subscriptions",
+      "organizations_url": "https://api.github.com/users/HodanPlodky/orgs",
+      "repos_url": "https://api.github.com/users/HodanPlodky/repos",
+      "events_url": "https://api.github.com/users/HodanPlodky/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/HodanPlodky/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "bb7ee4955b65b3e7ab45f21562e8f03b3e6ac493",
+        "url": "https://api.github.com/repos/vyperlang/vyper/commits/bb7ee4955b65b3e7ab45f21562e8f03b3e6ac493",
+        "html_url": "https://github.com/vyperlang/vyper/commit/bb7ee4955b65b3e7ab45f21562e8f03b3e6ac493"
+      }
+    ]
+  },
+  {
+    "sha": "bb7ee4955b65b3e7ab45f21562e8f03b3e6ac493",
+    "node_id": "C_kwDOBGDvrNoAKGJiN2VlNDk1NWI2NWIzZTdhYjQ1ZjIxNTYyZThmMDNiM2U2YWM0OTM",
+    "commit": {
+      "author": {
+        "name": "Quentin Bernet",
+        "email": "quentin.bernet@bluewin.ch",
+        "date": "2026-10-15T09:01:07Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-10-15T09:01:07Z"
+      },
+      "message": "chore[build]: make mypy error on unused ignores (#5306)\n\nthis commit ensures every ignore comment is actually required, by\ninstructing mypy to error when that is not the case. this is done by\nsetting `warn_unused_ignores` to true in `pyproject.toml`. additionally,\nthis commit removes the existing unused ignore comments.",
+      "tree": {
+        "sha": "680e224a99ef734f619d0f4bd5d6fb881d85c1d7",
+        "url": "https://api.github.com/repos/vyperlang/vyper/git/trees/680e224a99ef734f619d0f4bd5d6fb881d85c1d7"
+      },
+      "url": "https://api.github.com/repos/vyperlang/vyper/git/commits/bb7ee4955b65b3e7ab45f21562e8f03b3e6ac493",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJq0JZTCRC1aQ7uu5UhlAAAZEsQAEPcFNz42OvBfiI8/mDq7Wia\nXVlFv9dFloCZ4R0Dj/2TkM9izGrwuxB4vHiwSzsMylpDlkunOBPLTRgRHe+CzBQT\nKvKY2rvdMkBtxWxBFJhUueqsca8vPOSjj7hV6DzHzmIRhollDVC8f60093S4CjDe\nwfVp2f63U45DL3rRctLbABWQe5+iiBSkb0val0DDz2MiIAcC3U7cY77JQg8zi/Hg\nKKTGIa/et04Fe8pB7tw9HjjBl8tO3MlQpwvVhJaEOKLCh24fX9140KqcgMcJHzSN\nmQvFN8ZPmNCbOvwA9pwB4zxV1Kwropw35EqnBVDJzlKuN269DivspBSgi/7CVREw\nvzmteWJpQ/YOnPlgXmgED/PA8PY74V5+WN1Ec1eei0PO4pUF6bKoZlfq9NM33ki1\n+wcyMZobkj/H3QKT2VfwN0zZZ+XuK9rpF8tKQru6uKRK2HQS2BVkcEru41OJ6yDO\nCcTmBfrCXH4mEyVVKIW3VwAxlc5b4Dbjn/5hMH2pGVfek6xYfEW91DWkOXmCOGo3\nIh/0lvK2IzdHa1YHriphvibTvR1vu3vwn6/atAc07RXLFp0R7q0zsGHU+Yl8ZNnH\no42WzYOMX2IwACxcBszIkjlQ6FzBWwsyd6gW/XKo/juduXAjFWzNDMbb1KEC/7Kh\n+uNCZiAkhfyjM39FL3eu\n=YahD\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 680e224a99ef734f619d0f4bd5d6fb881d85c1d7\nparent daaf96fc6692e6217d7dbbb998b334e3064f651c\nauthor Quentin Bernet <quentin.bernet@bluewin.ch> 1792054867 +0200\ncommitter GitHub <noreply@github.com> 1792054867 +0000\n\nchore[build]: make mypy error on unused ignores (#5306)\n\nthis commit ensures every ignore comment is actually required, by\ninstructing mypy to error when that is not the case. this is done by\nsetting `warn_unused_ignores` to true in `pyproject.toml`. additionally,\nthis commit removes the existing unused ignore comments.",
+        "verified_at": "2026-10-15T09:01:08Z"
+      }
+    },
+    "url": "https://api.github.com/repos/vyperlang/vyper/commits/bb7ee4955b65b3e7ab45f21562e8f03b3e6ac493",
+    "html_url": "https://github.com/vyperlang/vyper/commit/bb7ee4955b65b3e7ab45f21562e8f03b3e6ac493",
+    "comments_url": "https://api.github.com/repos/vyperlang/vyper/commits/bb7ee4955b65b3e7ab45f21562e8f03b3e6ac493/comments",
+    "author": {
+      "login": "Sporarum",
+      "id": 28290641,
+      "node_id": "MDQ6VXNlcjI4MjkwNjQx",
+      "avatar_url": "https://avatars.githubusercontent.com/u/28290641?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Sporarum",
+      "html_url": "https://github.com/Sporarum",
+      "followers_url": "https://api.github.com/users/Sporarum/followers",
+      "following_url": "https://api.github.com/users/Sporarum/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Sporarum/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Sporarum/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Sporarum/subscriptions",
+      "organizations_url": "https://api.github.com/users/Sporarum/orgs",
+      "repos_url": "https://api.github.com/users/Sporarum/repos",
+      "events_url": "https://api.github.com/users/Sporarum/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Sporarum/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "daaf96fc6692e6217d7dbbb998b334e3064f651c",
+        "url": "https://api.github.com/repos/vyperlang/vyper/commits/daaf96fc6692e6217d7dbbb998b334e3064f651c",
+        "html_url": "https://github.com/vyperlang/vyper/commit/daaf96fc6692e6217d7dbbb998b334e3064f651c"
+      }
+    ]
+  },
+  {
+    "sha": "daaf96fc6692e6217d7dbbb998b334e3064f651c",
+    "node_id": "C_kwDOBGDvrNoAKGRhYWY5NmZjNjY5MmU2MjE3ZDdkYmJiOTk4YjMzNGUzMDY0ZjY1MWM",
+    "commit": {
+      "author": {
+        "name": "Julien Kervarrec",
+        "email": "114134889+JulienKervarrec@users.noreply.github.com",
+        "date": "2026-10-13T19:36:20Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-10-13T19:36:20Z"
+      },
+      "message": "chore[test]: cover empty ternary arms (#5279)\n\nadd regression tests for #5199: ternaries whose arm is `[]` or\n`empty(T)`, over dynarrays, static arrays, bytestrings, strings and\nstructs, in both branches, assigned and returned.",
+      "tree": {
+        "sha": "21ae7ae7cf30440c4e86653a9828af810a1b4041",
+        "url": "https://api.github.com/repos/vyperlang/vyper/git/trees/21ae7ae7cf30440c4e86653a9828af810a1b4041"
+      },
+      "url": "https://api.github.com/repos/vyperlang/vyper/git/commits/daaf96fc6692e6217d7dbbb998b334e3064f651c",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqzog0CRC1aQ7uu5UhlAAAqSAQAF/LIol7IyGd5jgr98L/t/A1\nK/Ibc6WwkY21jbCqG+IONi8AQ4iu0PEJAz5mryYxDDsqV6QcJPMYTcm9bEo0M13W\nSxascDJrbQUPy0L5TiD3jYCWVBwWhbsHyXW9XrNJM9xGW63PoA2e0+8IVCmFzhSW\nGTfarnTEoL9kg8zRyjNV7joGlNH8NzcMe3OMMF/hO585TQeW+t0Iy2+KP/W9OSOW\nuZNBMuQ5PHyiLy6ZSfl10RczEHA6s7ZZjVbsEpLqLERrwdSKgSxhsZplHGMb82Ep\nKRyuzkieqVypzrLgzuAY0OYJvlxiCmPH5GLAv2FrZth90Jx+tdsi5d+N8wKjZQ+I\nmt5seozcJz3z1YvuFFOM/GercdMF7c2KaWIfwUb8XP/8mHJSzfQDRGRclo2nAcqs\n1Kn0ww5N7Dec2Ewkfztcw32cBddGxZSSSq3yN5e0a6+z7KQAlHQqhahKvPwITh4L\nCITF+kcG5FNNert+kdDo/kHTOSfmLozdqGm2eh33bC8gZMva0H6KSBwm9elJ4cOf\nv+iLsdC2Z3t2PK02zq1RpjEJVmnBglNMAKEYtFnFW6KAOFhegvfxRSERutO5d8Rn\nyNJRR/HLXUCKVNRf+jd+9emD1pZ1ahbwfaffJpiVmkD5kmiRH1zjQIgeGxcD3rv8\nzzfttKMJC7koisEMtcuU\n=nkpW\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 21ae7ae7cf30440c4e86653a9828af810a1b4041\nparent 50a9b42dc39da9527905ade7a0901ac72b244a21\nauthor Julien Kervarrec <114134889+JulienKervarrec@users.noreply.github.com> 1791920180 +0200\ncommitter GitHub <noreply@github.com> 1791920180 +0300\n\nchore[test]: cover empty ternary arms (#5279)\n\nadd regression tests for #5199: ternaries whose arm is `[]` or\n`empty(T)`, over dynarrays, static arrays, bytestrings, strings and\nstructs, in both branches, assigned and returned.",
+        "verified_at": "2026-10-13T19:36:21Z"
+      }
+    },
+    "url": "https://api.github.com/repos/vyperlang/vyper/commits/daaf96fc6692e6217d7dbbb998b334e3064f651c",
+    "html_url": "https://github.com/vyperlang/vyper/commit/daaf96fc6692e6217d7dbbb998b334e3064f651c",
+    "comments_url": "https://api.github.com/repos/vyperlang/vyper/commits/daaf96fc6692e6217d7dbbb998b334e3064f651c/comments",
+    "author": {
+      "login": "JulienKervarrec",
+      "id": 114134889,
+      "node_id": "U_kgDOBs2PaQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/114134889?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/JulienKervarrec",
+      "html_url": "https://github.com/JulienKervarrec",
+      "followers_url": "https://api.github.com/users/JulienKervarrec/followers",
+      "following_url": "https://api.github.com/users/JulienKervarrec/following{/other_user}",
+      "gists_url": "https://api.github.com/users/JulienKervarrec/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/JulienKervarrec/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/JulienKervarrec/subscriptions",
+      "organizations_url": "https://api.github.com/users/JulienKervarrec/orgs",
+      "repos_url": "https://api.github.com/users/JulienKervarrec/repos",
+      "events_url": "https://api.github.com/users/JulienKervarrec/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/JulienKervarrec/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "50a9b42dc39da9527905ade7a0901ac72b244a21",
+        "url": "https://api.github.com/repos/vyperlang/vyper/commits/50a9b42dc39da9527905ade7a0901ac72b244a21",
+        "html_url": "https://github.com/vyperlang/vyper/commit/50a9b42dc39da9527905ade7a0901ac72b244a21"
+      }
+    ]
+  },
+  {
+    "sha": "50a9b42dc39da9527905ade7a0901ac72b244a21",
+    "node_id": "C_kwDOBGDvrNoAKDUwYTliNDJkYzM5ZGE5NTI3OTA1YWRlN2EwOTAxYWM3MmIyNDRhMjE",
+    "commit": {
+      "author": {
+        "name": "Quentin Bernet",
+        "email": "quentin.bernet@bluewin.ch",
+        "date": "2026-10-13T13:26:44Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-10-13T13:26:44Z"
+      },
+      "message": "refactor[lang]: simplify typing logic around inf (#5233)\n\nbefore d3c150e, the codegen type of an expression was always the\nexpected type. with d3c150e this no longer works, as the expected type\ncan now contain wildcard lengths, which are not encodable (need to be\nresolved to a finite length or `INF`). to solve this issue, it added\n`_annotation_type` which derives an encodable type from the inferred and\nexpected type.\n\nthis commit refactors `_annotation_type` to give it nice properties, and\nto validate its invariants:\n\n`_interpolate` finds the smallest type between its two parameters, which\ncontains no wildcards. this allows us to remove\n`empty_list_candidate_types` which represented a kind of regression of\n3867629 (and thus re-introduced similar issues).\n\nto support the above/fix bugs it uncovered, a couple more minor things\nare done:\n* fix (codegen's) `Expr.parse_IfExp`'s not copying `~empty` into memory.\n* fix `_ExprAnalyser.types_from_Subscript` producing multitypes\n  containing the same type twice.\n* fix not being able to do `my_type.has_wildcard` because\n  `_GenericTypeAcceptor` didn't have it.\n* let mypy know that `SArrayT.length` is always an int.",
+      "tree": {
+        "sha": "3fcf58a40be5d45bd02de26b993b1309e7bed040",
+        "url": "https://api.github.com/repos/vyperlang/vyper/git/trees/3fcf58a40be5d45bd02de26b993b1309e7bed040"
+      },
+      "url": "https://api.github.com/repos/vyperlang/vyper/git/commits/50a9b42dc39da9527905ade7a0901ac72b244a21",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqzjGUCRC1aQ7uu5UhlAAAKHsQAKbsebv5Nf+M/tCMWNegKHe2\na60J5KGQHKSALLV2DYv6KZ486BH27QwJj8/h9IN5RJvgWLGukR8bPSs66zT+OamE\nTJ7TDsiR7qfOYHSKRvVwAtCFuSQ8ylSQjDoPaAx/tlZ1vsVnsUoGesY0lNkaPXst\ncKtMfd93S5l/XXK1uuJNsHmB6dvb0RaGAp1rvJGUOC2/RQuQeP6secMYynQHA4uY\n8Uxdhg5/+g6oTo5+Fenq8BZkZmywt1Sah9V27wSgrU6zyhGVZIsbOYmr7x2zPm/P\nq1HhzM1OyT0BNPZdcAHZ50zx64CeLMK+pwgN4ZCur/TIKfkbv/cja0JppBSJlly3\nn8rnnDVE/qddOneybLB6svT/pp8W3V8WBDyMZ59QnLVyTS6dh2iTAmL8CV2/0VN7\nbo4mD0hgll3Hhr2F69/xcF0HRqt/KFr6BVMwxknSbKfeevjtc7Nhlwxjr0VmwAo8\n70RuM2rG7UxtD0z2oGO6JNCouizI0MxRAMaS0fEb+ITZiHzlTqHj0ZdeJaMwMIXe\nDK69A7zMdSS1YAnx1Xs6bVnq9HRpixFqCinyv2+p/1UQQT9xlMJurtLwfLIV+XcG\nhnl/kP5M5B1zn3Ywwvdf4W6DYi/CMB9c53UHxwntPO388QOl8Goot3CcpTTze+3k\nvon0YO7IDbmSDcMwY+Ur\n=lwxS\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 3fcf58a40be5d45bd02de26b993b1309e7bed040\nparent 02832229024d016d28804137e3bda52a94ff590e\nauthor Quentin Bernet <quentin.bernet@bluewin.ch> 1791898004 +0200\ncommitter GitHub <noreply@github.com> 1791898004 +0000\n\nrefactor[lang]: simplify typing logic around inf (#5233)\n\nbefore d3c150e, the codegen type of an expression was always the\nexpected type. with d3c150e this no longer works, as the expected type\ncan now contain wildcard lengths, which are not encodable (need to be\nresolved to a finite length or `INF`). to solve this issue, it added\n`_annotation_type` which derives an encodable type from the inferred and\nexpected type.\n\nthis commit refactors `_annotation_type` to give it nice properties, and\nto validate its invariants:\n\n`_interpolate` finds the smallest type between its two parameters, which\ncontains no wildcards. this allows us to remove\n`empty_list_candidate_types` which represented a kind of regression of\n3867629 (and thus re-introduced similar issues).\n\nto support the above/fix bugs it uncovered, a couple more minor things\nare done:\n* fix (codegen's) `Expr.parse_IfExp`'s not copying `~empty` into memory.\n* fix `_ExprAnalyser.types_from_Subscript` producing multitypes\n  containing the same type twice.\n* fix not being able to do `my_type.has_wildcard` because\n  `_GenericTypeAcceptor` didn't have it.\n* let mypy know that `SArrayT.length` is always an int.",
+        "verified_at": "2026-10-13T13:26:44Z"
+      }
+    },
+    "url": "https://api.github.com/repos/vyperlang/vyper/commits/50a9b42dc39da9527905ade7a0901ac72b244a21",
+    "html_url": "https://github.com/vyperlang/vyper/commit/50a9b42dc39da9527905ade7a0901ac72b244a21",
+    "comments_url": "https://api.github.com/repos/vyperlang/vyper/commits/50a9b42dc39da9527905ade7a0901ac72b244a21/comments",
+    "author": {
+      "login": "Sporarum",
+      "id": 28290641,
+      "node_id": "MDQ6VXNlcjI4MjkwNjQx",
+      "avatar_url": "https://avatars.githubusercontent.com/u/28290641?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Sporarum",
+      "html_url": "https://github.com/Sporarum",
+      "followers_url": "https://api.github.com/users/Sporarum/followers",
+      "following_url": "https://api.github.com/users/Sporarum/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Sporarum/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Sporarum/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Sporarum/subscriptions",
+      "organizations_url": "https://api.github.com/users/Sporarum/orgs",
+      "repos_url": "https://api.github.com/users/Sporarum/repos",
+      "events_url": "https://api.github.com/users/Sporarum/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Sporarum/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "02832229024d016d28804137e3bda52a94ff590e",
+        "url": "https://api.github.com/repos/vyperlang/vyper/commits/02832229024d016d28804137e3bda52a94ff590e",
+        "html_url": "https://github.com/vyperlang/vyper/commit/02832229024d016d28804137e3bda52a94ff590e"
+      }
+    ]
+  },
+  {
+    "sha": "02832229024d016d28804137e3bda52a94ff590e",
+    "node_id": "C_kwDOBGDvrNoAKDAyODMyMjI5MDI0ZDAxNmQyODgwNDEzN2UzYmRhNTJhOTRmZjU5MGU",
+    "commit": {
+      "author": {
+        "name": "Quentin Bernet",
+        "email": "quentin.bernet@bluewin.ch",
+        "date": "2026-10-13T12:53:18Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-10-13T12:53:18Z"
+      },
+      "message": "fix[lang]: forbid assignment to values (#5181)\n\nthe left hand-side of assignments used to only be checked to have\ncorrect mutability and location. however some expressions fulfilled\nthese criterion without representing a concrete offset in\nmemory/transient/storage, for example 'self.g()[0] = 5'. this commit\naddresses that by directly checking that the lhs has a location.",
+      "tree": {
+        "sha": "0bd0e749eb62f7340b335d1064e1210d349ebc29",
+        "url": "https://api.github.com/repos/vyperlang/vyper/git/trees/0bd0e749eb62f7340b335d1064e1210d349ebc29"
+      },
+      "url": "https://api.github.com/repos/vyperlang/vyper/git/commits/02832229024d016d28804137e3bda52a94ff590e",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqzim+CRC1aQ7uu5UhlAAAhpoQAHw0sbG46G9BzeygSMj2A1dB\nYfl5yHoeKT5KSlHPAui3/yqqL5CeCJkt4yN0tozRjO0OgnDh8kW+hHssiCuFSfWd\nhirvPZXMdkdwqT0OgmKd8KJsXbxzAm7Z+uS08BLnEVujhP7P5ikbUNJ76rwAxWxA\nEvUaM8EU+IbaGsqrs77q1Ut0ZbWBpPNf+2hWZwWIbU4NxphzLF1akIWtliupun3J\ncNLyZgd3RzXUmqKgzivRGWqF+0MP8FHyZqnZUeY06wj8I1U+QP5SsavobxdsJOjG\nypL+RrjlPiVOnFIfVvsRG2Gj7WiYhXFdMJUw9JqkE59pdfHuszpBc0tuTKQZ5vY8\nZWKaq2B+/2j2XczuLp7l+8P19fxh9cs5efsotmy40RGFkpXkUi8foFdMawT7NdQI\nxySRgQcPAN/vRUydTGkcgbJHhAxpf+8kZEkfpLSBS1nKKzaWcy3C92ms8dHCVx1k\nYnjbY7GiWilZYN9wTu1Y9c+1GlfN9O18rUk5EC1bhJR1KQNGmdBH6+Qr9vgLybWc\nd8pkYsIsqvfkwO/shn/Hh5+uiLKWu2Px+4wHaqa1uLKnx714o+FcY9DLqmechX/S\nv+YYCKGgEKWUj8eeCzV4r0bn6yf1plG7QASueCz4KBFPDU9wRtVA4/PlgADI3ild\ngSWZUlTVEoGLg3HAQ71h\n=WRZX\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 0bd0e749eb62f7340b335d1064e1210d349ebc29\nparent 15e442d7fd74b9d7fc07e07027b624bd01514928\nauthor Quentin Bernet <quentin.bernet@bluewin.ch> 1791895998 +0200\ncommitter GitHub <noreply@github.com> 1791895998 +0200\n\nfix[lang]: forbid assignment to values (#5181)\n\nthe left hand-side of assignments used to only be checked to have\ncorrect mutability and location. however some expressions fulfilled\nthese criterion without representing a concrete offset in\nmemory/transient/storage, for example 'self.g()[0] = 5'. this commit\naddresses that by directly checking that the lhs has a location.",
+        "verified_at": "2026-10-13T12:53:18Z"
+      }
+    },
+    "url": "https://api.github.com/repos/vyperlang/vyper/commits/02832229024d016d28804137e3bda52a94ff590e",
+    "html_url": "https://github.com/vyperlang/vyper/commit/02832229024d016d28804137e3bda52a94ff590e",
+    "comments_url": "https://api.github.com/repos/vyperlang/vyper/commits/02832229024d016d28804137e3bda52a94ff590e/comments",
+    "author": {
+      "login": "Sporarum",
+      "id": 28290641,
+      "node_id": "MDQ6VXNlcjI4MjkwNjQx",
+      "avatar_url": "https://avatars.githubusercontent.com/u/28290641?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Sporarum",
+      "html_url": "https://github.com/Sporarum",
+      "followers_url": "https://api.github.com/users/Sporarum/followers",
+      "following_url": "https://api.github.com/users/Sporarum/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Sporarum/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Sporarum/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Sporarum/subscriptions",
+      "organizations_url": "https://api.github.com/users/Sporarum/orgs",
+      "repos_url": "https://api.github.com/users/Sporarum/repos",
+      "events_url": "https://api.github.com/users/Sporarum/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Sporarum/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "15e442d7fd74b9d7fc07e07027b624bd01514928",
+        "url": "https://api.github.com/repos/vyperlang/vyper/commits/15e442d7fd74b9d7fc07e07027b624bd01514928",
+        "html_url": "https://github.com/vyperlang/vyper/commit/15e442d7fd74b9d7fc07e07027b624bd01514928"
+      }
+    ]
+  },
+  {
+    "sha": "15e442d7fd74b9d7fc07e07027b624bd01514928",
+    "node_id": "C_kwDOBGDvrNoAKDE1ZTQ0MmQ3ZmQ3NGI5ZDdmYzA3ZTA3MDI3YjYyNGJkMDE1MTQ5Mjg",
+    "commit": {
+      "author": {
+        "name": "imitater-dou",
+        "email": "ikun3.1415927@gmail.com",
+        "date": "2026-10-12T08:14:30Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-10-12T08:14:30Z"
+      },
+      "message": "chore[docs]: drop dead links (#5283)\n\nthe following links in the docs were dead: try.vyperlang.org returns\nCloudflare \"HTTP 526\" (origin SSL failure). https://vyper-by-\nexample.org/ is \"NXDOMAIN\". https://academy.apeworx.io/ has \"no A/AAAA\nrecord\".\n\nthis commit fixes that by removing them outright: in every spot there\nexists alternative ressources.",
+      "tree": {
+        "sha": "2b302eba9eae1eadc2dee9120f4d68f39024f649",
+        "url": "https://api.github.com/repos/vyperlang/vyper/git/trees/2b302eba9eae1eadc2dee9120f4d68f39024f649"
+      },
+      "url": "https://api.github.com/repos/vyperlang/vyper/git/commits/15e442d7fd74b9d7fc07e07027b624bd01514928",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqzJbmCRC1aQ7uu5UhlAAAtisQABgMCLUDdVYkwwav2+QJ5IBf\nBi74W1oLHAE6Lf1ZxACwn/im9/To8rJ6+yTLl2K66Z/wX/jhWu3q050ifAvL4eyo\nr1NwhiQ1gn41/czKam09jdNE9snOXJkNMGZbxRcdoTYCzlmQR5WQccROYMaRs2xK\nChvE/E9mK+77L9hFfdiQb6lpf28D2vtQyGwoNzNvD3QiNuqPTZSLsedfZWccHj6X\nfSP64nWkOV3Uc8WBPEyK4UsdF52LAHD7WfmtwGCEo17LgK/5IyziMLlDZQYJ0aWJ\ny2qKRjhW0aCoJ5SMCgnKiioQRmAaeGTInoRg9Jc2ki3ONt5cHQMiKsVdfkSzpGvf\nTRSZg8/RPFzlpsv07R0Br/BoBnuEpqltbYBkzZCVqJKywc9+VdPItNO8rPGbb7DE\naEtVzvDaoqiTPJjMz5CVJPZrfxKRwIdfJAMyEDPuHeLSUhCFRYJgBiACozLicx3D\nRqH36MQE7tTZcHlXS+PB6yagRqzzkCAjxLxdCCw3GDcDYPvHeN+RyHMZqyGtZW7X\nZe4KMvofT/oJpxeX1dzjjilRDVzcOXbHuKGJaJdI7YX4VEzXhU5u1zSo9XARnFOu\nGiWIo0RwtA2CffauOsYgCUrYO94VQB0rAz1R8EOG1ywbBkjQv7+ptgSNu0zctW5V\n69yXFw3WjxFd1b6P8TBQ\n=rU9J\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 2b302eba9eae1eadc2dee9120f4d68f39024f649\nparent 10e41359d8f566d4c16f162da17df8ab6417ae6f\nauthor imitater-dou <ikun3.1415927@gmail.com> 1791792870 -0700\ncommitter GitHub <noreply@github.com> 1791792870 +0000\n\nchore[docs]: drop dead links (#5283)\n\nthe following links in the docs were dead: try.vyperlang.org returns\nCloudflare \"HTTP 526\" (origin SSL failure). https://vyper-by-\nexample.org/ is \"NXDOMAIN\". https://academy.apeworx.io/ has \"no A/AAAA\nrecord\".\n\nthis commit fixes that by removing them outright: in every spot there\nexists alternative ressources.",
+        "verified_at": "2026-10-12T08:14:30Z"
+      }
+    },
+    "url": "https://api.github.com/repos/vyperlang/vyper/commits/15e442d7fd74b9d7fc07e07027b624bd01514928",
+    "html_url": "https://github.com/vyperlang/vyper/commit/15e442d7fd74b9d7fc07e07027b624bd01514928",
+    "comments_url": "https://api.github.com/repos/vyperlang/vyper/commits/15e442d7fd74b9d7fc07e07027b624bd01514928/comments",
+    "author": {
+      "login": "imitater-dou",
+      "id": 287387610,
+      "node_id": "U_kgDOESEv2g",
+      "avatar_url": "https://avatars.githubusercontent.com/u/287387610?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/imitater-dou",
+      "html_url": "https://github.com/imitater-dou",
+      "followers_url": "https://api.github.com/users/imitater-dou/followers",
+      "following_url": "https://api.github.com/users/imitater-dou/following{/other_user}",
+      "gists_url": "https://api.github.com/users/imitater-dou/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/imitater-dou/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/imitater-dou/subscriptions",
+      "organizations_url": "https://api.github.com/users/imitater-dou/orgs",
+      "repos_url": "https://api.github.com/users/imitater-dou/repos",
+      "events_url": "https://api.github.com/users/imitater-dou/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/imitater-dou/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "10e41359d8f566d4c16f162da17df8ab6417ae6f",
+        "url": "https://api.github.com/repos/vyperlang/vyper/commits/10e41359d8f566d4c16f162da17df8ab6417ae6f",
+        "html_url": "https://github.com/vyperlang/vyper/commit/10e41359d8f566d4c16f162da17df8ab6417ae6f"
+      }
+    ]
+  },
+  {
+    "sha": "10e41359d8f566d4c16f162da17df8ab6417ae6f",
+    "node_id": "C_kwDOBGDvrNoAKDEwZTQxMzU5ZDhmNTY2ZDRjMTZmMTYyZGExN2RmOGFiNjQxN2FlNmY",
+    "commit": {
+      "author": {
+        "name": "Harry Kalogirou",
+        "email": "harry@kalogirou.net",
+        "date": "2026-10-10T12:58:11Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-10-10T12:58:11Z"
+      },
+      "message": "fix[venom]: round int to decimal clamp bound toward zero (#5298)\n\nThe lower pre-scale bound in _to_decimal used floor division, so\nfor negative bounds it was one below the legacy bound and venom\naccepted one input that legacy rejects, producing a decimal below\nMIN_DECIMAL. Use truncating division, matching legacy.",
+      "tree": {
+        "sha": "34c4865d640f3421061d8e2183cdbdb76d8d377f",
+        "url": "https://api.github.com/repos/vyperlang/vyper/git/trees/34c4865d640f3421061d8e2183cdbdb76d8d377f"
+      },
+      "url": "https://api.github.com/repos/vyperlang/vyper/git/commits/10e41359d8f566d4c16f162da17df8ab6417ae6f",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqyjZjCRC1aQ7uu5UhlAAAc7kQAEP5d9qwh91bwNlijLbkg3xp\ngoUyh8aC2IuEYI+et2NcJ0/wVvun8+/4pspyCcbfxVzlasdOuE9h4+bGLMZBG7HJ\ndJJGRMh8A3atblh9+pxA/icTmg52XD3j2YTAEQ5R+baEfMZedYS6cSlgIEdNtEVY\nGC78yU8ixe9r9AuXaa2YohWYeMMZiyWg6Yd82g1DQsQ+W+5BhJ8VUkObMIkljmqV\ne36GsbT1Webk4yfMqJGxAuzkp18FAgTKwXRXJW/h1pT0ssLHvMWiEQ4Jco29TB7N\nLrj3PFjZa97At6dUbp7e3hb6o2TO8FeTzKSBZfjpHNDbVUxC6LMNK+iK4pWw8//W\nJwlIVgoPMhBECzkomYqjJVeXlffiQ08G1QDz8lv5dWHDeVaon9Scdi7LShrRNYqh\nGLd3aBiabJl0vMz+Q/BewqCTG8ayra9r/0qlZvYB9ikTzY2D5K/HlwhbbNXeVwQa\nNv/SCBM5WmpVSPnK5V6CSlpQ9tTeWzseeGzbk3Hh+WvfA/bAbfhWwRhLUDnXmXGS\nYD0P8ith77Mzxpqas816iW1VMxEHzn9mxWJDJ7Pj5nA7Vndi1+mmOM2XT48iX4Ca\nkojdOUclZfhGnPqs+SNnkVmq2Hs2Ylt7D9BDhbKv8vruqef/spR5jrGZBzSovdFV\nsHWMtYSBrGQukH96Esvp\n=cjtM\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 34c4865d640f3421061d8e2183cdbdb76d8d377f\nparent e317f905d3ff0002f3b5a51ec8673c39d527a300\nauthor Harry Kalogirou <harry@kalogirou.net> 1791637091 +0300\ncommitter GitHub <noreply@github.com> 1791637091 +0000\n\nfix[venom]: round int to decimal clamp bound toward zero (#5298)\n\nThe lower pre-scale bound in _to_decimal used floor division, so\nfor negative bounds it was one below the legacy bound and venom\naccepted one input that legacy rejects, producing a decimal below\nMIN_DECIMAL. Use truncating division, matching legacy.",
+        "verified_at": "2026-10-10T12:58:12Z"
+      }
+    },
+    "url": "https://api.github.com/repos/vyperlang/vyper/commits/10e41359d8f566d4c16f162da17df8ab6417ae6f",
+    "html_url": "https://github.com/vyperlang/vyper/commit/10e41359d8f566d4c16f162da17df8ab6417ae6f",
+    "comments_url": "https://api.github.com/repos/vyperlang/vyper/commits/10e41359d8f566d4c16f162da17df8ab6417ae6f/comments",
+    "author": {
+      "login": "harkal",
+      "id": 5312224,
+      "node_id": "MDQ6VXNlcjUzMTIyMjQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5312224?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/harkal",
+      "html_url": "https://github.com/harkal",
+      "followers_url": "https://api.github.com/users/harkal/followers",
+      "following_url": "https://api.github.com/users/harkal/following{/other_user}",
+      "gists_url": "https://api.github.com/users/harkal/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/harkal/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/harkal/subscriptions",
+      "organizations_url": "https://api.github.com/users/harkal/orgs",
+      "repos_url": "https://api.github.com/users/harkal/repos",
+      "events_url": "https://api.github.com/users/harkal/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/harkal/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "e317f905d3ff0002f3b5a51ec8673c39d527a300",
+        "url": "https://api.github.com/repos/vyperlang/vyper/commits/e317f905d3ff0002f3b5a51ec8673c39d527a300",
+        "html_url": "https://github.com/vyperlang/vyper/commit/e317f905d3ff0002f3b5a51ec8673c39d527a300"
+      }
+    ]
+  },
+  {
+    "sha": "e317f905d3ff0002f3b5a51ec8673c39d527a300",
+    "node_id": "C_kwDOBGDvrNoAKGUzMTdmOTA1ZDNmZjAwMDJmM2I1YTUxZWM4NjczYzM5ZDUyN2EzMDA",
+    "commit": {
+      "author": {
+        "name": "trocher",
+        "email": "rocher14@live.fr",
+        "date": "2026-10-09T09:40:46Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-10-09T09:40:46Z"
+      },
+      "message": "chore[build]: add dockerfile for the OSS Scanner (#5302)\n\nadd `.oss-scanner/Dockerfile`, which sets up an environment for\nAnthropic's OSS Scanner. the image clones the repo, does an editable\ninstall with the `test` and `lint` dependency groups, and checks the\ninstall by running the unit tests. the scanner runs offline, so\neverything the test suite needs is installed while the image is built.\n\nCo-authored-by: trocher <tanguy.rocher@chainsecurity.com>",
+      "tree": {
+        "sha": "03ae3171799f52293abeb46f86635dff3c87d21a",
+        "url": "https://api.github.com/repos/vyperlang/vyper/git/trees/03ae3171799f52293abeb46f86635dff3c87d21a"
+      },
+      "url": "https://api.github.com/repos/vyperlang/vyper/git/commits/e317f905d3ff0002f3b5a51ec8673c39d527a300",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqyLaeCRC1aQ7uu5UhlAAAx84QAAd8zY0Lgta7o9gCRwFwQCs1\nvENtAjeWeJz+ipiHk84EgvhCE7Ux4+gw+HKa0hvao2f9qcngrQq+F3mpc4B7kgkz\ncItAJy15tjdjt2JvE0K1nO2puUGrA2DVkSygV0/QFPBWoEBlFOCN5F4Efn3rwFTv\nWCyh1Gf00PhHTR9LfuktifNEXunDSeChOqO1p0fO8RJFql+S9tZz3tRRZwL2Sjkc\nb24BevmvGY3sOFoDIfIfSLeY21QCKDgj/q57KGI+UaXh4nqAhUvzR7RDA+UmZMRe\nWY3Wxj2p6GVfLLh8/uklilROYrtTi7WclLDq/yp38AoL13vwpedoPlwluPR4Ko7l\n/yheCJkHPH6yqignoPe+jn/N1noP9gbQK3A1BvVdbIRcflufM+K+tXf8aX+vGq2s\ndDAe8nqMtq0ULQ1Mv/ZP+785RjPu7kKdlmQZLg9XJYN5UoPyiMui2dJHgSh16YVC\nVsByuR5AXa3cyvDEbB3ubCOpSHUchvP8LyQYOkiAYj5KBv8fxkMmJjH3oUD/JLur\nCYDYXxaKEzQcIFvS/L78PWXwEo8rFffXkbUv4WofzbSywt+H2NeK174vhE+zP5ea\nTejTmw7QpBGS9pVGYaixPARbxvrcLwcDKqKJD6AK/8w6xUULwU/BeAHJEnp4/auR\nUrvfeA4d1rmvl6Z0Sq4P\n=zW3I\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 03ae3171799f52293abeb46f86635dff3c87d21a\nparent ffa58c4068ae688d1d43509d0269217efe4b3aac\nauthor trocher <rocher14@live.fr> 1791538846 +0200\ncommitter GitHub <noreply@github.com> 1791538846 +0000\n\nchore[build]: add dockerfile for the OSS Scanner (#5302)\n\nadd `.oss-scanner/Dockerfile`, which sets up an environment for\nAnthropic's OSS Scanner. the image clones the repo, does an editable\ninstall with the `test` and `lint` dependency groups, and checks the\ninstall by running the unit tests. the scanner runs offline, so\neverything the test suite needs is installed while the image is built.\n\nCo-authored-by: trocher <tanguy.rocher@chainsecurity.com>",
+        "verified_at": "2026-10-09T09:40:47Z"
+      }
+    },
+    "url": "https://api.github.com/repos/vyperlang/vyper/commits/e317f905d3ff0002f3b5a51ec8673c39d527a300",
+    "html_url": "https://github.com/vyperlang/vyper/commit/e317f905d3ff0002f3b5a51ec8673c39d527a300",
+    "comments_url": "https://api.github.com/repos/vyperlang/vyper/commits/e317f905d3ff0002f3b5a51ec8673c39d527a300/comments",
+    "author": {
+      "login": "trocher",
+      "id": 43437004,
+      "node_id": "MDQ6VXNlcjQzNDM3MDA0",
+      "avatar_url": "https://avatars.githubusercontent.com/u/43437004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/trocher",
+      "html_url": "https://github.com/trocher",
+      "followers_url": "https://api.github.com/users/trocher/followers",
+      "following_url": "https://api.github.com/users/trocher/following{/other_user}",
+      "gists_url": "https://api.github.com/users/trocher/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/trocher/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/trocher/subscriptions",
+      "organizations_url": "https://api.github.com/users/trocher/orgs",
+      "repos_url": "https://api.github.com/users/trocher/repos",
+      "events_url": "https://api.github.com/users/trocher/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/trocher/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "ffa58c4068ae688d1d43509d0269217efe4b3aac",
+        "url": "https://api.github.com/repos/vyperlang/vyper/commits/ffa58c4068ae688d1d43509d0269217efe4b3aac",
+        "html_url": "https://github.com/vyperlang/vyper/commit/ffa58c4068ae688d1d43509d0269217efe4b3aac"
+      }
+    ]
+  },
+  {
+    "sha": "ffa58c4068ae688d1d43509d0269217efe4b3aac",
+    "node_id": "C_kwDOBGDvrNoAKGZmYTU4YzQwNjhhZTY4OGQxZDQzNTA5ZDAyNjkyMTdlZmU0YjNhYWM",
+    "commit": {
+      "author": {
+        "name": "imitater-dou",
+        "email": "ikun3.1415927@gmail.com",
+        "date": "2026-10-09T08:45:41Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-10-09T08:45:41Z"
+      },
+      "message": "chore[docs]: fix stale file links in semantics README (#5293)\n\nupdate links in vyper/semantics/README.md for files that were renamed\nor removed: types/bases.py -> types/base.py, analysis/pre_typecheck.py\n-> analysis/constant_folding.py, and drop analysis/annotation.py (merged\ninto local.py).",
+      "tree": {
+        "sha": "02bb1630a3a7ba43393404d405b4ea5e77d1fd03",
+        "url": "https://api.github.com/repos/vyperlang/vyper/git/trees/02bb1630a3a7ba43393404d405b4ea5e77d1fd03"
+      },
+      "url": "https://api.github.com/repos/vyperlang/vyper/git/commits/ffa58c4068ae688d1d43509d0269217efe4b3aac",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqyKm1CRC1aQ7uu5UhlAAAYHAQAEcS1MlfC5/koKy3Q4FTjVpc\n6UO2t3cXKMKo2QsdeTbjIV27ajhs4XqeJtS7QmxmIOzZMyYduO+jit9lINQWS7mz\niW6qXtO075MSOXHHmhWdu/l/1pQ1EdwVs/Qb/O8XDXgIwPH+ViwL9d+d8MMo31mk\n57sC+SAm6HA3pp+im6jcNemjHK7dH4i3bxm+hAXhs9wKL5sZBobON5Nkno8b4bbw\nAMaUY9h9R7xa9cYL4IWFco1jvZpTu1VhpwbtP/e2JFLu3o4TZaVt6WzHeQu5qeW5\nRzf8iYIL8WvJD8AzuCFoPCECUNfaOIF2Gplw9kAnLY8IRPi6Ptjfvte1voGbu93B\nB7vucvSjP0KohHTuEovAJqyIjkod0feSxS4nEt+MnglFhYS6TsHbg2/r0kH6WA4t\nbdvqieYbQce/qWfSdXTRY/xYlz3sIC0jSjKnzNFhifaNaLGKjEXoE+6v9o3S8Z0a\nBZxMH8bzf0+6NFPEDmxlLyq4Qt54GMFljztu88P94o2bKZUwg2guUDyJrquiKlWb\nWQPliwThO8iA7R2kP/ErwKIkXPupshu/rARYhKE/KJO0r45Rvmf3IpTLYSTXQeRj\nWrp/MZUGc0MnwwsyJB4Rh4FYzgssBARUW7OzdD7+cKNBAFhRIcdZB6Xvxc7gKiR6\nRhESCVmok1ICT1nEMF8h\n=57qZ\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 02bb1630a3a7ba43393404d405b4ea5e77d1fd03\nparent 73821545d076ab2c7fefbbcba95e07ad33dd1dd5\nauthor imitater-dou <ikun3.1415927@gmail.com> 1791535541 -0700\ncommitter GitHub <noreply@github.com> 1791535541 +0000\n\nchore[docs]: fix stale file links in semantics README (#5293)\n\nupdate links in vyper/semantics/README.md for files that were renamed\nor removed: types/bases.py -> types/base.py, analysis/pre_typecheck.py\n-> analysis/constant_folding.py, and drop analysis/annotation.py (merged\ninto local.py).",
+        "verified_at": "2026-10-09T08:45:41Z"
+      }
+    },
+    "url": "https://api.github.com/repos/vyperlang/vyper/commits/ffa58c4068ae688d1d43509d0269217efe4b3aac",
+    "html_url": "https://github.com/vyperlang/vyper/commit/ffa58c4068ae688d1d43509d0269217efe4b3aac",
+    "comments_url": "https://api.github.com/repos/vyperlang/vyper/commits/ffa58c4068ae688d1d43509d0269217efe4b3aac/comments",
+    "author": {
+      "login": "imitater-dou",
+      "id": 287387610,
+      "node_id": "U_kgDOESEv2g",
+      "avatar_url": "https://avatars.githubusercontent.com/u/287387610?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/imitater-dou",
+      "html_url": "https://github.com/imitater-dou",
+      "followers_url": "https://api.github.com/users/imitater-dou/followers",
+      "following_url": "https://api.github.com/users/imitater-dou/following{/other_user}",
+      "gists_url": "https://api.github.com/users/imitater-dou/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/imitater-dou/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/imitater-dou/subscriptions",
+      "organizations_url": "https://api.github.com/users/imitater-dou/orgs",
+      "repos_url": "https://api.github.com/users/imitater-dou/repos",
+      "events_url": "https://api.github.com/users/imitater-dou/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/imitater-dou/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "73821545d076ab2c7fefbbcba95e07ad33dd1dd5",
+        "url": "https://api.github.com/repos/vyperlang/vyper/commits/73821545d076ab2c7fefbbcba95e07ad33dd1dd5",
+        "html_url": "https://github.com/vyperlang/vyper/commit/73821545d076ab2c7fefbbcba95e07ad33dd1dd5"
+      }
+    ]
+  },
+  {
+    "sha": "73821545d076ab2c7fefbbcba95e07ad33dd1dd5",
+    "node_id": "C_kwDOBGDvrNoAKDczODIxNTQ1ZDA3NmFiMmM3ZmVmYmJjYmE5NWUwN2FkMzNkZDFkZDU",
+    "commit": {
+      "author": {
+        "name": "kenny-ish",
+        "email": "114967656+kenny-ish@users.noreply.github.com",
+        "date": "2026-10-09T08:16:59Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-10-09T08:16:59Z"
+      },
+      "message": "chore[docs]: document `block.prevhash` at block 0 (#5291)\n\n`block.prevhash` compiles to a bare `blockhash(number - 1)`, without the\nclamps that the `blockhash()` builtin adds and without the underflow\ncheck that `block.number - 1` gets in user code. at block 0,\n`blockhash(block.number - 1)` reverts, while `block.prevhash` evaluates\nto zero.\n\nthe compiler assumes the block number is never 0 on real chains, so\ninstead of adding the checks (and their gas cost) to `block.prevhash`,\ndocument the difference next to the other notes on environment\nvariables.\n\nfixes GH 5146",
+      "tree": {
+        "sha": "e760e01c3eefc5fb5102b3072a873add8aea2963",
+        "url": "https://api.github.com/repos/vyperlang/vyper/git/trees/e760e01c3eefc5fb5102b3072a873add8aea2963"
+      },
+      "url": "https://api.github.com/repos/vyperlang/vyper/git/commits/73821545d076ab2c7fefbbcba95e07ad33dd1dd5",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqyKL7CRC1aQ7uu5UhlAAA9E4QADq7febBA6kak4Y8oGB+2efj\nB+S0bZgcqrElqyPqgWrSCH/8x+3U6kmZuL3G5bCpneH/mQhM0qkmr+z3UFc6B5Et\nPYWtf8zB2MpLOjZvvw0x63SvbgERw+rrObL+uyoj8bBfpXlHiRHEHwgKKPIZI/Kb\nMoqj+hoGHIwIMBgNt66KFik4P4wJS+m6iOmVc4iPruy7/HJC3DyiexoSnzFksDpt\neeAsXC0fYRCsKZ6voCr668LprJkzBSLMUrLIeV9QX41lldC3ySbu/069OZ/Rj0hM\n70PxSATXLJLsE60AndSSssOPI17J+0dxpeI9F/oHTBiM3drbTCW+gtwYEnc7986N\n3S6mHzGR3vCHPUhvEqE6nEJR2rZAWYBLvuyi2ZEMrbiFuFRVk920X4M77U9/DxY5\nmCfj4J72zJqrN1XVKze3K3ki9y3FyiAYDelE7lt7f8s8EazojgpY6W3EjdriU7BK\nazlR/dixrufsGLlMUW2CNZq74ohPIPBQVcEshoH36MSg/lVnhk2fJ1u99IERQBjp\nMruOKjw/Zw1wNplWKVEhcTlIxAZA52pAPjh3BFW6KFH/A4GTKXZobUdp8wboq0jo\n+6JYIMjSWYd8cKSSiJXNA99iRb6Md/mD3g3+mVNpM4sFLrApycjvaltifygJzktE\n6AOjQHoaChWNj0ChLo2M\n=/nd5\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree e760e01c3eefc5fb5102b3072a873add8aea2963\nparent 95fe091b2d654184a6427bfe8732ac223a885e6f\nauthor kenny-ish <114967656+kenny-ish@users.noreply.github.com> 1791533819 +0700\ncommitter GitHub <noreply@github.com> 1791533819 +0200\n\nchore[docs]: document `block.prevhash` at block 0 (#5291)\n\n`block.prevhash` compiles to a bare `blockhash(number - 1)`, without the\nclamps that the `blockhash()` builtin adds and without the underflow\ncheck that `block.number - 1` gets in user code. at block 0,\n`blockhash(block.number - 1)` reverts, while `block.prevhash` evaluates\nto zero.\n\nthe compiler assumes the block number is never 0 on real chains, so\ninstead of adding the checks (and their gas cost) to `block.prevhash`,\ndocument the difference next to the other notes on environment\nvariables.\n\nfixes GH 5146",
+        "verified_at": "2026-10-09T08:17:00Z"
+      }
+    },
+    "url": "https://api.github.com/repos/vyperlang/vyper/commits/73821545d076ab2c7fefbbcba95e07ad33dd1dd5",
+    "html_url": "https://github.com/vyperlang/vyper/commit/73821545d076ab2c7fefbbcba95e07ad33dd1dd5",
+    "comments_url": "https://api.github.com/repos/vyperlang/vyper/commits/73821545d076ab2c7fefbbcba95e07ad33dd1dd5/comments",
+    "author": {
+      "login": "kenny-ish",
+      "id": 114967656,
+      "node_id": "U_kgDOBtpEaA",
+      "avatar_url": "https://avatars.githubusercontent.com/u/114967656?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/kenny-ish",
+      "html_url": "https://github.com/kenny-ish",
+      "followers_url": "https://api.github.com/users/kenny-ish/followers",
+      "following_url": "https://api.github.com/users/kenny-ish/following{/other_user}",
+      "gists_url": "https://api.github.com/users/kenny-ish/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/kenny-ish/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/kenny-ish/subscriptions",
+      "organizations_url": "https://api.github.com/users/kenny-ish/orgs",
+      "repos_url": "https://api.github.com/users/kenny-ish/repos",
+      "events_url": "https://api.github.com/users/kenny-ish/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/kenny-ish/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "95fe091b2d654184a6427bfe8732ac223a885e6f",
+        "url": "https://api.github.com/repos/vyperlang/vyper/commits/95fe091b2d654184a6427bfe8732ac223a885e6f",
+        "html_url": "https://github.com/vyperlang/vyper/commit/95fe091b2d654184a6427bfe8732ac223a885e6f"
+      }
+    ]
+  },
+  {
+    "sha": "95fe091b2d654184a6427bfe8732ac223a885e6f",
+    "node_id": "C_kwDOBGDvrNoAKDk1ZmUwOTFiMmQ2NTQxODRhNjQyN2JmZTg3MzJhYzIyM2E4ODVlNmY",
+    "commit": {
+      "author": {
+        "name": "Harry Kalogirou",
+        "email": "harry@kalogirou.net",
+        "date": "2026-10-07T06:13:43Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-10-07T06:13:43Z"
+      },
+      "message": "fix[venom]: fix concat buffer overrun with bytesM args (#5295)\n\nbytesM args are stored with full-word mstores at unaligned offsets, so\na store near the end of the data can write up to 31 bytes past the\nconcat output buffer. size the buffer to cover the furthest byte any\nbytesM store can reach.",
+      "tree": {
+        "sha": "d93be60ffe41d7f21e9c4ab9e989169b0784b931",
+        "url": "https://api.github.com/repos/vyperlang/vyper/git/trees/d93be60ffe41d7f21e9c4ab9e989169b0784b931"
+      },
+      "url": "https://api.github.com/repos/vyperlang/vyper/git/commits/95fe091b2d654184a6427bfe8732ac223a885e6f",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqxeMXCRC1aQ7uu5UhlAAAW6sQACLFgXpgxOLaadpsX3eZkBYF\nrueGQTaSPnUobrGvCca+zyf50B56bb4b3FSe3uhqkBB4YNei8v+Ehwr81riWMlxx\nymawpH8b0Zaoe7gvB1YeKdwbT7WrevXH8EdT1joUEKnE/ZpjqiW8LRju3Sf0wbia\nBVOJezt5cJsAMiXCUNH2NPiPtEjRLNnXUr6yrbM46tIejK6DRQK6dfWywoNhFQk5\nR/VFbD5KP+OEAhAKo+xsvhoVWaRLUEGQ9ImVPfl4bIEf0aDd2De1SvTjyIu+btAH\nAH5TLXU73hJ3+KH0g8QEAr5ysb/UR/hsTj2gMZ1Jrd5ehKJhFKknmKH1udhwzQYX\npB7jl560gwB5VNhdDwxcVyLoxX6ctsGWn5y0vJ7LTrWTfoGwIpcf9ImKa9i48/AM\nivU6zFOJvRDr7keo65HE9zRLoRVbqLQrECJAwzWW8vMQWggHQgMvFeI7AExcLsyI\ngoIcbctkgdp2/zMzIAN3X9SXUZYLERPrFxBFJfUeKy0TtBXSTGmK25aS8D/6QyL3\nZpp9B7ijTrgSuqj8L+nN9GI5NuDq7tyIDOxY6bOgVu68DB71WGE3s6UqDvPcEmYS\njPWKZlMn9KZnS4fPxviRe47VHpobQBmyPzlb0ROShrHe4YR3bcawZFLF5r87eWnX\ngsfMiDms9khyD8h5vqRW\n=xYEx\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree d93be60ffe41d7f21e9c4ab9e989169b0784b931\nparent 17e925db6b33352338f0b94099f3dd1d65e30554\nauthor Harry Kalogirou <harry@kalogirou.net> 1791353623 +0300\ncommitter GitHub <noreply@github.com> 1791353623 +0300\n\nfix[venom]: fix concat buffer overrun with bytesM args (#5295)\n\nbytesM args are stored with full-word mstores at unaligned offsets, so\na store near the end of the data can write up to 31 bytes past the\nconcat output buffer. size the buffer to cover the furthest byte any\nbytesM store can reach.",
+        "verified_at": "2026-10-07T06:13:43Z"
+      }
+    },
+    "url": "https://api.github.com/repos/vyperlang/vyper/commits/95fe091b2d654184a6427bfe8732ac223a885e6f",
+    "html_url": "https://github.com/vyperlang/vyper/commit/95fe091b2d654184a6427bfe8732ac223a885e6f",
+    "comments_url": "https://api.github.com/repos/vyperlang/vyper/commits/95fe091b2d654184a6427bfe8732ac223a885e6f/comments",
+    "author": {
+      "login": "harkal",
+      "id": 5312224,
+      "node_id": "MDQ6VXNlcjUzMTIyMjQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5312224?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/harkal",
+      "html_url": "https://github.com/harkal",
+      "followers_url": "https://api.github.com/users/harkal/followers",
+      "following_url": "https://api.github.com/users/harkal/following{/other_user}",
+      "gists_url": "https://api.github.com/users/harkal/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/harkal/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/harkal/subscriptions",
+      "organizations_url": "https://api.github.com/users/harkal/orgs",
+      "repos_url": "https://api.github.com/users/harkal/repos",
+      "events_url": "https://api.github.com/users/harkal/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/harkal/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "17e925db6b33352338f0b94099f3dd1d65e30554",
+        "url": "https://api.github.com/repos/vyperlang/vyper/commits/17e925db6b33352338f0b94099f3dd1d65e30554",
+        "html_url": "https://github.com/vyperlang/vyper/commit/17e925db6b33352338f0b94099f3dd1d65e30554"
+      }
+    ]
+  },
+  {
+    "sha": "17e925db6b33352338f0b94099f3dd1d65e30554",
+    "node_id": "C_kwDOBGDvrNoAKDE3ZTkyNWRiNmIzMzM1MjMzOGYwYjk0MDk5ZjNkZDFkNjVlMzA1NTQ",
+    "commit": {
+      "author": {
+        "name": "HodanPlodky",
+        "email": "36966616+HodanPlodky@users.noreply.github.com",
+        "date": "2026-10-02T15:59:34Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-10-02T15:59:34Z"
+      },
+      "message": "fix[codegen]: complex tuple wrap abi decode (#5286)\n\nFixed the issue where the `abi_decode` would cause assert \nit the `punnable`, this brings the `abi_decode` venom \ncodegen closer to the legacy behavior.",
+      "tree": {
+        "sha": "b5fa225c41ef5dfcd5a5f375096cf921bf88f78b",
+        "url": "https://api.github.com/repos/vyperlang/vyper/git/trees/b5fa225c41ef5dfcd5a5f375096cf921bf88f78b"
+      },
+      "url": "https://api.github.com/repos/vyperlang/vyper/git/commits/17e925db6b33352338f0b94099f3dd1d65e30554",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqv9TmCRC1aQ7uu5UhlAAAULgQAIaYhVTiCdsDeQLj1xzw4srC\nMKEJyj9rgBhIZyOz870gFv/0tcI+4sDzF2kclVLIwucpvUfwgTEChOZCoiZiE2ro\nuCCQ4439kQMzjkwyR+QKbjM6siH2bqpuDk9MFbOhlxiXus5pAykQoSiArsw32WYy\nh8QPRDJxtLX1NPhsEvzvNmG9p17Ln+Nt9yp0aIcxe9atmF4qMsg32g80BYH9ICah\nWKqi1Yb5uNWpJxDHCrVXZPqqTWpcE5Rs9PvlT8rc24WhvUjJTLpVxEUbIJ5c+gb9\nPFOP9gwZYjk3DDMWAQ5NzAvvlNIKBlgD9oex1wW32e0ocpZ2ZCfsEFvRu1DAZL2g\nrvR5EG2qWnxn2w0Lh3Vx9hu/StMj/0UQ12Negk6NoVv5SkdFLApP8VzMi5GPh/69\nV8ISUNAyQTbQi4HfuRph8AZJAwRi+IY0Ghw1vSkpEU5H99zi8SGw2b6hLWN2jh4J\nVquWZEDjMNnmITUHTrMgI/TNejxH4743F4mO4eyrlKKJS/oRE93F9ncO9lZnH8x+\nDOKGFen2oaiJT40FhGLMJH31Y6QzDAOuRjPAcZBAAWbfqMqcdGFKi9elp+CM3D86\n16CaAUH0HbPsGuR+Z8sB1wReJ2LwGhJGMNnDEU6joIKypatPcDkCN/RaPr2SAsOa\nU02kBqjJpWfd1GRZ63c6\n=7oES\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree b5fa225c41ef5dfcd5a5f375096cf921bf88f78b\nparent f89b81f9b85533791c8191bbdf1fa1a08bde0ffe\nauthor HodanPlodky <36966616+HodanPlodky@users.noreply.github.com> 1790956774 +0000\ncommitter GitHub <noreply@github.com> 1790956774 +0300\n\nfix[codegen]: complex tuple wrap abi decode (#5286)\n\nFixed the issue where the `abi_decode` would cause assert \nit the `punnable`, this brings the `abi_decode` venom \ncodegen closer to the legacy behavior.",
+        "verified_at": "2026-10-02T15:59:35Z"
+      }
+    },
+    "url": "https://api.github.com/repos/vyperlang/vyper/commits/17e925db6b33352338f0b94099f3dd1d65e30554",
+    "html_url": "https://github.com/vyperlang/vyper/commit/17e925db6b33352338f0b94099f3dd1d65e30554",
+    "comments_url": "https://api.github.com/repos/vyperlang/vyper/commits/17e925db6b33352338f0b94099f3dd1d65e30554/comments",
+    "author": {
+      "login": "HodanPlodky",
+      "id": 36966616,
+      "node_id": "MDQ6VXNlcjM2OTY2NjE2",
+      "avatar_url": "https://avatars.githubusercontent.com/u/36966616?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/HodanPlodky",
+      "html_url": "https://github.com/HodanPlodky",
+      "followers_url": "https://api.github.com/users/HodanPlodky/followers",
+      "following_url": "https://api.github.com/users/HodanPlodky/following{/other_user}",
+      "gists_url": "https://api.github.com/users/HodanPlodky/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/HodanPlodky/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/HodanPlodky/subscriptions",
+      "organizations_url": "https://api.github.com/users/HodanPlodky/orgs",
+      "repos_url": "https://api.github.com/users/HodanPlodky/repos",
+      "events_url": "https://api.github.com/users/HodanPlodky/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/HodanPlodky/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "f89b81f9b85533791c8191bbdf1fa1a08bde0ffe",
+        "url": "https://api.github.com/repos/vyperlang/vyper/commits/f89b81f9b85533791c8191bbdf1fa1a08bde0ffe",
+        "html_url": "https://github.com/vyperlang/vyper/commit/f89b81f9b85533791c8191bbdf1fa1a08bde0ffe"
+      }
+    ]
+  },
+  {
+    "sha": "f89b81f9b85533791c8191bbdf1fa1a08bde0ffe",
+    "node_id": "C_kwDOBGDvrNoAKGY4OWI4MWY5Yjg1NTMzNzkxYzgxOTFiYmRmMWZhMWEwOGJkZTBmZmU",
+    "commit": {
+      "author": {
+        "name": "Harry Kalogirou",
+        "email": "harry@kalogirou.net",
+        "date": "2026-10-02T13:24:54Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-10-02T13:24:54Z"
+      },
+      "message": "fix[venom]: reject risky append/pop overlap like legacy (#5280)\n\nreject risky append/pop overlap to match legacy behaviour",
+      "tree": {
+        "sha": "eb7dd52d19886e840d937fe3a8fa2ef3976cb964",
+        "url": "https://api.github.com/repos/vyperlang/vyper/git/trees/eb7dd52d19886e840d937fe3a8fa2ef3976cb964"
+      },
+      "url": "https://api.github.com/repos/vyperlang/vyper/git/commits/f89b81f9b85533791c8191bbdf1fa1a08bde0ffe",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqv7CmCRC1aQ7uu5UhlAAA/qkQAFGoxoCt/Uj7ELHvwB9t0MHk\ngTtQMeqfrRK9StvgZqw0hXW9NyhZ8jKq2BzgAtCgmSUdI7xsA90bM2+vdyYB54RL\nVccMXqoGfCa80DjFJiih/+NKZTecivgPxb+LbaspgakAMRs+zi5+4SdgEBryZLOr\n4UQh+7T2nXtxNtLemu/KlDQ9uQbX0l+JpmjbZBL2k5oCNqqCJFE4iyd/HtzEFkDm\nFUNt4Zev7ojDWvk+reF2dOYvRGIQOnW68BZ3ssQ0ndz++fwdF1Xuw57GKYGQPPw+\nrQxjX2p7i5mlwtrbEFELVCk1uYKwNOdKgLvjCmpvayK9Uya5nsMYKyBTVnF94S6h\nY/FGbXfPNS2RbrHed+aIacsI2CwRz3QfSzMdMD1qZpyMowFqcfkWCPgfCu9qbPHG\nnXH4MOu2xISrAK6KstYrDfQzvycorzKTirM8W3MxaauuJd5uCGyQqQW8C/OROdHL\nHd98Y+QYXNxSNHwGKlYwftLKGTvVU6SLj6F5OjFazDnWsq271NMpKOnS5Lzti9sj\nfCUUTE94KZXyldcb3fGOQtLxXpszpsw2PMI5lJq3cnS5nlDGH3YGpixzqw53ICFQ\nZmPu090wJe3RszuLr6JZIX1ie8AIps0mGS/PcmbN+DBlZEg2S+7NYnmU3qVJPYSI\nXw35mLxea3I4fXMHt5iL\n=gs+i\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree eb7dd52d19886e840d937fe3a8fa2ef3976cb964\nparent d1b33e8cc4a008a5a18c3bbc484c4e8834495769\nauthor Harry Kalogirou <harry@kalogirou.net> 1790947494 +0300\ncommitter GitHub <noreply@github.com> 1790947494 +0300\n\nfix[venom]: reject risky append/pop overlap like legacy (#5280)\n\nreject risky append/pop overlap to match legacy behaviour",
+        "verified_at": "2026-10-02T13:24:54Z"
+      }
+    },
+    "url": "https://api.github.com/repos/vyperlang/vyper/commits/f89b81f9b85533791c8191bbdf1fa1a08bde0ffe",
+    "html_url": "https://github.com/vyperlang/vyper/commit/f89b81f9b85533791c8191bbdf1fa1a08bde0ffe",
+    "comments_url": "https://api.github.com/repos/vyperlang/vyper/commits/f89b81f9b85533791c8191bbdf1fa1a08bde0ffe/comments",
+    "author": {
+      "login": "harkal",
+      "id": 5312224,
+      "node_id": "MDQ6VXNlcjUzMTIyMjQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5312224?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/harkal",
+      "html_url": "https://github.com/harkal",
+      "followers_url": "https://api.github.com/users/harkal/followers",
+      "following_url": "https://api.github.com/users/harkal/following{/other_user}",
+      "gists_url": "https://api.github.com/users/harkal/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/harkal/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/harkal/subscriptions",
+      "organizations_url": "https://api.github.com/users/harkal/orgs",
+      "repos_url": "https://api.github.com/users/harkal/repos",
+      "events_url": "https://api.github.com/users/harkal/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/harkal/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "d1b33e8cc4a008a5a18c3bbc484c4e8834495769",
+        "url": "https://api.github.com/repos/vyperlang/vyper/commits/d1b33e8cc4a008a5a18c3bbc484c4e8834495769",
+        "html_url": "https://github.com/vyperlang/vyper/commit/d1b33e8cc4a008a5a18c3bbc484c4e8834495769"
+      }
+    ]
+  },
+  {
+    "sha": "d1b33e8cc4a008a5a18c3bbc484c4e8834495769",
+    "node_id": "C_kwDOBGDvrNoAKGQxYjMzZThjYzRhMDA4YTVhMThjM2JiYzQ4NGM0ZTg4MzQ0OTU3Njk",
+    "commit": {
+      "author": {
+        "name": "Harry Kalogirou",
+        "email": "harry@kalogirou.net",
+        "date": "2026-09-30T08:42:44Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-09-30T08:42:44Z"
+      },
+      "message": "fix[venom]: match legacy for appends to removed rows (#5281)\n\nmatch legacy's rejection of an append whose argument removes the row\nbeing appended to. venom previously checked the row too early and then\nsilently wrote into it after removal.\n\nrecheck the array positions after evaluating the argument. reuse the\noriginal positions to keep venom's evaluation order and avoid running\nindex expressions twice.",
+      "tree": {
+        "sha": "c14bb22b5029531e23b418913d5a7c153430a529",
+        "url": "https://api.github.com/repos/vyperlang/vyper/git/trees/c14bb22b5029531e23b418913d5a7c153430a529"
+      },
+      "url": "https://api.github.com/repos/vyperlang/vyper/git/commits/d1b33e8cc4a008a5a18c3bbc484c4e8834495769",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqvMuECRC1aQ7uu5UhlAAAc5IQABzuN7LiN3RSBXWzydzXmNMm\nGLTCOh3k9JSUOwJNkdTFRszgQ05px1rpVEUQGoB9hVjk9dhkBV5ikeFt0dCnRHT0\n7aiXzBsBVRGFTcT69fBWRlP5Ml//gjuArCKahYSE8YE5j+t1RczXhsczhilxDg90\n8mbTy648YvyJBLneYSv3lN8WrSb8stZYDREYx3xfKTnVoGn8UPiHoIiah1I6M0m+\nxDWTXMLg29+F3Z8uUKNZNTmkdpcuXi5HRQOIJmb9FVtM7mH1SAjuTd9TE4AoYvQ5\nEQSiMtH4j0rYgdS952J5SbUkkPVyMVpoU3COd/UNxzeF23FeVdorS179r9OvlQxF\nGOQ0igA43xqCe3XBEfYaSHqEg1bWl3EgHxTwnaxK1j3/v1XnEd4pnM+G68xT05qd\nComTj+D/LqwB83fb1SFpem5wIO0fNBCDZZ5gu+RhDToqS+PCTD9WHMhw5+EbdoSa\nLLfYHYTVjV7AyyP25NfEihlRz9KDhKIYMxJ6L1sTc8eTkJMi2pldeRKRCbKH5KRj\nvlXuWwzNkOXghazHCNLZTcVfBwMfrtuBeRgu5fhZbJZ0DkIgvLkZcgqzjH1qkP/F\nlT9hnZLRo8lNaRm2DsTOIurNoWsPAEQAvJ43u/pL8u3ir4CCpK4hCjBSybiydZZP\ngutj9Ceyh5ZkFQh0/dsj\n=yao1\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree c14bb22b5029531e23b418913d5a7c153430a529\nparent 04e6b46138874e2db3a0c655feafd47c000ebae8\nauthor Harry Kalogirou <harry@kalogirou.net> 1790757764 +0300\ncommitter GitHub <noreply@github.com> 1790757764 +0000\n\nfix[venom]: match legacy for appends to removed rows (#5281)\n\nmatch legacy's rejection of an append whose argument removes the row\nbeing appended to. venom previously checked the row too early and then\nsilently wrote into it after removal.\n\nrecheck the array positions after evaluating the argument. reuse the\noriginal positions to keep venom's evaluation order and avoid running\nindex expressions twice.",
+        "verified_at": "2026-09-30T08:42:45Z"
+      }
+    },
+    "url": "https://api.github.com/repos/vyperlang/vyper/commits/d1b33e8cc4a008a5a18c3bbc484c4e8834495769",
+    "html_url": "https://github.com/vyperlang/vyper/commit/d1b33e8cc4a008a5a18c3bbc484c4e8834495769",
+    "comments_url": "https://api.github.com/repos/vyperlang/vyper/commits/d1b33e8cc4a008a5a18c3bbc484c4e8834495769/comments",
+    "author": {
+      "login": "harkal",
+      "id": 5312224,
+      "node_id": "MDQ6VXNlcjUzMTIyMjQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5312224?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/harkal",
+      "html_url": "https://github.com/harkal",
+      "followers_url": "https://api.github.com/users/harkal/followers",
+      "following_url": "https://api.github.com/users/harkal/following{/other_user}",
+      "gists_url": "https://api.github.com/users/harkal/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/harkal/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/harkal/subscriptions",
+      "organizations_url": "https://api.github.com/users/harkal/orgs",
+      "repos_url": "https://api.github.com/users/harkal/repos",
+      "events_url": "https://api.github.com/users/harkal/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/harkal/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "04e6b46138874e2db3a0c655feafd47c000ebae8",
+        "url": "https://api.github.com/repos/vyperlang/vyper/commits/04e6b46138874e2db3a0c655feafd47c000ebae8",
+        "html_url": "https://github.com/vyperlang/vyper/commit/04e6b46138874e2db3a0c655feafd47c000ebae8"
+      }
+    ]
+  }
+]

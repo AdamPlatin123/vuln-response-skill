@@ -1,0 +1,52 @@
+[
+  {
+    "name": "v0.5.0b1",
+    "zipball_url": "https://api.github.com/repos/vyperlang/vyper/zipball/refs/tags/v0.5.0b1",
+    "tarball_url": "https://api.github.com/repos/vyperlang/vyper/tarball/refs/tags/v0.5.0b1",
+    "commit": {
+      "sha": "577d2534356903076bb79b5b15ebd4d772994693",
+      "url": "https://api.github.com/repos/vyperlang/vyper/commits/577d2534356903076bb79b5b15ebd4d772994693"
+    },
+    "node_id": "MDM6UmVmNzM0NjE2NzY6cmVmcy90YWdzL3YwLjUuMGIx"
+  },
+  {
+    "name": "v0.5.0a3",
+    "zipball_url": "https://api.github.com/repos/vyperlang/vyper/zipball/refs/tags/v0.5.0a3",
+    "tarball_url": "https://api.github.com/repos/vyperlang/vyper/tarball/refs/tags/v0.5.0a3",
+    "commit": {
+      "sha": "994bfdec4ff154ef84512b508409e1763022560c",
+      "url": "https://api.github.com/repos/vyperlang/vyper/commits/994bfdec4ff154ef84512b508409e1763022560c"
+    },
+    "node_id": "MDM6UmVmNzM0NjE2NzY6cmVmcy90YWdzL3YwLjUuMGEz"
+  },
+  {
+    "name": "v0.5.0a2",
+    "zipball_url": "https://api.github.com/repos/vyperlang/vyper/zipball/refs/tags/v0.5.0a2",
+    "tarball_url": "https://api.github.com/repos/vyperlang/vyper/tarball/refs/tags/v0.5.0a2",
+    "commit": {
+      "sha": "0cc5c4ad5a80b4ffa652bed8ecc358f5a22a3bce",
+      "url": "https://api.github.com/repos/vyperlang/vyper/commits/0cc5c4ad5a80b4ffa652bed8ecc358f5a22a3bce"
+    },
+    "node_id": "MDM6UmVmNzM0NjE2NzY6cmVmcy90YWdzL3YwLjUuMGEy"
+  },
+  {
+    "name": "v0.5.0a1",
+    "zipball_url": "https://api.github.com/repos/vyperlang/vyper/zipball/refs/tags/v0.5.0a1",
+    "tarball_url": "https://api.github.com/repos/vyperlang/vyper/tarball/refs/tags/v0.5.0a1",
+    "commit": {
+      "sha": "7d73c46878e850987891ac21430fc4d29af33d5a",
+      "url": "https://api.github.com/repos/vyperlang/vyper/commits/7d73c46878e850987891ac21430fc4d29af33d5a"
+    },
+    "node_id": "MDM6UmVmNzM0NjE2NzY6cmVmcy90YWdzL3YwLjUuMGEx"
+  },
+  {
+    "name": "v0.4.3",
+    "zipball_url": "https://api.github.com/repos/vyperlang/vyper/zipball/refs/tags/v0.4.3",
+    "tarball_url": "https://api.github.com/repos/vyperlang/vyper/tarball/refs/tags/v0.4.3",
+    "commit": {
+      "sha": "bff19ea204059290da652854cd634abef10f6c43",
+      "url": "https://api.github.com/repos/vyperlang/vyper/commits/bff19ea204059290da652854cd634abef10f6c43"
+    },
+    "node_id": "MDM6UmVmNzM0NjE2NzY6cmVmcy90YWdzL3YwLjQuMw=="
+  }
+]

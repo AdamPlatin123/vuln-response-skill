@@ -1,0 +1,87 @@
+{
+  "ghsa_id": "GHSA-2489-32vh-8rrc",
+  "cve_id": null,
+  "url": "https://api.github.com/repos/vyperlang/vyper/security-advisories/GHSA-2489-32vh-8rrc",
+  "html_url": "https://github.com/vyperlang/vyper/security/advisories/GHSA-2489-32vh-8rrc",
+  "summary": "Function variables can replace imported constant values and default arguments",
+  "description": "## Summary\r\n\r\nVyper can resolve names inside unfoldable constants and omitted default arguments against the function using them rather than their original declaration in an imported module. A same-named parameter, local, or loop variable can silently replace the intended value, including with values outside the declared type's range.\r\n\r\n## Details\r\n\r\nThese expressions are typechecked where declared but compiled at their use site. In `vyper/codegen/expr.py`, `parse_Name` checks `context.vars` before using the name's semantic binding. Consequently, a variable in the using function can override a reference that was validated as a module constant or immutable.\r\n\r\nUnfoldable constant values are expanded by `parse_Name` and `parse_Attribute`. Omitted internal defaults are compiled through `Expr(default, context)` in `self_call.py`; external defaults are similarly compiled in the function's context by `external_function.py`.\r\n\r\nThe colliding declaration must live in an imported module: declaring the constant and same-named parameter in one module fails with `NamespaceCollision`. Expansion is recursive, so qualifying the outer constant as `lib.CS` does not protect bare names inside its value. Constant and internal-default expansion can capture in-scope parameters, locals, or loop variables; external defaults can capture parameters through expanded imported constants.\r\n\r\nThe replacement can also bypass type constraints: primitive setters trust internally encoded values and do not necessarily clamp them to the destination type. The using function's `uint256` word can therefore enter a nominal `uint8` slot unchanged. Fully folded expressions avoid the name lookup and are unaffected by this trigger.\r\n\r\n## Proof of concept\r\n\r\n```vyper\r\n# lib.vy\r\nstruct S:\r\n    a: uint8\r\n\r\nE: constant(uint8) = empty(uint8)\r\nCS: constant(S) = S(a=E)\r\n\r\n@internal\r\n@pure\r\ndef f(x: uint8 = E) -> uint8:\r\n    return x\r\n```\r\n\r\n```vyper\r\n# main.vy\r\nimport lib\r\n\r\n@external\r\n@pure\r\ndef test(E: uint256) -> (uint256, uint256):\r\n    return convert(lib.f(), uint256), convert(lib.CS.a, uint256)\r\n```\r\n\r\nBoth results should be `0`. Instead, `test(300)` returns `(300, 300)`: the function parameter `E` replaces the library binding, and the value survives despite the nominal `uint8` type.\r\n\r\n## Impact\r\n\r\nThe using function's variables can replace module-defined defaults or constants used in validation, routing, flags, or accounting. An external user controls the replacement only when the captured variable depends on user input, as in the PoC. The name collision is part of the developer-written source.\r\n\r\nValues outside narrow integer ranges and noncanonical booleans can propagate internally or appear in ABI output. Exploitation requires a matching name and an expression that remains unfoldable; consequences depend on how the contract uses the captured value.\r\n\r\n## Affected versions\r\n\r\nThe issue affects versions from **0.4.0b1 through master (at `17e925db`)\r\n\r\n## Remediation\r\n\r\nPreserve declaration bindings when compiling constant values and default arguments, rather than resolving their names through the using function's local scope. Also enforce primitive type compatibility and destination constraints during internal assignments.\r\n\r\nAs a workaround, use literal or fully folded values, or avoid collisions with names throughout the expanded expressions. Explicitly passing a qualified immutable can avoid default capture; qualifying an unfoldable constant alone is insufficient. Deployed contracts may require recompilation and redeployment or an upgrade.\r\n",
+  "severity": "medium",
+  "author": null,
+  "publisher": {
+    "login": "charles-cooper",
+    "id": 3867501,
+    "node_id": "MDQ6VXNlcjM4Njc1MDE=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/3867501?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/charles-cooper",
+    "html_url": "https://github.com/charles-cooper",
+    "followers_url": "https://api.github.com/users/charles-cooper/followers",
+    "following_url": "https://api.github.com/users/charles-cooper/following{/other_user}",
+    "gists_url": "https://api.github.com/users/charles-cooper/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/charles-cooper/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/charles-cooper/subscriptions",
+    "organizations_url": "https://api.github.com/users/charles-cooper/orgs",
+    "repos_url": "https://api.github.com/users/charles-cooper/repos",
+    "events_url": "https://api.github.com/users/charles-cooper/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/charles-cooper/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "identifiers": [
+    {
+      "value": "GHSA-2489-32vh-8rrc",
+      "type": "GHSA"
+    }
+  ],
+  "state": "published",
+  "created_at": null,
+  "updated_at": "2026-10-07T11:17:35Z",
+  "published_at": "2026-10-07T11:17:35Z",
+  "closed_at": null,
+  "withdrawn_at": null,
+  "submission": null,
+  "vulnerabilities": [
+    {
+      "package": {
+        "ecosystem": "pip",
+        "name": "vyper"
+      },
+      "vulnerable_version_range": ">= 0.4.0b1",
+      "patched_versions": "",
+      "vulnerable_functions": [
+
+      ]
+    }
+  ],
+  "cvss_severities": {
+    "cvss_v3": {
+      "vector_string": null,
+      "score": null
+    },
+    "cvss_v4": {
+      "vector_string": null,
+      "score": null
+    }
+  },
+  "cwes": [
+
+  ],
+  "cwe_ids": [
+
+  ],
+  "credits": [
+
+  ],
+  "credits_detailed": [
+
+  ],
+  "collaborating_users": null,
+  "collaborating_teams": null,
+  "private_fork": null,
+  "comments": 7,
+  "cvss": {
+    "vector_string": null,
+    "score": null
+  }
+}

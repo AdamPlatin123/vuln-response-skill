@@ -1,0 +1,114 @@
+{
+  "ghsa_id": "GHSA-cw3h-xwxq-8cx2",
+  "cve_id": null,
+  "url": "https://api.github.com/repos/vyperlang/vyper/security-advisories/GHSA-cw3h-xwxq-8cx2",
+  "html_url": "https://github.com/vyperlang/vyper/security/advisories/GHSA-cw3h-xwxq-8cx2",
+  "summary": "Ternary expressions misread nested arrays with different inner bounds",
+  "description": "## Summary\r\n\r\nWhen a ternary selects between nested arrays with different inner bounds, selecting the narrower array can corrupt the result. The compiler reads it using the wider array's memory layout without first converting it. Inner arrays after the first are therefore read at the wrong offsets. This can silently produce incorrect values at all optimization levels. The equivalent `if`/`else` assignment gives the correct result.\r\n\r\n## Details\r\n\r\nIn Vyper 0.4.3, `parse_IfExp` (`vyper/codegen/expr.py:781-802`) returns a pointer to the selected branch, labelled with the ternary's result type. When both branches are in memory, it leaves their layouts unchanged. In the PoC below, each inner array in `narrow` occupies 96 bytes: a 32-byte length followed by space for two values. The result type reserves 160 bytes per inner array, allowing four values. `_get_element_ptr_array` in `vyper/codegen/core.py` uses that wider spacing, so it reads the second inner array 64 bytes past its actual start.\r\n\r\nFixed on `master` by [`1fb7dfe2` (#5236)](https://github.com/vyperlang/vyper/commit/1fb7dfe2). The fix copies branches with incompatible layouts into memory using the result type before returning their pointers.\r\n\r\nAffected versions: 0.3.8 (which introduced ternaries) through 0.5.0b1.\r\n\r\n## PoC\r\n\r\n```vyper\r\nremaining: public(DynArray[DynArray[uint256, 4], 4])\r\n\r\n@external\r\ndef set(flag: bool, narrow: DynArray[DynArray[uint256, 2], 4], wide: DynArray[DynArray[uint256, 4], 4]):\r\n    self.remaining = narrow if flag else wide\r\n```\r\n\r\n`set(True, [[6, 4], [7, 3]], [])` stores `[[6, 4], [0, 0, 0]]`. The compiler mistakes `narrow[1][1]`, which holds `3`, for the second inner array's length, then reads three zero values from unused memory. An `if`/`else` assignment stores the expected `[[6, 4], [7, 3]]`. Returning `narrow if flag else wide` as the wider type produces the same corrupted result.\r\n\r\n## Impact\r\n\r\nContracts can silently store or use corrupted values when the misread array lengths remain within bounds, as in this PoC. If a misread length exceeds its bound, the call can revert, depending on how the array is used.\r\n",
+  "severity": "medium",
+  "author": null,
+  "publisher": {
+    "login": "charles-cooper",
+    "id": 3867501,
+    "node_id": "MDQ6VXNlcjM4Njc1MDE=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/3867501?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/charles-cooper",
+    "html_url": "https://github.com/charles-cooper",
+    "followers_url": "https://api.github.com/users/charles-cooper/followers",
+    "following_url": "https://api.github.com/users/charles-cooper/following{/other_user}",
+    "gists_url": "https://api.github.com/users/charles-cooper/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/charles-cooper/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/charles-cooper/subscriptions",
+    "organizations_url": "https://api.github.com/users/charles-cooper/orgs",
+    "repos_url": "https://api.github.com/users/charles-cooper/repos",
+    "events_url": "https://api.github.com/users/charles-cooper/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/charles-cooper/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "identifiers": [
+    {
+      "value": "GHSA-cw3h-xwxq-8cx2",
+      "type": "GHSA"
+    }
+  ],
+  "state": "published",
+  "created_at": null,
+  "updated_at": "2026-10-05T17:04:08Z",
+  "published_at": "2026-10-05T17:04:08Z",
+  "closed_at": null,
+  "withdrawn_at": null,
+  "submission": null,
+  "vulnerabilities": [
+    {
+      "package": {
+        "ecosystem": "pip",
+        "name": "vyper"
+      },
+      "vulnerable_version_range": ">= 0.3.8, <= 0.5.0b1",
+      "patched_versions": "",
+      "vulnerable_functions": [
+
+      ]
+    }
+  ],
+  "cvss_severities": {
+    "cvss_v3": {
+      "vector_string": null,
+      "score": null
+    },
+    "cvss_v4": {
+      "vector_string": null,
+      "score": null
+    }
+  },
+  "cwes": [
+
+  ],
+  "cwe_ids": [
+
+  ],
+  "credits": [
+    {
+      "login": "harkal",
+      "type": "analyst"
+    }
+  ],
+  "credits_detailed": [
+    {
+      "user": {
+        "login": "harkal",
+        "id": 5312224,
+        "node_id": "MDQ6VXNlcjUzMTIyMjQ=",
+        "avatar_url": "https://avatars.githubusercontent.com/u/5312224?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/harkal",
+        "html_url": "https://github.com/harkal",
+        "followers_url": "https://api.github.com/users/harkal/followers",
+        "following_url": "https://api.github.com/users/harkal/following{/other_user}",
+        "gists_url": "https://api.github.com/users/harkal/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/harkal/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/harkal/subscriptions",
+        "organizations_url": "https://api.github.com/users/harkal/orgs",
+        "repos_url": "https://api.github.com/users/harkal/repos",
+        "events_url": "https://api.github.com/users/harkal/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/harkal/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "type": "analyst",
+      "state": "accepted"
+    }
+  ],
+  "collaborating_users": null,
+  "collaborating_teams": null,
+  "private_fork": null,
+  "comments": 5,
+  "cvss": {
+    "vector_string": null,
+    "score": null
+  }
+}
