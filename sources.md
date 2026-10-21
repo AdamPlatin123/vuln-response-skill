@@ -220,5 +220,5 @@ grep -oE 'CVE-[0-9]{4}-[0-9]+' sources.md | sort -u
 | 编号 | 来源 | 类型 | URL | 涉及 | 核实状态 |
 |---|---|---|---|---|---|
 | S900 | SystemTwo 情报交换：PoeLLM 僵尸网络 | 二手 | https://systemtwosecurity.com/intel-exchange/01a11b23-e3be-706c-bc82-7317b948c11d | 声称感染 3,400+ 暴露的 Ollama/vLLM，C2 藏 GitHub 诗 | 传闻；**不入结论** |
-| S901 | LinuxSecurity：vLLM 0.31.0 批量修复 | 二手 | https://linuxsecurity.com/news/security-vulnerabilities/vllm-vulnerability-code-execution-server-crashes | 称 vLLM 0.31.0 批量修 RCE，候选 CVE-2026-114053（已升 S437） | 传闻；官方 GHSA 未出，**不入结论** |
+| S901 | LinuxSecurity：vLLM 0.31.0 批量修复 | 二手 | https://linuxsecurity.com/news/security-vulnerabilities/vllm-vulnerability-code-execution-server-crashes | 称 vLLM 0.31.0 批量修 RCE；候选 CVE-2026-114053 仍为二手、未核实官方 GHSA；`CVE-2026-105754` 已升 verified，见 S437 | 传闻；官方 GHSA 未出，**不入结论** |
 | S902 | CloudSEK 博客：TOPHIT（npm 抢注洪泛 + GPU 挖矿 C2） | 二手 | https://www.cloudsek.com/ar/blog/tophit-npm-typosquat-flood-gpu-cryptojacking-server | 单操作者批量抢注 npm 包 + GPU 挖矿 C2 | 传闻；**不入结论** |
