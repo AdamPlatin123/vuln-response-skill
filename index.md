@@ -20,7 +20,7 @@
 | PKI / CA | eMudhra 8 张中间 CA 私钥被攻破（跨生态，改 01/04 结论） | [`09-pki-ca-rollover.md`](playbooks/09-pki-ca-rollover.md) | **定稿 verified** |
 | 边界 / 媒体设备 | KEV 在野利用簇：SiteGuard / Plex / Siemens / PAN-OS / FortiMail（9 条，逐分支 fixed 已按厂商公告核） | [`10-boundary-devices.md`](playbooks/10-boundary-devices.md) | **定稿 verified**（S416–S421 五家厂商一手） |
 | .NET / ASP.NET Core | Kestrel HTTP/1 请求走私（CVSS 9.4）领衔 6 条；修 `8.0.32` / `9.0.21` / `10.0.13` / `11.0.0-rc.2` | [`11-dotnet-runtime.md`](playbooks/11-dotnet-runtime.md) | **定稿 verified**（MSRC + GHSA 一手，S404–S409） |
-| Vyper 源码闸门 | 6 条 GHSA：**无已发布修复版本** → 只能改源码 + 阻断发布（非 ASCII 标识符 / 8 种行分隔符 / `msg.value \|` 三元折叠 / 导入常量与默认参数名 / `create_from_blueprint` 偏移） | [`12-vyper-source-gate.md`](playbooks/12-vyper-source-gate.md) | **定稿 verified**（闸门≠修复版本，不给升级命令） |
+| Vyper 源码闸门 | 6 条 GHSA：**无已发布修复版本** → 只能改源码 + 阻断发布（非 ASCII 标识符 / 8 种行分隔符 / `msg.value` 位或 三元折叠 / 导入常量与默认参数名 / `create_from_blueprint` 偏移） | [`12-vyper-source-gate.md`](playbooks/12-vyper-source-gate.md) | **定稿 verified**（闸门≠修复版本，不给升级命令） |
 
 ## 2. 按 CVE 定位
 
