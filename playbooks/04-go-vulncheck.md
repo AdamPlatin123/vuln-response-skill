@@ -2,7 +2,8 @@
 id: "04"
 title: Go 运行时与依赖漏洞排查（stdlib / x/net / Coraza WAF）
 ecosystem: go
-cve: ["CVE-2026-111943", "CVE-2026-78660", "CVE-2026-78669", "CVE-2026-41510", "CVE-2026-112778"]
+cve: ["CVE-2026-111943", "CVE-2026-78660", "CVE-2026-78669", "CVE-2026-41510", "CVE-2026-112778", "CVE-2026-94448", "CVE-2026-94447", "CVE-2026-94440", "CVE-2026-78667"]
+aliases: ["GO-2026-6599", "GO-2026-6602", "GO-2026-6608", "GO-2026-6609", "GO-2026-6610", "GO-2026-6611", "GO-2026-6809", "GO-2026-6668", "GHSA-rh7m-2m44-x32f"]
 affects: "stdlib <1.26.9/<1.26.10 与 <1.27.2/<1.27.3；golang.org/x/net <0.60.0；Coraza v3.0.0–<3.8.1；Traefik K8s provider >=2.0.0 <=2.11.45 / >=3.0.0 <=3.6.16 / =3.7.0"
 fixed: ["1.26.9", "1.26.10", "1.27.2", "1.27.3", "x/net 0.60.0", "Coraza v3.8.1", "Traefik 2.11.46", "Traefik 3.6.17", "Traefik 3.7.1"]
 severity: "高危（HTTP/2 响应走私、CPU DoS、WAF 规则绕过、CA 信任面；Traefik 跨命名空间引用为 4.0 6.4 中危）"
@@ -14,6 +15,16 @@ updated: 2026-10-22
 # Go 运行时与依赖漏洞排查
 
 **一句话**：`govulncheck` 是唯一可信的判定入口；stdlib 两条 HTTP/2 缺陷在 1.26.9 / 1.27.2 修，CA 信任面在 1.26.10 / 1.27.3 修，`x/net` 要单独升到 `0.60.0`。
+
+## 变量清单（先 export，再抄命令）
+
+下面命令只认环境变量，**先 export 再逐条抄**；`${VAR:?...}` 会在变量缺失时直接报错退出。
+
+```bash
+: "${NS:?未设置 NS（Traefik 所在命名空间，如 traefik）}"
+: "${SERVICE_HOST:?未设置 SERVICE_HOST（对外服务 host[:port]，如 api.example.com）}"
+: "${TRAEFIK_REVISION:?未设置 TRAEFIK_REVISION（回退目标 revision，来自 helm history）}"
+```
 
 ## 适用版本区间
 
@@ -161,8 +172,8 @@ govulncheck ./...                             # 期望无 Vulnerable 段命中
 go build -mod=readonly ./... && go test ./... -count=1
 
 # 4) 协议协商冒烟（若止血阶段禁用了 h2，本条改为验证 HTTP/1.1 正常、且 h2 已被拒）
-curl -sI --http2 https://<服务地址>/ | head -3   # 未禁用 h2 时期望 HTTP/2 200
-curl -sI https://<服务地址>/ | head -1           # 期望 HTTP/1.1 200（业务未被打死）
+curl -sI --http2 https://"$SERVICE_HOST"/ | head -3   # 未禁用 h2 时期望 HTTP/2 200
+curl -sI https://"$SERVICE_HOST"/ | head -1           # 期望 HTTP/1.1 200（业务未被打死）
 
 # 5) Traefik 已到修复版 + 跨命名空间引用已收口
 helm list -A 2>/dev/null | grep -i traefik                                  # 期望 chart/app 版本 ≥ 修复线
@@ -189,7 +200,7 @@ go mod download
 
 # Traefik：回退 Helm release（chart 与镜像一起回，别只回镜像）
 helm history traefik -n "${NS:?export NS=traefik命名空间}" | tail -5
-helm rollback traefik <上一个 revision> -n "$NS"
+helm rollback traefik "${TRAEFIK_REVISION:?export TRAEFIK_REVISION=<helm history 里选定的 revision>}" -n "$NS"
 ```
 
 **回退后风险**：回退即重新暴露响应走私 / CPU DoS / WAF 绕过；CA 信任面变更不可局部关掉，回退只能靠网络层限制出站 TLS 目标作缓解；Traefik 回退到区间版本 = 重新开放跨命名空间引用（多租户集群必须同时保留准入策略/CRD 路径）。回退必须同时给出再升级时间点。

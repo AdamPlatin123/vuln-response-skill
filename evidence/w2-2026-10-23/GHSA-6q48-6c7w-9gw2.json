@@ -1,0 +1,66 @@
+{
+  "ghsa_id": "GHSA-6q48-6c7w-9gw2",
+  "cve_id": null,
+  "url": "https://api.github.com/advisories/GHSA-6q48-6c7w-9gw2",
+  "html_url": "https://github.com/advisories/GHSA-6q48-6c7w-9gw2",
+  "summary": "certifi bundles emSign root CAs with compromised intermediate CA keys",
+  "description": "Certifi versions before 2026.10.18 include the `emSign ECC Root CA - G3` root certificate in their bundled CA store. Eight eMudhra intermediate CA certificates that chain to this root have compromised private keys and the CA has revoked them. \n\nAn attacker with one of the compromised keys can issue valid-looking certificates for any hostname. If the attacker is also on-path, they can intercept or modify TLS traffic from clients that trust the certifi bundle. Examples include `requests`, `urllib3` and `pip`, and the Python.org macOS installer.\n\nCertifi 2026.10.18 removed all emSign roots from the bundle. Certifi 2026.10.19 restored the emSign roots that are not affected. Upgrade to 2026.10.19 or later, and rebuild container images that vendor certifi.",
+  "type": "reviewed",
+  "severity": "critical",
+  "repository_advisory_url": "https://api.github.com/repos/certifi/python-certifi/security-advisories/GHSA-6q48-6c7w-9gw2",
+  "source_code_location": "https://github.com/certifi/python-certifi",
+  "identifiers": [
+    {
+      "value": "GHSA-6q48-6c7w-9gw2",
+      "type": "GHSA"
+    }
+  ],
+  "references": [
+    "https://github.com/certifi/python-certifi/security/advisories/GHSA-6q48-6c7w-9gw2",
+    "https://discuss.python.org/t/information-for-python-users-regarding-emudhra-emsign-ca-certificate-security-incident/109576",
+    "https://emudhra.we-have-a-problem.com",
+    "https://github.com/advisories/GHSA-6q48-6c7w-9gw2"
+  ],
+  "published_at": "2026-10-20T19:35:05Z",
+  "updated_at": "2026-10-20T19:35:06Z",
+  "github_reviewed_at": "2026-10-20T19:35:05Z",
+  "nvd_published_at": null,
+  "withdrawn_at": null,
+  "vulnerabilities": [
+    {
+      "package": {
+        "ecosystem": "pip",
+        "name": "certifi"
+      },
+      "vulnerable_version_range": ">= 2019.03.09, < 2026.10.19",
+      "first_patched_version": "2026.10.19",
+      "vulnerable_functions": [
+
+      ]
+    }
+  ],
+  "cvss_severities": {
+    "cvss_v3": {
+      "vector_string": null,
+      "score": 0.0
+    },
+    "cvss_v4": {
+      "vector_string": "CVSS:4.0/AV:N/AC:H/AT:P/PR:N/UI:N/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N",
+      "score": 9.1
+    }
+  },
+  "cwes": [
+    {
+      "cwe_id": "CWE-295",
+      "name": "Improper Certificate Validation"
+    }
+  ],
+  "credits": [
+
+  ],
+  "comments": 0,
+  "cvss": {
+    "vector_string": null,
+    "score": null
+  }
+}

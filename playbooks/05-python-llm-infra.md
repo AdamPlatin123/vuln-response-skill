@@ -15,6 +15,19 @@ updated: 2026-10-21
 
 **一句话**：LLM 基建的通病是「默认无认证 + 默认高权限 + 默认信远端代码」。先断端口暴露面，再升版本；`trust_remote_code=False` 不是万能挡箭牌（vLLM 那条就是 loader 绕过它）。
 
+## 变量清单（先 export，再抄命令）
+
+下面命令只认环境变量，**先 export 再逐条抄**；`${VAR:?...}` 会在变量缺失时直接报错退出。
+
+```bash
+: "${PUBLIC_IP:?未设置 PUBLIC_IP（对外暴露的 IP，无公网暴露就填本机内网 IP）}"
+: "${CONTAINER:?未设置 CONTAINER（vLLM / 推理服务容器名或 ID）}"
+: "${OLLAMA_CONTAINER:?未设置 OLLAMA_CONTAINER（Ollama 容器名或 ID）}"
+: "${GITLAB_HOST:?未设置 GITLAB_HOST（GitLab 访问地址，如 gitlab.example.com）}"
+: "${LMCACHE_IMAGE:?未设置 LMCACHE_IMAGE（LMCache 镜像引用，如 lmcache/lmcache:0.5.6）}"
+: "${GITLAB_VERSION:?未设置 GITLAB_VERSION（目标修复版本，如 19.4.1）}"
+```
+
 ## 适用版本区间
 
 | 组件 | 受影响 | 修复 |
@@ -49,21 +62,21 @@ docker ps --format '{{.Names}}\t{{.Image}}\t{{.Ports}}' | grep -Ei 'vllm|lmcache
 
 # 3) 端口是否裸奔公网
 ss -lntp 2>/dev/null | grep -E ':(8000|11434)\b'
-curl -s -m 5 -o /dev/null -w 'ollama_api=%{http_code}\n' http://<公网IP>:11434/api/tags
-curl -s -m 5 -o /dev/null -w 'vllm_api=%{http_code}\n' http://<公网IP>:8000/v1/models
+curl -s -m 5 -o /dev/null -w 'ollama_api=%{http_code}\n' http://"$PUBLIC_IP":11434/api/tags
+curl -s -m 5 -o /dev/null -w 'vllm_api=%{http_code}\n' http://"$PUBLIC_IP":8000/v1/models
 
 # 4) 是否以 root 跑（LMCache 官方镜像默认 root，命中即放大器）
-docker inspect <CONTAINER> --format '{{.Config.User}}'   # 空值 = root
+docker inspect "$CONTAINER" --format '{{.Config.User}}'   # 空值 = root
 
 # 4b) Ollama 专用：是否对 /usr/lib/ollama 有写权限（决定 CVSS 9.4 还是 6.9）
 test -w /usr/lib/ollama && echo "WRITABLE -> 9.4 Critical 场景" || echo "not writable -> 6.9 Medium 场景"
-docker exec <OLLAMA_CONTAINER> sh -c 'test -w /usr/lib/ollama && echo writable || echo readonly'
+docker exec "$OLLAMA_CONTAINER" sh -c 'test -w /usr/lib/ollama && echo writable || echo readonly'
 
 # 5) vLLM 是否加载远端代码 / 不受信模型
 grep -RniE 'trust_remote_code' --include='*.py' --include='*.yaml' --include='*.sh' . 2>/dev/null | head -20
 
 # 6) GitLab AI Gateway 版本
-curl -s -m 5 http://<gitlab>/help | grep -oE 'GitLab (Community|Enterprise) Edition[^<]*' | head -1
+curl -s -m 5 http://"$GITLAB_HOST"/help | grep -oE 'GitLab (Community|Enterprise) Edition[^<]*' | head -1
 ```
 
 **命中判据**：版本落在上表区间；且 8000 / 11434 / LMCache ZMQ 端口能从「不该访问的网络位置」连通。
@@ -107,7 +120,7 @@ ollama --version                       # 期望 0.35.0
 
 # 4) LMCache 降权限（别再 root）
 #    Dockerfile: USER 10001:10001；或 docker run --user 10001:10001
-docker run --user 10001:10001 <lmcache-image>
+docker run --user 10001:10001 "$LMCACHE_IMAGE"
 
 # 5) vLLM 收紧模型来源
 #    只允许白名单模型仓库；禁止用户传入任意 HF repo / 本地路径
@@ -119,7 +132,7 @@ GitLab AI Gateway（Omnibus）：
 ```bash
 # 按当前所在线升级，三条线各自的目标版本
 # 19.2.x → 19.2.4；19.3.x → 19.3.2；19.4.x → 19.4.1
-sudo apt-get update && sudo apt-get install gitlab-ee=<目标版本>
+sudo apt-get update && sudo apt-get install "gitlab-ee=$GITLAB_VERSION"
 sudo gitlab-ctl reconfigure
 ```
 
@@ -138,11 +151,11 @@ python3 -c 'import importlib.metadata as m;print("vllm",m.version("vllm"))'
 python3 -c 'import importlib.metadata as m;print("lmcache",m.version("lmcache"))'
 ollama --version
 # 自建 GitLab AI Gateway 版本（三线目标：19.2.4 / 19.3.2 / 19.4.1）
-curl -s -m 5 http://<gitlab>/help | grep -oE 'GitLab [0-9]+\.[0-9]+\.[0-9]+' | head -1
+curl -s -m 5 http://"$GITLAB_HOST"/help | grep -oE 'GitLab [0-9]+\.[0-9]+\.[0-9]+' | head -1
 
 # 2) 暴露面已断（从公网位置跑，必须连不上）
-curl -s -m 5 -o /dev/null -w '%{http_code}\n' http://<公网IP>:11434/api/tags    # 期望 000/超时
-curl -s -m 5 -o /dev/null -w '%{http_code}\n' http://<公网IP>:8000/v1/models    # 期望 000/超时
+curl -s -m 5 -o /dev/null -w '%{http_code}\n' http://"$PUBLIC_IP":11434/api/tags    # 期望 000/超时
+curl -s -m 5 -o /dev/null -w '%{http_code}\n' http://"$PUBLIC_IP":8000/v1/models    # 期望 000/超时
 
 # 3) Ollama 路径穿越复现探针（只在测试实例跑）
 curl -s -o /dev/null -w 'pull=%{http_code}\n' http://127.0.0.1:11434/api/pull \
@@ -150,7 +163,7 @@ curl -s -o /dev/null -w 'pull=%{http_code}\n' http://127.0.0.1:11434/api/pull \
 # 修复后：拒绝/400，且 /tmp/poc 不生成
 
 # 4) 容器非 root
-docker inspect <CONTAINER> --format '{{.Config.User}}'   # 期望非空（如 10001:10001）
+docker inspect "$CONTAINER" --format '{{.Config.User}}'   # 期望非空（如 10001:10001）
 
 # 5) 功能回归：模型列表、推理、缓存命中
 curl -s http://127.0.0.1:8000/v1/models -H "Authorization: Bearer $VLLM_API_KEY" | head -c 300

@@ -15,6 +15,27 @@ updated: 2026-10-21
 
 **一句话**：轮换不是「换一个值」，是**先加后减**：新凭据上线并全量生效 → 双读/双写窗口 → 旧凭据引用计数归零 → **禁用**（不是删除）→ 观察后销毁。直接覆盖旧值 = 把一次可回退操作变成不可回退。
 
+## 变量清单（先 export，再抄命令）
+
+下面命令只认环境变量，**先 export 再逐条抄**；`${VAR:?...}` 会在变量缺失时直接报错退出。
+敏感值（新旧 secret / 口令）**只从 secret manager 读进环境变量，别写进文件或 shell history**。
+
+```bash
+: "${DATABASE_URL:?未设置 DATABASE_URL（应用库连接串（新凭据））}"
+: "${OLD_DATABASE_URL:?未设置 OLD_DATABASE_URL（旧凭据连接串，仅用于验证旧口令已失效）}"
+: "${PID:?未设置 PID（目标进程 pid，用 pgrep 查）}"
+: "${KMS_KEY_ID:?未设置 KMS_KEY_ID（KMS key id）}"
+: "${KMS_OLD_KEY_ID:?未设置 KMS_OLD_KEY_ID（旧 KMS key id，回退用）}"
+: "${APP_DEPLOY:?未设置 APP_DEPLOY（k8s Deployment 名）}"
+: "${SECRET_NAME:?未设置 SECRET_NAME（CI secret 名）}"
+: "${NEW_SECRET:?未设置 NEW_SECRET（从 secret manager 读出的新值）}"
+: "${OLD_SECRET:?未设置 OLD_SECRET（旧值，仅回退窗口内保留）}"
+: "${OLD_KEY_FINGERPRINT:?未设置 OLD_KEY_FINGERPRINT（旧密钥指纹（前 8 位即可））}"
+: "${NEW_DB_PASSWORD:?未设置 NEW_DB_PASSWORD（从 secret manager 读出的新库口令）}"
+: "${NEW_KEY:?未设置 NEW_KEY（新 API key）}"
+: "${OLD_KEY:?未设置 OLD_KEY（旧 API key，仅用于验证已失效）}"
+```
+
 ## 适用版本区间
 
 不按版本判定，按凭据类型 + 泄露判定档位。
@@ -39,14 +60,14 @@ updated: 2026-10-21
 ```bash
 # 1) 盘点：到底有哪些凭据在用（先列清单，再动手）
 # 应用侧（值一律脱敏，只记名字与指纹）
-tr '\0' '\n' < /proc/<pid>/environ | grep -iE 'key|token|secret|password|dsn|url' | sed 's/=.*/=<redacted>/'
+tr '\0' '\n' < /proc/"$PID"/environ | grep -iE 'key|token|secret|password|dsn|url' | sed 's/=.*/=<redacted>/'
 
 # k8s secret（只看名字与创建时间，不解码内容）
 kubectl get secret -A -o custom-columns='NS:.metadata.namespace,NAME:.metadata.name,AGE:.metadata.creationTimestamp'
 
 # 云 KMS 密钥版本（AWS 示例；其他云按各自 CLI 语法）
 aws kms list-keys --query 'Keys[].KeyId' --output text
-aws kms list-key-policies --key-id <KEY_ID> >/dev/null && echo "可读策略"
+aws kms list-key-policies --key-id "$KMS_KEY_ID" >/dev/null && echo "可读策略"
 
 # 2) 数据库账号与权限边界
 psql "$DATABASE_URL" -c '\du'
@@ -98,10 +119,10 @@ gh workflow list 2>/dev/null || gitlab-ci-lint < .gitlab-ci.yml
 
 ```bash
 # AWS KMS 示例：新版本由轮换生成，旧版本保持 enabled
-aws kms enable-key-rotation --key-id <KEY_ID>
-aws kms list-key-rotations --key-id <KEY_ID>
+aws kms enable-key-rotation --key-id "$KMS_KEY_ID"
+aws kms list-key-rotations --key-id "$KMS_KEY_ID"
 # 双读窗口内：应用同时能解旧/新版本；回填完成后才禁用旧版本
-aws kms disable-key --key-id <OLD_KEY_ID>      # 禁用，不是 schedule-delete
+aws kms disable-key --key-id "$KMS_OLD_KEY_ID"      # 禁用，不是 schedule-delete
 ```
 
 回填（应用层，按批）：
@@ -121,10 +142,10 @@ done
 
 ```bash
 # 1) 建新口令（应用账号），旧口令仍有效一段时间
-psql "$DATABASE_URL" -c "ALTER ROLE app_user PASSWORD '<new-from-secret-manager>';"
+psql "$DATABASE_URL" -c "ALTER ROLE app_user PASSWORD '"$NEW_DB_PASSWORD"';"
 # 2) 滚动更新应用（连接池会重连，注意 max_connections 与重连风暴）
-kubectl rollout restart deploy/<app>
-kubectl rollout status deploy/<app> --timeout=600s
+kubectl rollout restart deploy/"$APP_DEPLOY"
+kubectl rollout status deploy/"$APP_DEPLOY" --timeout=600s
 # 3) 确认无旧连接
 psql "$DATABASE_URL" -c "SELECT count(*) FROM pg_stat_activity WHERE usename='app_user';"
 # 4) 旧口令不再需要时：撤销（Postgres 无「旧口令并存」，靠连接排空 + 二次改密）
@@ -144,7 +165,7 @@ psql "$DATABASE_URL" -c "SELECT count(*) FROM pg_stat_activity WHERE usename='ap
 
 ```bash
 # 冻结 → 换 → 验证 → 解冻
-gh secret set <NAME> --body "<new>"        # GitHub
+gh secret set "$SECRET_NAME" --body "$NEW_SECRET"        # GitHub
 gh workflow list                           # 确认流水线仍可用
 # 解冻后立刻跑一次全量 secret 扫描，确认没在构建日志里回显
 ```
@@ -153,7 +174,7 @@ gh workflow list                           # 确认流水线仍可用
 
 ```bash
 # 旧值引用计数（DB 列 / 配置项 / 文档）
-grep -rn '<old-key-fingerprint>' /etc /srv /opt 2>/dev/null | wc -l
+grep -rn "$OLD_KEY_FINGERPRINT" /etc /srv /opt 2>/dev/null | wc -l
 psql "$DATABASE_URL" -c "SELECT count(*) FROM t WHERE key_version < 2;"
 ```
 
@@ -168,7 +189,7 @@ curl -s -o /dev/null -w 'new_key=%{http_code}\n' https://api.example.com/health 
 # 2) 旧凭据必须失败（这是轮换的唯一硬证据）
 curl -s -o /dev/null -w 'old_key=%{http_code}\n' https://api.example.com/health \
   -H "Authorization: Bearer $OLD_KEY"        # 期望 401/403
-psql "postgres://app_user_v1:<old>@db/appdb" -c 'SELECT 1;'   # 期望认证失败
+psql "$OLD_DATABASE_URL" -c 'SELECT 1;'   # 期望认证失败
 
 # 3) 引用计数归零
 psql "$DATABASE_URL" -c "SELECT count(*) FROM t WHERE key_version < 2;"    # 期望 0
@@ -193,13 +214,13 @@ psql "$DATABASE_URL" -c "SELECT count(*) FROM t WHERE secret IS NULL;"     # 期
 
 ```bash
 # 加密密钥：re-enable 旧版本（这就是「禁用不删除」的价值）
-aws kms enable-key --key-id <OLD_KEY_ID>
+aws kms enable-key --key-id "$KMS_OLD_KEY_ID"
 
 # 应用凭据：回退到旧值（仅限旧值尚未销毁）
-kubectl set env deploy/<app> API_KEY=<old> --record
+kubectl set env deploy/"$APP_DEPLOY" API_KEY="$OLD_SECRET" --record
 
 # CI：恢复旧 secret（仅限未解冻前）
-gh secret set <NAME> --body "<old>"
+gh secret set "$SECRET_NAME" --body "$OLD_SECRET"
 ```
 
 **回退后风险**：回退到旧凭据 = 重新暴露已泄露的凭据；回退到旧密钥版本 = 新写入的数据用旧版本加密，后续还要再回填一次。因此回退必须同时：确认泄露面已关闭（攻击者不再可达）、回退窗口 ≤ 24h、并在窗口内重新排期轮换。

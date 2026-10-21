@@ -3,6 +3,7 @@ id: "03"
 title: npm 供应链投毒排查与清理（恶意包 / 站外 tarball / 依赖混淆）
 ecosystem: npm
 cve: []
+aliases: ["MAL-2026-17650", "GHSA-rqxj-g25x-4v9v", "MAL-2026-17754", "GHSA-8j36-pr5c-f6vx", "MAL-2026-17744", "MAL-2026-18064"]
 affects: "tensorlake 0.5.144；@library-wide/library-shell 99.9.1；kmf-vendor-pack 99.0.0 / 100.100.x；sc-announcer 99.9.1"
 fixed: ["REMOVE-ONLY（无安全版本：移除 + 轮换安装期凭据 + 回滚锁文件）"]
 severity: "严重（凭据窃取、生命周期脚本任意执行、持久化后门）"

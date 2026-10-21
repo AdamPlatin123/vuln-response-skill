@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Plex Media Server - #714 by PlexReleaser - Announcements - Plex Forum</title>
+    <meta name="description" content="Plex Media Server 1.43.3.10896 is now available to Plex Pass users in the Beta update channel.  NEW:   (Library) Audio codec filter is now available on music libraries when browsing tracks (PM-5224) (Network) IPv6 support has TEMPORARILY been made a plex pass feature (PM-5140) (Network) Support for ipv6 only networks (PM-5140) (Subtitles) Added support for dvb_teletext (PM-3855) (Transcoder) The “HEVC Sources Only” encoding setting now also applies to AV1 sources and is named “HEVC/AV1 Sources O...">
+    <meta name="generator" content="Discourse 2026.10.0-latest - https://github.com/discourse/discourse version 4a8bfcbe9b7be246055383cea4031f3fafe9b14c">
+<link rel="icon" type="image/png" href="https://global.discourse-cdn.com/plex/optimized/4X/f/2/a/f2afe54b49581852ea62676be55e1ed062586f78_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="https://global.discourse-cdn.com/plex/optimized/3X/8/3/833e5cd753c8645af15fef9118673a310d7e286d_2_180x180.png">
+<meta name="theme-color" media="all" content="#ffffff">
+
+<meta name="color-scheme" content="light">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
+<link rel="canonical" href="https://forums.plex.tv/t/plex-media-server/30447?page=36" />
+
+<meta name="discourse-track-view-session-id" content="sKvHtx5VZ7sFdxLfypNtMZYXLRg6Uh1k">
+  <link rel="search" type="application/opensearchdescription+xml" href="https://forums.plex.tv/opensearch.xml" title="Plex Forum Search">
+
+    
+    <link href="https://sea1.discourse-cdn.com/plex/stylesheets/color_definitions_plex-colors_2_3_3b35903df89fa71dc9b1b46a79c7fb9f8fc2538b.css?__ws=forums.plex.tv" media="all" rel="stylesheet" class="light-scheme" data-scheme-id="2"/>
+
+<link href="https://sea1.discourse-cdn.com/plex/stylesheets/common_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="common"  />
+
+
+
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/automation_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="automation"  />
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/checklist_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="checklist"  />
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/discourse-ai_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="discourse-ai"  />
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/discourse-akismet_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="discourse-akismet"  />
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/discourse-antivirus_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="discourse-antivirus"  />
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/discourse-assign_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="discourse-assign"  />
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/discourse-chat-integration_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="discourse-chat-integration"  />
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/discourse-data-explorer_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="discourse-data-explorer"  />
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/discourse-details_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="discourse-details"  />
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/discourse-github_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="discourse-github"  />
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/discourse-lazy-videos_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="discourse-lazy-videos"  />
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/discourse-local-dates_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="discourse-local-dates"  />
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/discourse-narrative-bot_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="discourse-narrative-bot"  />
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/discourse-policy_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="discourse-policy"  />
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/discourse-presence_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="discourse-presence"  />
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/discourse-reactions_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="discourse-reactions"  />
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/discourse-solved_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="discourse-solved"  />
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/discourse-templates_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="discourse-templates"  />
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/discourse-topic-voting_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="discourse-topic-voting"  />
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/discourse-user-notes_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="discourse-user-notes"  />
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/footnote_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="footnote"  />
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/hosted-site_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="hosted-site"  />
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/poll_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="poll"  />
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/spoiler-alert_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="spoiler-alert"  />
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/discourse-ai_mobile_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="(width < 40rem)" rel="stylesheet" data-target="discourse-ai_mobile"  />
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/discourse-assign_mobile_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="(width < 40rem)" rel="stylesheet" data-target="discourse-assign_mobile"  />
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/discourse-reactions_mobile_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="(width < 40rem)" rel="stylesheet" data-target="discourse-reactions_mobile"  />
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/discourse-ai_desktop_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="(width >= 40rem)" rel="stylesheet" data-target="discourse-ai_desktop"  />
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/discourse-reactions_desktop_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="(width >= 40rem)" rel="stylesheet" data-target="discourse-reactions_desktop"  />
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/poll_desktop_ccd67b2f294c0378e59971f17be1aa9b3d75fbb5.css?__ws=forums.plex.tv" media="(width >= 40rem)" rel="stylesheet" data-target="poll_desktop"  />
+
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/common_theme_22_b74ed276689621bfe721d1c454527f1bec808639.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="22" data-theme-name="discotoc"/>
+<link href="https://sea1.discourse-cdn.com/plex/stylesheets/common_theme_23_69abfeec433a949de9a50a2d88d9e75e270c0cc2.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="23" data-theme-name="hide muted categories"/>
+<link href="https://sea1.discourse-cdn.com/plex/stylesheets/common_theme_24_fece0d004b30bbc1f40429e4b538c2a9c18ba90d.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="24" data-theme-name="tag styles"/>
+<link href="https://sea1.discourse-cdn.com/plex/stylesheets/common_theme_29_5aa6e5e06020fc4ee5dbd97d72e5bf9c9817521e.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="29" data-theme-name="topic-list-voting-column"/>
+<link href="https://sea1.discourse-cdn.com/plex/stylesheets/common_theme_27_7b458d082865d08acf3ccb0e4b0b258ac9cd5e37.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="27" data-theme-name="component: temp-hide-a-mod"/>
+<link href="https://sea1.discourse-cdn.com/plex/stylesheets/common_theme_3_fa06de52793c186325009b4466f65de2797e7284.css?__ws=forums.plex.tv" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="3" data-theme-name="plex light"/>
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/mobile_theme_3_783403d12958c51524dc0d9aec3dea35ba02aea0.css?__ws=forums.plex.tv" media="(width < 40rem)" rel="stylesheet" data-target="mobile_theme" data-theme-id="3" data-theme-name="plex light"/>
+  <link href="https://sea1.discourse-cdn.com/plex/stylesheets/desktop_theme_21_51024b5c8d166b741897b90c3812fe18605d7763.css?__ws=forums.plex.tv" media="(width >= 40rem)" rel="stylesheet" data-target="desktop_theme" data-theme-id="21" data-theme-name="alternative voting category style"/>
+<link href="https://sea1.discourse-cdn.com/plex/stylesheets/desktop_theme_26_c856237fe4b3dba45e01ee030dc84768b1a60211.css?__ws=forums.plex.tv" media="(width >= 40rem)" rel="stylesheet" data-target="desktop_theme" data-theme-id="26" data-theme-name="topic list sidebars"/>
+
+    <!--<link rel="stylesheet" href="https://s3.amazonaws.com/icomoon.io/5482/Plex4Final/style.css?yhue87">-->
+<script defer="" src="https://sea1.discourse-cdn.com/plex/theme-javascripts/2573591627da2b3a026d5f08d0ddb8538adf5291.js?__ws=forums.plex.tv" data-theme-id="3" nonce="mjyUbECTOcXexZUn0AO6AwD6I"></script>
+    <meta id="data-ga-universal-analytics" data-tracking-code="G-818DFNHB65" data-json="{&quot;cookieDomain&quot;:&quot;auto&quot;,&quot;allowLinker&quot;:true}" data-auto-link-domains="www.plex.tv">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-818DFNHB65" nonce="mjyUbECTOcXexZUn0AO6AwD6I"></script>
+  <script defer src="https://global.discourse-cdn.com/plex/assets/js/google-universal-analytics-v4-43cb071f.js" data-discourse-entrypoint="js/google-universal-analytics-v4" nonce="mjyUbECTOcXexZUn0AO6AwD6I"></script>
+
+
+        <link rel="alternate nofollow" type="application/rss+xml" title="RSS feed of &#39;Plex Media Server&#39;" href="https://forums.plex.tv/t/plex-media-server/30447.rss" />
+    <meta property="og:site_name" content="Plex Forum" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://global.discourse-cdn.com/plex/original/3X/b/f/bf4da7e4a0c1ed2fd6faf0decc0f3846e352c6fa.png" />
+<meta property="og:image" content="https://global.discourse-cdn.com/plex/original/3X/b/f/bf4da7e4a0c1ed2fd6faf0decc0f3846e352c6fa.png" />
+<meta property="og:url" content="https://forums.plex.tv/t/plex-media-server/30447/714" />
+<meta name="twitter:url" content="https://forums.plex.tv/t/plex-media-server/30447/714" />
+<meta property="og:title" content="Plex Media Server" />
+<meta name="twitter:title" content="Plex Media Server" />
+<meta property="og:description" content="Plex Media Server 1.43.3.10896 is now available to Plex Pass users in the Beta update channel.  NEW:   (Library) Audio codec filter is now available on music libraries when browsing tracks (PM-5224) (Network) IPv6 support has TEMPORARILY been made a plex pass feature (PM-5140) (Network) Support for ipv6 only networks (PM-5140) (Subtitles) Added support for dvb_teletext (PM-3855) (Transcoder) The “HEVC Sources Only” encoding setting now also applies to AV1 sources and is named “HEVC/AV1 Sources O..." />
+<meta name="twitter:description" content="Plex Media Server 1.43.3.10896 is now available to Plex Pass users in the Beta update channel.  NEW:   (Library) Audio codec filter is now available on music libraries when browsing tracks (PM-5224) (Network) IPv6 support has TEMPORARILY been made a plex pass feature (PM-5140) (Network) Support for ipv6 only networks (PM-5140) (Subtitles) Added support for dvb_teletext (PM-3855) (Transcoder) The “HEVC Sources Only” encoding setting now also applies to AV1 sources and is named “HEVC/AV1 Sources O..." />
+<meta property="og:article:section" content="Announcements" />
+<meta property="og:article:section:color" content="E59F0E" />
+<meta property="og:article:tag" content="release-announcements" />
+<meta property="article:published_time" content="2026-08-17T10:57:25+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+
+    <link rel="alternate" type="text/markdown" href="https://forums.plex.tv/t/plex-media-server/30447/714.md">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"QAPage","name":"Plex Media Server","datePublished":"2013-03-10T03:33:13.000Z","mainEntity":{"@type":"Question","answerCount":20,"author":{"@type":"Person","name":"elan","url":"https://forums.plex.tv/u/elan"},"dateModified":"2013-03-10T03:33:13.000Z","datePublished":"2013-03-10T03:33:13.000Z","name":"Plex Media Server","text":"Plex Media Server 0.9.7.16\n\n \n\nDownload instructions can be found <a href=\"http://forums.plexapp.com/index.php/topic/64569-download-instructions/\">here<\/a>.\n\n \n\nWe&#39;ve got an exciting new release for you today. Since we launched PlexSync, and enabled apps like Kepler and the Roku to use the new transcoder, we&#39;ve heard a few complaints that the new transcoder was slower than the old o&hellip;","upvoteCount":33,"suggestedAnswer":[{"@type":"Answer","author":{"@type":"Person","name":"PlexReleaser","url":"https://forums.plex.tv/u/PlexReleaser"},"dateModified":"2026-03-12T20:34:49.692Z","datePublished":"2026-03-12T18:44:51.988Z","text":"NOTE #: QNAP builds are unavailable at this time. There is no estimate of when this will be resolved, however we will publish a dedicated release when they become available.\n\nPlex Media Server 1.43.1.10540 is now available to Plex Pass users in the Beta update channel.\n\nNEW:\n\nA new NFO metadata age&hellip;","upvoteCount":14,"url":"https://forums.plex.tv/t/plex-media-server/30447/700"},{"@type":"Answer","author":{"@type":"Person","name":"PlexReleaser","url":"https://forums.plex.tv/u/PlexReleaser"},"dateModified":"2026-03-23T12:37:36.763Z","datePublished":"2026-03-23T12:36:54.550Z","text":"NOTE #: QNAP builds are unavailable at this time. There is no estimate of when this will be resolved, however we will publish a dedicated release when they become available.\n\nPlex Media Server 1.43.1.10561 is now available to Plex Pass users in the Beta update channel.\n\nNEW:\n\n(Transcoding) Add supp&hellip;","upvoteCount":5,"url":"https://forums.plex.tv/t/plex-media-server/30447/701"},{"@type":"Answer","author":{"@type":"Person","name":"PlexReleaser","url":"https://forums.plex.tv/u/PlexReleaser"},"dateModified":"2026-04-08T16:03:24.200Z","datePublished":"2026-04-06T15:25:26.385Z","text":"NOTE #: QNAP builds are unavailable at this time. There is no estimate of when this will be resolved, however we will publish a dedicated release when they become available.\n\nPlex Media Server 1.43.1.10576 is now available to Plex Pass users in the Beta update channel.\n\nNEW:\n\n(Transcoding) Add supp&hellip;","upvoteCount":4,"url":"https://forums.plex.tv/t/plex-media-server/30447/702"},{"@type":"Answer","author":{"@type":"Person","name":"PlexReleaser","url":"https://forums.plex.tv/u/PlexReleaser"},"dateModified":"2026-04-08T16:03:05.320Z","datePublished":"2026-04-08T16:02:46.024Z","text":"Plex Media Server 1.43.1.10576 is now available to everyone.","upvoteCount":8,"url":"https://forums.plex.tv/t/plex-media-server/30447/703"},{"@type":"Answer","author":{"@type":"Person","name":"PlexReleaser","url":"https://forums.plex.tv/u/PlexReleaser"},"dateModified":"2026-04-09T18:38:00.713Z","datePublished":"2026-04-09T18:37:42.111Z","text":"NOTE #: QNAP builds are unavailable at this time. There is no estimate of when this will be resolved, however we will publish a dedicated release when they become available.\n\nPlex Media Server 1.43.1.10611 is now available to Plex Pass users in the Beta update channel.\n\nNEW:\n\n(Transcoding) Add supp&hellip;","upvoteCount":1,"url":"https://forums.plex.tv/t/plex-media-server/30447/704"},{"@type":"Answer","author":{"@type":"Person","name":"drzoidberg33","url":"https://forums.plex.tv/u/drzoidberg33"},"dateModified":"2026-04-10T12:27:33.420Z","datePublished":"2026-04-10T12:27:33.257Z","text":"NOTE #: QNAP builds are unavailable at this time. There is no estimate of when this will be resolved, however we will publish a dedicated release when they become available.\n\nPlex Media Server 1.43.1.10611 is now available to everyone.","upvoteCount":4,"url":"https://forums.plex.tv/t/plex-media-server/30447/705"},{"@type":"Answer","author":{"@type":"Person","name":"PlexReleaser","url":"https://forums.plex.tv/u/PlexReleaser"},"dateModified":"2026-05-19T17:40:37.962Z","datePublished":"2026-05-04T18:24:27.124Z","text":"Plex Media Server 1.43.2.10687 is now available to Plex Pass users in the Beta update channel.\n\nNOTE #: QNAP builds are currently unsigned.  Instructions for installing these builds can be found <a href=\"https://support.plex.tv/articles/using-unsigned-qnap-apps/\">here<\/a>.\n\nNEW:\n\n(Filters) Add filter for  Atmos (PM-5173)\n\n(Filters) Add filter for audio layout (PM-5118)\n\n(&hellip;","upvoteCount":20,"url":"https://forums.plex.tv/t/plex-media-server/30447/706"},{"@type":"Answer","author":{"@type":"Person","name":"PlexReleaser","url":"https://forums.plex.tv/u/PlexReleaser"},"dateModified":"2026-05-19T18:43:35.585Z","datePublished":"2026-05-19T18:43:12.105Z","text":"Plex Media Server 1.43.2.10687 is now available to everyone.\n\nNOTE #: QNAP builds are currently unsigned. Instructions for installing these builds can be found <a href=\"https://support.plex.tv/articles/using-unsigned-qnap-apps/\">here<\/a>.","upvoteCount":8,"url":"https://forums.plex.tv/t/plex-media-server/30447/707"},{"@type":"Answer","author":{"@type":"Person","name":"PlexReleaser","url":"https://forums.plex.tv/u/PlexReleaser"},"dateModified":"2026-06-22T14:19:33.827Z","datePublished":"2026-06-22T14:18:49.530Z","text":"Plex Media Server 1.43.3.10768 is now available to Plex Pass users in the Beta update channel.\n\nNOTE #: QNAP builds are currently unsigned. Instructions for installing these builds can be found <a href=\"https://support.plex.tv/articles/using-unsigned-qnap-apps/\">here<\/a>.\n\nNEW:\n\n(Library) Audio codec filter is now available on music libraries when browsing tracks (PM-52&hellip;","upvoteCount":9,"url":"https://forums.plex.tv/t/plex-media-server/30447/708"},{"@type":"Answer","author":{"@type":"Person","name":"drzoidberg33","url":"https://forums.plex.tv/u/drzoidberg33"},"dateModified":"2026-06-29T14:46:39.463Z","datePublished":"2026-06-29T14:46:39.233Z","text":"Plex Media Server 1.43.3.10793 is now available to Plex Pass users in the Beta update channel.\n\nNOTE: QNAP builds should now be signed.\n\nNEW:\n\n(Library) Audio codec filter is now available on music libraries when browsing tracks (PM-5224)\n\n(Network) IPv6 support has TEMPORARILY been made a plex pass&hellip;","upvoteCount":11,"url":"https://forums.plex.tv/t/plex-media-server/30447/709"},{"@type":"Answer","author":{"@type":"Person","name":"drzoidberg33","url":"https://forums.plex.tv/u/drzoidberg33"},"dateModified":"2026-07-13T13:59:40.370Z","datePublished":"2026-07-13T13:59:40.144Z","text":"Plex Media Server 1.43.3.10828 is now available to Plex Pass users in the Beta update channel.\n\nNEW:\n\n(Library) Audio codec filter is now available on music libraries when browsing tracks (PM-5224)\n\n(Network) IPv6 support has TEMPORARILY been made a plex pass feature (PM-5140)\n\n(Network) Support for &hellip;","upvoteCount":7,"url":"https://forums.plex.tv/t/plex-media-server/30447/710"},{"@type":"Answer","author":{"@type":"Person","name":"PlexReleaser","url":"https://forums.plex.tv/u/PlexReleaser"},"dateModified":"2026-07-14T13:10:44.300Z","datePublished":"2026-07-14T13:10:21.055Z","text":"Plex Media Server 1.43.3.10828 is now available to everyone.\n\nNote: Not all app stores (e.g. QNAP, etc.) will have the update immediately and may take some time to go through the various approvals.","upvoteCount":6,"url":"https://forums.plex.tv/t/plex-media-server/30447/711"},{"@type":"Answer","author":{"@type":"Person","name":"PlexReleaser","url":"https://forums.plex.tv/u/PlexReleaser"},"dateModified":"2026-08-04T16:08:24.058Z","datePublished":"2026-08-03T13:59:16.992Z","text":"Plex Media Server 1.43.3.10861 is now available to Plex Pass users in the Beta update channel.\n\nNEW:\n\n(Library) Audio codec filter is now available on music libraries when browsing tracks (PM-5224)\n\n(Network) IPv6 support has TEMPORARILY been made a plex pass feature (PM-5140)\n\n(Network) Support for &hellip;","upvoteCount":8,"url":"https://forums.plex.tv/t/plex-media-server/30447/712"},{"@type":"Answer","author":{"@type":"Person","name":"PlexReleaser","url":"https://forums.plex.tv/u/PlexReleaser"},"dateModified":"2026-08-04T16:09:20.144Z","datePublished":"2026-08-04T16:09:08.390Z","text":"Plex Media Server 1.43.3.10861 is now available to everyone\n\nNote: Not all app stores (e.g. QNAP, etc.) will have the update immediately and may take some time to go through the various approvals.","upvoteCount":6,"url":"https://forums.plex.tv/t/plex-media-server/30447/713"},{"@type":"Answer","author":{"@type":"Person","name":"PlexReleaser","url":"https://forums.plex.tv/u/PlexReleaser"},"dateModified":"2026-08-17T10:59:55.125Z","datePublished":"2026-08-17T10:57:25.674Z","text":"Plex Media Server 1.43.3.10896 is now available to Plex Pass users in the Beta update channel.\n\nNEW:\n\n(Library) Audio codec filter is now available on music libraries when browsing tracks (PM-5224)\n\n(Network) IPv6 support has TEMPORARILY been made a plex pass feature (PM-5140)\n\n(Network) Support for &hellip;","upvoteCount":8,"url":"https://forums.plex.tv/t/plex-media-server/30447/714"},{"@type":"Answer","author":{"@type":"Person","name":"PlexReleaser","url":"https://forums.plex.tv/u/PlexReleaser"},"dateModified":"2026-08-18T14:31:33.560Z","datePublished":"2026-08-18T14:31:20.757Z","text":"Plex Media Server 1.43.3.10896 is now available to everyone\n\nNote: Not all app stores (e.g. QNAP, etc.) will have the update immediately and may take some time to go through the various approvals.","upvoteCount":3,"url":"https://forums.plex.tv/t/plex-media-server/30447/715"},{"@type":"Answer","author":{"@type":"Person","name":"PlexReleaser","url":"https://forums.plex.tv/u/PlexReleaser"},"dateModified":"2026-08-24T15:18:09.856Z","datePublished":"2026-08-24T15:17:50.184Z","text":"Plex Media Server 1.43.4.10903 is now available to Plex Pass users in the Beta update channel.\n\nNEW:\n\n(GPU) Added support for HEVC transcode on devices that only support 8 bit HEVC encoding (PM-5595)\n\n(Library) Add library filter for HDR10+ media (PM-5617)\n\n(Metadata) Add HDR10+ metadata detection (P&hellip;","upvoteCount":20,"url":"https://forums.plex.tv/t/plex-media-server/30447/716"},{"@type":"Answer","author":{"@type":"Person","name":"PlexReleaser","url":"https://forums.plex.tv/u/PlexReleaser"},"dateModified":"2026-09-10T19:30:10.147Z","datePublished":"2026-09-10T19:29:48.050Z","text":"Plex Media Server 1.43.4.10903 is now available to everyone\n\nNote: Not all app stores (e.g. QNAP, etc.) will have the update immediately and may take some time to go through the various approvals.","upvoteCount":2,"url":"https://forums.plex.tv/t/plex-media-server/30447/717"},{"@type":"Answer","author":{"@type":"Person","name":"PlexReleaser","url":"https://forums.plex.tv/u/PlexReleaser"},"dateModified":"2026-10-06T14:58:42.184Z","datePublished":"2026-10-06T14:58:24.922Z","text":"Plex Media Server 1.43.5.11029 is now available to Plex Pass users in the Beta update channel.\n\nNEW:\n\n(Metadata) Added support for reading artist and album metadata from NFO files in music libraries (PM-6153)\n\n(Network) Ignore manually specified public port for IPv6 connections (PM-5364)\n\n(Network) S&hellip;","upvoteCount":11,"url":"https://forums.plex.tv/t/plex-media-server/30447/718"},{"@type":"Answer","author":{"@type":"Person","name":"PlexReleaser","url":"https://forums.plex.tv/u/PlexReleaser"},"dateModified":"2026-10-20T14:09:40.623Z","datePublished":"2026-10-20T14:09:26.833Z","text":"Plex Media Server 1.43.5.11029 is now available to everyone.","upvoteCount":4,"url":"https://forums.plex.tv/t/plex-media-server/30447/719"}]}}</script>
+  </head>
+  <body class="crawler ">
+    
+    <header>
+  <a href="/">Plex Forum</a>
+</header>
+
+    <div id="main-outlet" class="wrap" role="main">
+        <div id="topic-title">
+    <h1>
+      <a href="/t/plex-media-server/30447">Plex Media Server</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="/c/announcements/5" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #E59F0E'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Announcements</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+      </div>
+
+      <div class="topic-category">
+        <div class='discourse-tags list-tags'>
+            <a href='https://forums.plex.tv/tag/release-announcements' class='discourse-tag' rel="tag">release-announcements</a>
+        </div>
+      </div>
+  </div>
+
+  
+
+    <div itemscope="itemscope" itemtype="https://schema.org/QAPage">
+      <meta itemprop='name' content='Plex Media Server'>
+      <link itemprop='url' href='https://forums.plex.tv/t/plex-media-server/30447'>
+      <meta itemprop='datePublished' content='2013-03-10T03:33:13Z'>
+      <meta itemprop='keywords' content='release-announcements'>
+
+      
+
+        <div itemprop="mainEntity" itemscope="itemscope" itemtype="https://schema.org/Question">
+          <meta itemprop='answerCount' content='1'><meta itemprop='datePublished' content='2013-03-10T03:33:13Z'><meta itemprop='name' content='Plex Media Server'><meta itemprop='upvoteCount' content='33'>
+
+          <span itemprop='author' itemscope itemtype="http://schema.org/Person">
+            <meta itemprop='name' content='elan'>
+            <link itemprop='url' rel='nofollow' href='https://forums.plex.tv/u/elan'>
+          </span>
+        <meta itemprop='text' content=''>
+
+          <div id='post_714' itemprop="suggestedAnswer" itemscope="itemscope" itemtype="https://schema.org/Answer" class='topic-body crawler-post'>
+            <div class='crawler-post-meta'>
+              <span class="creator" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+                <a rel='nofollow' href='https://forums.plex.tv/u/PlexReleaser'><span itemprop="name">PlexReleaser</span></a>
+                  <meta itemprop='url' content='https://forums.plex.tv/u/PlexReleaser'>
+                
+              </span>
+
+
+
+              <span class="crawler-post-infos">
+                  <time itemprop="datePublished" datetime='2026-08-17T10:57:25Z' class='post-time'>
+                    August 17, 2026, 10:57am
+                  </time>
+                  <meta itemprop='dateModified' content='2026-08-17T10:59:55Z'>
+              <span itemprop="position">714</span>
+              </span>
+            </div>
+            <div class='post' itemprop="text">
+              <p><strong>Plex Media Server 1.43.3.10896 is now available to Plex Pass users in the Beta update channel.</strong></p>
+<p>NEW:</p>
+<ul>
+<li>(Library) Audio codec filter is now available on music libraries when browsing tracks (PM-5224)</li>
+<li>(Network) IPv6 support has TEMPORARILY been made a plex pass feature (PM-5140)</li>
+<li>(Network) Support for ipv6 only networks (PM-5140)</li>
+<li>(Subtitles) Added support for dvb_teletext (PM-3855)</li>
+<li>(Transcoder) The “HEVC Sources Only” encoding setting now also applies to AV1 sources and is named “HEVC/AV1 Sources Only” (PM-5261)</li>
+<li>Updated Web to 4.160.0</li>
+</ul>
+<p>FIXES:</p>
+<ul>
+<li><strong>(Analysis) Improved MP4/MOV atom validation (PM-5862)</strong></li>
+<li>(Downloads) Stream display titles in download decisions now match streaming decisions (PM-5211)</li>
+<li><strong>(Filters) Improved validation of library filter values (PM-5797)</strong></li>
+<li>(Library) Expose HDR, DOVI, and Atmos filters for episodes in show libraries (PM-5215)</li>
+<li>(Library) Manual API requests could allow invalid URIs for smart collections and playlists (PM-4267)</li>
+<li>(Live-TV) OTA channels would often fail to hardware transcode on MacOS (PM-4103)</li>
+<li>(MacOS) The server could crash under certain network conditions (PM-5421)</li>
+<li>(Metadata) Don’t abort metadata refresh on failed match if remaining providers are all local (PM-5422)</li>
+<li>(Metadata) Local album images can fail to load if item matching is incomplete (PM-5422)</li>
+<li>(Metadata) Prefer certification tag when reading NFO content ratings and match to library country preference (PM-5378)</li>
+<li>(Metadata) Read writers credits in NFO parser (PM-5377)</li>
+<li>(Metadata) Using multiple providers with ratings can result in primary rating being set inconsistently (PM-5458)</li>
+<li>(Metadata) When remote providers are missing local metadata would fail to load (PM-5488)</li>
+<li>(Performance) Speed up related collection queries in some scenarios (PM-5204)</li>
+<li>(PlexMatch) Using show guid hints in .plexmatch files can result in unmatched episodes on initial scan (PM-5184)</li>
+<li>(Scanner) Filename text in curly braces should get cleaned up on unmatched content (PM-4844)</li>
+<li>(Security) Address potential vulnerability in the CompanionProxy. (PM-5763)</li>
+<li>(Security) The TranscoderH264Options and TranscoderH264OptionsOverride preferences can no longer be modified over the network. (PM-5766)</li>
+<li>(Transcoder) Correct the Content-Type of DASH manifest files (PM-5259)</li>
+</ul>
+            </div>
+
+
+
+            
+
+<meta itemprop='upvoteCount' content='8'><meta itemprop='url' content='https://forums.plex.tv/t/plex-media-server/30447/714'>
+          </div>
+
+        </div>
+    </div>
+
+      <div role='navigation' itemscope itemtype='http://schema.org/SiteNavigationElement' class="topic-body crawler-post">
+          <span itemprop='name'>
+            <a itemprop="url" href="/t/plex-media-server/30447?page=36#post_714">show post in topic</a>
+          </span>
+      </div>
+
+    <div id="related-topics" class="more-topics__list " role="complementary" aria-labelledby="related-topics-title">
+  <h3 id="related-topics-title" class="more-topics__list-title">
+    Related topics
+  </h3>
+  <div class="topic-list-container" itemscope itemtype='http://schema.org/ItemList'>
+    <meta itemprop='itemListOrder' content='http://schema.org/ItemListOrderDescending'>
+    <table class='topic-list'>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th></th>
+          <th class="replies">Replies</th>
+          <th class="views">Views</th>
+          <th>Activity</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="topic-list-item" id="topic-list-item-17320">
+            <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+              <meta itemprop='position' content='1'>
+              <span class="link-top-line">
+                <a itemprop='url' href='https://forums.plex.tv/t/versionshistorie/17320' class='title raw-link raw-topic-link'>Versionshistorie</a>
+              </span>
+              <div class="link-bottom-line">
+                  <a href='/c/non-english-forums/deutsch/82' class='badge-wrapper bullet'>
+                    <span class='badge-category-bg' style='background-color: #E0E3E6'></span>
+                    <span class='badge-category clear-badge'>
+                      <span class='category-name'>Deutsch - German</span>
+                    </span>
+                  </a>
+                  <div class="discourse-tags">
+                  </div>
+              </div>
+            </td>
+            <td class="replies">
+              <span class='posts' title='posts'>8</span>
+            </td>
+            <td class="views">
+              <span class='views' title='views'>409</span>
+            </td>
+            <td>
+              December 5, 2012
+            </td>
+          </tr>
+          <tr class="topic-list-item" id="topic-list-item-147757">
+            <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+              <meta itemprop='position' content='2'>
+              <span class="link-top-line">
+                <a itemprop='url' href='https://forums.plex.tv/t/updated-plex-to-0-9-17-2-and-can-no-longer-watch-any-media-anywhere/147757' class='title raw-link raw-topic-link'>Updated Plex to 0.9.17.2 and can no longer watch any media anywhere.</a>
+              </span>
+              <div class="link-bottom-line">
+                  <a href='/c/general-discussions/7' class='badge-wrapper bullet'>
+                    <span class='badge-category-bg' style='background-color: #E59F0E'></span>
+                    <span class='badge-category clear-badge'>
+                      <span class='category-name'>General Discussions</span>
+                    </span>
+                  </a>
+                  <div class="discourse-tags">
+                  </div>
+              </div>
+            </td>
+            <td class="replies">
+              <span class='posts' title='posts'>17</span>
+            </td>
+            <td class="views">
+              <span class='views' title='views'>393</span>
+            </td>
+            <td>
+              June 14, 2016
+            </td>
+          </tr>
+          <tr class="topic-list-item" id="topic-list-item-446435">
+            <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+              <meta itemprop='position' content='3'>
+              <span class="link-top-line">
+                <a itemprop='url' href='https://forums.plex.tv/t/plex-for-mac-windows-and-linux/446435' class='title raw-link raw-topic-link'>Plex for Mac, Windows, and Linux</a>
+              </span>
+              <div class="link-bottom-line">
+                  <a href='/c/announcements/5' class='badge-wrapper bullet'>
+                    <span class='badge-category-bg' style='background-color: #E59F0E'></span>
+                    <span class='badge-category clear-badge'>
+                      <span class='category-name'>Announcements</span>
+                    </span>
+                  </a>
+                  <div class="discourse-tags">
+                      <a href='https://forums.plex.tv/tag/player-mac/162' class='discourse-tag'>player-mac</a>
+                      ,&nbsp;
+                      <a href='https://forums.plex.tv/tag/player-windows/163' class='discourse-tag'>player-windows</a>
+                      ,&nbsp;
+                      <a href='https://forums.plex.tv/tag/player-linux/194' class='discourse-tag'>player-linux</a>
+                      
+                  </div>
+              </div>
+            </td>
+            <td class="replies">
+              <span class='posts' title='posts'>137</span>
+            </td>
+            <td class="views">
+              <span class='views' title='views'>139419</span>
+            </td>
+            <td>
+              August 17, 2026
+            </td>
+          </tr>
+          <tr class="topic-list-item" id="topic-list-item-20528">
+            <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+              <meta itemprop='position' content='4'>
+              <span class="link-top-line">
+                <a itemprop='url' href='https://forums.plex.tv/t/plex-web/20528' class='title raw-link raw-topic-link'>Plex Web</a>
+              </span>
+              <div class="link-bottom-line">
+                  <a href='/c/announcements/5' class='badge-wrapper bullet'>
+                    <span class='badge-category-bg' style='background-color: #E59F0E'></span>
+                    <span class='badge-category clear-badge'>
+                      <span class='category-name'>Announcements</span>
+                    </span>
+                  </a>
+                  <div class="discourse-tags">
+                      <a href='https://forums.plex.tv/tag/release-announcements/1' class='discourse-tag'>release-announcements</a>
+                      ,&nbsp;
+                      <a href='https://forums.plex.tv/tag/plex-web/40' class='discourse-tag'>plex-web</a>
+                      
+                  </div>
+              </div>
+            </td>
+            <td class="replies">
+              <span class='posts' title='posts'>469</span>
+            </td>
+            <td class="views">
+              <span class='views' title='views'>252244</span>
+            </td>
+            <td>
+              October 20, 2026
+            </td>
+          </tr>
+          <tr class="topic-list-item" id="topic-list-item-746527">
+            <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+              <meta itemprop='position' content='5'>
+              <span class="link-top-line">
+                <a itemprop='url' href='https://forums.plex.tv/t/plex-media-server-1-24-6-5145-new-transcoder-preview/746527' class='title raw-link raw-topic-link'>Plex Media Server 1.24.6.5145 - New Transcoder Preview</a>
+              </span>
+              <div class="link-bottom-line">
+                  <a href='/c/plex-media-server/114' class='badge-wrapper bullet'>
+                    <span class='badge-category-bg' style='background-color: #E59F0E'></span>
+                    <span class='badge-category clear-badge'>
+                      <span class='category-name'>Plex Media Server</span>
+                    </span>
+                  </a>
+                  <div class="discourse-tags">
+                      <a href='https://forums.plex.tv/tag/server-windows/12' class='discourse-tag'>server-windows</a>
+                      ,&nbsp;
+                      <a href='https://forums.plex.tv/tag/server-mac/13' class='discourse-tag'>server-mac</a>
+                      ,&nbsp;
+                      <a href='https://forums.plex.tv/tag/server-linux/15' class='discourse-tag'>server-linux</a>
+                      ,&nbsp;
+                      <a href='https://forums.plex.tv/tag/server-docker/20' class='discourse-tag'>server-docker</a>
+                      ,&nbsp;
+                      <a href='https://forums.plex.tv/tag/server-qnap/23' class='discourse-tag'>server-qnap</a>
+                      ,&nbsp;
+                      <a href='https://forums.plex.tv/tag/server-synology/25' class='discourse-tag'>server-synology</a>
+                      ,&nbsp;
+                      <a href='https://forums.plex.tv/tag/server-western-digital/29' class='discourse-tag'>server-western-digital</a>
+                      ,&nbsp;
+                      <a href='https://forums.plex.tv/tag/server-truenas/169' class='discourse-tag'>server-truenas</a>
+                      
+                  </div>
+              </div>
+            </td>
+            <td class="replies">
+              <span class='posts' title='posts'>84</span>
+            </td>
+            <td class="views">
+              <span class='views' title='views'>9986</span>
+            </td>
+            <td>
+              November 14, 2021
+            </td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+
+
+    </div>
+    <footer class="container wrap">
+  <nav class='crawler-nav'>
+    <ul>
+      <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+        <span itemprop='name'>
+          <a href='/' itemprop="url">Home </a>
+        </span>
+      </li>
+      <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+        <span itemprop='name'>
+          <a href='/categories' itemprop="url">Categories </a>
+        </span>
+      </li>
+      
+      <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+        <span itemprop='name'>
+          <a href='/guidelines' itemprop="url">Guidelines </a>
+        </span>
+      </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='https://www.plex.tv/about/privacy-legal/plex-terms-of-service/' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='https://www.plex.tv/about/privacy-legal/' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+    </ul>
+  </nav>
+  <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+</footer>
+
+    <div class="grid-x footer">
+	<div class="large-12 cell footer-main">
+		<div class="foot-container">
+			<div class="grid-x footer-inner">
+				<div class="large-2 medium-12 cell logo">
+					
+						<a href="https://www.plex.tv/" aria-label="Plex">
+							<img alt="Plex" src="https://www.plex.tv/wp-content/themes/plex/assets/img/plex-logo.svg">
+						</a>
+
+									</div>
+				<div class="large-10 medium-12 cell menu-footer">
+					
+						<div class="menu-footer-container"><ul id="menu-footer" class="menu"><li id="menu-item-20323" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-20323"><a href="https://www.plex.tv/about/" role="heading">Company</a>
+<ul class="sub-menu">
+	<li id="menu-item-20188" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20188"><a href="https://www.plex.tv/about/">About</a></li>
+	<li id="menu-item-19915" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-19915"><a href="https://www.plex.tv/careers/">Careers</a></li>
+	<li id="menu-item-20179" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20179"><a href="https://www.plex.tv/about/culture/">Our Culture</a></li>
+	<li id="menu-item-4493" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4493"><a href="https://www.plex.tv/about/giving/">Giving</a></li>
+	<li id="menu-item-12173" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12173"><a href="https://www.plex.tv/about/partners/">Partners</a></li>
+	<li id="menu-item-11462" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11462"><a href="https://www.plex.tv/press/">News</a></li>
+	<li id="menu-item-20726" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-20726"><a href="https://plex-gear.myshopify.com/">Plex Gear</a></li>
+	<li id="menu-item-18818" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-18818"><a href="https://www.plex.tv/blog/">The Plex Blog</a></li>
+	<li id="menu-item-21902" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-21902"><a href="https://www.plex.tv/advertising/">Advertise with Us</a></li>
+</ul>
+</li>
+<li id="menu-item-17009" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-17009"><a href="https://www.plex.tv/plex-pass/" role="heading">Go Premium</a>
+<ul class="sub-menu">
+	<li id="menu-item-22899" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22899"><a href="https://www.plex.tv/plans/">Plans</a></li>
+	<li id="menu-item-20553" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20553"><a href="https://www.plex.tv/plexamp/">Plexamp</a></li>
+	<li id="menu-item-86" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-86"><a href="https://www.plex.tv/plex-labs/">Plex Labs</a></li>
+	<li id="menu-item-8572" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8572"><a href="https://www.plex.tv/plex-pass/perks/">Get Perks</a></li>
+</ul>
+</li>
+<li id="menu-item-75" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-75"><a href="https://www.plex.tv/media-server-downloads/" role="heading">Downloads</a>
+<ul class="sub-menu">
+	<li id="menu-item-18864" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-18864"><a href="https://www.plex.tv/media-server-downloads/#plex-media-server">Plex Media Server</a></li>
+	<li id="menu-item-4707" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4707"><a href="https://www.plex.tv/media-server-downloads/#plex-app">Plex</a></li>
+	<li id="menu-item-21771" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-21771"><a href="https://www.plex.tv/media-server-downloads/#plex-plexamp">Plexamp</a></li>
+	<li id="menu-item-22317" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22317"><a href="https://www.plex.tv/media-server-downloads/#plex-plexphotos">Plex Photos</a></li>
+	<li id="menu-item-22316" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22316"><a href="https://www.plex.tv/media-server-downloads/#plex-plexdash">Plex Dash</a></li>
+	<li id="menu-item-18862" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-18862"><a href="https://www.plex.tv/apps-devices/">Where to Watch</a></li>
+</ul>
+</li>
+<li id="menu-item-8578" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-8578"><a href="https://support.plex.tv" role="heading">Support</a>
+<ul class="sub-menu">
+	<li id="menu-item-20180" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-20180"><a href="https://support.plex.tv">Finding Help</a></li>
+	<li id="menu-item-4551" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4551"><a href="https://support.plex.tv/articles">Support Library</a></li>
+	<li id="menu-item-4561" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4561"><a href="https://forums.plex.tv">Community Forums</a></li>
+	<li id="menu-item-22404" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22404"><a href="https://www.plex.tv/about/community-guidelines/">Community Guidelines</a></li>
+	<li id="menu-item-8579" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8579"><a href="https://www.plex.tv/contact/?option=plex-pass-billing">Billing Questions</a></li>
+	<li id="menu-item-4599" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4599"><a href="https://status.plex.tv">Status</a></li>
+	<li id="menu-item-11651" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11651"><a href="https://support.plex.tv/articles/reporting-security-issues/">Bug Bounty</a></li>
+	<li id="menu-item-9286" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9286"><a href="https://cordcutter.plex.tv">CordCutter</a></li>
+	<li id="menu-item-4569" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4569"><a href="https://www.plex.tv/contact/">Get in Touch</a></li>
+</ul>
+</li>
+<li id="menu-item-20346" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-20346"><a href="https://watch.plex.tv/movies-and-shows" role="heading">Watch Free</a>
+<ul class="sub-menu">
+	<li id="menu-item-22036" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22036"><a href="https://www.plex.tv/discover/">Discover on Plex</a></li>
+	<li id="menu-item-20201" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20201"><a href="https://www.plex.tv/live-tv-channels/">TV Channel Finder</a></li>
+	<li id="menu-item-20347" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20347"><a href="https://www.plex.tv/what-to-watch/">What to Watch</a></li>
+	<li id="menu-item-22109" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22109"><a href="https://www.plex.tv/what-to-watch/netflix/">What To Watch on Netflix</a></li>
+	<li id="menu-item-20985" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20985"><a href="https://www.plex.tv/what-to-watch/hulu/">What To Watch on Hulu</a></li>
+	<li id="menu-item-20348" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20348"><a href="https://www.plex.tv/a24-movies/">A24 Movies</a></li>
+	<li id="menu-item-22669" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22669"><a href="https://www.plex.tv/valentines-day-movies/">Valentine’s Day Movies</a></li>
+	<li id="menu-item-22633" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22633"><a href="https://www.plex.tv/best-christmas-movies/">Christmas Movies</a></li>
+</ul>
+</li>
+</ul></div>
+									</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="large-12 cell footer-sub">
+		<div class="foot-container">
+			<div class="grid-x footer-inner align-middle">
+				<div class="large-7 medium-12 cell menu-sub-footer">
+					<span class="footer-copy">Copyright © 2025 Plex</span>
+
+					<div class="menu-sub-footer-container"><ul id="menu-sub-footer" class="menu"><li id="menu-item-15685" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15685"><a href="https://www.plex.tv/about/privacy-legal/">Privacy &amp; Legal</a></li>
+<li id="menu-item-19660" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-19660 "><a href="https://www.plex.tv/accessibility-statement/">Accessibility</a></li>
+<li id="menu-item-22910" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22910 geolocation-hide geolocation-continent-EU-hide nav-item-toggable"><a href="https://www.plex.tv/accessibility-statement-eaa/">Accessibility</a></li>
+<li id="menu-item-21565" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-21565"><a href="#" class=" manage-cookie-settings">Manage Cookies</a></li>
+</ul></div>
+					<span class="footer-lang">	<span class="lang-selector">
+<span id="tooltip-lang-container" class="tooltip-lang" data-tooltip-content="#tooltip_content">Language: <a class="sel-language" aria-expanded="false" tabindex="0" aria-controls="tip-languages" aria-labelledby="tooltip-lang-container"></a></span>
+<div class="lang-selector tooltip_templates">
+	<span id="tooltip_content">
+		<ul id="tip-languages" class="tip-languages-content" aria-label="Language Selector">
+			<!--dynamically added-->
+		</ul>
+	</span>
+</div>
+</span>
+	</span>
+				</div>
+				<div class="large-5 medium-12 cell menu-social">
+
+					<div class="menu-social-container"><ul id="menu-social" class="menu"><li id="menu-item-65" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-65"><a target="_blank" href="https://www.instagram.com/plex.tv/" data-pulldown="item-social-instagram"><i class="icomoon icon-social-instagram" aria-label="Instagram"></i></a></li>
+<li id="menu-item-22699" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22699"><a target="_blank" href="https://www.tiktok.com/@plex.tv" class=" tiktok" data-pulldown="item-social-tiktok"><i class="icomoon icon-social-tiktok" aria-label="TikTok"></i></a></li>
+<li id="menu-item-67" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-67"><a target="_blank" href="https://twitter.com/plex" data-pulldown="item-social-x"><i class="icomoon icon-social-x" aria-label="Twitter X"></i></a></li>
+<li id="menu-item-22570" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-22570"><a href="https://bsky.app/profile/plex.tv" class=" bluesky"><span class="nav-icon" alt="BlueSky" title="BlueSky" aria-label="BlueSky"><div class="plex-svg-holder icon-bsky-logo-gray "><svg class="plexico-icon-bsky-logo-gray-17" id="bsky-logo-gray" width="64" height="57" viewBox="0 0 64 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_1004_3)">
+<path d="M13.873 3.80516C21.21 9.33216 29.103 20.5372 32 26.5502V42.4322C32 42.0942 31.87 42.4762 31.59 43.2992C30.078 47.7552 24.172 65.1462 10.667 51.2432C3.556 43.9232 6.848 36.6032 19.792 34.3932C12.387 35.6572 4.062 33.5682 1.778 25.3782C1.12 23.0222 0 8.51016 0 6.55016C0 -3.26784 8.579 -0.181838 13.873 3.80516ZM50.127 3.80516C42.79 9.33216 34.897 20.5372 32 26.5502V42.4322C32 42.0942 32.13 42.4762 32.41 43.2992C33.922 47.7552 39.828 65.1462 53.333 51.2432C60.444 43.9232 57.152 36.6032 44.208 34.3932C51.613 35.6572 59.938 33.5682 62.222 25.3782C62.88 23.0222 64 8.51016 64 6.55016C64 -3.26784 55.422 -0.181838 50.127 3.80516Z" fill="#7E7F81"></path>
+</g>
+<defs>
+<clipPath id="clip0_1004_3">
+<rect width="64" height="57" fill="white"></rect>
+</clipPath>
+</defs>
+</svg>
+</div></span></a></li>
+<li id="menu-item-66" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-66"><a target="_blank" href="https://www.facebook.com/plexapp" data-pulldown="item-social-facebook"><i class="icomoon icon-social-facebook" aria-label="BlueSky"></i></a></li>
+<li id="menu-item-64" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-64"><a target="_blank" href="https://www.linkedin.com/company/plex-inc" data-pulldown="item-social-linkedin"><i class="icomoon icon-social-linkedin" aria-label="LinkedIn"></i></a></li>
+<li id="menu-item-63" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-63"><a target="_blank" href="https://www.youtube.com/user/plextvapp" data-pulldown="item-social-youtube"><i class="icomoon icon-social-youtube" aria-label="YouTube"></i></a></li>
+</ul></div>
+				</div>
+			</div>
+							<div class="grid-x footer-inner align-middle">
+					<div class="large-12 cell menu-sub-footer menu-sub-footer-alt">
+
+						<div class="menu-sub-footer-us-container"><ul id="menu-sub-footer-us" class="menu"><li id="menu-item-20707" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-20707 geolocation-hide geolocation-country-US-hide nav-item-toggable"><a href="https://www.plex.tv/vendors-us/">Do Not Sell or Share My Personal Information / Opt-out of Targeted Advertising</a></li>
+</ul></div>
+					</div>
+				</div>
+					</div>
+	</div>
+</div>
+    <script defer="" src="https://sea1.discourse-cdn.com/plex/theme-javascripts/46fa29dcfdf9f6cdae1ccb58e033162db1a0a6cd.js?__ws=forums.plex.tv" data-theme-id="3" nonce="mjyUbECTOcXexZUn0AO6AwD6I"></script>
+  </body>
+  
+</html>

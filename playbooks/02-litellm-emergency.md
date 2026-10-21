@@ -3,6 +3,7 @@ id: "02"
 title: LiteLLM 多 CVE 升级矩阵与 1.82.7/1.82.8 供应链事故处置
 ecosystem: python-llm
 cve: ["CVE-2026-42208", "CVE-2026-35029", "CVE-2026-35030", "CVE-2026-59823", "CVE-2026-84377"]
+aliases: ["GHSA-69x8-hrgq-fjj8"]
 affects: "CVE-2026-42208: >=1.81.16 <1.83.7；CVE-2026-35029/35030 与 GHSA-69x8: <1.83.0；CVE-2026-59823: <1.83.9；CVE-2026-84377: <1.88.6 且 1.89–1.96 各分支低于对应分支修复版；投毒包: 1.82.7 / 1.82.8（仅 2026-03-24 窗口）"
 fixed: ["1.83.0", "1.83.7", "1.83.9", "1.88.6", "1.89.7", "1.90.7", "1.91.5", "1.92.2", "1.93.2", "1.94.3", "1.95.1", "1.96.2", "1.106.2"]
 severity: "严重（42208 未认证 9.8 + KEV；其余需已认证 key，含 RCE 与凭据外泄）"
@@ -14,6 +15,16 @@ updated: 2026-10-21
 # LiteLLM 多 CVE 升级矩阵与供应链事故
 
 **一句话**：「升到 1.83.7」只修了那一条未认证 SQLi。**LiteLLM 现在是 5 条 CVE + 1 起投毒事故、多分支修复**，按全局 semver 比较必然升错线。
+
+## 变量清单（先 export，再抄命令）
+
+下面命令不写死容器名/域名/镜像，只认环境变量。**先 export，再逐条抄**；变量没设时命令会带 `:?` 直接报错退出，不会拿空值去跑。
+
+```bash
+: "${CONTAINER:?未设置 CONTAINER（litellm 容器名或 ID）}"
+: "${PUBLIC_HOST:?未设置 PUBLIC_HOST（对外域名，如 ai.example.com；无公网暴露就 export PUBLIC_HOST=127.0.0.1）}"
+: "${IMAGE_REF:?未设置 IMAGE_REF（litellm 镜像引用，可带 tag 或 sha256:digest）}"
+```
 
 ## 适用版本区间
 
@@ -69,7 +80,7 @@ PY
 # 1) 版本（进程所在环境，不是宿主机）
 pip show litellm 2>/dev/null | grep -i '^version'
 python3 -c 'import importlib.metadata as m; print(m.version("litellm"))'
-docker exec <CONTAINER> pip show litellm | grep -i '^version'
+docker exec "$CONTAINER" pip show litellm | grep -i '^version'
 
 # 2) 是否踩过 1.82.7/1.82.8 投毒窗口（这步不能用自己的 python/pip 执行）
 #    被投毒环境里的 python 一启动就可能执行 .pth，所以用 find/grep 只读盘点
@@ -82,7 +93,7 @@ docker ps --format '{{.Names}}\t{{.Image}}' | grep -i litellm
 kubectl get deploy -A -o jsonpath='{range .items[*]}{.metadata.namespace}/{.metadata.name}{"\t"}{..image}{"\n"}{end}' 2>/dev/null | grep -i litellm
 
 # 4) 暴露面（42208 只看这一条是否公网可达）
-curl -s -m 5 -o /dev/null -w 'public=%{http_code}\n' https://<公网域名>/health/readiness
+curl -s -m 5 -o /dev/null -w 'public=%{http_code}\n' https://"$PUBLIC_HOST"/health/readiness
 
 # 5) 相关开关（35030 需要 JWT 才命中）
 grep -Rn 'enable_jwt_auth' config.yaml .env 2>/dev/null
@@ -119,9 +130,9 @@ grep -Rn 'enable_jwt_auth' config.yaml .env 2>/dev/null
 #    nginx: location = /chat/completions { deny all; }
 # B. 官方 workaround：切断错误处理路径（缓解，不是修复）
 #    config.yaml -> general_settings.disable_error_logs: true
-docker restart <CONTAINER>
+docker restart "$CONTAINER"
 # C. 确认外网不可达
-curl -s -m 5 -o /dev/null -w '%{http_code}\n' https://<公网域名>/health/readiness
+curl -s -m 5 -o /dev/null -w '%{http_code}\n' https://"$PUBLIC_HOST"/health/readiness
 ```
 
 ### 4.2 按分支升级（决策树）
@@ -141,7 +152,7 @@ pip install "litellm[proxy]==1.89.7"   # 或 1.90.7 / 1.91.5 / 1.92.2 / 1.93.2 /
 pip install -U "litellm[proxy]"
 ```
 
-> 云/容器部署：镜像 tag 必须先 `docker run --rm <image> pip show litellm` 验证版本，再切流量。别信「tag 写了 stable 就是新版」。
+> 云/容器部署：镜像 tag 必须先 `docker run --rm "$IMAGE_REF" pip show litellm` 验证版本，再切流量。别信「tag 写了 stable 就是新版」。
 
 ### 4.3 投毒命中（1.82.7 / 1.82.8）——重建，不升级
 
@@ -160,7 +171,7 @@ grep -rIl 'litellm_init.pth' /root/.cache /var/cache 2>/dev/null
 ```bash
 # 轮换按 playbook 06（先加后减、双读窗口、引用计数归零才禁用）
 # 取证：SQL 错误痕迹（42208）+ 出站到 models.litellm.cloud（投毒）
-docker logs <CONTAINER> --since 720h 2>&1 | grep -Ei 'syntax error at or near|unterminated quoted string' | wc -l
+docker logs "$CONTAINER" --since 720h 2>&1 | grep -Ei 'syntax error at or near|unterminated quoted string' | wc -l
 ```
 
 ```sql
@@ -173,7 +184,7 @@ WHERE query ILIKE '%LiteLLM_VerificationToken%' ORDER BY total_exec_time DESC LI
 ```yaml
 - run: pip install --require-hashes -r requirements.txt   # 锁 hash，挡掉投毒版本
 - run: pip-audit -r requirements.txt
-- run: trivy image --severity HIGH,CRITICAL --exit-code 1 <image>
+- run: trivy image --severity HIGH,CRITICAL --exit-code 1 "$IMAGE_REF"
 ```
 
 ## 验证

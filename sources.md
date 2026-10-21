@@ -75,7 +75,7 @@
 | S605 | CISA KEV：PAN-OS（5 月批） | 一手 | https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json | CVE-2026-0257；认证绕过；added 2026-05-29，due 2026-06-01（已过）；**与 0322 是两条不同 CVE** | 实测 |
 | S606 | CISA KEV：FortiMail | 一手 | https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json | CVE-2026-104286；路径穿越；added 2026-10-01，due 2026-10-04（已过）；受影响版本矩阵未确认 | 实测 |
 | S506 | MFSA 2026-111（Firefox 158.0.1） | 一手 | https://www.mozilla.org/en-US/security/advisories/mfsa2026-111/ | CVE-2026-113470；high；OneCRL 阻断列表随发行版下发（防 RemoteSettings 被策略禁用） | 2026-10-21 抓原文 |
-| S507 | Mozilla Bugzilla 2083449（eMudhra 私钥泄露） | 一手 | https://bugzilla.mozilla.org/show_bug.cgi?id=2083449 | 根因：8 把 P384 私钥均为**小于 256 的整数**，可秒级恢复（BSGS/枚举）；Mozilla 独立复现；Sectigo 交叉签证书当时**仍未吊销** | 2026-10-21 抓原文 |
+| S507 | Mozilla Bugzilla 2083449（eMudhra 私钥泄露） | 一手 | https://bugzilla.mozilla.org/show_bug.cgi?id=2083449 | 根因：8 把 P384 私钥均为**小于 256 的整数**，可秒级恢复（BSGS/枚举）；Mozilla 独立复现；Sectigo 交叉签证书当时**仍未吊销** | 2026-10-21 抓原文。**批注（R7）**：标题里的「私钥泄露」是 Bugzilla 原文名，不是本队结论；本队口径为**弱密钥**（见 09 / index G16），标题按 R7 不改 |
 | S508 | oss-security 披露（Dennis Jackson / Mozilla） | 一手 | https://www.openwall.com/lists/oss-security/2026/10/20/1 | eMudhra 事件全貌：8 中间 CA（6 TLS + 2 代码签名）+ 3 根 + Sectigo 交叉签 SPKI 全哈希；根因 KGC 弱密钥；事件时间线 | 一手原文；SPKI 全表已誊录到 `evidence/spki-emudhra-2026-10-21.md` |
 | S108 | Traefik 官方安全公告 GHSA-rh7m-2m44-x32f（K8s annotation 跨命名空间引用） | 一手 | https://github.com/traefik/traefik/security/advisories/GHSA-rh7m-2m44-x32f | CVE-2026-112778；修 **2.11.46 / 3.6.17 / 3.7.1**；CVSS 4.0 **6.4**（NVD Secondary）；修复引入 `crossProviderNamespaces` | 2026-10-22 收原件；`04` 引用 |
 | S404 | MSRC CVE-2026-88092（Kestrel HTTP/1 请求走私）+ dotnet/aspnetcore GHSA-rv87-ccxw-8ggf | 一手（厂商/GHSA） | https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-88092 | CVE-2026-88092；CWE-444；CVSS 3.1 **9.4**；修 `8.0.32`/`9.0.21`/`10.0.13`/`11.0.0-rc.2` | 2026-10-22 收 GHSA 原件；`11` 引用 |
@@ -86,6 +86,16 @@
 | S409 | GHSA-w6wh-p4g7-mpj2（Unix 命名互斥/共享内存提权；无 MSRC 页） | 一手（**无 MSRC 页**、NVD 无发布日） | https://github.com/advisories/GHSA-w6wh-p4g7-mpj2 | CVE-2026-96225；CWE-59；CVSS 3.1 **7.8**；修同上 | 2026-10-22 收原件；`11` 引用 |
 | S410 | NVD CVE-2026-105221 + gist 上游 commit/issue（RubyGem 硬编码 `VERIFY_NONE`） | 一手（NVD + 上游 commit） | https://nvd.nist.gov/vuln/detail/CVE-2026-105221 | CVE-2026-105221；CWE-295；CVSS 3.1 **7.4** / 4.0 **9.1**；修 `6.1.0` | 2026-10-22 收原件；`09` 引用 |
 | S411 | NVD CVE-2026-85086（Apache Thrift perl bindings 不安全 TLS 默认） | 一手（NVD；**Apache 原文需 JS，未取到**） | https://nvd.nist.gov/vuln/detail/CVE-2026-85086 | CVE-2026-85086；CWE-295 + CWE-1188；CVSS 4.0 **6.9**；修 `0.25.0` | 2026-10-22 收原件；`09` 引用 |
+| S412 | CVE 官方记录 `CVE-2026-85086`（**CNA = apache**，state PUBLISHED）+ lists.apache.org 线程 | 一手（CNA 记录） | https://lists.apache.org/thread/33otcgbqd27wf6qq810q56znzbomnhg1 | CVE-2026-85086；Apache Thrift perl bindings `<0.25.0` → `0.25.0`；title「Perl TLS client disables certificate verification by default」 | 2026-10-22 收 `cveawg-CVE-2026-85086.json`；`09` 引用（**补 S411 的「仅 NVD」口径**） |
+| S413 | metacpan 发布说明 `Mozilla-CA-20261020` + NVD `CVE-2026-113812` | 一手（上游发布说明 + NVD） | https://metacpan.org/release/LWP/Mozilla-CA-20261020/changes | CVE-2026-113812；Perl `Mozilla::CA` `<20261020` → `20261020`；denylist 含 `emSign ECC Root CA - G3`（sha256 `86a1ecba…`） | 2026-10-22 收原件（`metacpan-Mozilla-CA-20261020-changes.txt` + `NVD-CVE-2026-113812.json`）；`09` 引用；编号 **S412/S413 已由工坊确认：S411 之后顺延，无冲突** |
+| S414 | GHSA-6q48-6c7w-9gw2（Python `certifi` 打包 emSign 根证书，critical，无 CVE 别名） | 一手（GHSA） | https://github.com/advisories/GHSA-6q48-6c7w-9gw2 | `>=2019.03.09 <2026.10.19` → `2026.10.19` | 2026-10-22 收原件；`09` 引用（**闭环 W1 certifi 缺口**） |
+| S415 | GHSA-hq85-5cpj-mr62（Python `uv` 内置 CA store，无 CVE 别名） | 一手（GHSA） | https://github.com/advisories/GHSA-hq85-5cpj-mr62 | `<0.13.4` → `0.13.4` | 2026-10-22 收原件；`09` 引用 |
+| S416 | Plex 官方论坛版本公告 #712（Plex Media Server 1.43.3.10861） | 一手（厂商发布公告） | https://forums.plex.tv/t/plex-media-server/30447/712 | CVE-2026-96652/96654/96655/96656；`<1.43.3.10861` → `1.43.3.10861`；发布时为 **Plex Pass Beta 通道**；社区流传 `v1.43.2` 是错的 | 2026-10-22 收原件；`10` 引用；**稳定通道版本待核（post #714 已到 1.43.3.10896）** |
+| S417 | Fortinet PSIRT `FG-IR-26-175`（FortiMail 路径穿越 + NULL 字节） | 一手（厂商 PSIRT） | https://www.fortiguard.com/psirt/FG-IR-26-175 | CVE-2026-104286；受影响 `8.0.0–8.0.1`/`7.6.0–7.6.6`/`7.4.0–7.4.8`/`7.2.0–7.2.9`；修 `8.0.2`/`7.6.7`/`7.4.9`；**7.2 无同分支修复**；workaround 关 IBE；IoC `79.141.169.187`/`45.129.0.192` | 2026-10-22 收原件；`10` 引用 |
+| S418 | JVN#88474777（EG Secure Solutions SiteGuard Server Edition OS 命令注入） | 一手（JVN / IPA） | https://jvn.jp/en/jp/JVN88474777/ | CVE-2026-106931；受影响 `>=Ver2.20`（IIS 3.10–4.00U4 不受影响；需统计功能开启，默认开）；修 **Ver8.00 Update 5 / Ver7.00 Update 6**；CVSS 4.0 8.5 / 3.0 7.8；**已确认在野利用**；EOL 版本另有补丁 | 2026-10-22 收原件；`10` 引用；厂商页 302 已留证，以 JVN 为一手 |
+| S419 | Siemens ProductCERT `SSA-580366`（Software Center 不受控搜索路径） | 一手（厂商 PSIRT） | https://cert-portal.siemens.com/productcert/html/ssa-580366.html | CVE-2026-110936；`All versions < V4.0.9.8` → `V4.0.9.8`（启动时自动更新）；另 ProductCERT News 确认**在野利用** + IoC 章节 | 2026-10-22 收原件；`10` 引用 |
+| S420 | Palo Alto 官方安全公告 `CVE-2026-0322`（管理面认证 RCE，逐分支 Product Status） | 一手（厂商 PSIRT） | https://security.paloaltonetworks.com/CVE-2026-0322 | CVSS-BT **8.6 HIGH**、`E:A ATTACKED`、`PR:H`；**无官方 workaround**；逐分支修复线（12.2/12.1/11.2/11.1/10.2）；Threat ID 510046/510047 有限覆盖（需 SSL 解密） | 2026-10-22 收原件；`10` 引用 |
+| S421 | Palo Alto 官方安全公告 `CVE-2026-0257`（GlobalProtect 认证绕过） | 一手（厂商 PSIRT） | https://security.paloaltonetworks.com/CVE-2026-0257 | CVSS-BT **7.8 HIGH**、`E:A`；**有官方缓解**（关 Authentication Override / 专用证书）；逐分支修复线 + Prisma Access；**升级后 GP 用户需重认证一次** | 2026-10-22 收原件；`10` 引用 |
 
 ## 传闻区（二手 / 未确认，**不入结论**）
 
@@ -156,8 +166,10 @@ S1xx | <来源名称> | 一手 | <URL> | <CVE/组件/版本> | 已核实
 - `S108` Traefik（CVE-2026-112778）→ `04`
 - `S404`–`S409` .NET / ASP.NET Core 6 条（CVE-2026-88092 / 70183 / 70186 / 96230 / 96233 / 96225）→ `11`
 - `S410` Ruby gist（CVE-2026-105221）、`S411` Perl Thrift（CVE-2026-85086）→ `09`
+- **W2 追加**：`S412` CNA=apache 记录（CVE-2026-85086，补 S411 的「仅 NVD」口径）、`S413` Mozilla::CA 20261020（CVE-2026-113812）→ `09`；编号**已确认**（S411 之后顺延，无冲突）
+- **W2 二次追加（修复策略顺延占用，请工坊确认）**：`S414` certifi、`S415` uv → `09`；`S416` Plex、`S417` FortiMail、`S418` SiteGuard（JVN）、`S419` Siemens、`S420`/`S421` PAN-OS 逐分支 → `10`
 
-证据原件：`evidence/w1-2026-10-22/`（45 份，sha256 见该目录 `evidence-manifest.sha256`）。
+证据原件：`evidence/w1-2026-10-22/`（45 份，sha256 见该目录 `evidence-manifest.sha256`）；W2 第二批在 `evidence/w2-2026-10-23/`（31 份，`evidence-manifest.sha256` = `8627892252a30c6b09e35199e7f57cdfbffa2a74697b0d5cdb7b83e5df7b7478`）。
 
 ## 待办
 

@@ -3,6 +3,7 @@ id: "11"
 title: .NET / ASP.NET Core 2026-10 安全更新（Kestrel HTTP/1 走私 9.4 领衔，6 条）
 ecosystem: generic          # 模板枚举无 nuget；inventory 该 6 行 ecosystem=nuget，映射见文末
 cve: ["CVE-2026-88092", "CVE-2026-70183", "CVE-2026-70186", "CVE-2026-96230", "CVE-2026-96233", "CVE-2026-96225"]
+ghsa: ["GHSA-rv87-ccxw-8ggf", "GHSA-494h-xx7x-5frh", "GHSA-mf4x-w4gh-4656", "GHSA-qjpx-jqm5-h2c4", "GHSA-87vj-4hqv-22p9", "GHSA-w6wh-p4g7-mpj2"]
 affects: "8.0.0–8.0.31 / 9.0.0–9.0.20 / 10.0.0–10.0.12 / 11.0.0-preview.1–11.0.0-rc.1（6 条同一组区间）"
 fixed: ["8.0.32", "9.0.21", "10.0.13", "11.0.0-rc.2"]
 severity: "严重（CVE-2026-88092 Kestrel HTTP/1 请求走私 CVSS 3.1 9.4；其余 7.5–8.8）"

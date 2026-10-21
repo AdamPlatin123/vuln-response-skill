@@ -17,6 +17,25 @@ updated: 2026-10-21
 > 目标：把「发现 → 修完 → 能被审计」压成一条可回退的路。
 > 本文不判断漏洞真伪——判定输入来自 playbook 01–06、08、09 的已核实条目。
 
+## 变量清单（先 export，再抄命令）
+
+下面命令只认环境变量，**先 export 再逐条抄**；`${VAR:?...}` 会在变量缺失时直接报错退出。
+生产操作前先把这组变量抄进变更单留痕（谁、哪台、哪个版本）。
+
+```bash
+: "${PUBLIC_HOST:?未设置 PUBLIC_HOST（被处置资产的对外域名）}"
+: "${PROBE_PATH:?未设置 PROBE_PATH（探测路径，如 health 或 api/health）}"
+: "${APP_DEPLOY:?未设置 APP_DEPLOY（k8s Deployment 名）}"
+: "${CONTAINER:?未设置 CONTAINER（Deployment 里的容器名）}"
+: "${IMAGE_REF:?未设置 IMAGE_REF（目标镜像（不含 digest））}"
+: "${IMAGE_DIGEST:?未设置 IMAGE_DIGEST（目标镜像 sha256 digest）}"
+: "${INGRESS:?未设置 INGRESS（Ingress 名）}"
+: "${INCIDENT_ID:?未设置 INCIDENT_ID（事件单号）}"
+: "${ARTIFACT:?未设置 ARTIFACT（待校验制品路径或镜像 tar）}"
+: "${PID:?未设置 PID（目标进程 pid，与 06 号件同名同义）}"
+: "${DATABASE_URL:?未设置 DATABASE_URL（库连接串（只读除外））}"
+```
+
 ## 适用版本区间
 
 不按软件版本判定，按事件档位。踩错档位，后面每一步都错。
@@ -68,7 +87,7 @@ for p in $(pgrep -f 'node|java|python|gunicorn|vllm|litellm'); do
   tr '\0' '\n' < /proc/$p/environ | sed 's/=.*/=<redacted>/'
 done
 docker ps --no-trunc --format '{{.Names}} {{.Image}} {{.CreatedAt}}'
-docker image inspect <img> --format '{{json .RepoDigests}}'
+docker image inspect "$IMAGE_REF" --format '{{json .RepoDigests}}'
 journalctl --since '-6h' -o short-iso > /evidence/journal.log
 ```
 
@@ -94,7 +113,7 @@ curl -s https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabi
   | jq -r --arg id "$CVE_ID" '.vulnerabilities[] | select(.cveID==$id) | "\(.cveID)\t\(.dateAdded)\t\(.dueDate)"'
 
 # 3) 暴露面：从攻击者视角实测
-curl -s -m 5 -o /dev/null -w 'public=%{http_code}\n' https://prod.example.com/<受影响路径>
+curl -s -m 5 -o /dev/null -w 'public=%{http_code}\n' https://"$PUBLIC_HOST"/"$PROBE_PATH"
 ss -lntp | grep -E ':(4000|8000|11434)\b'
 ```
 
@@ -141,9 +160,9 @@ ss -lntp | grep -E ':(4000|8000|11434)\b'
 
 ```bash
 # 灰度（不是一把梭）
-kubectl set image deploy/<app> <container>=<image>@sha256:<digest>
-kubectl rollout status deploy/<app> --timeout=300s
-kubectl rollout undo deploy/<app>        # 回退触发器命中时执行
+kubectl set image deploy/"$APP_DEPLOY" "$CONTAINER"="$IMAGE_REF"@sha256:"$IMAGE_DIGEST"
+kubectl rollout status deploy/"$APP_DEPLOY" --timeout=300s
+kubectl rollout undo deploy/"$APP_DEPLOY"        # 回退触发器命中时执行
 ```
 
 ### P4 数据面专项（「动生产库」就是这段）
@@ -224,8 +243,8 @@ G4 八项，缺一项不许说「已修复」：
 
 | # | 验证项 | 命令 / 证据 | 通过标准 |
 |---|---|---|---|
-| 1 | 制品正确 | `sha256sum <artifact>` 对比官方发布页；`docker image inspect --format '{{json .RepoDigests}}'` | 与官方 digest 一致 |
-| 2 | 运行态正确 | `readlink /proc/<pid>/exe`；`ps -o lstart=` | 指向新路径且启动时间晚于发版 |
+| 1 | 制品正确 | `sha256sum "$ARTIFACT"` 对比官方发布页；`docker image inspect --format '{{json .RepoDigests}}'` | 与官方 digest 一致 |
+| 2 | 运行态正确 | `readlink "/proc/$PID/exe"`；`ps -o lstart=` | 指向新路径且启动时间晚于发版 |
 | 3 | 功能回归 | 核心链路冒烟 + 业务方签字 | 成功率回到基线 ±10% |
 | 4 | 边界拒绝 | 厂商 PoC 的**只读/无害**变体，在测试实例跑 | 返回 401/403/400，无 200 |
 | 5 | 凭据边界 | 旧 key 调一次 | 401/403 |
@@ -250,12 +269,12 @@ ls -la /etc/cron* /var/spool/cron 2>/dev/null; crontab -l 2>/dev/null
 
 ```bash
 # 流量层
-kubectl patch ingress <ing> --type=json \
+kubectl patch ingress "$INGRESS" --type=json \
   -p='[{"op":"remove","path":"/metadata/annotations/nginx.ingress.kubernetes.io~1server-snippet"}]'
 # 版本层
-kubectl rollout undo deploy/<app> && kubectl rollout status deploy/<app>
+kubectl rollout undo deploy/"$APP_DEPLOY" && kubectl rollout status deploy/"$APP_DEPLOY"
 # 数据层（仅当按 §4.3 有已演练的回退点）
-pg_restore --clean --if-exists -d "$DATABASE_URL" /secure/<incident>/pre-change.dump
+pg_restore --clean --if-exists -d "$DATABASE_URL" /secure/"$INCIDENT_ID"/pre-change.dump
 ```
 
 **回退后风险**：回退版本 = 重新暴露漏洞；回退数据 = 可能丢修复后的写入。回退必须同时满足：入口仍围堵、密钥已轮换、再升级时间点已定。**不允许「回退即收工」**。

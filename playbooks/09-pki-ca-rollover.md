@@ -2,9 +2,10 @@
 id: "09"
 title: eMudhra 中间 CA 弱密钥（P384 私钥可秒级恢复）· PKI 处置与五套信任库更新
 ecosystem: pki
-cve: ["CVE-2026-111943", "CVE-2026-113470", "CVE-2026-105221", "CVE-2026-85086"]
-affects: "① 信任库面：证书链经过 3 个根（AAA Certificate Services / emSign Root TLS CA - G3 / emSign ECC Root CA - G3）的中间 CA；受影响的是**信任库**而非某个软件版本：Go <1.26.10 / <1.27.3、Rust webpki-roots <1.0.10（`=0.26.11` 是 unaffected 兼容包，**不是修复版**）、rustls-webpki `<0.103.16` 或 `0.104.0-alpha.1–<0.104.0-alpha.8`（两段，取「或」）、webpki-root-certs <1.0.10、Node 22/24/26 修复线之前；Python certifi / Java cacerts / Linux ca-certificates / .NET 处置版本**未确认**。② 应用层 TLS 校验关断面（与信任库无关）：gist RubyGem `<6.1.0`、Apache Thrift perl bindings `<0.25.0`"
-fixed: ["Go 1.26.10", "Go 1.27.3", "webpki-roots 1.0.10", "webpki-root-certs 1.0.10", "rustls-webpki 0.103.16", "rustls-webpki 0.104.0-alpha.8", "Node 22.23.4", "Node 24.22.1", "Node 26.12.1", "Firefox 158.0.1", "Firefox ESR 115.43.1", "Firefox ESR 153.5.1", "Firefox Android 158.0.2", "NSS 3.131.1", "gist 6.1.0", "Thrift 0.25.0"]
+cve: ["CVE-2026-111943", "CVE-2026-113470", "CVE-2026-105221", "CVE-2026-85086", "CVE-2026-113812"]
+aliases: ["RUSTSEC-2026-0381", "RUSTSEC-2026-0382", "RUSTSEC-2026-0383", "GHSA-phqh-xp3p-h6mr", "GHSA-6q48-6c7w-9gw2", "GHSA-hq85-5cpj-mr62"]
+affects: "① 信任库面：证书链经过 3 个根（AAA Certificate Services / emSign Root TLS CA - G3 / emSign ECC Root CA - G3）的中间 CA；受影响的是**信任库**而非某个软件版本：Go <1.26.10 / <1.27.3、Rust webpki-roots <1.0.10（`=0.26.11` 是 unaffected 兼容包，**不是修复版**）、rustls-webpki `<0.103.16` 或 `0.104.0-alpha.1–<0.104.0-alpha.8`（两段，取「或」）、webpki-root-certs <1.0.10、Node 22/24/26 修复线之前、Perl `Mozilla::CA` <20261020、Python `certifi >=2019.03.09 <2026.10.19`（修 `2026.10.19`）、`uv <0.13.4`（修 `0.13.4`）；Java cacerts / Debian ca-certificates / .NET 处置版本**未确认**。② 应用层 TLS 校验关断面（与信任库无关）：gist RubyGem `<6.1.0`、Apache Thrift perl bindings `<0.25.0`"
+fixed: ["Go 1.26.10", "Go 1.27.3", "webpki-roots 1.0.10", "webpki-root-certs 1.0.10", "rustls-webpki 0.103.16", "rustls-webpki 0.104.0-alpha.8", "Node 22.23.4", "Node 24.22.1", "Node 26.12.1", "Firefox 158.0.1", "Firefox ESR 115.43.1", "Firefox ESR 153.5.1", "Firefox Android 158.0.2", "NSS 3.131.1", "gist 6.1.0", "Thrift 0.25.0", "Mozilla::CA 20261020"]
 severity: "高危（伪造 HTTPS 证书做中间人；私钥已广为人知，CT 日志暂未见签发记录，但厂商明确「近期很可能被滥用」）；另含两条应用层 TLS 校验关断：gist 4.0 **9.1** / Thrift 4.0 **6.9**"
 status: verified
 sources: ["https://www.openwall.com/lists/oss-security/2026/10/20/1", "https://blog.mozilla.org/security/2026/10/20/protecting-firefox-users-following-the-compromise-of-emudhra-intermediate-certificates/", "https://raw.githubusercontent.com/rustsec/advisory-db/main/crates/webpki-roots/RUSTSEC-2026-0381.md", "https://osv.dev/vulnerability/GO-2026-6809"]
@@ -13,9 +14,22 @@ updated: 2026-10-21
 
 # eMudhra 中间 CA 弱密钥 · PKI 处置
 
+> **覆盖说明（三条）**
+> 1. **包级事实 verified**：本件 CVE 号、受影响区间、修复版本均有一手来源（oss-security / RUSTSEC / OSV / MFSA / NVD / CNA 记录 / GHSA）。
+> 2. **三套信任库的 fixed 版本未在本件确认**：Debian ca-certificates / Java cacerts / .NET 需按各自发行版与厂商公告核对；**Python 侧已确认**：`certifi 2026.10.19`、`uv 0.13.4`。
+> 3. 本件按「verified + 未确认子项」归档：**不下调 status、不改统计口径**，缺口在 `index.md` 未闭环清单单列。
+
 > 措辞口径：根因是**弱密钥**（私钥本身可被秒级恢复，见下「根因」段），不是普通「私钥被盗」。标题与正文按根因写，别再叫「私钥泄露」。
 
 **一句话**：**只升浏览器/运行时修不掉系统 trust store**。Go、Rust、Node、Python、Java、Linux 各自有独立信任库，随二进制或系统发行，要**逐个更新并逐个验证**；同时「对外证书换 CA 重签」和「客户端信任库更新」是两件事，不能互相替代。
+
+## 变量清单（先 export，再抄命令）
+
+下面命令只认环境变量，**先 export 再逐条抄**；`${VAR:?...}` 会在变量缺失时直接报错退出。
+
+```bash
+: "${BASELINE_VERSION:?未设置 BASELINE_VERSION（回退目标版本，如 gist 6.1.0 之前 / Thrift 0.25.0）}"
+```
 
 ## 适用版本区间
 
@@ -33,10 +47,11 @@ updated: 2026-10-21
 | 组件 | 受影响 | 修复 | 说明 |
 |---|---|---|---|
 | `gist` RubyGem | `<6.1.0` | `6.1.0` | `CVE-2026-105221`；`lib/gist.rb` 硬编码 `VERIFY_NONE` → 任意证书可被接受，GitHub API 流量可被中间人读取/篡改（CWE-295） |
-| Apache Thrift **perl bindings** | `<0.25.0` | `0.25.0` | `CVE-2026-85086`；不安全 TLS 默认（CWE-295 + CWE-1188）。**依据 NVD，Apache 原文需 JS 未取到** |
+| Apache Thrift **perl bindings** | `<0.25.0` | `0.25.0` | `CVE-2026-85086`；不安全 TLS 默认（CWE-295 + CWE-1188）。**依据：CVE 记录（`assignerShortName=apache`、state PUBLISHED，含 lists.apache.org 线程引用）+ NVD；Apache 公告页正文需 JS 未取到** |
 | Node.js 内置 CA（ca-cert 依赖） | 22/24/26 三条线修复版之前 | `22.23.4` / `24.22.1` / `26.12.1` | 一手（Node 安全公告） |
 | Firefox / NSS | OneCRL 未生效或自定义设置阻断更新 | `158.0.1` / ESR `115.43.1`·`153.5.1` / Android `158.0.2` / NSS `3.131.1`（**CVE-2026-113470**，MFSA 2026-111，high） | 一手（Mozilla 博客 + MFSA） |
-| **Python certifi** | 版本未知 | **未确认** | 待核 |
+| Python `certifi` | `>=2019.03.09 <2026.10.19`（打包 emSign 根证书） | `2026.10.19` | 一手（GHSA-6q48-6c7w-9gw2，critical） |
+| Python `uv`（内置 CA store） | `<0.13.4` | `0.13.4` | 一手（GHSA-hq85-5cpj-mr62） |
 | **Java cacerts** | 版本未知 | **未确认** | 待核 |
 | **Linux ca-certificates** | 发行版各自 | **未确认**（按发行版 tracker） | 待核 |
 | **Chrome / Android** | CRLSets 阻断 | 侦察交件；Google 原文正文未能抓取 | **待核** |
@@ -113,7 +128,8 @@ done | grep -F -f /tmp/emudhra-spki.txt
 ### 3) 五套信任库逐个查
 
 ```bash
-# Python certifi（独立 bundle，不跟系统走）
+# Python certifi（独立 bundle，不跟系统走）——先看版本，再看内容
+python3 -c 'import certifi;print(certifi.__version__, certifi.where())'   # <2026.10.19 即命中
 python3 -c 'import certifi;print(certifi.where())'
 openssl crl2pkcs7 -nocrl -certfile "$(python3 -c 'import certifi;print(certifi.where())')" \
   | openssl pkcs7 -print_certs -noout | grep -iE 'emSign|eMudhra|AAA Certificate'
@@ -135,6 +151,9 @@ keytool -list -cacerts -storepass changeit 2>/dev/null | grep -iE 'emSign|eMudhr
 
 # Rust
 cargo tree -i webpki-roots 2>/dev/null; cargo tree -i rustls-webpki 2>/dev/null; cargo tree -i webpki-root-certs 2>/dev/null
+
+# Python uv（内置 CA store，独立于 certifi）
+uv --version 2>/dev/null || python3 -c 'import importlib.metadata as m;print(m.version("uv"))' 2>/dev/null   # <0.13.4 即命中
 
 # Go（system pool + 自带逻辑：升级运行时才算修）
 go version; go env GOROOT
@@ -221,15 +240,17 @@ cargo build --locked
 # 4) Node：升级运行时（ca-cert 随二进制走），SEA/snapshot 产物要重建
 nvm install 24.22.1 && nvm use 24.22.1 && node -v
 
-# 5) Python：升级 certifi 后重启进程（必要时注入自定义 bundle）
-python3 -m pip install -U certifi
-python3 -c 'import certifi;print(certifi.__version__, certifi.where())'
+# 5) Python：安装已确认的修复版本，然后重启进程（必要时注入自定义 bundle）
+python3 -m pip install 'certifi==2026.10.19'
+python3 -c 'import certifi;print(certifi.__version__, certifi.where())'      # 期望 2026.10.19
+python3 -m pip install 'uv==0.13.4'   # uv 若单独装（内置 CA store 需 ≥0.13.4）
+uv --version
 
 # 6) Java：更新 cacerts（版本未确认，先按发行版/JDK 安全公告处置）
 keytool -list -cacerts -storepass changeit | grep -icE 'emSign|eMudhra|AAA Certificate'
 ```
 
-> **Java / .NET / Linux 发行版 / Python certifi 的精确处置版本本稿未确认**——必须按各自官方公告与发行版 tracker 定，不在这里编版本号。
+> **Java cacerts / .NET / Debian ca-certificates 三套的精确处置版本本稿未确认**——必须按各自官方公告与发行版 tracker 定，不在这里编版本号；Python 侧已确认（`certifi 2026.10.19`、`uv 0.13.4`）。
 
 ### 4.2 对外证书：换 CA 重签（与信任库更新无关）
 
@@ -263,7 +284,7 @@ cpanm Thrift@0.25.0          # 或 cpan -i Thrift
 perl -MThrift -e 'print "$Thrift::VERSION\n"'
 ```
 
-> Thrift 这条**依据 NVD**（`security@apache.org` 提交的记录）；Apache 官方公告页正文需 JS 渲染、本次未取到，**升级目标版本以 NVD 记录为准，厂商原文待补**。
+> Thrift 这条**依据 CVE 官方记录（`assignerShortName=apache`，state PUBLISHED，即 Apache 自己提交的 CNA 记录，含 lists.apache.org 线程引用）+ NVD**；Apache 公告页正文需 JS 渲染、本次未取到，**升级目标版本以该 CVE 记录为准**。
 
 ## 验证
 
@@ -311,6 +332,10 @@ curl -sS -o /dev/null -w '%{http_code}\n' "https://${PEER:?export PEER=关键依
 gem list gist 2>/dev/null | grep -E '\(6\.(1|[2-9])'                # 期望 6.1.0 及以上
 grep -rn 'VERIFY_NONE' "$(gem which gist 2>/dev/null | xargs -r dirname)" 2>/dev/null | wc -l   # 期望 0
 perl -MThrift -e 'print "$Thrift::VERSION\n"' 2>/dev/null           # 期望 0.25.0
+
+# 6) Python 侧已确认修复版（certifi / uv）
+python3 -c 'import certifi;print(certifi.__version__)'                # 期望 2026.10.19
+uv --version 2>/dev/null                                              # 期望 0.13.4
 ```
 
 **通过标准**
@@ -321,7 +346,8 @@ perl -MThrift -e 'print "$Thrift::VERSION\n"' 2>/dev/null           # 期望 0.2
 4. 业务 TLS 全链路回归通过，无新增证书告警；
 5. 对外证书已换 CA（若原链涉及 eMudhra）并有新证书链留档；
 6. 代码签名策略已评估（2 张被攻破的 CS 中间 CA）；
-7. `gist` ≥ `6.1.0` 且源码中 `VERIFY_NONE` 命中数为 0；perl `Thrift` ≥ `0.25.0`（两条与信任库无关，必须单独出证据）。
+7. `gist` ≥ `6.1.0` 且源码中 `VERIFY_NONE` 命中数为 0；perl `Thrift` ≥ `0.25.0`（两条与信任库无关，必须单独出证据）；
+8. `certifi` = `2026.10.19`、`uv` ≥ `0.13.4`（Python 侧已确认项，单独出证据；三套未确认项按 `index.md` 未闭环清单跟踪）。
 
 ## 回退
 
@@ -332,7 +358,8 @@ perl -MThrift -e 'print "$Thrift::VERSION\n"' 2>/dev/null           # 期望 0.2
 PRE_CA=$(dpkg-query -W -f='${Version}' ca-certificates)
 PRE_NODE=$(node -v 2>/dev/null | tr -d v)
 PRE_CERTIFI=$(python3 -c 'import certifi;print(certifi.__version__)' 2>/dev/null)
-printf '%s\n%s\n%s\n' "$PRE_CA" "$PRE_NODE" "$PRE_CERTIFI" | tee "/secure/change/$CHG/pre-trust.txt"
+PRE_UV=$(uv --version 2>/dev/null | awk '{print $2}')
+printf '%s\n%s\n%s\n%s\n' "$PRE_CA" "$PRE_NODE" "$PRE_CERTIFI" "$PRE_UV" | tee "/secure/change/$CHG/pre-trust.txt"
 
 # 1) 系统信任库回退（仅当移除根导致业务中断）
 apt-get -y install "ca-certificates=$PRE_CA" && update-ca-certificates --fresh
@@ -343,7 +370,7 @@ python3 -m pip install "certifi==$PRE_CERTIFI"        # 再用 4.1 第 5 条重�
 # Node 使用自定义 bundle 时：NODE_EXTRA_CA_CERTS / --use-openssl-ca 回退到基线配置
 
 # 3) gist / Thrift 回退（回退 = 重新关掉证书校验，必须有到期时间）
-#    Gemfile.lock 里 gist 的版本行改回基线后 `bundle install --local`；perl 用 cpanm Thrift@<基线版本>
+#    Gemfile.lock 里 gist 的版本行改回基线后 `bundle install --local`；perl 用 cpanm Thrift@"$BASELINE_VERSION"
 ```
 
 **回退后风险**：回退信任库 = 重新接受可被伪造成任意站点的证书，等于打开中间人通道；且攻击者已知私钥，利用成本极低。回退 `gist` / Thrift = 重新关掉应用层证书校验（`VERIFY_NONE`），比信任库回退更直接。回退只允许在「升级导致关键业务不可用」的短窗口，并必须同时：限制出站目标、加证书钉扎（pinning）、给出二次处置时间点。
@@ -355,7 +382,9 @@ python3 -m pip install "certifi==$PRE_CERTIFI"        # 再用 4.1 第 5 条重�
 | CVE-2026-111943 | Go / Rust / Node 内置 CA（同根因跨生态，merge_key 相同） | Go `<1.26.10`/`<1.27.3`；webpki-roots `<1.0.10`（`=0.26.11` unaffected）；rustls-webpki `<0.103.16` 或 `0.104.0-alpha.1–<0.104.0-alpha.8`；webpki-root-certs `<1.0.10`；Node 22/24/26 修复线之前 | Go `1.26.10`/`1.27.3`；webpki-roots `1.0.10`；rustls-webpki `0.103.16`/`0.104.0-alpha.8`；webpki-root-certs `1.0.10`；Node `22.23.4`/`24.22.1`/`26.12.1` | S501–S508 / GO-2026-6809 |
 | CVE-2026-113470 | Firefox / NSS OneCRL | OneCRL 未生效或自定义设置阻断更新 | `158.0.1` / ESR `115.43.1`·`153.5.1` / Android `158.0.2` / NSS `3.131.1` | MFSA 2026-111 |
 | CVE-2026-105221 | `gist` RubyGem（硬编码 `VERIFY_NONE`） | `<6.1.0` | `6.1.0` | NVD / 上游 commit |
-| CVE-2026-85086 | Apache Thrift perl bindings（不安全 TLS 默认） | `<0.25.0` | `0.25.0`（**依据 NVD**；Apache 原文需 JS 未取到） | NVD |
+| CVE-2026-85086 | Apache Thrift perl bindings（不安全 TLS 默认） | `<0.25.0` | `0.25.0`（**依据 CVE 记录 CNA=apache + NVD**；Apache 公告页正文需 JS 未取到） | NVD / CNA 记录 |
+| GHSA-6q48-6c7w-9gw2（无 CVE 别名） | Python `certifi`（打包 emSign 根证书） | `>=2019.03.09 <2026.10.19` | `2026.10.19` | GHSA-6q48-6c7w-9gw2 |
+| GHSA-hq85-5cpj-mr62（无 CVE 别名） | Python `uv` 内置 CA store | `<0.13.4` | `0.13.4` | GHSA-hq85-5cpj-mr62 |
 
 > 与 `vuln-w1/inventory.tsv` 对应：CVE-2026-105221 = W1-068（`merge_key=ruby-gist-105221`）、CVE-2026-85086 = W1-069（`perl-thrift-85086`）。
 
@@ -374,4 +403,7 @@ python3 -m pip install "certifi==$PRE_CERTIFI"        # 再用 4.1 第 5 条重�
 | 一手（Bugzilla 2083449：根因 = 私钥为 <256 的整数，可秒级恢复；Sectigo 交叉签当时仍未吊销） | https://bugzilla.mozilla.org/show_bug.cgi?id=2083449 |
 | 一手（NVD：CVE-2026-105221，gist `<6.1.0` → `6.1.0`，CWE-295，CVSS 3.1 7.4 / 4.0 9.1） | https://nvd.nist.gov/vuln/detail/CVE-2026-105221 |
 | 一手（上游 commit：gist 移除 `VERIFY_NONE`） | https://github.com/defunkt/gist/commit/07ccc1a6d46e9d36f0e85d0b1c5d795890ae6bcf |
-| 一手（NVD：CVE-2026-85086，Apache Thrift perl bindings `<0.25.0` → `0.25.0`，CWE-295 + CWE-1188，CVSS 4.0 6.9；**Apache 原文需 JS 未取到**） | https://nvd.nist.gov/vuln/detail/CVE-2026-85086 |
+| 一手（CVE 记录 CNA=apache：CVE-2026-85086，`<0.25.0` → `0.25.0`，含 lists.apache.org 线程引用） | https://lists.apache.org/thread/33otcgbqd27wf6qq810q56znzbomnhg1 |
+| 一手（NVD：CVE-2026-85086，CWE-295 + CWE-1188，CVSS 4.0 6.9；**Apache 公告页正文需 JS 未取到**） | https://nvd.nist.gov/vuln/detail/CVE-2026-85086 |
+| 一手（GHSA-6q48-6c7w-9gw2：certifi `>=2019.03.09 <2026.10.19` → `2026.10.19`，critical） | https://github.com/advisories/GHSA-6q48-6c7w-9gw2 |
+| 一手（GHSA-hq85-5cpj-mr62：uv `<0.13.4` → `0.13.4`） | https://github.com/advisories/GHSA-hq85-5cpj-mr62 |

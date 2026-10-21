@@ -1,0 +1,97 @@
+{
+  "ghsa_id": "GHSA-rv4m-xm3f-3ccq",
+  "cve_id": "CVE-2026-111058",
+  "url": "https://api.github.com/advisories/GHSA-rv4m-xm3f-3ccq",
+  "html_url": "https://github.com/advisories/GHSA-rv4m-xm3f-3ccq",
+  "summary": "Mercury: Unauthenticated Remote Code Execution via /api/kernels",
+  "description": "Mercury runs a JupyterLab server with **anonymous access by default** (`mercury_app/__main__.py` sets `--IdentityProvider.token=''` when no `--token`/`MERCURY_TOKEN` is given; when tokenless it also sets `--ServerApp.disable_check_xsrf=True`). It relies on a **blocklist** (`mercury_app/block_handler.py` `BLOCKED_PATTERNS`: `/lab`, `/api/terminals`, `/api/shutdown`, `/files`) to keep anonymous users off dangerous Jupyter endpoints.\n\n## The vulnerability\n`/api/kernels` is **NOT** in the blocklist (and cannot be — Mercury needs kernels to run notebooks), and `patch_kernel_websocket_handler()` (`mercury_app/idle_timeout.py`) only tracks the idle-timeout: it wraps `on_message` to call `self.application._timeout_manager.touch()` and then invokes the original handler with **no filtering of `execute_request`**. So any unauthenticated network client can:\n\n```\nPOST /api/kernels {\"name\":\"python3\"}        -> 201, returns kernel id\nopen websocket /api/kernels/<id>/channels\nsend an execute_request with arbitrary code -> arbitrary Python execution = RCE\n```\n\n## Distinct from GHSA-f8c7-rwf9-fmgm (incomplete fix)\nGHSA-f8c7 was \"Unauthenticated RCE via `/api/terminals`\" — a missing-comma blocklist bypass. Its fix (add the comma so `/api/terminals` is blocked) does **NOT** address `/api/kernels`, which remains exploitable. The blocklist approach is fundamentally unable to cover kernels, so this is not a variant that another blocklist entry fixes.\n\n## Runtime-proven (on the patched version)\nOn **mercury 3.2.4** — the release that fixed GHSA-f8c7 — with the default (tokenless) config, as an unauthenticated client: `POST /api/terminals` returns **403** (the f8c7 fix is present), but `POST /api/kernels` returns **201**; opening the kernel websocket and sending an `execute_request` executed attacker-supplied Python (ran `whoami` as the server process user and wrote a marker file `/tmp/PWNED_MERCURY_RCE`). Full unauthenticated remote code execution. Deterministic PoC (client script + notebook) included.\n\n## Impact\nUnauthenticated, network-reachable arbitrary code execution as the Mercury server process user on every default deployment — complete compromise of the host/container and any data/secrets it can reach. \n\n## Fix\nThe blocklist cannot secure an anonymous kernel-backed server. Require real per-request authentication (a token or password) by default, or restrict the kernel message channel so anonymous websocket clients cannot issue `execute_request` outside Mercury's own controlled execution flow.\n\n## Dedup (3-method)\nOSV.dev CLEAN(0) for `mercury` and `mljar-mercury`; the repo's only advisory (GHSA-f8c7-rwf9-fmgm) covers `/api/terminals` only (description does not mention kernels); no issue/PR describes the `/api/kernels` RCE (#219/#134/#262 are \"add auth\" feature requests that merely confirm anonymous-by-default). Sink independently confirmed on current HEAD (blocklist omits `/api/kernels`; `token=''` default; `patch_kernel_websocket_handler` does no execute filtering).\n\nFinder: Abdullah Kareem (GitHub: CyberKareem).",
+  "type": "reviewed",
+  "severity": "critical",
+  "repository_advisory_url": "https://api.github.com/repos/mljar/mercury/security-advisories/GHSA-rv4m-xm3f-3ccq",
+  "source_code_location": "https://github.com/mljar/mercury",
+  "identifiers": [
+    {
+      "value": "GHSA-rv4m-xm3f-3ccq",
+      "type": "GHSA"
+    },
+    {
+      "value": "CVE-2026-111058",
+      "type": "CVE"
+    }
+  ],
+  "references": [
+    "https://github.com/mljar/mercury/security/advisories/GHSA-rv4m-xm3f-3ccq",
+    "https://github.com/mljar/mercury/commit/73a40ceb0becf057f495a5738ad7f5a5222a53e1",
+    "https://github.com/mljar/mercury/releases/tag/3.2.6",
+    "https://github.com/advisories/GHSA-rv4m-xm3f-3ccq"
+  ],
+  "published_at": "2026-10-19T16:49:08Z",
+  "updated_at": "2026-10-19T16:49:08Z",
+  "github_reviewed_at": "2026-10-19T16:49:08Z",
+  "nvd_published_at": null,
+  "withdrawn_at": null,
+  "vulnerabilities": [
+    {
+      "package": {
+        "ecosystem": "pip",
+        "name": "mercury"
+      },
+      "vulnerable_version_range": "<= 3.2.5",
+      "first_patched_version": "3.2.6",
+      "vulnerable_functions": [
+
+      ]
+    }
+  ],
+  "cvss_severities": {
+    "cvss_v3": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "score": 9.8
+    },
+    "cvss_v4": {
+      "vector_string": null,
+      "score": 0.0
+    }
+  },
+  "cwes": [
+    {
+      "cwe_id": "CWE-862",
+      "name": "Missing Authorization"
+    }
+  ],
+  "credits": [
+    {
+      "user": {
+        "login": "CyberKareem",
+        "id": 67718280,
+        "node_id": "MDQ6VXNlcjY3NzE4Mjgw",
+        "avatar_url": "https://avatars.githubusercontent.com/u/67718280?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/CyberKareem",
+        "html_url": "https://github.com/CyberKareem",
+        "followers_url": "https://api.github.com/users/CyberKareem/followers",
+        "following_url": "https://api.github.com/users/CyberKareem/following{/other_user}",
+        "gists_url": "https://api.github.com/users/CyberKareem/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/CyberKareem/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/CyberKareem/subscriptions",
+        "organizations_url": "https://api.github.com/users/CyberKareem/orgs",
+        "repos_url": "https://api.github.com/users/CyberKareem/repos",
+        "events_url": "https://api.github.com/users/CyberKareem/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/CyberKareem/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "type": "finder"
+    }
+  ],
+  "comments": 1,
+  "cvss": {
+    "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "score": 9.8
+  },
+  "epss": {
+    "percentage": 0.00437,
+    "percentile": 0.36703
+  }
+}

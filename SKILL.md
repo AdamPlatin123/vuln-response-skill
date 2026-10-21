@@ -101,6 +101,48 @@ bash bin/lint-playbooks.sh                     # 结构校验（交件前必跑�
 bash bin/seal.sh                               # 生成 sha256 清单
 ```
 
+## 包怎么用（加载 / 选件 / 升级）
+
+### 1. 加载入口
+
+- 入口是 **`SKILL.md`**（本文件）头部 front-matter：`name: vuln-response` + `description`（触发条件）。
+  客户端把整个目录当 Skill 加载后，命中触发词即进本文件；不需要联网。
+- 进来先做两件事：① 按「决策树」判档；② 按 `index.md` 找件。**不要跳过 index 直接猜 playbook 编号**。
+
+### 2. 11 份 playbook 的适用面
+
+| 编号 | 文件 | 什么时候用 | 状态 |
+|---|---|---|---|
+| 01 | `playbooks/01-nodejs-security-release.md` | Node.js 运行时安全版本（Brotli/TLS/crypto 熵） | verified |
+| 02 | `playbooks/02-litellm-emergency.md` | LiteLLM 网关（未认证 SQLi + 6 条认证类 + PyPI 投毒） | verified |
+| 03 | `playbooks/03-npm-supply-chain.md` | npm 投毒 / 站外 tarball / 依赖混淆（`REMOVE-ONLY`） | verified |
+| 04 | `playbooks/04-go-vulncheck.md` | Go stdlib、govulncheck、x/net、Coraza、Traefik K8s | verified |
+| 05 | `playbooks/05-python-llm-infra.md` | vLLM / LMCache / Ollama / GitLab AI Gateway | verified |
+| 06 | `playbooks/06-credential-rotation.md` | 任意凭据轮换（先加后减、双读窗口、回退） | verified |
+| 07 | `playbooks/07-production-remediation.md` | **入口件**：定档 P0–P3、六段四门、动生产库姿势 | verified |
+| 08 | `playbooks/08-php-runtime.md` | PHP 运行时未认证 RCE（8.5.12 / 8.4.27 / 8.3.36 / 8.2.35） | verified |
+| 09 | `playbooks/09-pki-ca-rollover.md` | eMudhra 中间 CA 弱密钥 / 五套信任库（含 Ruby gist、Perl Thrift） | verified（**三套** store 未确认：Debian ca-certificates / Java cacerts / .NET；Python `certifi 2026.10.19`、`uv 0.13.4` 已确认） |
+| 10 | `playbooks/10-boundary-devices.md` | KEV 在野利用簇：边界/媒体设备 9 条（逐分支 fixed 已按厂商公告核） | verified |
+| 11 | `playbooks/11-dotnet-runtime.md` | .NET / ASP.NET Core 6 条（Kestrel 走私 9.4 领衔） | verified |
+
+> `10` 已转 `verified`（fixed 来自五家厂商 PSIRT，逐分支；Plex 仅 Beta 通道，稳定通道待核）。`playbooks/_draft/` 现为空，包内不再有草稿区。
+
+### 3. 升级流程（换新快照）
+
+1. **什么时候换**：情报过期（当前快照日见 `README.md` 首屏）、或新 CVE/KEV 命中你资产时。
+2. **换之前先校验旧包**：`sha256sum -c MANIFEST.sha256`（全绿才说明包没被改过）。
+3. **改内容**：`playbooks/_draft/` 起草 → `bash bin/lint-playbooks.sh --all` exit 0 → 移入 `playbooks/`。
+4. **封版**：`bash bin/seal.sh` 一次 → `sha256sum -c MANIFEST.sha256` 全绿 → 报 `MANIFEST sha256 + 文件数 + 行数`。
+5. **清单表**：`inventory.tsv` 是机器可读快照，改完要重跑 `bash bin/lint-playbooks.sh --inventory`
+   （工作区版还需 `../vuln-w1/check_inventory.py` 作基线门；包内只跑 playbook 结构校验）。
+
+### 4. evidence 怎么用
+
+- `evidence/` 是**取证存档**，只证明「某天我从一手源抓到的原文」，不替代结论。
+- 引用方式：`sources.md` 的 S 号 → 对应 evidence 文件；`inventory.tsv` 的 `evidence_ref` 指向具体文件或 `sources.md#Sxxx`。
+- 复核时**重抓比对**：URL 在 `sources.md` 行内，命令块见 `evidence/README.md`。
+- 证据会过期：同一 URL 内容可能被厂商改版，重抓后不一致就以新抓的为准并更新 S 行「核实状态」。
+
 ## 已知生态与 playbook 索引
 
 见 [index.md](index.md)；一手来源清单见 [sources.md](sources.md)。

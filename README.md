@@ -3,7 +3,7 @@
 把「收到一条 CVE / 公告 → 判断我受不受影响 → 修复 → 验证 → 留证」压成可执行流程的 Agent Skill。
 不是漏洞库，是**处置流程**：每条结论带一手 URL，每个修复步骤带能直接跑的验证命令。
 
-- 状态：`v0.1.1`，情报快照 **2026-10-22**（W1 滚动窗口）
+- 状态：`v0.2.0`，情报快照 **2026-10-22**（W2 滚动窗口 2026-09-23 ~ 2026-10-23）
 - 许可：Apache-2.0（见 `LICENSE`、`NOTICE`）
 - 语言：中文
 - 覆盖：Node/npm、Go、Python/LLM 基建、PHP、PKI/CA、**.NET/ASP.NET Core**、边界设备、通用生产修复与凭据轮换
@@ -29,11 +29,11 @@ description: 互联网漏洞情报 → 检测 / 影响判定 / 修复 / 验证 �
 | `SKILL.md` | 入口：触发条件、决策树、铁律、紧急通道 |
 | `index.md` | 按生态 + 按 CVE 两套索引，含归并规则与未闭环清单 |
 | `sources.md` | 来源表：ID、级别（一手/三方/公开 PoC/二手）、URL、核实状态 |
-| `playbooks/01-…11-` | 逐生态处置：检测 → 判定 → 修复 → 验证 → 回退 |
+| `playbooks/01-…11-` | **11 件全部 verified**，逐生态处置：检测 → 判定 → 修复 → 验证 → 回退 |
 | `playbooks/07` | **入口件**：定档 P0–P3、六段四门、「先关服务」判断、动生产库姿势 |
-| `playbooks/_draft/` | 未定稿件（不保证结论完整） |
+| `playbooks/_draft/` | 本轮为空（W2 无草稿件；`10` 已转 verified 在根） |
 | `evidence/` | 取证存档：OSV / cvelistV5 原始 JSON、SPKI 清单 |
-| `inventory.tsv` | W1 机器可读清单表（14 列 / 70 行 / 一行一 advisory）：id、方向、区间、fixed、在野、一手 URL、证据、merge_key、playbook、status |
+| `inventory.tsv` | W2 机器可读清单表（14 列 / **100 行** / 一行一 advisory）：id、方向、区间、fixed、在野、一手 URL、证据、merge_key、playbook、status；status = verified 61 · partial 6 · draft 28 · observe 5 |
 | `bin/lint-playbooks.sh` | 结构校验：段缺命令块、占位符残留、CVE 未收录进 `sources.md` |
 | `bin/lint_inventory.py` | 清单表校验：复用 `check_inventory.py` 基线 + `verified` 必须挂件、`REMOVE-ONLY` 口径、`observe` 三态混入、一手来源审计 |
 | `bin/seal.sh` | 生成 `MANIFEST.sha256` 并打印文件树/行数 |
@@ -47,7 +47,7 @@ bash bin/seal.sh                        # 生成 MANIFEST.sha256
 sha256sum -c MANIFEST.sha256            # 校验没被人改过
 ```
 
-> `inventory.tsv` 是 **W1 快照**：`evidence_ref` 保留工作区相对路径（`vuln-response/evidence/…`，包内对应 `evidence/…`），
+> `inventory.tsv` 是 **W2 快照**：`evidence_ref` 保留工作区相对路径（`vuln-response/evidence/…`，包内对应 `evidence/…`），
 > `kev.json#CVE-…` 指向工作区里的 KEV 快照。它由 `bin/lint_inventory.py` 在工作区版（含 `../vuln-w1/`、`kev.json`）里校验，
 > **不在包内重跑**；包内只保证 playbook 结构校验可跑。
 
@@ -68,25 +68,27 @@ sha256sum -c MANIFEST.sha256            # 校验没被人改过
 
 ## 已知短板（请当缺陷清单看）
 
-- `playbooks/_draft/10-boundary-devices.md` 仍是草稿：KEV 不含修复版本，五家厂商版本未逐条核实；
+- `playbooks/10` 已 verified，但 fixed 来自五家厂商 PSIRT **逐分支/逐 hotfix 线**（Plex 目前只在 Beta 通道发布，稳定通道待核）；KEV 本身不含 fixed，别拿 KEV 当版本依据；
 - 无自动化测试：`lint` 只做结构校验，不执行 playbook 里的命令；
 - 覆盖缺口：Java(GraalVM) 无一手结论（Oracle CPU 原文 0 命中）、Vyper 6 条仅 `partial`（无 playbook）；K8s/Docker 只给配置姿势；
 - 情报有时效：全部结论基于 2026-10-22 快照，过期后必须重新对一手来源。
 
-## 已知差异（W1 交付口径）
+## 已知差异（W2 交付口径）
 
-W1 封版以 **0 FAIL + WARN 交付**，不把 WARN 改成「已核实」。分项如下（`lint_inventory` 实跑 84 条 WARN）：
+W2 封版以 **0 FAIL + WARN 交付**，不把 WARN 改成「已核实」。分项如下（`lint_inventory` 实跑 **102** 条 WARN）：
 
 | 类别 | 条数 | 含义 | 处置 |
 |---|---|---|---|
-| E4 一手来源审计 | 23 | 部分条目的 advisory 号在 `sources.md` 只有二手/未确认行，或 front-matter 别名待补 | 不入结论，W2 补一手 |
-| F11 front-matter 对账 | 34 | 清单与 playbook front-matter 的别名差异；其中 **3 处真实缺失**（09 缺 `CVE-2026-113812` / `CVE-2026-105221` / `CVE-2026-85086`；11 缺 6 个 GHSA 别名） | 记入 W1 缺口 G9，W2 首日补 |
-| F6 UNKNOWN 提示 | 20 | `affects`/`fixed` 含 `UNKNOWN` 的行（均为 `partial`/`draft`，非 `verified`） | 按状态定义合规，仅提示 |
+| E4 一手来源审计 | 57 | 部分 advisory 号在 `sources.md` 只有二手/未确认行，或 W2 新采条目的来源行待补 | 不入结论，W3 补一手 |
+| F11 front-matter 对账 | 3 | 结构性提示：`00-TEMPLATE` / `06` / `07` 本就不挂清单行（流程型文件，非漏洞条） | 非缺陷，保留 |
+| F6 UNKNOWN 提示 | 35 | `affects`/`fixed` 含 `UNKNOWN` 的行（均 `partial`/`draft`，无 `verified`） | 按状态定义合规，仅提示 |
 | F9 观察区提示 | 7 | `observe` 条目出现在已标注「观察项/未确认/不进结论」的区域 | 合规（R3 收窄后允许） |
+
+**W1 遗留的 G9 别名对账已清零**：09 补 `CVE-2026-113812` / `105221` / `85086`，11 补 6 个 GHSA（`ghsa:` 字段），02/03/04 补 `aliases:`。
 
 `lint-playbooks.sh --all`：11 文件 0 失败；唯一 WARN 是 `CVE-2026-111943` 同现 04/09（跨生态双写，组长红线保留，不拆）。
 
-**W1 以 WARN 交付，W2 首日补别名后重封。**
+**W2 以 WARN 交付，W3 首日补 E4 一手来源后重封。**
 
 ## 贡献
 

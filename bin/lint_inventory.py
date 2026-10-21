@@ -491,7 +491,7 @@ def check_frontmatter_sync(rows: list[dict[str, str]], rep: Report, strict: bool
         if not rows_nn:
             rep.warn("F11", f"{rel} 没有任何清单行挂到 playbook={nn}（清单/playbook 未对齐）")
             continue
-        fm_text = " ".join(fm.get(k, "") for k in ("cve", "affects", "fixed"))
+        fm_text = " ".join(fm.get(k, "") for k in ("cve", "ghsa", "aliases", "affects", "fixed"))
         for r in rows_nn:
             tag = f"第 {r['_line']} 行（{r['id']}）→ {rel}"
             for tok in split_ids(r["advisory_ids"]):

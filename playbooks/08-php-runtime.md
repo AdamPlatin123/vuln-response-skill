@@ -15,6 +15,18 @@ updated: 2026-10-21
 
 **一句话**：两条 RCE 落在**内存管理与错误处理**上——几乎每个请求都会碰到的位置。**Apache + mod_php 上未认证请求可在应用代码执行前触发**，默认配置下已演示完整 RCE。修复版本 `8.2.35 / 8.3.36 / 8.4.27 / 8.5.12`；**8.1 没有补丁，只能升分支**。
 
+## 变量清单（先 export，再抄命令）
+
+下面命令只认环境变量，**先 export 再逐条抄**；`${VAR:?...}` 会在变量缺失时直接报错退出。
+
+```bash
+: "${CONTAINER:?未设置 CONTAINER（PHP-FPM 容器名或 ID）}"
+: "${SITE_HOST:?未设置 SITE_HOST（站点域名，用于探测 /health）}"
+: "${IMAGE_REF:?未设置 IMAGE_REF（php:8.3-fpm-bookworm 或你的构建镜像）}"
+: "${IMAGE_DIGEST:?未设置 IMAGE_DIGEST（镜像 sha256 digest，来自 docker image inspect）}"
+: "${PHP_EXTS:?未设置 PHP_EXTS（扩展包列表，形如 "php8.3-redis php8.3-mbstring"）}"
+```
+
 ## 适用版本区间
 
 | 分支 | 受影响 | 修复 |
@@ -49,11 +61,11 @@ rpm -qa 2>/dev/null | grep -E '^php' | head -20
 
 # 3) 容器与镜像
 docker ps --format '{{.Names}}\t{{.Image}}' | grep -iE 'php|fpm|apache'
-docker exec <CONTAINER> php -v | head -1
+docker exec "$CONTAINER" php -v | head -1
 
 # 4) 暴露面：mod_php + 公网 = 最危险组合
 ss -lntp 2>/dev/null | grep -E ':(80|443|9000)\b'
-curl -s -m 5 -o /dev/null -w 'public=%{http_code}\n' https://<站点>/health
+curl -s -m 5 -o /dev/null -w 'public=%{http_code}\n' https://"$SITE_HOST"/health
 
 # 5) 扩展/opcache（升级会牵动）
 php -m 2>/dev/null | tr '\n' ' '; echo
@@ -100,11 +112,11 @@ php-fpm -v 2>/dev/null | head -1
 # 3) 容器：换 digest，不在容器里 apt upgrade
 docker pull php:8.3-fpm-bookworm
 docker image inspect php:8.3-fpm-bookworm --format '{{json .RepoDigests}}'
-# Dockerfile: FROM php:8.3-fpm-bookworm@sha256:<digest>
+# Dockerfile: FROM php:8.3-fpm-bookworm@sha256:$IMAGE_DIGEST
 
 # 4) 8.1 升分支（无补丁，唯一解）
 #    先冻结 CI/部署 → 预发跑全量 → 切 alternatives → 重启 FPM
-apt-get -y install php8.3-fpm php8.3-cli php8.3-<扩展清单>
+apt-get -y install php8.3-fpm php8.3-cli $PHP_EXTS
 update-alternatives --set php /usr/bin/php8.3
 systemctl restart php8.3-fpm
 ```
@@ -122,7 +134,7 @@ systemctl restart php8.3-fpm
 **CI / 防复发**
 
 ```bash
-docker run --rm <image> php -v | head -1
+docker run --rm "$IMAGE_REF" php -v | head -1
 composer check-platform-reqs 2>/dev/null
 ```
 
@@ -132,14 +144,14 @@ composer check-platform-reqs 2>/dev/null
 # 1) 每个 SAPI 的版本都到修复版（CLI 与 FPM 分开）
 php -v | head -1                 # 期望 8.2.35 / 8.3.36 / 8.4.27 / 8.5.12
 php-fpm -v 2>/dev/null | head -1
-docker exec <CONTAINER> php -v | head -1
+docker exec "$CONTAINER" php -v | head -1
 
 # 2) 扩展与配置没被升级弄丢
 php -m 2>/dev/null | wc -l       # 与升级前基线对比
 php -i 2>/dev/null | grep -E 'opcache.enable|memory_limit'
 
 # 3) 业务冒烟（走 web SAPI，不是 CLI）
-curl -s -o /dev/null -w '%{http_code}\n' https://<站点>/health
+curl -s -o /dev/null -w '%{http_code}\n' https://"$SITE_HOST"/health
 
 # 4) 回退演练
 systemctl status php8.3-fpm --no-pager | head -5

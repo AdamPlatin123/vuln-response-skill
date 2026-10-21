@@ -1,0 +1,90 @@
+{
+  "ghsa_id": "GHSA-hq85-5cpj-mr62",
+  "cve_id": null,
+  "url": "https://api.github.com/advisories/GHSA-hq85-5cpj-mr62",
+  "html_url": "https://github.com/advisories/GHSA-hq85-5cpj-mr62",
+  "summary": "uv's bundled CA store trusts an emSign root whose intermediate CA keys are compromised",
+  "description": "By default, uv verifies TLS connections against a vendored copy of the `webpki-root-certs` bundle. Versions before 0.13.4 include the `emSign ECC Root CA - G3` root. Eight eMudhra intermediate CA certificates that chain to that root have compromised private keys, and the CA has revoked them.\n\nAn attacker with one of the compromised keys can issue certificates that uv accepts for any hostname, and can be used to issue certificates to enable MITM attacks.\n\nuv 0.13.4 removes the root from its vendored bundle, following `webpki-root-certs` 1.0.10. Upgrade to 0.13.4 or later.",
+  "type": "reviewed",
+  "severity": "critical",
+  "repository_advisory_url": "https://api.github.com/repos/astral-sh/uv/security-advisories/GHSA-hq85-5cpj-mr62",
+  "source_code_location": "https://github.com/astral-sh/uv",
+  "identifiers": [
+    {
+      "value": "GHSA-hq85-5cpj-mr62",
+      "type": "GHSA"
+    }
+  ],
+  "references": [
+    "https://github.com/astral-sh/uv/security/advisories/GHSA-hq85-5cpj-mr62",
+    "https://github.com/certifi/python-certifi/security/advisories/GHSA-6q48-6c7w-9gw2",
+    "https://emudhra.we-have-a-problem.com",
+    "https://groups.google.com/a/mozilla.org/g/dev-security-policy/c/0R3XLJL6FuE/m/0XofdebrAAAJ",
+    "https://github.com/advisories/GHSA-hq85-5cpj-mr62"
+  ],
+  "published_at": "2026-10-20T19:37:52Z",
+  "updated_at": "2026-10-20T19:37:54Z",
+  "github_reviewed_at": "2026-10-20T19:37:52Z",
+  "nvd_published_at": null,
+  "withdrawn_at": null,
+  "vulnerabilities": [
+    {
+      "package": {
+        "ecosystem": "pip",
+        "name": "uv"
+      },
+      "vulnerable_version_range": "< 0.13.4",
+      "first_patched_version": "0.13.4",
+      "vulnerable_functions": [
+
+      ]
+    }
+  ],
+  "cvss_severities": {
+    "cvss_v3": {
+      "vector_string": null,
+      "score": 0.0
+    },
+    "cvss_v4": {
+      "vector_string": "CVSS:4.0/AV:N/AC:H/AT:P/PR:N/UI:N/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N",
+      "score": 9.1
+    }
+  },
+  "cwes": [
+    {
+      "cwe_id": "CWE-295",
+      "name": "Improper Certificate Validation"
+    }
+  ],
+  "credits": [
+    {
+      "user": {
+        "login": "woodruffw",
+        "id": 3059210,
+        "node_id": "MDQ6VXNlcjMwNTkyMTA=",
+        "avatar_url": "https://avatars.githubusercontent.com/u/3059210?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/woodruffw",
+        "html_url": "https://github.com/woodruffw",
+        "followers_url": "https://api.github.com/users/woodruffw/followers",
+        "following_url": "https://api.github.com/users/woodruffw/following{/other_user}",
+        "gists_url": "https://api.github.com/users/woodruffw/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/woodruffw/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/woodruffw/subscriptions",
+        "organizations_url": "https://api.github.com/users/woodruffw/orgs",
+        "repos_url": "https://api.github.com/users/woodruffw/repos",
+        "events_url": "https://api.github.com/users/woodruffw/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/woodruffw/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "type": "coordinator"
+    }
+  ],
+  "comments": 0,
+  "cvss": {
+    "vector_string": null,
+    "score": null
+  }
+}

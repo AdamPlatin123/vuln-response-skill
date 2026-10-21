@@ -1,0 +1,83 @@
+{
+  "ghsa_id": "GHSA-h4mw-j7qp-8mwm",
+  "cve_id": "CVE-2026-96620",
+  "url": "https://api.github.com/advisories/GHSA-h4mw-j7qp-8mwm",
+  "html_url": "https://github.com/advisories/GHSA-h4mw-j7qp-8mwm",
+  "summary": "Claude Agent SDK: Argument Injection via resume Option Allows Arbitrary Command Execution",
+  "description": "The Claude Agent SDK for Python passed the `resume` option to the Claude CLI without validation, allowing a value beginning with `-` to be interpreted as a separate CLI flag. An attacker who controlled the `resume` value could inject an `--mcp-config` flag defining a stdio MCP server, resulting in arbitrary command execution at CLI startup that bypassed the SDK's permission controls. Exploitation required an application to pass untrusted input as the session ID to resume.\n\nUsers are advised to update to the latest version of the claude-agent-sdk package.\n\nThank you to hackerone.com/moamenmahmood for reporting this issue.",
+  "type": "reviewed",
+  "severity": "critical",
+  "repository_advisory_url": "https://api.github.com/repos/anthropics/claude-agent-sdk-python/security-advisories/GHSA-h4mw-j7qp-8mwm",
+  "source_code_location": "https://github.com/anthropics/claude-agent-sdk-python",
+  "identifiers": [
+    {
+      "value": "GHSA-h4mw-j7qp-8mwm",
+      "type": "GHSA"
+    },
+    {
+      "value": "CVE-2026-96620",
+      "type": "CVE"
+    }
+  ],
+  "references": [
+    "https://github.com/anthropics/claude-agent-sdk-python/security/advisories/GHSA-h4mw-j7qp-8mwm",
+    "https://github.com/anthropics/claude-agent-sdk-python/pull/1123",
+    "https://github.com/anthropics/claude-agent-sdk-python/commit/347a1cb88d7652199399db1b7f914e0a459a6662",
+    "https://github.com/anthropics/claude-agent-sdk-python/releases/tag/v0.2.121",
+    "https://github.com/advisories/GHSA-h4mw-j7qp-8mwm"
+  ],
+  "published_at": "2026-10-16T19:44:37Z",
+  "updated_at": "2026-10-16T19:44:38Z",
+  "github_reviewed_at": "2026-10-16T19:44:37Z",
+  "nvd_published_at": null,
+  "withdrawn_at": null,
+  "vulnerabilities": [
+    {
+      "package": {
+        "ecosystem": "pip",
+        "name": "claude-agent-sdk"
+      },
+      "vulnerable_version_range": "< 0.2.121",
+      "first_patched_version": "0.2.121",
+      "vulnerable_functions": [
+
+      ]
+    }
+  ],
+  "cvss_severities": {
+    "cvss_v3": {
+      "vector_string": null,
+      "score": 0.0
+    },
+    "cvss_v4": {
+      "vector_string": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N",
+      "score": 9.2
+    }
+  },
+  "cwes": [
+    {
+      "cwe_id": "CWE-20",
+      "name": "Improper Input Validation"
+    },
+    {
+      "cwe_id": "CWE-78",
+      "name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+    },
+    {
+      "cwe_id": "CWE-88",
+      "name": "Improper Neutralization of Argument Delimiters in a Command ('Argument Injection')"
+    }
+  ],
+  "credits": [
+
+  ],
+  "comments": 1,
+  "cvss": {
+    "vector_string": null,
+    "score": null
+  },
+  "epss": {
+    "percentage": 0.00578,
+    "percentile": 0.46547
+  }
+}

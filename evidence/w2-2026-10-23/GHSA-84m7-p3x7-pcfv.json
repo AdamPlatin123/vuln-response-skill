@@ -1,0 +1,217 @@
+{
+  "ghsa_id": "GHSA-84m7-p3x7-pcfv",
+  "cve_id": "CVE-2026-59951",
+  "url": "https://api.github.com/advisories/GHSA-84m7-p3x7-pcfv",
+  "html_url": "https://github.com/advisories/GHSA-84m7-p3x7-pcfv",
+  "summary": "MCP Python SDK: Unbounded Session Accumulation in StreamableHTTP Transport Enables Resource Exhaustion",
+  "description": "### Summary\nIn affected versions, a Streamable HTTP server in stateful mode (the default) never reclaimed session state:\n\n- sessions did not expire;\n- a client `DELETE` ended the session but left its entry registered;\n- a session whose first request was refused stayed registered with a running task.\n\nEach session also kept its parsed `initialize` parameters, and the number of sessions was unlimited. A client that could reach the endpoint could grow server memory without bound using ordinary short requests; only a restart reclaimed it.\n\n### Am I affected?\nYes, if you serve MCP over Streamable HTTP in stateful mode and clients you do not fully trust can reach the endpoint. Stateful mode is the default for:\n\n- `FastMCP` (1.x)\n- `MCPServer` and `Server.streamable_http_app()` (2.x)\n- `StreamableHTTPSessionManager`\n\nAffected versions: 1.8.0 through 1.29.1, and 2.0.0 through 2.1.1.\n\nNot affected:\n\n- servers on 1.12.0 or later passing `stateless_http=True` (no sessions are kept)\n- servers using only the stdio or SSE transports\n\nAuthentication limits who can open sessions, not how many a token holder can open.\n\n### Fix\nUpgrade to `mcp` 1.30.0 (1.x) or 2.2.0 (2.x) or later. In those versions:\n\n- a session with no request in flight for `session_idle_timeout` seconds (default 1800) is closed and its ID then answers `404`; open streams and in-progress requests keep it alive;\n- at most `max_sessions` sessions exist at once (default 10000); a request that would open another is answered `503`;\n- a session is discarded as soon as it ends, whether by `DELETE`, expiry, or a refused opening request.\n\nBoth settings are keyword arguments on `FastMCP(...)` (1.x), `MCPServer.run()` / `streamable_http_app()` (2.x) and `StreamableHTTPSessionManager`; `None` disables them.\n\nThis bounds retention rather than eliminating it: a live session still holds its `initialize` parameters (up to roughly twice the 4 MiB body limit), and an `initialize` with invalid parameters still opens a session that expires like any other. On a small host, lower `session_idle_timeout`, `max_sessions` and `max_request_body_size` to fit.\n\nIf you cannot upgrade yet, pass `stateless_http=True` (1.12.0 or later) where you need no per-session state, or restrict who can reach the endpoint.",
+  "type": "reviewed",
+  "severity": "medium",
+  "repository_advisory_url": "https://api.github.com/repos/modelcontextprotocol/python-sdk/security-advisories/GHSA-84m7-p3x7-pcfv",
+  "source_code_location": "https://github.com/modelcontextprotocol/python-sdk",
+  "identifiers": [
+    {
+      "value": "GHSA-84m7-p3x7-pcfv",
+      "type": "GHSA"
+    },
+    {
+      "value": "CVE-2026-59951",
+      "type": "CVE"
+    }
+  ],
+  "references": [
+    "https://github.com/modelcontextprotocol/python-sdk/security/advisories/GHSA-84m7-p3x7-pcfv",
+    "https://nvd.nist.gov/vuln/detail/CVE-2026-59951",
+    "https://github.com/modelcontextprotocol/python-sdk/pull/3395",
+    "https://github.com/modelcontextprotocol/python-sdk/pull/3426",
+    "https://github.com/modelcontextprotocol/python-sdk/commit/92120b4b0f50385af096592d7cee932fc1d994e7",
+    "https://github.com/modelcontextprotocol/python-sdk/commit/d2290ca3434731b68ea3e2270bc06a6e6575931b",
+    "https://github.com/modelcontextprotocol/python-sdk/releases/tag/v1.30.0",
+    "https://github.com/modelcontextprotocol/python-sdk/releases/tag/v2.2.0",
+    "https://github.com/advisories/GHSA-84m7-p3x7-pcfv"
+  ],
+  "published_at": "2026-10-15T20:13:13Z",
+  "updated_at": "2026-10-15T20:13:14Z",
+  "github_reviewed_at": "2026-10-15T20:13:13Z",
+  "nvd_published_at": "2026-10-14T17:18:29Z",
+  "withdrawn_at": null,
+  "vulnerabilities": [
+    {
+      "package": {
+        "ecosystem": "pip",
+        "name": "mcp"
+      },
+      "vulnerable_version_range": ">= 1.8.0, < 1.30.0",
+      "first_patched_version": "1.30.0",
+      "vulnerable_functions": [
+
+      ]
+    },
+    {
+      "package": {
+        "ecosystem": "pip",
+        "name": "mcp"
+      },
+      "vulnerable_version_range": ">= 2.0.0, < 2.2.0",
+      "first_patched_version": "2.2.0",
+      "vulnerable_functions": [
+
+      ]
+    }
+  ],
+  "cvss_severities": {
+    "cvss_v3": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "score": 7.5
+    },
+    "cvss_v4": {
+      "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N",
+      "score": 6.9
+    }
+  },
+  "cwes": [
+    {
+      "cwe_id": "CWE-400",
+      "name": "Uncontrolled Resource Consumption"
+    },
+    {
+      "cwe_id": "CWE-770",
+      "name": "Allocation of Resources Without Limits or Throttling"
+    },
+    {
+      "cwe_id": "CWE-772",
+      "name": "Missing Release of Resource after Effective Lifetime"
+    }
+  ],
+  "credits": [
+    {
+      "user": {
+        "login": "rharang",
+        "id": 8082617,
+        "node_id": "MDQ6VXNlcjgwODI2MTc=",
+        "avatar_url": "https://avatars.githubusercontent.com/u/8082617?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/rharang",
+        "html_url": "https://github.com/rharang",
+        "followers_url": "https://api.github.com/users/rharang/followers",
+        "following_url": "https://api.github.com/users/rharang/following{/other_user}",
+        "gists_url": "https://api.github.com/users/rharang/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/rharang/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/rharang/subscriptions",
+        "organizations_url": "https://api.github.com/users/rharang/orgs",
+        "repos_url": "https://api.github.com/users/rharang/repos",
+        "events_url": "https://api.github.com/users/rharang/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/rharang/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "type": "finder"
+    },
+    {
+      "user": {
+        "login": "evilgensec",
+        "id": 183680293,
+        "node_id": "U_kgDOCvK9JQ",
+        "avatar_url": "https://avatars.githubusercontent.com/u/183680293?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/evilgensec",
+        "html_url": "https://github.com/evilgensec",
+        "followers_url": "https://api.github.com/users/evilgensec/followers",
+        "following_url": "https://api.github.com/users/evilgensec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/evilgensec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/evilgensec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/evilgensec/subscriptions",
+        "organizations_url": "https://api.github.com/users/evilgensec/orgs",
+        "repos_url": "https://api.github.com/users/evilgensec/repos",
+        "events_url": "https://api.github.com/users/evilgensec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/evilgensec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "type": "reporter"
+    },
+    {
+      "user": {
+        "login": "Madan301",
+        "id": 111639304,
+        "node_id": "U_kgDOBqd7CA",
+        "avatar_url": "https://avatars.githubusercontent.com/u/111639304?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/Madan301",
+        "html_url": "https://github.com/Madan301",
+        "followers_url": "https://api.github.com/users/Madan301/followers",
+        "following_url": "https://api.github.com/users/Madan301/following{/other_user}",
+        "gists_url": "https://api.github.com/users/Madan301/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/Madan301/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/Madan301/subscriptions",
+        "organizations_url": "https://api.github.com/users/Madan301/orgs",
+        "repos_url": "https://api.github.com/users/Madan301/repos",
+        "events_url": "https://api.github.com/users/Madan301/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/Madan301/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "type": "reporter"
+    },
+    {
+      "user": {
+        "login": "subchat",
+        "id": 82167489,
+        "node_id": "MDQ6VXNlcjgyMTY3NDg5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/82167489?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/subchat",
+        "html_url": "https://github.com/subchat",
+        "followers_url": "https://api.github.com/users/subchat/followers",
+        "following_url": "https://api.github.com/users/subchat/following{/other_user}",
+        "gists_url": "https://api.github.com/users/subchat/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/subchat/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/subchat/subscriptions",
+        "organizations_url": "https://api.github.com/users/subchat/orgs",
+        "repos_url": "https://api.github.com/users/subchat/repos",
+        "events_url": "https://api.github.com/users/subchat/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/subchat/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "type": "reporter"
+    },
+    {
+      "user": {
+        "login": "nickelsec",
+        "id": 300981992,
+        "node_id": "U_kgDOEfCe6A",
+        "avatar_url": "https://avatars.githubusercontent.com/u/300981992?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/nickelsec",
+        "html_url": "https://github.com/nickelsec",
+        "followers_url": "https://api.github.com/users/nickelsec/followers",
+        "following_url": "https://api.github.com/users/nickelsec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/nickelsec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/nickelsec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/nickelsec/subscriptions",
+        "organizations_url": "https://api.github.com/users/nickelsec/orgs",
+        "repos_url": "https://api.github.com/users/nickelsec/repos",
+        "events_url": "https://api.github.com/users/nickelsec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/nickelsec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "type": "reporter"
+    }
+  ],
+  "comments": 1,
+  "cvss": {
+    "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+    "score": 7.5
+  },
+  "epss": {
+    "percentage": 0.00458,
+    "percentile": 0.38172
+  }
+}

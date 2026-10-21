@@ -3,7 +3,7 @@
 > 用法：先按**生态**找 playbook，再按 **CVE 编号**定位到具体条目。
 > 状态：`定稿 verified` = 已通过 `bin/lint-playbooks.sh --all` 且在 `playbooks/`；`草稿` = 在 `playbooks/_draft/`。
 > 来源行号统一编号 `Sxxx`，对应 [sources.md](sources.md)。
-> **编号已定死**（2026-10-21 最终版，Chief 亲手落刀）：`07` 生产修复编排（**入口件，先读它**）、`08` PHP、`09` PKI/CA、`10` 边界设备（草稿）；`01–06` 为漏洞件，不复用、不重排。
+> **编号已定死**（2026-10-21 最终版，Chief 亲手落刀）：`07` 生产修复编排（**入口件，先读它**）、`08` PHP、`09` PKI/CA、`10` 边界设备（**定稿 verified**，五家厂商 fixed 逐分支）；`01–06` 为漏洞件，不复用、不重排。
 
 ## 1. 按生态
 
@@ -18,7 +18,7 @@
 | 通用 · 密钥轮换 | 凭据轮换清单、先加后减、双读窗口、验证、回退 | [`06-credential-rotation.md`](playbooks/06-credential-rotation.md) | **定稿 verified** |
 | PHP 运行时 | 2 条未认证 RCE，修复 `8.5.12` / `8.4.27` / `8.3.36` / `8.2.35` | [`08-php-runtime.md`](playbooks/08-php-runtime.md) | **定稿 verified** |
 | PKI / CA | eMudhra 8 张中间 CA 私钥被攻破（跨生态，改 01/04 结论） | [`09-pki-ca-rollover.md`](playbooks/09-pki-ca-rollover.md) | **定稿 verified** |
-| 边界 / 媒体设备 | KEV 在野利用簇：SiteGuard / Plex / Siemens / PAN-OS / FortiMail | [`10-boundary-devices.md`](playbooks/_draft/10-boundary-devices.md) | **草稿**（fixed 版本待逐条核实） |
+| 边界 / 媒体设备 | KEV 在野利用簇：SiteGuard / Plex / Siemens / PAN-OS / FortiMail（9 条，逐分支 fixed 已按厂商公告核） | [`10-boundary-devices.md`](playbooks/10-boundary-devices.md) | **定稿 verified**（S416–S421 五家厂商一手） |
 | .NET / ASP.NET Core | Kestrel HTTP/1 请求走私（CVSS 9.4）领衔 6 条；修 `8.0.32` / `9.0.21` / `10.0.13` / `11.0.0-rc.2` | [`11-dotnet-runtime.md`](playbooks/11-dotnet-runtime.md) | **定稿 verified**（MSRC + GHSA 一手，S404–S409） |
 
 ## 2. 按 CVE 定位
@@ -133,17 +133,21 @@
 | CVE-2026-111943 | Go / Rust 生态与 Node 内置 CA | Go `1.26.10` / `1.27.3`；`webpki-roots 1.0.10`；`rustls-webpki 0.103.16` / `0.104.0-alpha.8`；`webpki-root-certs 1.0.10`；Node `22.23.4` / `24.22.1` / `26.12.1` |
 | CVE-2026-113470 | Firefox / NSS OneCRL | Firefox `158.0.1`；ESR `115.43.1` / `153.5.1`；Android `158.0.2`；NSS `3.131.1` |
 
-> 来源 S501–S507（Mozilla 博客、MFSA 2026-111、RUSTSEC-2026-0381/0382/0383、Bugzilla 2083449）。**未确认**：Python `certifi`、Java `cacerts`、Linux `ca-certificates`、.NET 四套 store 的处置版本——别猜。
+> 来源 S501–S507（Mozilla 博客、MFSA 2026-111、RUSTSEC-2026-0381/0382/0383、Bugzilla 2083449）。**未确认**：Debian `ca-certificates`、Java `cacerts`、.NET 三套 store 的处置版本（**Python `certifi` 已确认 `2026.10.19`、`uv` `0.13.4`**）——其余别猜。
 >
-> **状态口径（组长裁定 2026-10-22）**：09 保持 `verified`。漏洞条目本身的 `fixed` 是确定的（按 SPKI 移除信任）；上列**四套 store 版本未确认属执行侧子项缺口**，不因此降 `partial`——但引用时必须带上这句限定。
+> **状态口径（组长裁定 2026-10-22）**：09 保持 `verified`。漏洞条目本身的 `fixed` 是确定的（按 SPKI 移除信任）；上列**三套 store 版本未确认**（Python `certifi` / `uv` 已确认）**属执行侧子项缺口**，不因此降 `partial`——但引用时必须带上这句限定。
+>
+> **三套信任库的 fixed 版本未在本件确认**：Debian ca-certificates / Java cacerts / .NET 需按各自发行版与厂商公告核对；**Python 侧已确认**：`certifi 2026.10.19`、`uv 0.13.4`。
 
 - **SPKI 检测锚点**：3 根 + 8 张中间 CA 的 SPKI SHA-256 全表在 `evidence/spki-emudhra-2026-10-21.md`（源 = oss-security 一手）。Sectigo 交叉签名同 SPKI → **检测只认 SPKI，不看签发路径**。
 - **RUSTSEC-2026-0381 / 0382 / 0383 与 `GO-2026-6809` 是同一个 `CVE-2026-111943`**（Go + Rust 同一根因），**09** 已按一行归档，**别拆三条**。
 - 根因口径：是**弱密钥**（KGC 生成脚本缺陷，出现 1 字节私钥 / 连续整数 155、156 这类 P384），不是普通「私钥被窃」。**09 标题已改为「eMudhra 中间 CA 弱密钥（P384 私钥可秒级恢复）」——本条已闭环**（见 G16）。
 
-### 2.8 边界 / 媒体设备（playbook 10 · 草稿）
+### 2.8 边界 / 媒体设备（playbook 10 · 定稿）
 
 KEV 收录 = **已被利用**，不是「有补丁待升级」。全部 9 条已用 KEV JSON 实抓核对（catalogVersion `2026.10.21`，count 1754）：
+
+逐分支 fixed（厂商公告原文，Plex `1.43.3.10861` / FortiMail `8.0.2`·`7.6.7`·`7.4.9` / SiteGuard `8.00U5`·`7.00U6` / Siemens `V4.0.9.8` / PAN-OS 逐分支）见 playbook 10 §适用版本区间与 §修复。
 
 | CVE | 产品 | KEV 原文要点 | added / due |
 |---|---|---|---|
@@ -157,8 +161,10 @@ KEV 收录 = **已被利用**，不是「有补丁待升级」。全部 9 条已
 | CVE-2026-0257 | PAN-OS | **认证绕过**；**5 月批，不是 10 月批** | 05-29 / 06-01（已过） |
 | CVE-2026-104286 | FortiMail | 路径穿越 + NULL 字节，**未认证** | 10-01 / 10-04（已过） |
 
-> **两条纪律**：① KEV **不含 fixed 字段**——Plex `v1.43.2` 等版本号是社区流传，10 号件已标「未核实」，不许挂 KEV 名下；② `CVE-2026-0257`（认证绕过）与 `CVE-2026-0322`（代码注入）是**两个不同 CVE、两个批次**，别合并。
+> **两条纪律**：① KEV **不含 fixed 字段**——本节的 fixed 全部来自厂商 PSIRT 一手（Plex 论坛公告 / FortiGuard FG-IR-26-175 / JVN / Siemens SSA-580366 / PAN-OS security advisories，S416–S421），**不挂 KEV 名下**；Plex `1.43.3.10861` 目前只在 Plex Pass Beta 通道，稳定通道待核。② `CVE-2026-0257`（认证绕过）与 `CVE-2026-0322`（代码注入）是**两个不同 CVE、两个批次**，别合并。
 
+
+> **watchlist（不进主表、不进 `inventory.tsv`）**：`CVE-2026-0300`（PAN-OS 越界写，出 W1 窗口，W2 再采）。
 ## 3. 按场景
 
 | 你在干什么 | 从这里开始 |
