@@ -7,7 +7,7 @@ affects: "按「分支 + hotfix 线」逐条判定（非合并 semver）：Plex 
 fixed: ["Plex 1.43.3.10861（2026-08-04 16:09 起全量可用；KEV 于 2026-10-20 收录时该版本已发布两个多月）", "FortiMail 逐线 8.0.2 / 7.6.7 / 7.4.9（7.2 无同分支修复，需跨分支升 7.4+）", "SiteGuard Ver8.00 Update 5（8.00U5，Apache/Nginx/IIS）/ Ver7.00 Update 6（7.00U6，FreeBSD）+ EOL 补丁", "Siemens V4.0.9.8", "PAN-OS CVE-2026-0322 逐分支：12.2.4｜12.1.4-h12/12.1.7-h8/12.1.10-h2｜11.2.4-h22/11.2.7-h21/11.2.10-h15/11.2.13-h3/11.2.16｜11.1.4-h37/11.1.6-h39/11.1.7-h11/11.1.10-h35/11.1.13-h15/11.1.16-h3｜10.2.7-h38/10.2.10-h41/10.2.13-h26/10.2.16-h11/10.2.18-h12", "PAN-OS CVE-2026-0257 逐分支：12.1.4-h6/12.1.7｜11.2.4-h17/11.2.7-h14/11.2.10-h7/11.2.12｜11.1.4-h33/11.1.6-h32/11.1.7-h6/11.1.10-h25/11.1.13-h5/11.1.15｜10.2.7-h34/10.2.10-h36/10.2.13-h21/10.2.16-h7/10.2.18-h6｜Prisma 11.2.7-h13/10.2.10-h36"]
 severity: "严重（9 条全部在 CISA KEV = 已被实际利用；3 条 dueDate 已逾期，3 条 2026-10-23 到期；PAN-OS `0322` CVSS-BT 8.6、`0257` 7.8，均 `E:A`；SiteGuard 4.0 8.5 / 3.0 7.8，厂商确认在野）"
 status: verified
-sources: ["https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json", "https://forums.plex.tv/t/plex-media-server/30447/712", "https://www.fortiguard.com/psirt/FG-IR-26-175", "https://jvn.jp/en/jp/JVN88474777/", "https://cert-portal.siemens.com/productcert/html/ssa-580366.html", "https://security.paloaltonetworks.com/CVE-2026-0322", "https://security.paloaltonetworks.com/CVE-2026-0257"]
+sources: ["https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json", "https://forums.plex.tv/t/plex-media-server/30447/712", "https://www.fortiguard.com/psirt/FG-IR-26-175", "https://jvn.jp/en/jp/JVN88474777/", "https://cert-portal.siemens.com/productcert/html/ssa-580366.html", "https://security.paloaltonetworks.com/CVE-2026-0322", "https://security.paloaltonetworks.com/CVE-2026-0257", "https://productcert.siemens.com/news/2026/10/19/active-exploitation-of-cve-2026-110936-in-siemens-software-center/"]
 updated: 2026-10-22
 ---
 
@@ -334,7 +334,7 @@ docker pull "<旧镜像 digest>"
 | Plex 版本通道 | **已闭环** | #713（2026-08-04 16:09）「1.43.3.10861 is now available to everyone」→ 全量可用；#714 已到 `1.43.3.10896`（更新版本，非本条必需） |
 | Plex「4 CVE ↔ 1.43.3.10861」的对应粒度 | 已注明 | 版本公告**未逐条点名**四个 CVE，是 CNA/NVD 描述 + 版本公告两处拼合；措辞按「CNA 记录 + 版本公告」，不写「厂商逐条确认」 |
 | SiteGuard 厂商页 | 已留证 | `eg-secure.co.jp/siteguard/news/alert-202610-1` 302 跳首页；以 **JVN 一手**为准，厂商页恢复后补原文 |
-| Siemens IoC 细节 | 未公开 | ProductCERT News 有 IoC 章节，本件只引用「厂商确认在野利用」 |
+| Siemens IoC 细节 | **本件未逐条收录** | 厂商 ProductCERT News 已公开 IoC 章节（含恶意文件哈希），见 [ProductCERT News 2026-10-19](https://productcert.siemens.com/news/2026/10/19/active-exploitation-of-cve-2026-110936-in-siemens-software-center/)；本件只引用「厂商确认在野利用」 |
 
 ## 来源
 
