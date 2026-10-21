@@ -227,7 +227,7 @@ docker pull "$(sed -n 4p "/secure/change/$CHG/pre-llm.txt")"   # RepoDigests 已
 | CVE-2026-90970 | GitLab AI Gateway（模板沙箱逃逸） | `18.1.6–<19.2.4` / `19.3.0–<19.3.2` / `19.4.0–<19.4.1` | `19.2.4` / `19.3.2` / `19.4.1`（官方，CVSS 9.9 `PR:L`） | https://docs.gitlab.com/releases/patches/other-patches/patch-release-gitlab-ai-gateway-19-4-1-released/ |
 | CVE-2026-105752 | vLLM（跨租户缓存泄露，low） | `<0.30.0` | `0.30.0` | https://github.com/vllm-project/vllm/security/advisories/GHSA-935w-9g4m-p28p |
 
-**未确认（不进结论，只跟进）**：CVE-2026-114053（AutoProcessor RCE）仍是二手候选，未核实到官方 GHSA。（`CVE-2026-105754` 已取得一手 GHSA，见 S437，升 verified。）
+**未确认（不进结论，只跟进）**：CVE-2026-114053（AutoProcessor RCE）仍是二手候选，未核实到官方 GHSA。
 
 ## 来源
 

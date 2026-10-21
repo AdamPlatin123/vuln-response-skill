@@ -110,7 +110,7 @@
 
 > **观察项（未进 05 的 cve 列表）**：`CVE-2026-105775` vLLM mamba_mixer2——issue #57266 是普通崩溃 bug（越界 slice 杀 EngineCore），无 GHSA、无修复 commit，不写升级命令。
 
-> `CVE-2026-114053`（AutoProcessor RCE）只有二手候选，**未核实到官方 GHSA，不进结论**。（`CVE-2026-105754` 已于 W7 取得一手 GHSA，见 S437，升 verified。）
+> `CVE-2026-114053`（AutoProcessor RCE）只有二手候选，**未核实到官方 GHSA，不进结论**。
 
 > cert.pl：CERT Polska 是 `CVE-2026-103663` 的 **CNA（CVE 分配方）**，其公告属 CVE 官方记录，记「一手」。但 Ollama 自己的 release note 未提该 CVE——**「CNA 记录了修复版本」≠「厂商声明确认」**，两件事分开写。
 
@@ -238,7 +238,7 @@ KEV 收录 = **已被利用**，不是「有补丁待升级」。全部 9 条已
 |---|---|---|---|
 | PoeLLM 僵尸网络：声称感染 3,400+ 暴露 Ollama/vLLM，C2 藏 GitHub 诗 | 二手 | S900（SystemTwo） | 不入结论；先核实感染面 |
 | TOPHIT：单操作者 npm 抢注洪泛 + GPU 挖矿 C2 | 二手 | S902（CloudSEK） | 不入结论；可作 03 的风险背景 |
-| vLLM 0.31.0 批量「RCE」修复 | 二手 | S901（LinuxSecurity） | 候选 CVE-2026-114053 未核实到官方 GHSA（105754 已升 verified，见 S437），压后处理 |
+| vLLM 0.31.0 批量「RCE」修复 | 二手 | S901（LinuxSecurity） | 候选 CVE-2026-114053 未核实到官方 GHSA，压后处理 |
 
 ## 8. 按架构自查（多栈生产环境 · 本次场景）
 

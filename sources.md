@@ -47,7 +47,7 @@
 | S304 | LMCache GHSA-w5f2-9q9c-ff4h | 一手 | https://github.com/LMCache/LMCache/security/advisories/GHSA-w5f2-9q9c-ff4h | CVE-2026-105192；ZMQ 未认证 pickle RCE，CVSS 9.8；修 `0.5.6` | 已核实（侦察交件） |
 | S305 | CERT Polska 公告 CVE-2026-103663 | 一手 | https://cert.pl/en/posts/2026/10/CVE-2026-103663/ | Ollama **`>=0.34.2 <0.35.0`**（cvelistV5 semver，见 S315）；`/api/pull` 路径穿越 → **重启后**执行写入文件（`UI:P`，非即时）；条件 CVSS 4.0：无 `/usr/lib/ollama` 写权限 **6.9**、有写权限（多数 Docker 默认 root）**9.4**；CISA-ADP SSVC `Exploitation: none`；修复 `0.35.0`；披露 2026-10-08 | **CNA 记录**：`assignerShortName` = CERT-PL（原始 JSON 见 **S315**）；受区间按 semver `>=0.34.2 <0.35.0`；条件 CVSS 6.9 / 9.4；SSVC `Exploitation: none`；⚠️ Ollama release note 静默 |
 | S306 | ThaiCERT 转述 GitLab AI Gateway | 二手 | https://www.thaicert.or.th/en/2026/10/05/gitlab-patches-critical-ai-gateway-vulnerability-that-could-allow-command-execution-on-self-hosted-gateways/ | CVE-2026-90970；模板沙箱逃逸，CVSS 9.9；修 `19.2.4` / `19.3.2` / `19.4.1` | 二手；**已被 S308（GitLab 官方）替代**，仅留时间线 |
-| S307 | VulDB 候选（传闻，CVE-2026-114053） | 未确认 | —（无一手 URL；GHSA-QX62 只对应 S303 的 105775） | CVE-2026-114053（AutoProcessor RCE）；`CVE-2026-105754` 已升 verified → 见 S437（一手 GHSA-ph72-cqr5-qpp7） | 未确认；未核实到官方 GHSA，不入结论 |
+| S307 | VulDB 候选（传闻，CVE-2026-114053） | 未确认 | —（无一手 URL；GHSA-QX62 只对应 S303 的 105775） | CVE-2026-114053（AutoProcessor RCE） | 未确认；未核实到官方 GHSA，不入结论 |
 | S308 | GitLab 官方补丁发布页：AI Gateway 19.4.1 | 一手 | https://docs.gitlab.com/releases/patches/other-patches/patch-release-gitlab-ai-gateway-19-4-1-released/ | CVE-2026-90970；CVSS 3.1 **9.9**（`AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H`，**PR:L = 需 Duo Agent Platform 认证**）；受影响 18.1.6–<19.2.4 / 19.3.0–<19.3.2 / 19.4.0–<19.4.1；修复 `19.2.4` / `19.3.2` / `19.4.1` | 厂商一手（侦察交件） |
 | S309 | GitHub Advisory GHSA-53mr-6c8q-9789（CVE-2026-35029） | 一手 | https://github.com/advisories/GHSA-53mr-6c8q-9789 | LiteLLM `/config/update` 未校验 admin 角色 → 权限提升 / 任意文件读 / 接管 admin；prior to `1.83.0`；alias PYSEC-2026-2597 | 侦察交件；Chief 复核 advisory 页 200 + OSV alias |
 | S310 | GitHub Advisory GHSA-jjhc-v7c2-5hh6（CVE-2026-35030） | 一手 | https://github.com/advisories/GHSA-jjhc-v7c2-5hh6 | OIDC userinfo 缓存键碰撞（`token[:20]`）→ 认证绕过；需 `enable_jwt_auth`；修复 `1.83.0`；alias PYSEC-2026-390 | 同上 |
@@ -123,7 +123,7 @@
 | 编号 | 来源 | 类型 | URL | 涉及 | 核实状态 |
 |---|---|---|---|---|---|
 | S900 | SystemTwo 情报交换：PoeLLM 僵尸网络 | 二手 | https://systemtwosecurity.com/intel-exchange/01a11b23-e3be-706c-bc82-7317b948c11d | 声称感染 3,400+ 暴露的 Ollama/vLLM，C2 藏 GitHub 诗 | 传闻；**不入结论** |
-| S901 | LinuxSecurity：vLLM 0.31.0 批量修复 | 二手 | https://linuxsecurity.com/news/security-vulnerabilities/vllm-vulnerability-code-execution-server-crashes | 称 vLLM 0.31.0 批量修 RCE，候选 CVE-2026-114053 / 105754 | 传闻；官方 GHSA 未出，**不入结论** |
+| S901 | LinuxSecurity：vLLM 0.31.0 批量修复 | 二手 | https://linuxsecurity.com/news/security-vulnerabilities/vllm-vulnerability-code-execution-server-crashes | 称 vLLM 0.31.0 批量修 RCE，候选 CVE-2026-114053（`CVE-2026-105754` 已升 verified，见 S437） | 传闻；官方 GHSA 未出，**不入结论** |
 | S902 | CloudSEK 博客：TOPHIT（npm 抢注洪泛 + GPU 挖矿 C2） | 二手 | https://www.cloudsek.com/ar/blog/tophit-npm-typosquat-flood-gpu-cryptojacking-server | 单操作者批量抢注 npm 包 + GPU 挖矿 C2 | 传闻；**不入结论** |
 
 ## ID 分配（给 漏洞侦察 交件用）
@@ -149,6 +149,8 @@ S1xx | <来源名称> | 一手 | <URL> | <CVE/组件/版本> | 已核实
 ```
 
 ## 状态小结
+
+> 升格记录（W7）：`CVE-2026-105754` 已取得一手 GHSA（S437），inventory 由 observe 升 verified；`CVE-2026-105922` 见 S441。
 
 - **LiteLLM（S003–S005、S008）**：一手齐。CVSS 9.8 / CWE-89 / KEV 收录 / 修复版本 PyPI 实查，可作结论。
 - **Node.js（S001、S006、S007）**：一手齐（10 条 CVE 逐条核实）。**公告没有 CVSS 分数，只有 high/medium/low 标签**——不要再找「不存在的分数」，要么从 NVD/GHSA 取分，要么结论写「官方未给」。
