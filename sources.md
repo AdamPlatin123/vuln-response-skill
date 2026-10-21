@@ -118,14 +118,6 @@
 | S440 | OSV/GHSA `GHSA-58v5-2m8f-94pr`（vLLM GLMGA 视频采样 CPU/内存耗尽） | 一手（GHSA/OSV） | https://osv.dev/vulnerability/GHSA-58v5-2m8f-94pr | CVE-2026-105760；vllm `>=0.23.0rc2 <0.30.0` → `0.30.0` | 2026-10-22 入库；证据 `evidence/w7-2026-10-22/osv-vllm.json`；`05` 引用 |
 | S441 | OSV/PYSEC `PYSEC-2026-4319`（vLLM Penalty Handler `get_token_bin_counts_and_mask` DoS） | 一手（OSV/PYSEC） | https://osv.dev/vulnerability/PYSEC-2026-4319 | CVE-2026-105922；vllm `<0.32.0` → `0.32.0`（总修复线） | 2026-10-22 入库；证据 `evidence/w7-2026-10-22/osv-PYSEC-2026-4319.json`；`05` 引用 |
 
-## 传闻区（二手 / 未确认，**不入结论**）
-
-| 编号 | 来源 | 类型 | URL | 涉及 | 核实状态 |
-|---|---|---|---|---|---|
-| S900 | SystemTwo 情报交换：PoeLLM 僵尸网络 | 二手 | https://systemtwosecurity.com/intel-exchange/01a11b23-e3be-706c-bc82-7317b948c11d | 声称感染 3,400+ 暴露的 Ollama/vLLM，C2 藏 GitHub 诗 | 传闻；**不入结论** |
-| S901 | LinuxSecurity：vLLM 0.31.0 批量修复 | 二手 | https://linuxsecurity.com/news/security-vulnerabilities/vllm-vulnerability-code-execution-server-crashes | 称 vLLM 0.31.0 批量修 RCE，候选 CVE-2026-114053（已升 S437） | 传闻；官方 GHSA 未出，**不入结论** |
-| S902 | CloudSEK 博客：TOPHIT（npm 抢注洪泛 + GPU 挖矿 C2） | 二手 | https://www.cloudsek.com/ar/blog/tophit-npm-typosquat-flood-gpu-cryptojacking-server | 单操作者批量抢注 npm 包 + GPU 挖矿 C2 | 传闻；**不入结论** |
-
 ## ID 分配（给 漏洞侦察 交件用）
 
 | 区段 | 用途 |
@@ -222,3 +214,11 @@ cd /path/to/vuln-response-skill
 grep -rhoE 'CVE-[0-9]{4}-[0-9]+' playbooks/*.md playbooks/_draft/*.md | sort -u
 grep -oE 'CVE-[0-9]{4}-[0-9]+' sources.md | sort -u
 ```
+
+## 传闻区（二手 / 未确认，**不入结论**）
+
+| 编号 | 来源 | 类型 | URL | 涉及 | 核实状态 |
+|---|---|---|---|---|---|
+| S900 | SystemTwo 情报交换：PoeLLM 僵尸网络 | 二手 | https://systemtwosecurity.com/intel-exchange/01a11b23-e3be-706c-bc82-7317b948c11d | 声称感染 3,400+ 暴露的 Ollama/vLLM，C2 藏 GitHub 诗 | 传闻；**不入结论** |
+| S901 | LinuxSecurity：vLLM 0.31.0 批量修复 | 二手 | https://linuxsecurity.com/news/security-vulnerabilities/vllm-vulnerability-code-execution-server-crashes | 称 vLLM 0.31.0 批量修 RCE，候选 CVE-2026-114053（已升 S437） | 传闻；官方 GHSA 未出，**不入结论** |
+| S902 | CloudSEK 博客：TOPHIT（npm 抢注洪泛 + GPU 挖矿 C2） | 二手 | https://www.cloudsek.com/ar/blog/tophit-npm-typosquat-flood-gpu-cryptojacking-server | 单操作者批量抢注 npm 包 + GPU 挖矿 C2 | 传闻；**不入结论** |
