@@ -17,7 +17,7 @@ updated: 2026-10-22
 > **覆盖说明（三条）**
 > 1. **包级事实 verified**：本件 CVE 号、受影响区间、修复版本均有一手来源（oss-security / RUSTSEC / OSV / MFSA / NVD / CNA 记录 / GHSA）。
 > 2. **三套信任库收口（W4）**：Debian ca-certificates **三线全有版本**——trixie `20250419+deb13u1`（**DSA-6572-1，2026-10-20，仅列 trixie**）、**bookworm-security `20250419~deb12u2`**（NMU 2026-10-20 21:45:34 +0200；**来源 = bookworm-security 源包 changelog + Debian tracker 版本表，不在 DSA-6572-1 正文内**）、unstable/testing `20260816+nmu1`；Java cacerts **分两条路**——**发行版 JDK 随 OS 包修**（**RHEL 已实证**：`java-21-openjdk.spec:2251` `ln -sf /etc/pki/java/cacerts .`；**Debian/Ubuntu 仅实证钩子机制**，以 `keytool -list -cacerts` 实际路径为准），**Oracle JDK 无厂商修复版本** → 兜底：**优先** `-Djavax.net.ssl.trustStore=` 指向清洗后副本（可回退），**次选** `keytool -delete`（Oracle CPU 0 命中、OpenJDK master 仍含 3 张 emSign 根）；.NET **无独立处置版本**，随 OS/基础镜像 trust store 更新。
-> 3. 本件按「verified + 未确认子项」归档：**不下调 status、不改统计口径**，缺口在 `index.md` 未闭环清单单列。
+> 3. 本件按「verified + 未确认子项」归档（**仅 Chrome/Android CRLSets 待核**）：**不下调 status、不改统计口径**，缺口在 `index.md` 未闭环清单单列。
 
 > 措辞口径：根因是**弱密钥**（私钥本身可被秒级恢复，见下「根因」段），不是普通「私钥被盗」。标题与正文按根因写，别再叫「私钥泄露」。
 

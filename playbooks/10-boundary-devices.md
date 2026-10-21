@@ -327,7 +327,7 @@ docker pull "<旧镜像 digest>"
 
 > 与 `vuln-w1/inventory.tsv` 对应：W1-046~054（`merge_key` 逐条 `kev-*`）。
 
-## 待核
+## 遗留与已闭环（仅 Siemens IoC 待补）
 
 | 项 | 状态 | 说明 |
 |---|---|---|
