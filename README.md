@@ -45,8 +45,11 @@ description: 互联网漏洞情报 → 检测 / 影响判定 / 修复 / 验证 �
 bash bin/lint-playbooks.sh --all        # playbook 结构校验，失败项要修到 0
 bash bin/seal.sh                        # 生成 MANIFEST.sha256
 sha256sum -c MANIFEST.sha256            # 校验没被人改过
-python3 bin/lint_inventory.py --inventory inventory.tsv --no-peer   # 清单表自检（无 peer 时用内部规则）
 ```
+
+> `inventory.tsv` 是 **W1 快照**：`evidence_ref` 保留工作区相对路径（`vuln-response/evidence/…`，包内对应 `evidence/…`），
+> `kev.json#CVE-…` 指向工作区里的 KEV 快照。它由 `bin/lint_inventory.py` 在工作区版（含 `../vuln-w1/`、`kev.json`）里校验，
+> **不在包内重跑**；包内只保证 playbook 结构校验可跑。
 
 ## 设计上的三条硬约束
 
