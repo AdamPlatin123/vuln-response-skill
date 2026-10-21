@@ -334,7 +334,7 @@ docker pull "<旧镜像 digest>"
 | Plex 版本通道 | **已闭环** | #713（2026-08-04 16:09）「1.43.3.10861 is now available to everyone」→ 全量可用；#714 已到 `1.43.3.10896`（更新版本，非本条必需） |
 | Plex「4 CVE ↔ 1.43.3.10861」的对应粒度 | 已注明 | 版本公告**未逐条点名**四个 CVE，是 CNA/NVD 描述 + 版本公告两处拼合；措辞按「CNA 记录 + 版本公告」，不写「厂商逐条确认」 |
 | SiteGuard 厂商页 | 已留证 | `eg-secure.co.jp/siteguard/news/alert-202610-1` 302 跳首页；以 **JVN 一手**为准，厂商页恢复后补原文 |
-| Siemens IoC 细节 | 待侦察补 | ProductCERT News 有 IoC 章节，本件只引用「厂商确认在野利用」 |
+| Siemens IoC 细节 | 未公开 | ProductCERT News 有 IoC 章节，本件只引用「厂商确认在野利用」 |
 
 ## 来源
 

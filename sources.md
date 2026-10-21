@@ -58,7 +58,7 @@
 | S315 | cvelistV5 原始记录 `CVE-2026-103663` | 一手（CVE 官方记录） | https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/103xxx/CVE-2026-103663.json | Ollama `>=0.34.2 <0.35.0`；`assignerShortName: CERT-PL`；条件 CVSS 4.0：无 `/usr/lib/ollama` 写权限 **6.9**、有写权限（多数 Docker 默认 root）**9.4**；CISA ADP SSVC `Exploitation: none`（未在野利用） | 2026-10-21 实抓 JSON 存档于 `evidence/cvelistV5-2026-10-21/`，sha256 `9c26b4d9…` |
 | S316 | GitHub Advisory GHSA-69x8-hrgq-fjj8（**无 CVE 别名**） | 一手 | https://github.com/advisories/GHSA-69x8-hrgq-fjj8 | LiteLLM 密码哈希泄露 + pass-the-hash 登录；需认证；`<1.83.0` 修复 `1.83.0` | 侦察交件；02 引用 |
 
-| S400 | php.net 2026-10-21 安全发布公告 | 一手 | https://www.php.net/archive/2026.php#2026-10-21-5 | CVE-2026-109618 / CVE-2026-109619；修复 `8.5.12` / `8.4.27` / `8.3.36` / `8.2.35`；技术细节与更新说明 | PHP Foundation 引用；php.net 正文待侦察抓取存档 |
+| S400 | php.net 2026-10-21 安全发布公告 | 一手 | https://www.php.net/archive/2026.php#2026-10-21-5 | CVE-2026-109618 / CVE-2026-109619；修复 `8.5.12` / `8.4.27` / `8.3.36` / `8.2.35`；技术细节与更新说明 | PHP Foundation 引用；php.net 正文尚未存档（第三方站点，不影响结论） |
 | S401 | PHP Foundation：今日安全发布说明 | 一手 | https://thephp.foundation/blog/2026/10/21/todays-php-security-release-and-how-were-strengthening-php-security/ | mod_php 未认证、默认配置可 RCE；FPM 经应用层路径也确认 RCE；**CVSS 实际 9.2（泄露的 10.0 错误）**；发布时未确认在野利用；Chainguard 07:41 UTC 破 embargo；8.1 无补丁 | 2026-10-21 抓原文 |
 | S402 | GHSA-w8hw-w9fx-j79w（php-src） | 一手 | https://github.com/php/php-src/security/advisories/GHSA-w8hw-w9fx-j79w | CVE-2026-109618：RCE via OOM corruption | 侦察交件 |
 | S403 | GHSA-6wmf-4rv5-p3rp（php-src） | 一手 | https://github.com/php/php-src/security/advisories/GHSA-6wmf-4rv5-p3rp | CVE-2026-109619：RCE via stale state（UAF） | 侦察交件 |
