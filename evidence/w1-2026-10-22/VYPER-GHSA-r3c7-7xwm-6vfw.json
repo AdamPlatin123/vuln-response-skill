@@ -1,0 +1,144 @@
+{
+  "ghsa_id": "GHSA-r3c7-7xwm-6vfw",
+  "cve_id": null,
+  "url": "https://api.github.com/repos/vyperlang/vyper/security-advisories/GHSA-r3c7-7xwm-6vfw",
+  "html_url": "https://github.com/vyperlang/vyper/security/advisories/GHSA-r3c7-7xwm-6vfw",
+  "summary": "Multi-byte identifier characters can silently change literal values",
+  "description": "## Summary\r\n\r\nA multi-byte character, such as a non-ASCII identifier or a byte-order mark, shifts Vyper's source lookup for later literals on the same line. Crafted source can make numeric literals compile with values or types that are not the ones written, without a compiler warning.\r\n\r\n## Details\r\n\r\nIn `vyper/ast/parse.py`, `line_index` counts characters, but Python's `col_offset` counts UTF-8 bytes within the line. Each multi-byte character shifts later source slices on that line right by its extra bytes. `visit_Num` classifies literals and reconstructs hexadecimal, binary and decimal values from these slices. A replacement placed where the slice lands therefore becomes the compiled value, and a plain integer can become a hex literal.\r\n\r\nTwo triggers are reachable:\r\n\r\n- Non-ASCII identifiers that NFKC-normalize to ASCII, such as `ﬁ`, `ｆｏｏ` or `𝚏𝚘𝚘`.\r\n- A byte-order mark at the start of the file, which shifts literals on line 1. It is invisible.\r\n\r\nThis shares its root cause with [GHSA-wvx7-39qj-2g9v](https://github.com/vyperlang/vyper/security/advisories/GHSA-wvx7-39qj-2g9v): the line table introduced in 0.4.1.\r\n\r\n## Proof of concept\r\n\r\nThe identifier uses mathematical monospace letters (4 bytes, 1 character each). They shift the lookup onto the address in the trailing comment:\r\n\r\n```python\r\nimport vyper\r\n\r\n# The identifier uses MATHEMATICAL MONOSPACE letters (4 UTF-8 bytes each),\r\n# which Python normalizes to the ASCII name TREASURY_ADDRESS_FOR_FEES.\r\nsource = \"\"\"𝚃𝚁𝙴𝙰𝚂𝚄𝚁𝚈_𝙰𝙳𝙳𝚁𝙴𝚂𝚂_𝙵𝙾𝚁_𝙵𝙴𝙴𝚂: constant(address) = 0x000000000000000000000000000000000000dEaD                      # 0x00000000000000000000000000000000c0Ffee11\r\n\r\n@external\r\n@view\r\ndef treasury() -> address:\r\n    return TREASURY_ADDRESS_FOR_FEES\r\n\"\"\"\r\n\r\n# Same contract with an ASCII identifier\r\nclean = source.replace(source.split(\":\")[0], \"TREASURY_ADDRESS_FOR_FEES\", 1)\r\n\r\n# The getter's runtime bytecode matches an explicitly substituted contract.\r\nsubstituted = clean.replace(\r\n    \"0x000000000000000000000000000000000000dEaD\",\r\n    \"0x00000000000000000000000000000000c0Ffee11\",\r\n    1,\r\n)\r\n\r\ndef runtime(code):\r\n    return vyper.compile_code(code, output_formats=[\"bytecode_runtime\"])[\"bytecode_runtime\"]\r\n\r\nassert runtime(source) == runtime(substituted)\r\nassert runtime(source) != runtime(clean)\r\n```\r\n\r\nBoth assertions pass.\r\n\r\n## Impact\r\n\r\nAn attacker able to contribute source code can change an address, selector, byte sequence, integer or decimal constant. Identifier triggers can pass as ordinary letters in review; a byte-order mark is invisible.\r\n\r\n## Affected versions\r\n\r\n| pip range                | Notes                                                                                      |\r\n| ------------------------ | ------------------------------------------------------------------------------------------ |\r\n| `>= 0.1.0b1, < 0.1.0b12` | Literals are read using Python's byte offsets.                                             |\r\n| `= 0.1.0b14`             | A parser refactor overwrites the `asttokens` character offsets with Python's byte offsets. |\r\n| `>= 0.4.1`               | Affected through 0.5.0b1; also unpatched on the inspected `master` checkout (`17e925db`).  |\r\n\r\n0.1.0b12, 0.1.0b13 and 0.1.0b15 through 0.4.0 use character offsets from `asttokens` and are unaffected.\r\n\r\n## Remediation\r\n\r\nConvert byte offsets to character offsets using each line's own text before slicing, and take literal values from the parser instead of source text. Until fixed, reject non-ASCII characters outside comments and docstrings, including a byte-order mark.\r\n",
+  "severity": "low",
+  "author": null,
+  "publisher": {
+    "login": "charles-cooper",
+    "id": 3867501,
+    "node_id": "MDQ6VXNlcjM4Njc1MDE=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/3867501?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/charles-cooper",
+    "html_url": "https://github.com/charles-cooper",
+    "followers_url": "https://api.github.com/users/charles-cooper/followers",
+    "following_url": "https://api.github.com/users/charles-cooper/following{/other_user}",
+    "gists_url": "https://api.github.com/users/charles-cooper/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/charles-cooper/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/charles-cooper/subscriptions",
+    "organizations_url": "https://api.github.com/users/charles-cooper/orgs",
+    "repos_url": "https://api.github.com/users/charles-cooper/repos",
+    "events_url": "https://api.github.com/users/charles-cooper/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/charles-cooper/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "identifiers": [
+    {
+      "value": "GHSA-r3c7-7xwm-6vfw",
+      "type": "GHSA"
+    }
+  ],
+  "state": "published",
+  "created_at": null,
+  "updated_at": "2026-10-06T09:28:01Z",
+  "published_at": "2026-10-06T09:28:01Z",
+  "closed_at": null,
+  "withdrawn_at": null,
+  "submission": null,
+  "vulnerabilities": [
+    {
+      "package": {
+        "ecosystem": "pip",
+        "name": "vyper"
+      },
+      "vulnerable_version_range": ">= 0.1.0b1, < 0.1.0b12",
+      "patched_versions": "0.1.0b12",
+      "vulnerable_functions": [
+
+      ]
+    },
+    {
+      "package": {
+        "ecosystem": "pip",
+        "name": "vyper"
+      },
+      "vulnerable_version_range": "= 0.1.0b14",
+      "patched_versions": "0.1.0b15",
+      "vulnerable_functions": [
+
+      ]
+    },
+    {
+      "package": {
+        "ecosystem": "pip",
+        "name": "vyper"
+      },
+      "vulnerable_version_range": ">= 0.4.1",
+      "patched_versions": "",
+      "vulnerable_functions": [
+
+      ]
+    }
+  ],
+  "cvss_severities": {
+    "cvss_v3": {
+      "vector_string": null,
+      "score": null
+    },
+    "cvss_v4": {
+      "vector_string": null,
+      "score": null
+    }
+  },
+  "cwes": [
+    {
+      "cwe_id": "CWE-176",
+      "name": "Improper Handling of Unicode Encoding"
+    },
+    {
+      "cwe_id": "CWE-1007",
+      "name": "Insufficient Visual Distinction of Homoglyphs Presented to User"
+    }
+  ],
+  "cwe_ids": [
+    "CWE-176",
+    "CWE-1007"
+  ],
+  "credits": [
+    {
+      "login": "hyeon-Sec",
+      "type": "reporter"
+    }
+  ],
+  "credits_detailed": [
+    {
+      "user": {
+        "login": "hyeon-Sec",
+        "id": 308198454,
+        "node_id": "U_kgDOEl68Ng",
+        "avatar_url": "https://avatars.githubusercontent.com/u/308198454?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/hyeon-Sec",
+        "html_url": "https://github.com/hyeon-Sec",
+        "followers_url": "https://api.github.com/users/hyeon-Sec/followers",
+        "following_url": "https://api.github.com/users/hyeon-Sec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/hyeon-Sec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/hyeon-Sec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/hyeon-Sec/subscriptions",
+        "organizations_url": "https://api.github.com/users/hyeon-Sec/orgs",
+        "repos_url": "https://api.github.com/users/hyeon-Sec/repos",
+        "events_url": "https://api.github.com/users/hyeon-Sec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/hyeon-Sec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "type": "reporter",
+      "state": "accepted"
+    }
+  ],
+  "collaborating_users": null,
+  "collaborating_teams": null,
+  "private_fork": null,
+  "comments": 4,
+  "cvss": {
+    "vector_string": null,
+    "score": null
+  }
+}

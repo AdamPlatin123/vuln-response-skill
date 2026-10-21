@@ -19,6 +19,7 @@
 | PHP 运行时 | 2 条未认证 RCE，修复 `8.5.12` / `8.4.27` / `8.3.36` / `8.2.35` | [`08-php-runtime.md`](playbooks/08-php-runtime.md) | **定稿 verified** |
 | PKI / CA | eMudhra 8 张中间 CA 私钥被攻破（跨生态，改 01/04 结论） | [`09-pki-ca-rollover.md`](playbooks/09-pki-ca-rollover.md) | **定稿 verified** |
 | 边界 / 媒体设备 | KEV 在野利用簇：SiteGuard / Plex / Siemens / PAN-OS / FortiMail | [`10-boundary-devices.md`](playbooks/_draft/10-boundary-devices.md) | **草稿**（fixed 版本待逐条核实） |
+| .NET / ASP.NET Core | Kestrel HTTP/1 请求走私（CVSS 9.4）领衔 6 条；修 `8.0.32` / `9.0.21` / `10.0.13` / `11.0.0-rc.2` | [`11-dotnet-runtime.md`](playbooks/11-dotnet-runtime.md) | **定稿 verified**（MSRC + GHSA 一手，S404–S409） |
 
 ## 2. 按 CVE 定位
 
@@ -132,11 +133,13 @@
 | CVE-2026-111943 | Go / Rust 生态与 Node 内置 CA | Go `1.26.10` / `1.27.3`；`webpki-roots 1.0.10`；`rustls-webpki 0.103.16` / `0.104.0-alpha.8`；`webpki-root-certs 1.0.10`；Node `22.23.4` / `24.22.1` / `26.12.1` |
 | CVE-2026-113470 | Firefox / NSS OneCRL | Firefox `158.0.1`；ESR `115.43.1` / `153.5.1`；Android `158.0.2`；NSS `3.131.1` |
 
-> 来源 S501–S507（Mozilla 博客、MFSA 2026-111、RUSTSEC-2026-0381/0382/0383、Bugzilla 2083449）。**未确认**：Python `certifi`、Java `cacerts`、Linux `ca-certificates`、.NET 的处置版本——别猜。
+> 来源 S501–S507（Mozilla 博客、MFSA 2026-111、RUSTSEC-2026-0381/0382/0383、Bugzilla 2083449）。**未确认**：Python `certifi`、Java `cacerts`、Linux `ca-certificates`、.NET 四套 store 的处置版本——别猜。
+>
+> **状态口径（组长裁定 2026-10-22）**：09 保持 `verified`。漏洞条目本身的 `fixed` 是确定的（按 SPKI 移除信任）；上列**四套 store 版本未确认属执行侧子项缺口**，不因此降 `partial`——但引用时必须带上这句限定。
 
 - **SPKI 检测锚点**：3 根 + 8 张中间 CA 的 SPKI SHA-256 全表在 `evidence/spki-emudhra-2026-10-21.md`（源 = oss-security 一手）。Sectigo 交叉签名同 SPKI → **检测只认 SPKI，不看签发路径**。
-- **RUSTSEC-2026-0381 / 0382 / 0383 与 `GO-2026-6809` 是同一个 `CVE-2026-111943`**（Go + Rust 同一根因），08 已按一行归档，**别拆三条**。
-- 根因口径：是**弱密钥**（KGC 生成脚本缺陷，出现 1 字节私钥 / 连续整数 155、156 这类 P384），不是普通「私钥被窃」。08 标题仍写「私钥泄露」，正文按弱密钥——见 G16。
+- **RUSTSEC-2026-0381 / 0382 / 0383 与 `GO-2026-6809` 是同一个 `CVE-2026-111943`**（Go + Rust 同一根因），**09** 已按一行归档，**别拆三条**。
+- 根因口径：是**弱密钥**（KGC 生成脚本缺陷，出现 1 字节私钥 / 连续整数 155、156 这类 P384），不是普通「私钥被窃」。**09 标题已改为「eMudhra 中间 CA 弱密钥（P384 私钥可秒级恢复）」——本条已闭环**（见 G16）。
 
 ### 2.8 边界 / 媒体设备（playbook 10 · 草稿）
 
@@ -144,7 +147,7 @@ KEV 收录 = **已被利用**，不是「有补丁待升级」。全部 9 条已
 
 | CVE | 产品 | KEV 原文要点 | added / due |
 |---|---|---|---|
-| CVE-2026-106931 | SiteGuard Server Edition | OS 命令注入（**原文未写 root/SYSTEM**） | 10-20 / 10-23 |
+| CVE-2026-106931 | SiteGuard Server Edition | OS 命令注入（KEV 原文：可执行任意 OS 命令，**root 或 SYSTEM** 权限） | 10-20 / 10-23 |
 | CVE-2026-96652 | Plex Media Server | SSRF（**任意 `X-Plex-Token` 值即可**） | 10-20 / 11-03 |
 | CVE-2026-96654 | Plex Media Server | 编码 URI scheme 未中和 | 10-20 / 10-23 |
 | CVE-2026-96655 | Plex Media Server | SSRF（已认证用户） | 10-20 / 11-03 |
@@ -213,7 +216,7 @@ KEV 收录 = **已被利用**，不是「有补丁待升级」。全部 9 条已
 | G13 | GPT 情报集吸收（分批） | **D1 已吸收**：LiteLLM 6 条 + PyPI 事故 → S309–S316，02 扩成 7 条 + 分支表。**未吸收**：eMudhra CA 两份厂商公告、PHP 2 条、Go 15 项、在野利用簇 5 家 | 漏洞侦察 → Skill工坊 |
 | G14 | Check Point 研究正文（S314） | 只登记了 URL，正文未抓；引用了也没法核 | 漏洞侦察 |
 | G15 | 内核 `c6e50df8` 映射 | 8 位缩写**无法唯一映射**到 CVE（已查 10 月内核 CVE 与修复 commit 均不符）→ 标「未确认」，别拿 commit 猜 | 漏洞侦察 |
-| G16 | 09 标题与根因措辞 | 标题「私钥泄露」 vs 根因「弱密钥（KGC 脚本缺陷）」；正文已按弱密钥，标题待统一 | 修复策略 |
+| G16 | ~~09 标题与根因措辞~~ | **已闭环**：09 标题已改为「eMudhra 中间 CA 弱密钥（P384 私钥可秒级恢复）」，正文结论未动 | — |
 
 ## 7. 传闻区（二手/未确认，**不作结论**，只登记跟进）
 
@@ -237,11 +240,11 @@ KEV 收录 = **已被利用**，不是「有补丁待升级」。全部 9 条已
 | Rust TLS 校验层 | RUSTSEC-2026-0381/0382/0383 | 根证书**编译进二进制**，升级后重编译 | 已核实（S502–S504） |
 | Python + LiteLLM 1.107.0 | 5 条 CVE，修复线上限 `1.96.2` | `1.107.0` 高于全部修复线，版本大概率没事；**但 venv 的 `certifi` 要单独换**；逐条对 02 §0 矩阵 | 已核实（S309–S313） |
 | CI（昨晚拉新包） | PyPI 1.82.7/1.82.8 投毒（历史） | 冻结 CI → 锁文件 diff → `.pth` 扫描 → 可疑环境**别用它自己的 python/pip 自查** | 已核实（S313） |
-| Vyper + Docker/K8s/Traefik（mTLS **fail-open**） | 无本队条目；**fail-open 本身是配置缺陷** | 改 `requireAndVerifyClientCert`（fail-closed），不依赖任何 CVE | 待核实（缺口） |
+| Vyper + Docker/K8s/Traefik（mTLS **fail-open**） | **Traefik 已并入 04**（CVE-2026-112778，修 `2.11.46` / `3.6.17` / `3.7.1`）；Vyper 6 条仅 `partial`（尚无 playbook）；**fail-open 本身是配置缺陷** | 改 `requireAndVerifyClientCert`（fail-closed），不依赖任何 CVE | 部分已核实（S108）；Vyper 待补件 |
 | PHP 8.1 主站 | 7 号件（`CVE-2026-109618/109619`） | 8.1 **无补丁** → 升在维护分支（8.2/8.3）；查 FPM/Apache SAPI 而非 CLI | 已核实（S400–S403，见 07） |
 | Linux 内核（`c6e50df8` 之前） | KEV 三条 + 研究性 CVE-2026-99999 | `c6e50df8` 是占位，**必须先映射到 CVE**；容器共享宿主内核，重启才生效 | 待核实 |
-| Ruby / Perl | 无本队条目 | 走 OpenSSL 系统 trust store；Perl 查 `IO::Socket::SSL` 是否关 `verify` | 待核实（缺口） |
-| ASP.NET Core / .NET（宿主） | 无本队条目 | 面板不暴露公网、最小权限、本地服务只绑 `127.0.0.1` | 待核实（缺口） |
+| Ruby / Perl | gist（CVE-2026-105221，修 `6.1.0`）、Thrift perl（CVE-2026-85086，修 `0.25.0`）已并入 **09** | 走 OpenSSL 系统 trust store；Perl 查 `IO::Socket::SSL` 是否关 `verify` | 已核实（S410 / S411） |
+| ASP.NET Core / .NET（宿主） | **11 号件** 6 条（Kestrel 走私 9.4 等） | 先对版本：`8.0.32` / `9.0.21` / `10.0.13` / `11.0.0-rc.2`；宿主面板不暴露公网、最小权限 | 已核实（S404–S409） |
 
 **P0 顺序（小时级）**：eMudhra 证书链 → Node Brotli → CI 供应链 → Traefik fail-closed。
 **P1（天级）**：Go/Rust 重编译、Java cacerts + native image 重建、PHP 升分支、LiteLLM 逐条对、镜像 digest 固定（按 07）。
@@ -265,4 +268,4 @@ kubectl get tlsoptions.traefik.io -o yaml | grep -n 'clientAuth\|requireAndVerif
 find .venv/lib -name '*.pth' -newermt '-3 days'; grep -R 'models.litellm.cloud' -n .venv || true
 ```
 
-**覆盖不到的四块（缺口，别假装有）**：Java/GraalVM、.NET、Vyper/Docker/Traefik、Ruby/Perl——无一手条目，只给通用姿势。下一版：SPKI 清单进 08、Java/.NET trust store 检测进 09 附录。
+**仍覆盖不到（缺口，别假装有）**：Java/GraalVM（Oracle CPU 原文 0 命中）、Vyper（6 条 `partial`，无 playbook）；Docker/K8s 只给配置姿势（mTLS fail-open、最小权限），无 CVE 条目。**已收口**：.NET → `11`（S404–S409）、Traefik → `04`（S108）、Ruby/Perl → `09`（S410/S411）。下一版：SPKI 清单进 08、Java/.NET trust store 检测进 09 附录。

@@ -219,9 +219,23 @@ for i in 1 2 3; do node -e 'const c=require("crypto");console.log(c.randomUUID()
 ## 回退
 
 ```bash
-# 保留旧镜像 tag / digest 与旧 .nvmrc，回退即 git revert + 重新 pull 旧 tag
-git revert <升级 commit>
-nvm install <旧版本> && nvm use <旧版本>
+# 0) 升级前先落基线（回退点是数字，不是记忆；三项都进变更单）
+#    先 export 两个变量：CHG=变更单号，CURRENT_IMAGE=当前运行镜像（如 node:24.22.1-bookworm-slim）
+: "${CHG:?export CHG=变更单号}" "${CURRENT_IMAGE:?export CURRENT_IMAGE=当前运行镜像}"
+PRE_NODE=$(node -v | tr -d v)
+PRE_COMMIT=$(git rev-parse HEAD)
+PRE_IMAGE=$(docker inspect -f '{{index .RepoDigests 0}}' "$CURRENT_IMAGE")
+mkdir -p "/secure/change/$CHG"
+printf '%s\n%s\n%s\n' "$PRE_NODE" "$PRE_COMMIT" "$PRE_IMAGE" | tee "/secure/change/$CHG/pre-node.txt"
+
+# 1) 回退仓库改动（已推送的升级提交用 revert，未推送可 reset）
+git revert --no-edit "$PRE_COMMIT"
+
+# 2) 回退运行时到基线版本
+nvm install "$PRE_NODE" && nvm use "$PRE_NODE" && node -v
+
+# 3) 回退镜像（认 digest，不认 tag，防 tag 已漂移）
+docker pull "$(sed -n 3p "/secure/change/$CHG/pre-node.txt")"   # RepoDigests 已是 name@sha256: 完整引用
 
 # 26.x → 24.x 降级注意：26 专属 API（如只有 26 有的实验特性）不可用
 # 24.x ↔ 22.x 降级注意：先跑完整测试，`node:sqlite` 等实验 API 行为有差异（待验证具体清单）

@@ -4,11 +4,11 @@ title: npm 供应链投毒排查与清理（恶意包 / 站外 tarball / 依赖�
 ecosystem: npm
 cve: []
 affects: "tensorlake 0.5.144；@library-wide/library-shell 99.9.1；kmf-vendor-pack 99.0.0 / 100.100.x；sc-announcer 99.9.1"
-fixed: ["无上游修复，只能移除恶意包并回滚锁文件"]
+fixed: ["REMOVE-ONLY（无安全版本：移除 + 轮换安装期凭据 + 回滚锁文件）"]
 severity: "严重（凭据窃取、生命周期脚本任意执行、持久化后门）"
 status: verified
 sources: ["https://osv.dev/vulnerability/MAL-2026-17754", "https://osv.dev/vulnerability/MAL-2026-17744", "https://osv.dev/vulnerability/MAL-2026-18064", "https://osv.dev/vulnerability/MAL-2026-17650"]
-updated: 2026-10-21
+updated: 2026-10-22
 ---
 
 # npm 供应链投毒排查与清理
@@ -55,9 +55,18 @@ npx --yes osv-scanner@latest --lockfile=package-lock.json
 # 5) 持久化痕迹（tensorlake 会写这些）
 ls -la .claude .vscode 2>/dev/null; cat .claude/settings*.json 2>/dev/null | head -40
 ls -la ~/.claude ~/.vscode 2>/dev/null | head -20
+
+# 6) 安装脚本「已执行」的痕迹（判定 P0 还是 P1 就看这一步）
+ls -la ~/.npm/_logs 2>/dev/null | tail -5
+grep -rlE 'tensorlake|library-wide|kmf-vendor-pack|sc-announcer' ~/.npm/_logs 2>/dev/null | head -5
+#    安装后被改动的文件（比锁文件新 = 极可能由生命周期脚本落盘）
+find . -maxdepth 3 -newer package-lock.json -not -path './node_modules/*' -not -path './.git/*' -type f 2>/dev/null | head -30
+stat -c '%y %n' .claude/settings*.json .vscode/* 2>/dev/null
+#    是否留下恶意域外联痕迹（网关/DNS 侧证据比本机日志更可信）
+grep -rhoE 'ltidi\.storage\.googleapis\.com|[0-9]{1,3}(\.[0-9]{1,3}){3}' ~/.npm/_logs 2>/dev/null | sort -u | head -10
 ```
 
-**命中判据**：`npm ls` 出现上表任一包；或锁文件出现 `registry.npmjs.org` 以外的 tarball；或 `.claude` / `.vscode` 出现非本人写入的配置（指向外部命令/域名）。
+**命中判据**：`npm ls` 出现上表任一包；或锁文件出现 `registry.npmjs.org` 以外的 tarball；或 `.claude` / `.vscode` 出现非本人写入的配置（指向外部命令/域名）；**或 `~/.npm/_logs` 里出现上述包名/恶意域 → 生命周期脚本已执行（P0）**。
 
 ## 影响判定
 
@@ -84,13 +93,15 @@ npm uninstall tensorlake @library-wide/library-shell kmf-vendor-pack sc-announce
 rm -rf node_modules
 npm cache clean --force
 
-# 3) 回滚锁文件到「最后可信提交」（比 uninstall 更彻底）
-git checkout <最后可信 commit> -- package-lock.json package.json
-npm ci --ignore-scripts
+# 3) 回滚锁文件到「最后可信提交」（比 uninstall 更彻底；提交号用 §回退 的基线值）
+git checkout "$PRE_COMMIT" -- package-lock.json package.json
+rm -rf node_modules && npm ci --ignore-scripts
 
 # 4) 查这些包是否被写进 npmrc / 全局
 grep -niE 'registry|_authToken' .npmrc ~/.npmrc 2>/dev/null | sed 's/=.*/=<redacted>/'
 ```
+
+> **`fixed` 语义 = `REMOVE-ONLY`**：这四条 MAL 包没有「安全版本」可升，动作就是「移除 + 轮换安装期凭据 + 回滚锁文件」。**任何**把某个版本写进 `fixed` 的做法都是错的。
 
 **凭据轮换（默认已泄露，逐项打勾）**
 
@@ -135,6 +146,14 @@ npm ci --ignore-scripts && echo "clean install ok"
 # 4) 持久化痕迹已清
 ls -la .claude .vscode 2>/dev/null
 
+# 4b) 无 postinstall 落盘物：干净安装前后各拍一次，差异必须为空
+find . -maxdepth 3 -newer package-lock.json -not -path './node_modules/*' -not -path './.git/*' -type f 2>/dev/null | tee /tmp/npm-after.txt
+grep -rlE 'tensorlake|library-wide|kmf-vendor-pack|sc-announcer' ~/.npm/_logs 2>/dev/null | wc -l   # 期望 0（新日志里不再出现）
+
+# 4c) 恶意包彻底消失（含缓存与全局）
+npm ls --all --parseable 2>/dev/null | grep -ciE 'tensorlake|library-wide|kmf-vendor-pack|sc-announcer'   # 期望 0
+ls ~/.npm/_cacache 2>/dev/null >/dev/null && npm cache verify 2>/dev/null | tail -2
+
 # 5) 恶意包库扫描通过
 npx --yes osv-scanner@latest --lockfile=package-lock.json
 ```
@@ -151,8 +170,23 @@ npx --yes osv-scanner@latest --lockfile=package-lock.json
 ## 回退
 
 ```bash
-# 回退 = 恢复锁文件/依赖到投毒前状态；不存在「回退到旧版本仍安全」的路径
-git revert <移除 commit>
+# 0) 改动前先落基线（锁文件 blob 哈希 + 提交号，回退点必须是数字）
+#    CHG=变更单号
+: "${CHG:?export CHG=变更单号}"; mkdir -p "/secure/change/$CHG"
+PRE_COMMIT=$(git rev-parse HEAD)
+git ls-files -s package-lock.json | tee "/secure/change/$CHG/pre-npm.txt"
+echo "$PRE_COMMIT" | tee -a "/secure/change/$CHG/pre-npm.txt"
+
+# 1) 回退 = 回到基线锁文件（已推送用 revert，未推送用 checkout）
+git revert --no-edit "$PRE_COMMIT"
+# 或只恢复锁文件与清单（保留其它改动时）
+git checkout "$PRE_COMMIT" -- package-lock.json package.json
+
+# 2) 回退后安装必须禁生命周期脚本（这是唯一的安全安装姿势）
+npm ci --ignore-scripts
+
+# 3) 回退后立刻复扫，确认没把恶意包装回来
+npm ls --all 2>/dev/null | grep -Ei 'tensorlake|library-wide|kmf-vendor-pack|sc-announcer'; echo "grep_exit=$?"
 ```
 
 **回退后风险**：恢复到含恶意包的锁文件 = 下次 `npm install` 再次执行后门。回退只允许用于「业务依赖无法立即移除」的场景，且必须：`--ignore-scripts` 安装 + 断网构建 + 记录例外并设到期时间。

@@ -1,0 +1,13 @@
+# 一手证据摘录 · Mozilla::CA 20261020 发布说明（2026-10-22 抓取）
+# 来源: https://metacpan.org/release/LWP/Mozilla-CA-20261020/changes
+# 同源 API: https://fastapi.metacpan.org/v1/source/LWP/Mozilla-CA-20261020/Changes
+# release date (metacpan API): 2026-10-20T19:46:15
+# sha256 of archive (metacpan API): 1aeed97a463389e582e085e82de03ae0bffae74d46cf8ee4c511341e5508c21d
+
+Revision history for Mozilla-CA
+
+20261020
+  - Update from Mozilla repository to 2026-10-20
+  - Denylisted certificates:
+    - emSign ECC Root CA - G3
+      sha256: 86a1ecba089c4a8d3bbe2734c612ba341d813e043cf9e8a862cd5c57a36bbe6b

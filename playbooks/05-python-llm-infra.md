@@ -168,9 +168,29 @@ curl -s http://127.0.0.1:8000/v1/models -H "Authorization: Bearer $VLLM_API_KEY"
 ## 回退
 
 ```bash
-# 回退包版本
-pip install "vllm==<旧版本>" "lmcache==<旧版本>"
-docker pull <旧镜像 tag>
+# 0) 升级前先落基线（回退点用值，不用记忆）
+#    CHG=变更单号，CURRENT_IMAGE=容器当前镜像（如 lmcache/lmcache:0.5.5）
+: "${CHG:?export CHG=变更单号}" "${CURRENT_IMAGE:?export CURRENT_IMAGE=容器当前镜像}"
+mkdir -p "/secure/change/$CHG"
+PRE_VLLM=$(python3 -c 'import importlib.metadata as m;print(m.version("vllm"))')
+PRE_LMCACHE=$(python3 -c 'import importlib.metadata as m;print(m.version("lmcache"))')
+PRE_OLLAMA=$(ollama --version 2>/dev/null | tail -1)
+PRE_IMAGE=$(docker inspect -f '{{index .RepoDigests 0}}' "$CURRENT_IMAGE")
+printf '%s\n%s\n%s\n%s\n' "$PRE_VLLM" "$PRE_LMCACHE" "$PRE_OLLAMA" "$PRE_IMAGE" | tee "/secure/change/$CHG/pre-llm.txt"
+# 0b) 上一版 Ollama 安装包先留档（回退要用；不留档就没有回退路径）
+PRE_OLLAMA_PKG="/secure/change/$CHG/ollama-linux-amd64.tar.zst"
+
+# 1) 回退包版本
+pip install "vllm==$PRE_VLLM" "lmcache==$PRE_LMCACHE"
+python3 -c 'import importlib.metadata as m;print(m.version("vllm"), m.version("lmcache"))'
+
+# 2) 回退镜像（认 digest）
+docker pull "$(sed -n 4p "/secure/change/$CHG/pre-llm.txt")"   # RepoDigests 已是 name@sha256: 完整引用
+
+# 2b) Ollama 二进制：升级前必须把上一版 .tar.zst 留档，否则没有回退路径
+#     sudo tar -C /usr/local -xf "$PRE_OLLAMA_PKG"; ollama --version
+
+# 3) 回退前必查：基线是否仍落在受影响区间；是则回退窗口内必须保留端口隔离与非 root
 ```
 
 **回退后风险**：回退即重新暴露未认证 RCE（LMCache 9.8 / Ollama root RCE）。回退期间必须保留网络层隔离与非 root 运行；若回退到 `LMCache <0.5.6` 且端口可达，等同主动开门。

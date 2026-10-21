@@ -157,11 +157,24 @@ systemctl status php8.3-fpm --no-pager | head -5
 ## 回退
 
 ```bash
-# 包路线
-apt-get -y install php8.3-fpm=<旧版本> && systemctl restart php8.3-fpm
+# 0) 升级前先落基线（包版本 / 镜像 digest 都要记）
+#    CHG=变更单号，CURRENT_IMAGE=当前运行镜像
+: "${CHG:?export CHG=变更单号}" "${CURRENT_IMAGE:?export CURRENT_IMAGE=当前运行镜像}"
+mkdir -p "/secure/change/$CHG"
+PRE_FPM=$(dpkg-query -W -f='${Version}' php8.3-fpm 2>/dev/null)
+PRE_DIGEST=$(docker inspect -f '{{index .RepoDigests 0}}' "$CURRENT_IMAGE" 2>/dev/null)
+printf '%s\n%s\n' "$PRE_FPM" "$PRE_DIGEST" | tee "/secure/change/$CHG/pre-php.txt"
 
-# 容器路线
-docker pull <旧镜像 digest> && kubectl set image deploy/<app> <container>=<旧digest>
+# 包路线（回退到基线 deb 版本，再重启 FPM）
+apt-get -y install "php8.3-fpm=$PRE_FPM" && systemctl restart php8.3-fpm
+php-fpm -v 2>/dev/null | head -1
+
+# 容器路线（认 digest，不认 tag）
+docker pull "$PRE_DIGEST"   # RepoDigests 已是 name@sha256: 完整引用
+kubectl set image "deploy/${APP:?export APP=deployment名}" "${CONTAINER:?export CONTAINER=容器名}=$PRE_DIGEST"
+
+# 回退后立刻确认 SAPI 与版本（CLI 与 FPM 分开看）
+php -v | head -1; php -i 2>/dev/null | grep -E '^Server API'
 ```
 
 **回退后风险**：回退即重新暴露 CVE-2026-109618 / 109619——mod_php + 公网 = 未认证 RCE。回退只允许出现在「升级引发业务故障」的短窗口，且必须同时：入口限流/摘流量、把再升级时间点写进变更单；不允许回退即收工。

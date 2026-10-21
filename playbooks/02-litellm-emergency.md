@@ -211,9 +211,27 @@ curl -s -o /dev/null -w 'models=%{http_code}\n' http://127.0.0.1:4000/models -H 
 ## 回退
 
 ```bash
-# 只允许在同一分支内回退，且不得低于该分支修复版
-pip install "litellm[proxy]==<本分支修复版>"
+# 0) 升级前先落基线（回退只能用这个值，不允许"记得好像是 1.9x"）
+#    CHG=变更单号
+: "${CHG:?export CHG=变更单号}"; mkdir -p "/secure/change/$CHG"
+PRE=$(python3 -c 'import importlib.metadata as m;print(m.version("litellm"))')
+echo "$PRE" | tee "/secure/change/$CHG/pre-litellm.txt"
+
+# 1) 同一分支内回退到基线版本
+pip install "litellm[proxy]==$PRE"
+python3 -c 'import importlib.metadata as m;print(m.version("litellm"))'   # 必须等于 $PRE
+
+# 2) 回退前必查：基线本身是否已含本条 CVE 的修复
+#    基线 < 本分支修复版 -> 禁止回退（回退即重开漏洞），只能前滚修业务回归
 ```
+
+**回退前置判定（缺一不许回退）**
+
+| 检查 | 通过条件 |
+|---|---|
+| `$PRE` 是否 ≥ 本分支修复版 | 是 → 可回退；否 → 只能前滚 |
+| 42208 是否曾公网暴露 | 是 → 回退窗口内必须保留 4.1 网络层止血 |
+| 投毒是否命中过 | 命中 → 不适用回退，走重建 |
 
 **回退后风险**：回退到 `1.83.7` 以下 = 重开 42208（未认证 9.8 + KEV）；回退到 `1.88.6` 以下 = 重开 84377（凭据外泄）。新版本若有业务回归，只能回退到**本分支修复版**并保留网络层止血；禁止跨分支回退到更低修复线。
 

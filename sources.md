@@ -58,19 +58,17 @@
 | S315 | cvelistV5 原始记录 `CVE-2026-103663` | 一手（CVE 官方记录） | https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/103xxx/CVE-2026-103663.json | Ollama `>=0.34.2 <0.35.0`；`assignerShortName: CERT-PL`；条件 CVSS 4.0：无 `/usr/lib/ollama` 写权限 **6.9**、有写权限（多数 Docker 默认 root）**9.4**；CISA ADP SSVC `Exploitation: none`（未在野利用） | 2026-10-21 实抓 JSON 存档于 `evidence/cvelistV5-2026-10-21/`，sha256 `9c26b4d9…` |
 | S316 | GitHub Advisory GHSA-69x8-hrgq-fjj8（**无 CVE 别名**） | 一手 | https://github.com/advisories/GHSA-69x8-hrgq-fjj8 | LiteLLM 密码哈希泄露 + pass-the-hash 登录；需认证；`<1.83.0` 修复 `1.83.0` | 侦察交件；02 引用 |
 
-| S900 | SystemTwo 情报交换：PoeLLM 僵尸网络 | 二手 | https://systemtwosecurity.com/intel-exchange/01a11b23-e3be-706c-bc82-7317b948c11d | 声称感染 3,400+ 暴露的 Ollama/vLLM，C2 藏 GitHub 诗 | 传闻；**不入结论** |
-| S901 | LinuxSecurity：vLLM 0.31.0 批量修复 | 二手 | https://linuxsecurity.com/news/security-vulnerabilities/vllm-vulnerability-code-execution-server-crashes | 称 vLLM 0.31.0 批量修 RCE，候选 CVE-2026-114053 / 105754 | 传闻；官方 GHSA 未出，**不入结论** |
-| S902 | CloudSEK 博客：TOPHIT（npm 抢注洪泛 + GPU 挖矿 C2） | 二手 | https://www.cloudsek.com/ar/blog/tophit-npm-typosquat-flood-gpu-cryptojacking-server | 单操作者批量抢注 npm 包 + GPU 挖矿 C2 | 传闻；**不入结论** |
 | S400 | php.net 2026-10-21 安全发布公告 | 一手 | https://www.php.net/archive/2026.php#2026-10-21-5 | CVE-2026-109618 / CVE-2026-109619；修复 `8.5.12` / `8.4.27` / `8.3.36` / `8.2.35`；技术细节与更新说明 | PHP Foundation 引用；php.net 正文待侦察抓取存档 |
 | S401 | PHP Foundation：今日安全发布说明 | 一手 | https://thephp.foundation/blog/2026/10/21/todays-php-security-release-and-how-were-strengthening-php-security/ | mod_php 未认证、默认配置可 RCE；FPM 经应用层路径也确认 RCE；**CVSS 实际 9.2（泄露的 10.0 错误）**；发布时未确认在野利用；Chainguard 07:41 UTC 破 embargo；8.1 无补丁 | 2026-10-21 抓原文 |
 | S402 | GHSA-w8hw-w9fx-j79w（php-src） | 一手 | https://github.com/php/php-src/security/advisories/GHSA-w8hw-w9fx-j79w | CVE-2026-109618：RCE via OOM corruption | 侦察交件 |
-| S403 | GHSA-6wmf-4rv5-p3rp（php-src） | 一手 | https://github.com/php/php-src/security/advisories/GHSA-6wmf-4rv5-p3rp | CVE-2026-109619：RCE via stale state（UAF） | 侦察交件 || S500 | Mozilla 安全团队 oss-security 披露：eMudhra 中间 CA 泄露 | 一手 | https://www.openwall.com/lists/oss-security/2026/10/20/1 | 8 张中间 CA 私钥被攻破（6 TLS + 2 代码签名）；3 个根 SPKI 全清单；eMudhra 10-18 吊销、Sectigo 10-19 吊销；OneCRL/CRLSets 已阻断；CT 暂未见签发记录；「abuse likely in the near future」 | 2026-10-21 抓原文（含 8 张 SPKI 与证书 SHA-256） |
+| S403 | GHSA-6wmf-4rv5-p3rp（php-src） | 一手 | https://github.com/php/php-src/security/advisories/GHSA-6wmf-4rv5-p3rp | CVE-2026-109619：RCE via stale state（UAF） | 侦察交件 |
+| S500 | Mozilla 安全团队 oss-security 披露：eMudhra 中间 CA 泄露 | 一手 | https://www.openwall.com/lists/oss-security/2026/10/20/1 | 8 张中间 CA 私钥被攻破（6 TLS + 2 代码签名）；3 个根 SPKI 全清单；eMudhra 10-18 吊销、Sectigo 10-19 吊销；OneCRL/CRLSets 已阻断；CT 暂未见签发记录；「abuse likely in the near future」 | 2026-10-21 抓原文（含 8 张 SPKI 与证书 SHA-256） |
 | S501 | Mozilla 官方博客：保护 Firefox 用户 | 一手 | https://blog.mozilla.org/security/2026/10/20/protecting-firefox-users-following-the-compromise-of-emudhra-intermediate-certificates/ | 10-17 20:06 UTC 接报；OneCRL 3 小时内（22:59 UTC）全量分发；Firefox `158.0.1`（桌面+Android）、ESR `115.43.1`/`153.5.1`、NSS `3.131.1`；10-21 补 Android `158.0.2`（OneCRL 启动应用问题） | 2026-10-21 抓原文 |
 | S502 | RUSTSEC-2026-0381（webpki-roots） | 一手 | https://raw.githubusercontent.com/rustsec/advisory-db/main/crates/webpki-roots/RUSTSEC-2026-0381.md | patched `>=1.0.10`；`=0.26.11` unaffected；alias **CVE-2026-111943**；references 含社区测试主机 | 2026-10-21 抓 raw |
 | S503 | RUSTSEC-2026-0382（rustls-webpki） | 一手 | https://raw.githubusercontent.com/rustsec/advisory-db/main/crates/rustls-webpki/RUSTSEC-2026-0382.md | patched `>=0.103.16, <0.104.0-alpha.1` 与 `>=0.104.0-alpha.8`；alias **CVE-2026-111943** | 2026-10-21 抓 raw |
 | S504 | RUSTSEC-2026-0383（webpki-root-certs） | 一手 | https://raw.githubusercontent.com/rustsec/advisory-db/main/crates/webpki-root-certs/RUSTSEC-2026-0383.md | patched `>=1.0.10`；`=0.26.11` unaffected；alias **CVE-2026-111943** | 2026-10-21 抓 raw |
-| S505 | 社区测试锚点 `emudhra.we-have-a-problem.com` | 一手（社区工具，非厂商） | https://emudhra.we-have-a-problem.com/ | 被 RUSTSEC 三条 advisory 的 references 引用；用于验证信任库是否仍接受该链 | 只作快速验证，不作唯一验收 || S601 | CISA KEV：SiteGuard Server Edition | 一手 | https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json | CVE-2026-106931；OS 命令注入（root/SYSTEM）；added 2026-10-20，due 2026-10-23 | catalogVersion 2026.10.21 实测 |
-| S601 | CISA KEV：EG Secure Solutions SiteGuard Server Edition | 一手 | https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json | CVE-2026-106931；**OS 命令注入**（KEV 原文只写「may allow arbitrary OS command」，**未写 root/SYSTEM**）；added 2026-10-20，due 2026-10-23 | 2026-10-21 实抓 KEV JSON（catalogVersion 2026.10.21，count 1754） |
+| S505 | 社区测试锚点 `emudhra.we-have-a-problem.com` | 一手（社区工具，非厂商） | https://emudhra.we-have-a-problem.com/ | 被 RUSTSEC 三条 advisory 的 references 引用；用于验证信任库是否仍接受该链 | 只作快速验证，不作唯一验收 |
+| S601 | CISA KEV：SiteGuard Server Edition | 一手 | https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json | CVE-2026-106931；OS 命令注入（root/SYSTEM）；added 2026-10-20，due 2026-10-23 | catalogVersion 2026.10.21 实测 |
 | S602 | CISA KEV：Plex Media Server | 一手 | https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json | CVE-2026-96652(SSRF,due 11-03) / CVE-2026-96654(编码 URI scheme,due 10-23) / CVE-2026-96655(SSRF,due 11-03) / CVE-2026-96656(路径控制→RCE,due 10-23)；均 added 2026-10-20 | 实测；**fixed 版本未确认**（社区称 v1.43.2，待核） |
 | S603 | CISA KEV：Siemens Software Center | 一手 | https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json | CVE-2026-110936；不受控搜索路径（DLL 侧载，本地→ACE）；added 2026-10-20，due 2026-11-03 | 实测 |
 | S604 | CISA KEV：PAN-OS（10 月批） | 一手 | https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json | CVE-2026-0322；代码注入（认证攻击者→root）；added 2026-10-14，due 2026-10-17（已过） | 实测 |
@@ -79,6 +77,24 @@
 | S506 | MFSA 2026-111（Firefox 158.0.1） | 一手 | https://www.mozilla.org/en-US/security/advisories/mfsa2026-111/ | CVE-2026-113470；high；OneCRL 阻断列表随发行版下发（防 RemoteSettings 被策略禁用） | 2026-10-21 抓原文 |
 | S507 | Mozilla Bugzilla 2083449（eMudhra 私钥泄露） | 一手 | https://bugzilla.mozilla.org/show_bug.cgi?id=2083449 | 根因：8 把 P384 私钥均为**小于 256 的整数**，可秒级恢复（BSGS/枚举）；Mozilla 独立复现；Sectigo 交叉签证书当时**仍未吊销** | 2026-10-21 抓原文 |
 | S508 | oss-security 披露（Dennis Jackson / Mozilla） | 一手 | https://www.openwall.com/lists/oss-security/2026/10/20/1 | eMudhra 事件全貌：8 中间 CA（6 TLS + 2 代码签名）+ 3 根 + Sectigo 交叉签 SPKI 全哈希；根因 KGC 弱密钥；事件时间线 | 一手原文；SPKI 全表已誊录到 `evidence/spki-emudhra-2026-10-21.md` |
+| S108 | Traefik 官方安全公告 GHSA-rh7m-2m44-x32f（K8s annotation 跨命名空间引用） | 一手 | https://github.com/traefik/traefik/security/advisories/GHSA-rh7m-2m44-x32f | CVE-2026-112778；修 **2.11.46 / 3.6.17 / 3.7.1**；CVSS 4.0 **6.4**（NVD Secondary）；修复引入 `crossProviderNamespaces` | 2026-10-22 收原件；`04` 引用 |
+| S404 | MSRC CVE-2026-88092（Kestrel HTTP/1 请求走私）+ dotnet/aspnetcore GHSA-rv87-ccxw-8ggf | 一手（厂商/GHSA） | https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-88092 | CVE-2026-88092；CWE-444；CVSS 3.1 **9.4**；修 `8.0.32`/`9.0.21`/`10.0.13`/`11.0.0-rc.2` | 2026-10-22 收 GHSA 原件；`11` 引用 |
+| S405 | MSRC CVE-2026-70183（Blazor 授权竞态）+ GHSA-494h-xx7x-5frh | 一手 | https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-70183 | CVE-2026-70183；CWE-362；CVSS 3.1 **7.5**；修同上 | 2026-10-22 收原件；`11` 引用 |
+| S406 | MSRC CVE-2026-70186（Kestrel HTTP/3 DoS）+ GHSA-mf4x-w4gh-4656 | 一手 | https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-70186 | CVE-2026-70186；CWE-833；CVSS 3.1 **7.5**；修同上 | 2026-10-22 收原件；`11` 引用 |
+| S407 | MSRC CVE-2026-96230（Blazor WASM 开发服务器调试页）+ GHSA-qjpx-jqm5-h2c4 | 一手 | https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-96230 | CVE-2026-96230；CWE-79；CVSS 3.1 **8.8**；修同上 | 2026-10-22 收原件；`11` 引用 |
+| S408 | MSRC CVE-2026-96233（DateTime 希伯来数字越界读 DoS）+ GHSA-87vj-4hqv-22p9 | 一手 | https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-96233 | CVE-2026-96233；CWE-787；CVSS 3.1 **7.5**；修同上 | 2026-10-22 收原件；`11` 引用 |
+| S409 | GHSA-w6wh-p4g7-mpj2（Unix 命名互斥/共享内存提权；无 MSRC 页） | 一手（**无 MSRC 页**、NVD 无发布日） | https://github.com/advisories/GHSA-w6wh-p4g7-mpj2 | CVE-2026-96225；CWE-59；CVSS 3.1 **7.8**；修同上 | 2026-10-22 收原件；`11` 引用 |
+| S410 | NVD CVE-2026-105221 + gist 上游 commit/issue（RubyGem 硬编码 `VERIFY_NONE`） | 一手（NVD + 上游 commit） | https://nvd.nist.gov/vuln/detail/CVE-2026-105221 | CVE-2026-105221；CWE-295；CVSS 3.1 **7.4** / 4.0 **9.1**；修 `6.1.0` | 2026-10-22 收原件；`09` 引用 |
+| S411 | NVD CVE-2026-85086（Apache Thrift perl bindings 不安全 TLS 默认） | 一手（NVD；**Apache 原文需 JS，未取到**） | https://nvd.nist.gov/vuln/detail/CVE-2026-85086 | CVE-2026-85086；CWE-295 + CWE-1188；CVSS 4.0 **6.9**；修 `0.25.0` | 2026-10-22 收原件；`09` 引用 |
+
+## 传闻区（二手 / 未确认，**不入结论**）
+
+| 编号 | 来源 | 类型 | URL | 涉及 | 核实状态 |
+|---|---|---|---|---|---|
+| S900 | SystemTwo 情报交换：PoeLLM 僵尸网络 | 二手 | https://systemtwosecurity.com/intel-exchange/01a11b23-e3be-706c-bc82-7317b948c11d | 声称感染 3,400+ 暴露的 Ollama/vLLM，C2 藏 GitHub 诗 | 传闻；**不入结论** |
+| S901 | LinuxSecurity：vLLM 0.31.0 批量修复 | 二手 | https://linuxsecurity.com/news/security-vulnerabilities/vllm-vulnerability-code-execution-server-crashes | 称 vLLM 0.31.0 批量修 RCE，候选 CVE-2026-114053 / 105754 | 传闻；官方 GHSA 未出，**不入结论** |
+| S902 | CloudSEK 博客：TOPHIT（npm 抢注洪泛 + GPU 挖矿 C2） | 二手 | https://www.cloudsek.com/ar/blog/tophit-npm-typosquat-flood-gpu-cryptojacking-server | 单操作者批量抢注 npm 包 + GPU 挖矿 C2 | 传闻；**不入结论** |
+
 ## ID 分配（给 漏洞侦察 交件用）
 
 | 区段 | 用途 |
@@ -110,7 +126,6 @@ S1xx | <来源名称> | 一手 | <URL> | <CVE/组件/版本> | 已核实
 - **GitLab AI Gateway**：S308 厂商一手，**PR:L 需认证**——别写成未认证。
 - 二手：S002、S306，仅用于时间线线索。
 
-
 ## 补充核实数据（2026-10-21 二次交件吸收，按 URL 映射到本表 ID）
 
 | 编号 | 披露日 | CVSS / 备注 |
@@ -133,6 +148,16 @@ S1xx | <来源名称> | 一手 | <URL> | <CVE/组件/版本> | 已核实
 | S206 / S207 tensorlake | 2026-10-08 | Socket + Sonatype 两个研究方一手，互相印证 |
 
 > Node.js 10 条仍**无 CVSS**：官方公告不给、NVD 同日未评分，已由侦察二次复查确认。
+
+## W1 追加来源（2026-10-22，**已并入「已收录」**）
+
+修复策略交件的 9 条已由工坊分配 S 号并入上表，本区不再保留重复行：
+
+- `S108` Traefik（CVE-2026-112778）→ `04`
+- `S404`–`S409` .NET / ASP.NET Core 6 条（CVE-2026-88092 / 70183 / 70186 / 96230 / 96233 / 96225）→ `11`
+- `S410` Ruby gist（CVE-2026-105221）、`S411` Perl Thrift（CVE-2026-85086）→ `09`
+
+证据原件：`evidence/w1-2026-10-22/`（45 份，sha256 见该目录 `evidence-manifest.sha256`）。
 
 ## 待办
 
