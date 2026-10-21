@@ -163,7 +163,7 @@ KEV 收录 = **已被利用**，不是「有补丁待升级」。全部 9 条已
 | CVE-2026-0257 | PAN-OS | **认证绕过**；**5 月批，不是 10 月批** | 05-29 / 06-01（已过） |
 | CVE-2026-104286 | FortiMail | 路径穿越 + NULL 字节，**未认证** | 10-01 / 10-04（已过） |
 
-> **两条纪律**：① KEV **不含 fixed 字段**——本节的 fixed 全部来自厂商 PSIRT 一手（Plex 论坛公告 / FortiGuard FG-IR-26-175 / JVN / Siemens SSA-580366 / PAN-OS security advisories，S416–S421），**不挂 KEV 名下**；Plex `1.43.3.10861` 目前只在 Plex Pass Beta 通道，稳定通道待核。② `CVE-2026-0257`（认证绕过）与 `CVE-2026-0322`（代码注入）是**两个不同 CVE、两个批次**，别合并。
+> **两条纪律**：① KEV **不含 fixed 字段**——本节的 fixed 全部来自厂商 PSIRT 一手（Plex 论坛公告 / FortiGuard FG-IR-26-175 / JVN / Siemens SSA-580366 / PAN-OS security advisories，S416–S421），**不挂 KEV 名下**；`1.43.3.10861` 自 2026-08-04 16:09 全量（#713），早于 KEV 收录。② `CVE-2026-0257`（认证绕过）与 `CVE-2026-0322`（代码注入）是**两个不同 CVE、两个批次**，别合并。
 
 
 > **watchlist（不进主表、不进 `inventory.tsv`）**：`CVE-2026-0300`（PAN-OS 越界写，出 W1 窗口，W2 再采）。

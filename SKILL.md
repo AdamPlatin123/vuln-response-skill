@@ -5,7 +5,7 @@ description: 互联网漏洞情报 → 检测 / 影响判定 / 修复 / 验证 �
 
 # 漏洞响应 Skill
 
-> 包版本：`v0.3.2`（W4 收口 · 快照 2026-10-22）。升级只换 tar + 本版本行，loader 内容不动。
+> 包版本：`v0.3.3`（W5 doc-only · 快照 2026-10-22）。升级只换 tar + 本版本行，loader 内容不动。
 
 ## 何时用（触发条件）
 
@@ -128,7 +128,7 @@ bash bin/seal.sh                               # 生成 sha256 清单
 | 11 | `playbooks/11-dotnet-runtime.md` | .NET / ASP.NET Core 6 条（Kestrel 走私 9.4 领衔） | verified |
 | 12 | `playbooks/12-vyper-source-gate.md` | Vyper 6 条 GHSA：**无已发布修复版本** → 源码闸门（非 ASCII 标识符 / 8 种行分隔符 / `msg.value \|` 折叠 / 导入常量与默认参数名 / `create_from_blueprint` 偏移）；不给升级命令 | verified（闸门≠修复版本） |
 
-> `10` 已转 `verified`（fixed 来自五家厂商 PSIRT，逐分支；Plex 仅 Beta 通道，稳定通道待核）。`playbooks/_draft/` 现为空，包内不再有草稿区。
+> `10` 已转 `verified`（fixed 来自五家厂商 PSIRT，逐分支；Plex `1.43.3.10861` 2026-08-04 起全量（#713））。`playbooks/_draft/` 现为空，包内不再有草稿区。
 
 ### 3. 升级流程（换新快照）
 
