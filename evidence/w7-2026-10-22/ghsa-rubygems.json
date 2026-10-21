@@ -1,0 +1,613 @@
+[
+  {
+    "ghsa_id": "GHSA-6wmf-3r64-vcwv",
+    "cve_id": "CVE-2026-61845",
+    "url": "https://api.github.com/advisories/GHSA-6wmf-3r64-vcwv",
+    "html_url": "https://github.com/advisories/GHSA-6wmf-3r64-vcwv",
+    "summary": "Crass : Large numeric exponents cause CPU and memory denial of service",
+    "description": "### Impact\n\nCrass converts CSS scientific notation number values with unbounded exponentiation before it clamps the result to `Float::MAX`. Applications that use Crass to parse attacker-controlled CSS strings can be forced to spend disproportionate CPU and memory parsing a tiny input, possibly resulting in a crash.\n\n### Patches\n\nThis is fixed in Crass 1.0.7.\n\n### Related\n\n- https://github.com/rubysec/ruby-advisory-db/blob/master/gems/crass/GHSA-6wmf-3r64-vcwv.yml",
+    "type": "reviewed",
+    "severity": "high",
+    "repository_advisory_url": "https://api.github.com/repos/rgrove/crass/security-advisories/GHSA-6wmf-3r64-vcwv",
+    "source_code_location": "https://github.com/rgrove/crass",
+    "identifiers": [
+      {
+        "value": "GHSA-6wmf-3r64-vcwv",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-61845",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/rgrove/crass/security/advisories/GHSA-6wmf-3r64-vcwv",
+      "https://github.com/rgrove/crass/releases/tag/v1.0.7",
+      "https://github.com/rubysec/ruby-advisory-db/blob/master/gems/crass/GHSA-6wmf-3r64-vcwv.yml",
+      "https://rubygems.org/gems/crass/versions/1.0.7",
+      "https://github.com/advisories/GHSA-6wmf-3r64-vcwv"
+    ],
+    "published_at": "2026-10-20T14:32:39Z",
+    "updated_at": "2026-10-20T14:32:40Z",
+    "github_reviewed_at": "2026-10-20T14:32:39Z",
+    "nvd_published_at": null,
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "rubygems",
+          "name": "crass"
+        },
+        "vulnerable_version_range": "< 1.0.7",
+        "first_patched_version": "1.0.7",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": null,
+        "score": 0.0
+      },
+      "cvss_v4": {
+        "vector_string": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:H",
+        "score": 8.9
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-674",
+        "name": "Uncontrolled Recursion"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "hourianto",
+          "id": 175479716,
+          "node_id": "U_kgDOCnWbpA",
+          "avatar_url": "https://avatars.githubusercontent.com/u/175479716?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/hourianto",
+          "html_url": "https://github.com/hourianto",
+          "followers_url": "https://api.github.com/users/hourianto/followers",
+          "following_url": "https://api.github.com/users/hourianto/following{/other_user}",
+          "gists_url": "https://api.github.com/users/hourianto/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/hourianto/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/hourianto/subscriptions",
+          "organizations_url": "https://api.github.com/users/hourianto/orgs",
+          "repos_url": "https://api.github.com/users/hourianto/repos",
+          "events_url": "https://api.github.com/users/hourianto/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/hourianto/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      },
+      {
+        "user": {
+          "login": "rgrove",
+          "id": 1465,
+          "node_id": "MDQ6VXNlcjE0NjU=",
+          "avatar_url": "https://avatars.githubusercontent.com/u/1465?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/rgrove",
+          "html_url": "https://github.com/rgrove",
+          "followers_url": "https://api.github.com/users/rgrove/followers",
+          "following_url": "https://api.github.com/users/rgrove/following{/other_user}",
+          "gists_url": "https://api.github.com/users/rgrove/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/rgrove/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/rgrove/subscriptions",
+          "organizations_url": "https://api.github.com/users/rgrove/orgs",
+          "repos_url": "https://api.github.com/users/rgrove/repos",
+          "events_url": "https://api.github.com/users/rgrove/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/rgrove/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "remediation_developer"
+      }
+    ],
+    "comments": 1,
+    "cvss": {
+      "vector_string": null,
+      "score": null
+    }
+  },
+  {
+    "ghsa_id": "GHSA-c6rp-p8xm-4q9f",
+    "cve_id": "CVE-2026-107399",
+    "url": "https://api.github.com/advisories/GHSA-c6rp-p8xm-4q9f",
+    "html_url": "https://github.com/advisories/GHSA-c6rp-p8xm-4q9f",
+    "summary": "Mechanize sends credential headers to another origin after a meta refresh",
+    "description": "## Summary\n\n`mechanize` applied no trust boundary to a `meta` refresh, so credentials set through `Mechanize#request_headers=` followed a refresh that pointed at another origin.\n\n## Details\n\n`Mechanize::HTTP::Agent#response_follow_meta_refresh` fetched the refresh target with no notion of a crossed origin, so `@request_headers` were re-applied in full. An attacker who could place a `meta` refresh in a page the agent fetched — through stored content, an open redirect, or control of any page in the crawl — collected the same credentials as through an HTTP redirect, on a code path that had none of the redirect path's protections.\n\nThe refresh fetch passes an empty per-request headers hash, so only headers set through `Mechanize#request_headers=` were exposed.\n\nThis requires `Mechanize#follow_meta_refresh = true`. It is `false` by default, so an agent in its default configuration is not affected. Crawlers commonly enable it.\n\n## Impact\n\nAn attacker who can place a `meta` refresh in any page the agent fetches captures bearer tokens and session cookies set through `request_headers=`. Disclosure only; no integrity or availability impact.\n\n## Patches\n\nFixed in `mechanize` v2.14.1. A `meta` refresh that points at another origin is now subject to the same rule as an HTTP redirect: credentials and cookies are withheld from the request that follows it.\n\n## Workarounds\n\nLeave `Mechanize#follow_meta_refresh` at its default of `false`, or avoid `request_headers=` for credentials when it is enabled.",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": "https://api.github.com/repos/sparklemotion/mechanize/security-advisories/GHSA-c6rp-p8xm-4q9f",
+    "source_code_location": "https://github.com/sparklemotion/mechanize",
+    "identifiers": [
+      {
+        "value": "GHSA-c6rp-p8xm-4q9f",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-107399",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/sparklemotion/mechanize/security/advisories/GHSA-c6rp-p8xm-4q9f",
+      "https://github.com/sparklemotion/mechanize/pull/676",
+      "https://github.com/sparklemotion/mechanize/commit/02a1235842d6eda8d4a5a3d8f13aba2cecf52e4f",
+      "https://github.com/sparklemotion/mechanize/commit/84c74df87d15f5d119df268ba6aa79bc1e16a2c3",
+      "https://github.com/sparklemotion/mechanize/releases/tag/v2.14.1",
+      "https://github.com/advisories/GHSA-c6rp-p8xm-4q9f"
+    ],
+    "published_at": "2026-10-08T22:09:03Z",
+    "updated_at": "2026-10-08T22:09:04Z",
+    "github_reviewed_at": "2026-10-08T22:09:03Z",
+    "nvd_published_at": null,
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "rubygems",
+          "name": "mechanize"
+        },
+        "vulnerable_version_range": "< 2.14.1",
+        "first_patched_version": "2.14.1",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:N/A:N",
+        "score": 6.8
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-200",
+        "name": "Exposure of Sensitive Information to an Unauthorized Actor"
+      },
+      {
+        "cwe_id": "CWE-522",
+        "name": "Insufficiently Protected Credentials"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "flavorjones",
+          "id": 8207,
+          "node_id": "MDQ6VXNlcjgyMDc=",
+          "avatar_url": "https://avatars.githubusercontent.com/u/8207?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/flavorjones",
+          "html_url": "https://github.com/flavorjones",
+          "followers_url": "https://api.github.com/users/flavorjones/followers",
+          "following_url": "https://api.github.com/users/flavorjones/following{/other_user}",
+          "gists_url": "https://api.github.com/users/flavorjones/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/flavorjones/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/flavorjones/subscriptions",
+          "organizations_url": "https://api.github.com/users/flavorjones/orgs",
+          "repos_url": "https://api.github.com/users/flavorjones/repos",
+          "events_url": "https://api.github.com/users/flavorjones/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/flavorjones/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      }
+    ],
+    "comments": 1,
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:N/A:N",
+      "score": 6.8
+    },
+    "epss": {
+      "percentage": 0.00362,
+      "percentile": 0.28522
+    }
+  },
+  {
+    "ghsa_id": "GHSA-2mwr-xjcg-37j7",
+    "cve_id": "CVE-2026-107715",
+    "url": "https://api.github.com/advisories/GHSA-2mwr-xjcg-37j7",
+    "html_url": "https://github.com/advisories/GHSA-2mwr-xjcg-37j7",
+    "summary": "Mechanize sends credential headers to another host after an HTTP redirect",
+    "description": "## Summary\n\n`mechanize` leaked credentials to the redirect target when an HTTP redirect crossed to another host. Credentials set through `Mechanize#request_headers=` leaked even when they were `Authorization`.\n\n## Details\n\nTwo defects, both in `lib/mechanize/http/agent.rb`.\n\n**1. `Mechanize#request_headers=` bypassed the redirect strip entirely.** `#request_add_headers` copied `@request_headers` onto every request unconditionally, with no host check, including the request issued after a redirect. The strip in `#response_redirect` mutated only the per-request headers hash and never touched agent state. Because `request_headers=` is the documented way to set a default credential for every request, the header the code explicitly protected — `Authorization` — was the one most likely to leak.\n\n**2. The strip list omitted `Proxy-Authorization` and `Cookie2`.** Only `CREDENTIAL_HEADERS = ['Authorization']` and `COOKIE_HEADERS = ['Cookie']` were removed from the per-request headers hash on a cross-host redirect.\n\nCookies held in `Mechanize#cookie_jar` and credentials held in `Mechanize::HTTP::AuthStore` are **not** affected. Both are looked up per-URI, so they never follow a redirect to a foreign host. The exposure was limited to headers the caller set by hand.\n\n## PoC\n\n```ruby\nagent = Mechanize.new\nagent.request_headers = { 'Authorization' => 'Bearer secret' }\nagent.get('https://example.test/redirects-to-attacker')\n# the request to the attacker's host carries \"Authorization: Bearer secret\"\n```\n\n## Impact\n\nAn attacker who controls a redirect target — through an open redirect on the site being fetched, an attacker-supplied fetch URL, DNS rebinding, or MITM — captures bearer tokens and session cookies from any `mechanize` agent that sets credentials through `request_headers=` or the per-request `headers` argument. Disclosure only; no integrity or availability impact.\n\n## Patches\n\nFixed in `mechanize` v2.14.1.\n\n- Credentials and cookies are withheld from a request that follows a redirect across an origin, from **both** header sources: the per-request `headers` argument and `Mechanize#request_headers=`.\n- `CREDENTIAL_HEADERS` gains `Proxy-Authorization`; `COOKIE_HEADERS` gains `Cookie2`.\n\n`Proxy-Authorization` is withheld here although curl does not withhold it, because `Net::HTTP` tunnels `https:` requests with `CONNECT`, so a caller-supplied `Proxy-Authorization` travels inside the tunnel to the origin server rather than to the proxy.\n\nHeaders set through `Mechanize#request_headers=` no longer reach a redirect target on another origin when they are credentials. Callers that relied on the previous behavior will see those headers withheld.\n\n### What this fix does not cover\n\nOnly the headers in `CREDENTIAL_HEADERS` and `COOKIE_HEADERS` are withheld. A caller-supplied header that carries a credential under some other name — `X-API-Key`, `X-Vault-Token`, or any bespoke token header — still follows a redirect to another origin, matching the behavior of curl's `CURLOPT_HTTPHEADER`. If you set such a header, do not enable redirect following for requests that carry it, or scope it to a single request whose destination you control.\n\n## Workarounds\n\nSet `Mechanize#redirect_ok = false` and handle redirects explicitly, or avoid `request_headers=` for credentials and pass them per-request only to hosts you intend to authenticate to.\n\n## Credit\n\nReported by @SnailSploit.",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": "https://api.github.com/repos/sparklemotion/mechanize/security-advisories/GHSA-2mwr-xjcg-37j7",
+    "source_code_location": "https://github.com/sparklemotion/mechanize",
+    "identifiers": [
+      {
+        "value": "GHSA-2mwr-xjcg-37j7",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-107715",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/sparklemotion/mechanize/security/advisories/GHSA-2mwr-xjcg-37j7",
+      "https://github.com/sparklemotion/mechanize/pull/676",
+      "https://github.com/sparklemotion/mechanize/commit/02a1235842d6eda8d4a5a3d8f13aba2cecf52e4f",
+      "https://github.com/sparklemotion/mechanize/commit/94e0902867296be804f36eccbb47acf7d5018745",
+      "https://github.com/sparklemotion/mechanize/commit/ac49abf2869297d83c3b11bbfb8b18e63b588c95",
+      "https://github.com/sparklemotion/mechanize/releases/tag/v2.14.1",
+      "https://github.com/advisories/GHSA-2mwr-xjcg-37j7"
+    ],
+    "published_at": "2026-10-08T22:09:00Z",
+    "updated_at": "2026-10-08T22:09:01Z",
+    "github_reviewed_at": "2026-10-08T22:09:00Z",
+    "nvd_published_at": null,
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "rubygems",
+          "name": "mechanize"
+        },
+        "vulnerable_version_range": "< 2.14.1",
+        "first_patched_version": "2.14.1",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:N/A:N",
+        "score": 6.8
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-200",
+        "name": "Exposure of Sensitive Information to an Unauthorized Actor"
+      },
+      {
+        "cwe_id": "CWE-522",
+        "name": "Insufficiently Protected Credentials"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "SnailSploit",
+          "id": 95986478,
+          "node_id": "U_kgDOBbijLg",
+          "avatar_url": "https://avatars.githubusercontent.com/u/95986478?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/SnailSploit",
+          "html_url": "https://github.com/SnailSploit",
+          "followers_url": "https://api.github.com/users/SnailSploit/followers",
+          "following_url": "https://api.github.com/users/SnailSploit/following{/other_user}",
+          "gists_url": "https://api.github.com/users/SnailSploit/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/SnailSploit/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/SnailSploit/subscriptions",
+          "organizations_url": "https://api.github.com/users/SnailSploit/orgs",
+          "repos_url": "https://api.github.com/users/SnailSploit/repos",
+          "events_url": "https://api.github.com/users/SnailSploit/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/SnailSploit/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      }
+    ],
+    "comments": 3,
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:N/A:N",
+      "score": 6.8
+    },
+    "epss": {
+      "percentage": 0.00395,
+      "percentile": 0.3159
+    }
+  },
+  {
+    "ghsa_id": "GHSA-mwm8-39rw-8826",
+    "cve_id": null,
+    "url": "https://api.github.com/advisories/GHSA-mwm8-39rw-8826",
+    "html_url": "https://github.com/advisories/GHSA-mwm8-39rw-8826",
+    "summary": "sqlite3-ruby: Use-After-Free in SQLite Aggregate Arguments in Heap-Allocated Argument Array",
+    "description": "## Summary\n\nUsing `Database#create_aggregate`, `#create_aggregate_handler`, or `Database#define_aggregator` to define an aggregate function that takes two or more arguments, and then evaluating it over TEXT or BLOB column values, can free the Ruby objects holding those arguments while a later argument is still being converted, during ordinary garbage collection. The aggregate's `step` method then receives an incorrect object, or the process crashes with a segmentation fault.\n\n## Mitigation\n\nUpgrade to sqlite3 gem v2.9.6 or later.\n\nThere is no reliable workaround. If you cannot upgrade, avoid defining aggregate functions that take two or more arguments. Restricting column value sizes is not a mitigation: smaller values make the defect fire less often but do not prevent it.\n\n## Severity\n\nThe sqlite3-ruby maintainers assess this as Medium severity (CVSS 4.0 score 6.3). It is reached through ordinary garbage collection without any unusual code structuring: an application is exposed whenever it evaluates a multi-argument aggregate over TEXT or BLOB values whose size an attacker can influence. The demonstrated impact is an incorrect value passed to the aggregate's `step` method, or a process crash; no controlled memory write or general denial-of-service exploit has been demonstrated.\n\n## Credits\n\nReported by Jeremy Daer ([@jeremy](https://github.com/jeremy)).",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": "https://api.github.com/repos/sparklemotion/sqlite3-ruby/security-advisories/GHSA-mwm8-39rw-8826",
+    "source_code_location": "https://github.com/sparklemotion/sqlite3-ruby",
+    "identifiers": [
+      {
+        "value": "GHSA-mwm8-39rw-8826",
+        "type": "GHSA"
+      }
+    ],
+    "references": [
+      "https://github.com/sparklemotion/sqlite3-ruby/security/advisories/GHSA-mwm8-39rw-8826",
+      "https://github.com/sparklemotion/sqlite3-ruby/pull/733",
+      "https://github.com/sparklemotion/sqlite3-ruby/commit/cc5ac0cdf05af8148f4363410da0ba32508d9c97",
+      "https://github.com/sparklemotion/sqlite3-ruby/releases/tag/v2.9.6",
+      "https://github.com/advisories/GHSA-mwm8-39rw-8826"
+    ],
+    "published_at": "2026-10-02T23:11:51Z",
+    "updated_at": "2026-10-02T23:11:52Z",
+    "github_reviewed_at": "2026-10-02T23:11:51Z",
+    "nvd_published_at": null,
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "rubygems",
+          "name": "sqlite3"
+        },
+        "vulnerable_version_range": ">= 1.4.0, <= 2.9.5",
+        "first_patched_version": "2.9.6",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": null,
+        "score": 0.0
+      },
+      "cvss_v4": {
+        "vector_string": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:L/VI:L/VA:L/SC:N/SI:N/SA:N",
+        "score": 6.3
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-416",
+        "name": "Use After Free"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "jeremy",
+          "id": 199,
+          "node_id": "MDQ6VXNlcjE5OQ==",
+          "avatar_url": "https://avatars.githubusercontent.com/u/199?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/jeremy",
+          "html_url": "https://github.com/jeremy",
+          "followers_url": "https://api.github.com/users/jeremy/followers",
+          "following_url": "https://api.github.com/users/jeremy/following{/other_user}",
+          "gists_url": "https://api.github.com/users/jeremy/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/jeremy/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/jeremy/subscriptions",
+          "organizations_url": "https://api.github.com/users/jeremy/orgs",
+          "repos_url": "https://api.github.com/users/jeremy/repos",
+          "events_url": "https://api.github.com/users/jeremy/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/jeremy/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      }
+    ],
+    "comments": 4,
+    "cvss": {
+      "vector_string": null,
+      "score": null
+    }
+  },
+  {
+    "ghsa_id": "GHSA-jjq7-m736-w977",
+    "cve_id": "CVE-2026-77602",
+    "url": "https://api.github.com/advisories/GHSA-jjq7-m736-w977",
+    "html_url": "https://github.com/advisories/GHSA-jjq7-m736-w977",
+    "summary": "OpenC3 COSMOS: Authenticated remote code execution via the user-writable config overlay (table definitions, cmd/tlm definitions, and script suites)",
+    "description": "### Summary\n\nCOSMOS reads configuration from a user-writable overlay (`targets_modified/`) before the read-only plugin-installed `targets/` tree, and the config subsystem executes code on those files: `ConfigParser` renders every file as ERB by default, a `GENERIC_READ_CONVERSION` / `GENERIC_WRITE_CONVERSION` block is evaluated as code by `GenericConversion` (Ruby and Python), and the Script Runner suite analysis `require`s a procedure file. An authenticated user can write into `targets_modified/` below the admin tier (the storage-upload endpoint exempts that area from the admin gate, and the screen-save endpoint stores its body verbatim there), so the same root cause is reachable through several features, each giving arbitrary code execution on a COSMOS server.\n\nThree vulnerable routes were identified, all reachable by an authenticated non-admin user (in the open-source edition `authorize` ignores the permission string, so any authenticated user qualifies):\n\n1. **Table definitions** (immediate). `tables#generate|report|load` reads a definition from `targets_modified/` and ERB-renders it and evaluates its `GENERIC_*_CONVERSION` block in the `cmd-tlm-api` container.\n2. **Command/telemetry definitions** (persistent). A file written to `targets_modified/<TARGET>/cmd_tlm/` is overlaid by `System.setup_targets` and processed by `PacketConfig` in the decom/multi microservices: ERB-rendered in the Ruby implementation, and GENERIC-evaluated in both the Ruby and Python implementations (the Python `ConfigParser` does not run ERB). It executes on the next microservice (re)start.\n3. **Script Runner suites** (immediate). A procedure written to `targets_modified/<TARGET>/procedures/` is `require`d by the suite analysis, reachable at the read-only `script_view` tier through `scripts#body` and `running_script#show` (the analysis subprocess is spawned when `OPENC3_SERVICE_PASSWORD` is configured, which it is in the shipped `.env`).\n\n### Details\n\nRoot cause. `TargetFile.body` (Ruby `openc3/lib/openc3/utilities/target_file.rb`, Python `openc3/python/openc3/utilities/target_file.py`) reads `{scope}/targets_modified/{name}` before `{scope}/targets/{name}`. The storage-upload endpoint `storage_controller.rb get_upload_presigned_request` is gated at `system_set` and exempts `targets_modified/` and `tmp/` from its `admin` check (so a write there is not admin-gated); for a target path it additionally calls `authorize_bucket_path`, which in the permission-enforcing edition requires `tlm` on the target, while in the open-source edition `authorize` ignores the permission string entirely. `screens_controller.rb create` (`system_set`) stores its request body verbatim under `targets_modified/<target>/screens/`. So a non-admin can place files in the overlay. The config subsystem then executes them.\n\nSink 1, ERB. `ConfigParser#parse_file` renders the file as ERB before parsing (`run_erb` defaults to true):\n```ruby\n# openc3/lib/openc3/config/config_parser.rb:402\noutput = ERB.new(File.read(filename)...comment_erb(), trim_mode: \"-\").result(...)\n```\nReached for table definitions via `tables_controller.rb` -> `Table.get_definitions` -> `TableConfig.process_file` -> `parse_file`, and for cmd/tlm definitions via `System.setup_targets` (`system.rb`, whose overlay loop copies `targets_modified/<T>/cmd_tlm/*` over the read-only files) -> `PacketConfig#process_file` -> `parse_file`.\n\nSink 2, GENERIC conversion. `PacketConfig`/`TableConfig` build a `GenericConversion` from a `GENERIC_READ_CONVERSION_START .. END` / `GENERIC_WRITE_CONVERSION_START .. END` block, and `GenericConversion#call` evaluates it (independent of ERB):\n```ruby\n# openc3/lib/openc3/conversions/generic_conversion.rb (call)\neval(@code_to_eval)\n# Python openc3/python/openc3/conversions/generic_conversion.py (call): compile()/exec()/eval()\n```\nThe read conversion fires on `tables#report`/`load` and during telemetry decom; the write conversion fires on `tables#generate` and on `restore_defaults`.\n\nSink 3, suite require. The Script Runner suite analysis executes the file:\n```ruby\n# openc3-cosmos-script-runner-api/scripts/run_suite_analysis.rb:24\nrequire ARGV[1]      # runs all top-level code of the supplied file\n```\nreached from `Script.process_suite`, invoked by `scripts#body` and `running_script#show` (both `script_view`) and `scripts#create` (`script_edit`) when the file matches the suite pattern.\n\nPermission tiers. Writing the payload needs `system_set` (screen save, storage upload) or `script_edit` (script create); triggering needs `system` (tables) or `script_view` (suite). These are below the tiers where COSMOS gates code execution elsewhere (plugin install requires `admin`, running a script requires `script_run`).\n\n### PoC\n\nTable definition path, against a standard stack. Benign payload writes `id` to a marker file. This PoC uses the open-source password login; in the permission-enforcing edition substitute a bearer token for a user holding the permissions noted above.\n```bash\nBASE=http://localhost:2900/openc3-api      # adjust to your deployment\nTOKEN=$(curl -s -X POST \"$BASE/auth/verify\" -H 'Content-Type: application/json' -d '{\"password\":\"<your password>\"}')\n\n# 1) Write the payload into targets_modified/ via the screen save endpoint.\ncurl -s -X POST \"$BASE/screen\" -H \"Authorization: $TOKEN\" \\\n  --data-urlencode 'scope=DEFAULT' --data-urlencode 'target=INST' --data-urlencode 'screen=poc' \\\n  --data-urlencode $'text=SCREEN AUTO AUTO 1.0\\n<%= File.write(\"/tmp/erb_rce_poc\", `id`) %>\\nLABEL poc'\n\n# 2) Trigger by pointing a table action at that file.\ncurl -s -X POST \"$BASE/tables/generate\" -H \"Authorization: $TOKEN\" \\\n  --data-urlencode 'scope=DEFAULT' --data-urlencode 'definition=INST/screens/poc.txt'\n```\nThen in the cmd-tlm-api container: `cat /tmp/erb_rce_poc` shows `uid=1001(openc3) ...`. The `tables/generate` request returns HTTP 500 (the screen lines are not valid table keywords); the marker shows the code already ran.\n\nThe same outcome without ERB, using the GENERIC sink, on the same `tables/generate` trigger:\n```\nTABLE \"data\" BIG_ENDIAN KEY_VALUE \"poc\"\n  APPEND_PARAMETER \"item1\" 8 UINT 0 255 0 \"Item\"\n    GENERIC_WRITE_CONVERSION_START\n      `id > /tmp/erb_rce_poc`\n      0\n    GENERIC_WRITE_CONVERSION_END\n```\n\ncmd/tlm path: upload a telemetry definition containing the same ERB or GENERIC block to `targets_modified/<TARGET>/cmd_tlm/<file>.txt` via the storage-upload presigned request (`system_set`), then the code runs in that target's decom microservice on its next restart. Suite path: write a suite-shaped procedure to `targets_modified/<TARGET>/procedures/<x>.rb` and call `scripts#body` on it at `script_view`.\n\nThe ERB table chain was confirmed end to end over HTTP against a booted Rails and puma instance.\n\n### Impact\n\nArbitrary code execution as the `openc3` user in the `cmd-tlm-api` container and the per-target decom microservices and the script-runner. Those processes hold the Redis and bucket credentials and sit on the internal service network, so the executed code acts with that authority over configuration, telemetry, and command data across scopes. The API is served through Traefik, which the shipped compose binds to `127.0.0.1:2900`, so a default single-host install is reachable only from the host; a multi-user deployment exposes the web port, and the `AV:N` rating reflects that standard remote-operator exposure.\n\nAll paths require valid authentication, and the triggering permissions (`system`/`system_set`/`script_view`) are below the `admin`/`script_run`/plugin-install tiers where COSMOS gates code execution. In the open-source edition `authorize` checks only token validity and does not enforce the permission string, so any authenticated user can perform these requests.\n\n### Suggested fix\n\nThe fix is to treat the user-writable overlay as data, never code, and to gate the writers, applied uniformly:\n- Load table and cmd/tlm definitions for code-execution paths from the read-only `targets/` tree only, or parse the `targets_modified` overlay with ERB disabled (`run_erb=false`); dynamically-created packet definitions are structural and never need ERB, so this does not regress that feature.\n- Allow only admin and the server-side dynamic-packet mechanism to write a `cmd_tlm` overlay; reject non-canonical object keys so a positional path check cannot be bypassed by a key the object store normalizes differently.\n- Run the Script Runner suite analysis (which executes the file) only at the `script_run` tier, at every entry point.\n- Mirror the definition-read change in the Python implementation.",
+    "type": "reviewed",
+    "severity": "critical",
+    "repository_advisory_url": "https://api.github.com/repos/OpenC3/cosmos/security-advisories/GHSA-jjq7-m736-w977",
+    "source_code_location": "https://github.com/OpenC3/cosmos",
+    "identifiers": [
+      {
+        "value": "GHSA-jjq7-m736-w977",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-77602",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/OpenC3/cosmos/security/advisories/GHSA-jjq7-m736-w977",
+      "https://github.com/OpenC3/cosmos/pull/3488",
+      "https://github.com/OpenC3/cosmos/commit/71943352a28128ef3e7e894319d97a656b5cd4f2",
+      "https://github.com/OpenC3/cosmos/commit/7a1538a4626f82c0d1540fcaa27ffdcbbd71ff81",
+      "https://github.com/advisories/GHSA-jjq7-m736-w977"
+    ],
+    "published_at": "2026-09-23T18:57:24Z",
+    "updated_at": "2026-09-23T18:57:24Z",
+    "github_reviewed_at": "2026-09-23T18:57:24Z",
+    "nvd_published_at": null,
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "rubygems",
+          "name": "openc3"
+        },
+        "vulnerable_version_range": ">= 5.1.0, <= 7.2.1",
+        "first_patched_version": "7.3.0",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
+        "score": 9.9
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-94",
+        "name": "Improper Control of Generation of Code ('Code Injection')"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "Marnick39",
+          "id": 17315511,
+          "node_id": "MDQ6VXNlcjE3MzE1NTEx",
+          "avatar_url": "https://avatars.githubusercontent.com/u/17315511?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/Marnick39",
+          "html_url": "https://github.com/Marnick39",
+          "followers_url": "https://api.github.com/users/Marnick39/followers",
+          "following_url": "https://api.github.com/users/Marnick39/following{/other_user}",
+          "gists_url": "https://api.github.com/users/Marnick39/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/Marnick39/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/Marnick39/subscriptions",
+          "organizations_url": "https://api.github.com/users/Marnick39/orgs",
+          "repos_url": "https://api.github.com/users/Marnick39/repos",
+          "events_url": "https://api.github.com/users/Marnick39/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/Marnick39/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "finder"
+      }
+    ],
+    "comments": 4,
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
+      "score": 9.9
+    },
+    "epss": {
+      "percentage": 0.00574,
+      "percentile": 0.45551
+    }
+  },
+  {
+    "ghsa_id": "GHSA-vp3w-52v9-q57f",
+    "cve_id": "CVE-2026-77601",
+    "url": "https://api.github.com/advisories/GHSA-vp3w-52v9-q57f",
+    "html_url": "https://github.com/advisories/GHSA-vp3w-52v9-q57f",
+    "summary": "OpenC3 COSMOS: Authenticated OS command injection via the `pypi_url` setting",
+    "description": "## Summary\nAn authenticated user can execute arbitrary operating system commands on the `openc3-cosmos-cmd-tlm-api` service. The `pypi_url` setting is interpolated, unescaped, into a command line that is run through a shell backtick when a plugin is installed. Shell metacharacters in the setting value are executed by `/bin/sh`.\n\n## Details\nThe `pypi_url` value is written through the `set_setting` API method, reachable over the JSON-RPC endpoint `POST /openc3-api/api`. In the open-source edition, `authorize` (`openc3/lib/openc3/utilities/authorization.rb`) verifies only that the session token is valid and returns the anonymous user; the `permission:` argument is not enforced, so any authenticated user can write the setting and install a plugin. In the Enterprise edition these actions require the admin role.\n\nDuring plugin install, `PluginModel.install_phase2` reads the setting and builds the argument string, then runs it through a backtick (`openc3/lib/openc3/models/plugin_model.rb:288`):\n\n```ruby\npypi_url = get_setting('pypi_url', scope: scope)   # attacker-controlled, no validation\npypi_url += '/simple' if pypi_url\npip_args = \"-i #{pypi_url} -r #{requirements_path}\"\noutput = `/openc3/bin/pipinstall #{pip_args}`        # Ruby backtick -> /bin/sh -c\n```\n\n`get_setting` appends `/simple` to the stored value, and a trailing `#` comments out that suffix and the remainder of the argument string. The python install branch runs whenever the installed plugin contains a `requirements.txt` or `pyproject.toml`, which the actor controls because they supply the plugin gem.\n\nThe sibling installer `openc3/lib/openc3/models/python_package_model.rb:95` performs the same `pipinstall` invocation using an argv array through `ProcessManager.spawn`, which does not involve a shell and is not injectable. `plugin_model.rb:288` is the single site that uses a backtick.\n\n## PoC\nConfirmed end-to-end over HTTP against a booted `openc3-cosmos-cmd-tlm-api` (puma) with Redis and bucket storage. Every request is authenticated.\n\n1. Obtain a session token:\n   ```\n   POST /openc3-api/auth/verify    {\"password\":\"<password>\"}\n   ```\n2. Write the setting (JSON-RPC):\n   ```\n   POST /openc3-api/api\n   {\"jsonrpc\":\"2.0\",\"method\":\"set_setting\",\n    \"params\":[\"pypi_url\",\"https://pypi.org ; id > /tmp/A1_PWNED 2>&1 ; #\"],\n    \"keyword_params\":{\"scope\":\"DEFAULT\"},\"id\":1}\n   ```\n3. Upload a plugin gem that contains a `requirements.txt`:\n   ```\n   POST /openc3-api/plugins     (multipart: plugin=@malicious.gem, scope=DEFAULT)\n   ```\n4. Install it:\n   ```\n   POST /openc3-api/plugins/install/<id>    (plugin_hash from step 3, scope=DEFAULT)\n   ```\n\nThe injected command executed inside the install process. Contents of the marker file written by the payload:\n```\nuid=1001(openc3) gid=1001(openc3) groups=1001(openc3)\n```\n\n## Impact\nArbitrary OS command execution as the `openc3` user (uid 1001) inside the cmd-tlm-api container. That process holds the Redis/Valkey password and the bucket (S3) credentials and operates across every scope, so command execution there exposes stored telemetry, commanding, and credentials, and allows tampering with any scope.\n\nIn the Enterprise edition the prerequisite is the admin role; the admin already has plugin-driven code execution by design, so the practical effect there is that a configuration value becomes a shell command rather than a new privilege boundary being crossed. In the open-source edition any authenticated user reaches it.\n\n## Suggested fix\nRun `pipinstall` through an argv array instead of a shell, matching `python_package_model.rb:95`:\n\n```ruby\npip_argv = [\"-i\", pypi_url]\npip_argv += [\"--trusted-host\", URI.parse(pypi_url).host] unless ENV['PIP_ENABLE_TRUSTED_HOST'].nil?\npip_argv += File.exist?(pyproject_path) ? [gem_path] : [\"-r\", requirements_path]\nOpenC3::ProcessManager.instance.spawn([\"/openc3/bin/pipinstall\"] + pip_argv, \"plugin_pip_install\", File.basename(gem_path), Time.now + 3600.0, scope: scope)\n```\n\nOptionally also validate `pypi_url` as an `http(s)` URL when the setting is written.",
+    "type": "reviewed",
+    "severity": "high",
+    "repository_advisory_url": "https://api.github.com/repos/OpenC3/cosmos/security-advisories/GHSA-vp3w-52v9-q57f",
+    "source_code_location": "https://github.com/OpenC3/cosmos",
+    "identifiers": [
+      {
+        "value": "GHSA-vp3w-52v9-q57f",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-77601",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/OpenC3/cosmos/security/advisories/GHSA-vp3w-52v9-q57f",
+      "https://github.com/OpenC3/cosmos/pull/3489",
+      "https://github.com/OpenC3/cosmos/commit/be70d1d836c83c3b084e768e31a399312d4cbe0b",
+      "https://github.com/OpenC3/cosmos/releases/tag/v7.2.1",
+      "https://github.com/advisories/GHSA-vp3w-52v9-q57f"
+    ],
+    "published_at": "2026-09-23T18:51:01Z",
+    "updated_at": "2026-09-23T18:51:02Z",
+    "github_reviewed_at": "2026-09-23T18:51:01Z",
+    "nvd_published_at": null,
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "rubygems",
+          "name": "openc3"
+        },
+        "vulnerable_version_range": ">= 5.12.0, <= 7.2.1",
+        "first_patched_version": "7.3.0",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+        "score": 8.8
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-78",
+        "name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "Marnick39",
+          "id": 17315511,
+          "node_id": "MDQ6VXNlcjE3MzE1NTEx",
+          "avatar_url": "https://avatars.githubusercontent.com/u/17315511?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/Marnick39",
+          "html_url": "https://github.com/Marnick39",
+          "followers_url": "https://api.github.com/users/Marnick39/followers",
+          "following_url": "https://api.github.com/users/Marnick39/following{/other_user}",
+          "gists_url": "https://api.github.com/users/Marnick39/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/Marnick39/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/Marnick39/subscriptions",
+          "organizations_url": "https://api.github.com/users/Marnick39/orgs",
+          "repos_url": "https://api.github.com/users/Marnick39/repos",
+          "events_url": "https://api.github.com/users/Marnick39/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/Marnick39/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "finder"
+      }
+    ],
+    "comments": 5,
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+      "score": 8.8
+    },
+    "epss": {
+      "percentage": 0.00581,
+      "percentile": 0.46516
+    }
+  }
+]

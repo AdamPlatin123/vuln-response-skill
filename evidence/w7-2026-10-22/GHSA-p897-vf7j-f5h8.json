@@ -1,0 +1,77 @@
+{
+  "ghsa_id": "GHSA-p897-vf7j-f5h8",
+  "cve_id": "CVE-2026-12797",
+  "url": "https://api.github.com/advisories/GHSA-p897-vf7j-f5h8",
+  "html_url": "https://github.com/advisories/GHSA-p897-vf7j-f5h8",
+  "summary": "BerriAI litellm has Security Feature Bypass in BannedKeywords and AzureContentSafety Guardrails via call_type Mismatch on Async Endpoints",
+  "description": "A security flaw has been discovered in BerriAI litellm up to 1.82.5. Affected is the function async_pre_call_hook of the file enterprise/enterprise_hooks/banned_keywords.py of the component Completions Interface. The manipulation of the argument prompt results in incorrect authorization. The attack may be performed from remote. The exploit has been released to the public and may be used for attacks. The vendor was contacted early about this disclosure.",
+  "type": "reviewed",
+  "severity": "low",
+  "repository_advisory_url": null,
+  "source_code_location": "https://github.com/BerriAI/litellm",
+  "identifiers": [
+    {
+      "value": "GHSA-p897-vf7j-f5h8",
+      "type": "GHSA"
+    },
+    {
+      "value": "CVE-2026-12797",
+      "type": "CVE"
+    }
+  ],
+  "references": [
+    "https://nvd.nist.gov/vuln/detail/CVE-2026-12797",
+    "https://gist.github.com/YLChen-007/078179224f07cc4e39e4f141a18c817a",
+    "https://vuldb.com/cve/CVE-2026-12797",
+    "https://vuldb.com/submit/811288",
+    "https://vuldb.com/vuln/372559",
+    "https://vuldb.com/vuln/372559/cti",
+    "https://github.com/advisories/GHSA-p897-vf7j-f5h8"
+  ],
+  "published_at": "2026-06-21T12:30:52Z",
+  "updated_at": "2026-09-14T18:11:28Z",
+  "github_reviewed_at": "2026-09-14T18:11:28Z",
+  "nvd_published_at": "2026-06-21T10:16:16Z",
+  "withdrawn_at": null,
+  "vulnerabilities": [
+    {
+      "package": {
+        "ecosystem": "pip",
+        "name": "litellm"
+      },
+      "vulnerable_version_range": "<= 1.82.5",
+      "first_patched_version": null,
+      "vulnerable_functions": [
+
+      ]
+    }
+  ],
+  "cvss_severities": {
+    "cvss_v3": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:L",
+      "score": 6.3
+    },
+    "cvss_v4": {
+      "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:L/VI:L/VA:L/SC:N/SI:N/SA:N/E:P",
+      "score": 2.1
+    }
+  },
+  "cwes": [
+    {
+      "cwe_id": "CWE-285",
+      "name": "Improper Authorization"
+    }
+  ],
+  "credits": [
+
+  ],
+  "comments": 0,
+  "cvss": {
+    "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:L",
+    "score": 6.3
+  },
+  "epss": {
+    "percentage": 0.004,
+    "percentile": 0.32519
+  }
+}

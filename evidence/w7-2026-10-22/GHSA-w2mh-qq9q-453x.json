@@ -1,0 +1,77 @@
+{
+  "ghsa_id": "GHSA-w2mh-qq9q-453x",
+  "cve_id": "CVE-2026-12796",
+  "url": "https://api.github.com/advisories/GHSA-w2mh-qq9q-453x",
+  "html_url": "https://github.com/advisories/GHSA-w2mh-qq9q-453x",
+  "summary": "BerriAI litellm: SSO Login Does Not Invalidate Previous UI Session Tokens",
+  "description": "A vulnerability was identified in BerriAI litellm up to 1.82.2. This impacts the function get_redirect_response_from_openid of the file litellm/proxy/management_endpoints/ui_sso.py of the component SSO Authentication Flow. The manipulation leads to session expiration. The attack is possible to be carried out remotely. The exploit is publicly available and might be used. The vendor was contacted early about this disclosure.",
+  "type": "reviewed",
+  "severity": "low",
+  "repository_advisory_url": null,
+  "source_code_location": "https://github.com/BerriAI/litellm",
+  "identifiers": [
+    {
+      "value": "GHSA-w2mh-qq9q-453x",
+      "type": "GHSA"
+    },
+    {
+      "value": "CVE-2026-12796",
+      "type": "CVE"
+    }
+  ],
+  "references": [
+    "https://nvd.nist.gov/vuln/detail/CVE-2026-12796",
+    "https://gist.github.com/YLChen-007/5fa8af12e1b183674d7ca96d852fb697",
+    "https://vuldb.com/cve/CVE-2026-12796",
+    "https://vuldb.com/submit/811287",
+    "https://vuldb.com/vuln/372558",
+    "https://vuldb.com/vuln/372558/cti",
+    "https://github.com/advisories/GHSA-w2mh-qq9q-453x"
+  ],
+  "published_at": "2026-06-21T12:30:52Z",
+  "updated_at": "2026-09-14T17:19:21Z",
+  "github_reviewed_at": "2026-09-14T17:19:21Z",
+  "nvd_published_at": "2026-06-21T10:16:15Z",
+  "withdrawn_at": null,
+  "vulnerabilities": [
+    {
+      "package": {
+        "ecosystem": "pip",
+        "name": "litellm"
+      },
+      "vulnerable_version_range": "<= 1.82.2",
+      "first_patched_version": null,
+      "vulnerable_functions": [
+
+      ]
+    }
+  ],
+  "cvss_severities": {
+    "cvss_v3": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:L",
+      "score": 6.3
+    },
+    "cvss_v4": {
+      "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:L/VI:L/VA:L/SC:N/SI:N/SA:N/E:P",
+      "score": 2.1
+    }
+  },
+  "cwes": [
+    {
+      "cwe_id": "CWE-613",
+      "name": "Insufficient Session Expiration"
+    }
+  ],
+  "credits": [
+
+  ],
+  "comments": 0,
+  "cvss": {
+    "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:L",
+    "score": 6.3
+  },
+  "epss": {
+    "percentage": 0.0057,
+    "percentile": 0.4551
+  }
+}

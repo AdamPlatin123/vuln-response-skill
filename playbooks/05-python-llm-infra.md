@@ -2,9 +2,10 @@
 id: "05"
 title: Python / LLM 基建漏洞处置（vLLM / LMCache / Ollama / GitLab AI Gateway）
 ecosystem: python-llm
-cve: ["CVE-2026-90553", "CVE-2026-105192", "CVE-2026-103663", "CVE-2026-90970", "CVE-2026-105752"]
-affects: "vLLM <0.28.0（loader RCE）、≤0.25.1；LMCache 0.3.9–0.5.5（含 0.5.6rc）；Ollama >=0.34.2 <0.35.0；GitLab AI Gateway 18.1.6–<19.2.4 / 19.3.0–<19.3.2 / 19.4.0–<19.4.1"
-fixed: ["vLLM 0.28.0", "vLLM 0.30.0", "LMCache 0.5.6", "Ollama 0.35.0", "GitLab 19.2.4", "GitLab 19.3.2", "GitLab 19.4.1"]
+cve: ["CVE-2026-90553", "CVE-2026-105192", "CVE-2026-103663", "CVE-2026-90970", "CVE-2026-105752", "CVE-2026-105753", "CVE-2026-105754", "CVE-2026-105756", "CVE-2026-105758", "CVE-2026-105760", "CVE-2026-105922"]
+aliases: ["GHSA-ph3r-5jfg-f84f", "GHSA-ph72-cqr5-qpp7", "GHSA-2823-qmq8-rwvj", "GHSA-x6mc-67gf-chw4", "GHSA-58v5-2m8f-94pr", "PYSEC-2026-4319"]
+affects: "vLLM <0.28.0（loader RCE）、≤0.25.1、10-15 批：<0.28.0（105753）、<0.30.0（105754/105756）、>=0.24.0 <0.30.0（105758）、>=0.23.0rc2 <0.30.0（105760）、<0.32.0（105922）；LMCache 0.3.9–0.5.5（含 0.5.6rc）；Ollama >=0.34.2 <0.35.0；GitLab AI Gateway 18.1.6–<19.2.4 / 19.3.0–<19.3.2 / 19.4.0–<19.4.1"
+fixed: ["vLLM 0.28.0", "vLLM 0.30.0", "vLLM 0.32.0", "LMCache 0.5.6", "Ollama 0.35.0", "GitLab 19.2.4", "GitLab 19.3.2", "GitLab 19.4.1"]
 severity: "严重（LMCache 9.8 未认证 RCE；GitLab AI Gateway 9.9 需认证 PR:L；Ollama 条件 CVSS 9.4 / 6.9）"
 status: verified
 sources: ["https://github.com/vllm-project/vllm/security/advisories/GHSA-3c86-2m5g-59q7", "https://github.com/LMCache/LMCache/security/advisories/GHSA-w5f2-9q9c-ff4h", "https://cert.pl/en/posts/2026/10/CVE-2026-103663/", "https://github.com/vllm-project/vllm/security/advisories/GHSA-935w-9g4m-p28p"]
@@ -35,6 +36,12 @@ updated: 2026-10-22
 | vLLM | `<0.28.0`（LlavaOnevision2 loader） | `0.28.0` |
 | vLLM | `≤0.25.1`（Harmony 工具续轮丢 `cache_salt`） | `0.30.0` |
 | vLLM | `≤0.31.0`（mamba_mixer2 越界读） | **未确认**；已降为观察项，见文末 |
+| vLLM | `<0.28.0`（多模态 IPC 缓存不同步） | `0.28.0`（CVE-2026-105753） |
+| vLLM | `<0.30.0`（多模态传输信任调用方特征） | `0.30.0`（CVE-2026-105754，原 observe 升 verified） |
+| vLLM | `<0.30.0`（`cache_salt` 弱校验 → 杀 EngineCore） | `0.30.0`（CVE-2026-105756） |
+| vLLM | `>=0.24.0 <0.30.0`（Qwen2/3-VL 视频采样无界） | `0.30.0`（CVE-2026-105758） |
+| vLLM | `>=0.23.0rc2 <0.30.0`（GLMGA 视频采样耗尽） | `0.30.0`（CVE-2026-105760） |
+| vLLM | `<0.32.0`（Penalty Handler DoS） | **`0.32.0`**（CVE-2026-105922，**总修复线**） |
 | LMCache | `0.3.9–0.5.5`（含 `0.5.6rc`） | `0.5.6` |
 | Ollama | `>=0.34.2 <0.35.0`（cvelistV5 `affected` 原文） | `0.35.0`（**CNA = CERT-PL**，CVE 记录 `assignerShortName` 可证；Ollama 自身 release note 静默） |
 | GitLab AI Gateway（Self-Hosted） | `18.1.6–<19.2.4` / `19.3.0–<19.3.2` / `19.4.0–<19.4.1` | `19.2.4` / `19.3.2` / `19.4.1`（GitLab 官方补丁公告，一手） |
@@ -108,7 +115,7 @@ curl -s -m 5 http://"$GITLAB_HOST"/help | grep -oE 'GitLab (Community|Enterprise
 OLLAMA_HOST=127.0.0.1:11434 ollama serve
 
 # 2) 升版本（在运行进程的同一环境里执行）
-pip install -U "vllm>=0.30.0"          # 覆盖 0.28.0 / 0.30.0 两条修复线
+pip install -U "vllm>=0.32.0"          # 总修复线（覆盖 0.28.0 / 0.30.0 / 0.32.0 三条线）
 pip install -U "lmcache==0.5.6"
 ollama --version                       # 目标 0.35.0；见下方二进制升级
 
@@ -171,7 +178,7 @@ curl -s http://127.0.0.1:8000/v1/models -H "Authorization: Bearer $VLLM_API_KEY"
 
 **通过标准**
 
-1. vLLM ≥ `0.30.0`、LMCache = `0.5.6`、Ollama = `0.35.0`（或已确认的修复版本）；
+1. vLLM ≥ `0.32.0`、LMCache = `0.5.6`、Ollama = `0.35.0`（或已确认的修复版本）；`pip show vllm` 取 Version 后与区间表逐条对，不只看 ≥ 号；
 2. 8000 / 11434 / ZMQ 端口从公网位置不可达；
 3. 测试实例上路径穿越探针不再生成文件；
 4. 容器 `User` 非空（非 root）；
@@ -193,6 +200,8 @@ printf '%s\n%s\n%s\n%s\n' "$PRE_VLLM" "$PRE_LMCACHE" "$PRE_OLLAMA" "$PRE_IMAGE" 
 # 0b) 上一版 Ollama 安装包先留档（回退要用；不留档就没有回退路径）
 PRE_OLLAMA_PKG="/secure/change/$CHG/ollama-linux-amd64.tar.zst"
 
+# 0c) 0.28 → 0.32 跨 4 个小版本：升级前留旧 wheel / 镜像 tag（上面 PRE_* 已落基线）；
+#     回退 = pip install vllm==$PRE_VLLM + 重启推理进程；回退后立即恢复入口围堵。
 # 1) 回退包版本
 pip install "vllm==$PRE_VLLM" "lmcache==$PRE_LMCACHE"
 python3 -c 'import importlib.metadata as m;print(m.version("vllm"), m.version("lmcache"))'

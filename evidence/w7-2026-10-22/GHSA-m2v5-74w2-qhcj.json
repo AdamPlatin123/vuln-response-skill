@@ -1,0 +1,77 @@
+{
+  "ghsa_id": "GHSA-m2v5-74w2-qhcj",
+  "cve_id": "CVE-2026-12799",
+  "url": "https://api.github.com/advisories/GHSA-m2v5-74w2-qhcj",
+  "html_url": "https://github.com/advisories/GHSA-m2v5-74w2-qhcj",
+  "summary": "BerriAI litellm: UI User Enumeration leads to System-Wide Information Disclosure",
+  "description": "A security vulnerability has been detected in BerriAI litellm up to 1.82.2. Affected by this issue is the function ui_view_users of the file litellm/proxy/management_endpoints/internal_user_endpoints.py of the component Incomplete Fix CVE-2025-0628. Such manipulation leads to improper authorization. It is possible to launch the attack remotely. The exploit has been disclosed publicly and may be used. The vendor was contacted early about this disclosure.",
+  "type": "reviewed",
+  "severity": "low",
+  "repository_advisory_url": null,
+  "source_code_location": "https://github.com/BerriAI/litellm",
+  "identifiers": [
+    {
+      "value": "GHSA-m2v5-74w2-qhcj",
+      "type": "GHSA"
+    },
+    {
+      "value": "CVE-2026-12799",
+      "type": "CVE"
+    }
+  ],
+  "references": [
+    "https://nvd.nist.gov/vuln/detail/CVE-2026-12799",
+    "https://gist.github.com/YLChen-007/3ace22e33e468d0166fe609c9fdf4184",
+    "https://vuldb.com/cve/CVE-2026-12799",
+    "https://vuldb.com/submit/811291",
+    "https://vuldb.com/vuln/372561",
+    "https://vuldb.com/vuln/372561/cti",
+    "https://github.com/advisories/GHSA-m2v5-74w2-qhcj"
+  ],
+  "published_at": "2026-06-21T12:30:52Z",
+  "updated_at": "2026-09-14T18:11:51Z",
+  "github_reviewed_at": "2026-09-14T18:11:50Z",
+  "nvd_published_at": "2026-06-21T10:16:17Z",
+  "withdrawn_at": null,
+  "vulnerabilities": [
+    {
+      "package": {
+        "ecosystem": "pip",
+        "name": "litellm"
+      },
+      "vulnerable_version_range": "<= 1.82.2",
+      "first_patched_version": null,
+      "vulnerable_functions": [
+
+      ]
+    }
+  ],
+  "cvss_severities": {
+    "cvss_v3": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N",
+      "score": 4.3
+    },
+    "cvss_v4": {
+      "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N/E:P",
+      "score": 2.1
+    }
+  },
+  "cwes": [
+    {
+      "cwe_id": "CWE-266",
+      "name": "Incorrect Privilege Assignment"
+    }
+  ],
+  "credits": [
+
+  ],
+  "comments": 0,
+  "cvss": {
+    "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N",
+    "score": 4.3
+  },
+  "epss": {
+    "percentage": 0.00426,
+    "percentile": 0.35536
+  }
+}

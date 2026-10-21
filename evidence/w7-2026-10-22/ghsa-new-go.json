@@ -1,0 +1,229 @@
+[
+  {
+    "ghsa_id": "GHSA-46r4-q7wv-32fc",
+    "cve_id": "CVE-2026-113727",
+    "url": "https://api.github.com/advisories/GHSA-46r4-q7wv-32fc",
+    "html_url": "https://github.com/advisories/GHSA-46r4-q7wv-32fc",
+    "summary": "OpenChoreo: Authorization bypass on WorkflowRun update allows cross-project takeover of workflow runs",
+    "description": "## Summary\n\nThe OpenChoreo API server authorized `PUT .../workflowruns/{runName}` against ownership metadata taken from the request body, while the object it actually mutated was selected by the URL path. Nothing forced the two to agree.\n\nA `WorkflowRun`'s membership in a project and component is carried entirely by its `openchoreo.dev/project` and `openchoreo.dev/component` labels. Because the `workflowrun:update` check read those labels from the submitted object rather than the stored one, a caller holding `workflowrun:update` on one component could name a run belonging to a different project or component in the URL, supply labels for the component they legitimately control, pass the check, and have the unrelated run rewritten with their own ownership labels.\n\nThe namespace is taken from the URL and feeds both the authorization check and the Kubernetes read, so it cannot diverge. This is cross-project and cross-component escalation inside a single namespace, not a cross-tenant issue.\n\n## Impact\n\nRewriting the ownership labels transfers authority over the run. Every other WorkflowRun check (view, logs, events, status, delete, list) derives its scope from the stored labels, so once the write lands the policy engine legitimately grants the attacker access to an object they never had rights to. They can then:\n\n- Read the victim's build logs. These stream raw pod logs from the workflow plane and routinely carry source paths, registry destinations, and credentials a build step echoed by accident.\n- Read the run's Kubernetes events.\n- Delete the run.\n\nSo the primary impact is confidentiality and availability, not only integrity. On the integrity side, `spec.workflow.parameters` can be overwritten on a pending run, and manipulating the two ownership labels can either wedge the run in a permanent `ComponentValidationFailed` condition or downgrade it to a standalone run that skips component validation.\n\nExploitation requires an authenticated caller with an `AuthzRoleBinding` or `ClusterAuthzRoleBinding` granting `workflowrun:update` at project or component scope in the victim's namespace, plus knowledge of the target run's name. An anonymous caller cannot reach this.\n\n## Patches\n\nThe authorization check now loads the stored WorkflowRun and derives every ownership attribute from it instead of from the request body. Separately, the `openchoreo.dev/project` and `openchoreo.dev/component` labels are now immutable on update, so an authorized caller cannot hand their own run to another project either.\n\n| Line | Affected | Fixed in |\n|---|---|---|\n| 1.0.x | 1.0.0 through 1.0.5 | 1.0.6 |\n| 1.1.x | 1.1.0 through 1.1.6 | 1.1.7 |\n| 1.2.x | 1.2.0 through 1.2.4 | 1.2.5 |\n\nUpgrade to the patched release on your line. No configuration change is needed after upgrading.\n\n## Workarounds\n\nIf you cannot upgrade immediately, restrict who holds `workflowrun:update`.\n\nAudit your `AuthzRole` and `ClusterAuthzRole` definitions for that action and remove it from any role granted to principals you would not trust with write access to every workflow run in the namespace. Among the roles shipped with OpenChoreo, only the system role `workload-publisher` lists `workflowrun:update` explicitly, and `admin` holds it through its `*` wildcard. Custom roles in your own values file may also include it, so check those.\n\nTreat any credential bound to `workload-publisher` as privileged. CI systems are the usual holder, and a leaked CI token is enough to run this.",
+    "type": "reviewed",
+    "severity": "high",
+    "repository_advisory_url": "https://api.github.com/repos/openchoreo/openchoreo/security-advisories/GHSA-46r4-q7wv-32fc",
+    "source_code_location": "https://github.com/openchoreo/openchoreo",
+    "identifiers": [
+      {
+        "value": "GHSA-46r4-q7wv-32fc",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-113727",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/openchoreo/openchoreo/security/advisories/GHSA-46r4-q7wv-32fc",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-113727",
+      "https://github.com/openchoreo/openchoreo/pull/4596",
+      "https://github.com/openchoreo/openchoreo/pull/4618",
+      "https://github.com/openchoreo/openchoreo/pull/4626",
+      "https://github.com/openchoreo/openchoreo/pull/4627",
+      "https://github.com/openchoreo/openchoreo/commit/0e311468bb704b0dce7753b89c9d0204009285ca",
+      "https://github.com/openchoreo/openchoreo/commit/477031c6fece0666f144942fb02c0b579dacc0bb",
+      "https://github.com/openchoreo/openchoreo/commit/91e1e868eb8e0e67274109018d00a767b22eda14",
+      "https://github.com/openchoreo/openchoreo/commit/d5ed0ef62d9c9af7b05a72aed2bcbc0ac9d45426",
+      "https://github.com/openchoreo/openchoreo/releases/tag/v1.0.6",
+      "https://github.com/openchoreo/openchoreo/releases/tag/v1.1.7",
+      "https://github.com/openchoreo/openchoreo/releases/tag/v1.2.5",
+      "https://github.com/advisories/GHSA-46r4-q7wv-32fc"
+    ],
+    "published_at": "2026-10-21T16:29:53Z",
+    "updated_at": "2026-10-21T16:29:55Z",
+    "github_reviewed_at": "2026-10-21T16:29:53Z",
+    "nvd_published_at": "2026-10-20T22:19:29Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "go",
+          "name": "github.com/openchoreo/openchoreo"
+        },
+        "vulnerable_version_range": ">= 1.0.0, < 1.0.6",
+        "first_patched_version": "1.0.6",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "go",
+          "name": "github.com/openchoreo/openchoreo"
+        },
+        "vulnerable_version_range": ">= 1.1.0, < 1.1.7",
+        "first_patched_version": "1.1.7",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "go",
+          "name": "github.com/openchoreo/openchoreo"
+        },
+        "vulnerable_version_range": ">= 1.2.0, < 1.2.5",
+        "first_patched_version": "1.2.5",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:L/I:L/A:L",
+        "score": 7.4
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-639",
+        "name": "Authorization Bypass Through User-Controlled Key"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "Tike00",
+          "id": 170916859,
+          "node_id": "U_kgDOCi_7-w",
+          "avatar_url": "https://avatars.githubusercontent.com/u/170916859?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/Tike00",
+          "html_url": "https://github.com/Tike00",
+          "followers_url": "https://api.github.com/users/Tike00/followers",
+          "following_url": "https://api.github.com/users/Tike00/following{/other_user}",
+          "gists_url": "https://api.github.com/users/Tike00/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/Tike00/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/Tike00/subscriptions",
+          "organizations_url": "https://api.github.com/users/Tike00/orgs",
+          "repos_url": "https://api.github.com/users/Tike00/repos",
+          "events_url": "https://api.github.com/users/Tike00/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/Tike00/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      }
+    ],
+    "comments": 5,
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:L/I:L/A:L",
+      "score": 7.4
+    }
+  },
+  {
+    "ghsa_id": "GHSA-5588-rp99-5fjh",
+    "cve_id": "CVE-2026-113729",
+    "url": "https://api.github.com/advisories/GHSA-5588-rp99-5fjh",
+    "html_url": "https://github.com/advisories/GHSA-5588-rp99-5fjh",
+    "summary": "Moov signedxml: Unauthenticated denial of service in exclusive XML canonicalization",
+    "description": "Exclusive XML canonicalization (`http://www.w3.org/2001/10/xml-exc-c14n#`) in `github.com/moov-io/signedxml` copied the entire accumulated namespace map at every node during `ValidateReferences()`, before any reference digest or signature check.\n\nFor a chain of nested elements that each declare many unused namespace prefixes, that produced **O(m × depth²)** time and peak memory (`m` = prefixes per level). `beevik/etree` caps tree depth (~1024), but `m` is unbounded, so a small attacker-controlled document (on the order of 1 MB) could drive multi-gigabyte allocations and OOM the process. No valid signature, matching certificate, or authentication is required.\n\nThis is the library’s core path for SAML / WS-Federation service providers, which canonicalize attacker-supplied XML prior to authentication.\n\n### Affected\n\n- Package: `github.com/moov-io/signedxml`\n- Function: `ExclusiveCanonicalization` (`exclusivecanonicalization.go`)\n- Verified: **v1.4.0** and current default branch (commit `d79064a`). Earlier v1.2.x–v1.3.x releases are likely affected.\n \n\n### Remediation\n\nDo not copy the whole namespace map per node. Maintain a single scope and push/pop only the prefixes introduced at each element. Replace linear prefix-in-scope scans with set lookups. Impose a defensive cap on in-scope namespace declarations and return an error rather than allocating unbounded memory.\n\nFrom @shuji-oh \n```\nThanks for the fix — I re-ran my PoC against this branch and confirmed the memory blowup is gone.\n\nBefore (main)\n\n-- Doubling depth each time (m=10 fixed): allocated grows ~4x each time ≈ O(depth^2) --\ndepth=250  m=10  payload=  0.07MB allocated=     45MB\ndepth=500  m=10  payload=  0.14MB allocated=    179MB\ndepth=1000 m=10  payload=  0.27MB allocated=    711MB\n-- Increasing m (depth=1000 fixed): allocated scales roughly linearly with m --\ndepth=1000 m=5   payload=  0.16MB allocated=    377MB\ndepth=1000 m=100 payload=  2.57MB allocated=   6278MB\nAfter (fix/exc-c14n-namespace-dos)\n\n-- Doubling depth each time (m=10 fixed): allocated grows ~4x each time ≈ O(depth^2) --\ndepth=250  m=10  payload=  0.07MB allocated=      2MB\ndepth=500  m=10  payload=  0.14MB allocated=      4MB\ndepth=1000 m=10  payload=  0.27MB allocated=      7MB\n-- Increasing m (depth=1000 fixed): allocated scales roughly linearly with m --\ndepth=1000 m=5   payload=  0.16MB allocated=      4MB\ndepth=1000 m=100 payload=  2.57MB allocated=     47MB\nThat's roughly a 100–130x reduction in peak allocation for the same payload sizes, and no OOM in any of my runs. This looks like it resolves the issue — thanks for the quick fix!\n```\n\n### Credit\n\nReported by Shuji Ohira ([@shuji-oh](https://github.com/shuji-oh)).",
+    "type": "reviewed",
+    "severity": "high",
+    "repository_advisory_url": "https://api.github.com/repos/moov-io/signedxml/security-advisories/GHSA-5588-rp99-5fjh",
+    "source_code_location": "https://github.com/moov-io/signedxml",
+    "identifiers": [
+      {
+        "value": "GHSA-5588-rp99-5fjh",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-113729",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/moov-io/signedxml/security/advisories/GHSA-5588-rp99-5fjh",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-113729",
+      "https://github.com/moov-io/signedxml/commit/da2cd6126c4c53b7e59a367d287786e6f6a2d0d3",
+      "https://github.com/moov-io/signedxml/releases/tag/v1.4.1",
+      "https://github.com/advisories/GHSA-5588-rp99-5fjh"
+    ],
+    "published_at": "2026-10-21T16:27:55Z",
+    "updated_at": "2026-10-21T16:27:58Z",
+    "github_reviewed_at": "2026-10-21T16:27:55Z",
+    "nvd_published_at": "2026-10-20T22:19:29Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "go",
+          "name": "github.com/moov-io/signedxml"
+        },
+        "vulnerable_version_range": "<= 1.4.0",
+        "first_patched_version": "1.4.1",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+        "score": 7.5
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-400",
+        "name": "Uncontrolled Resource Consumption"
+      },
+      {
+        "cwe_id": "CWE-407",
+        "name": "Inefficient Algorithmic Complexity"
+      },
+      {
+        "cwe_id": "CWE-770",
+        "name": "Allocation of Resources Without Limits or Throttling"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "shuji-oh",
+          "id": 27995559,
+          "node_id": "MDQ6VXNlcjI3OTk1NTU5",
+          "avatar_url": "https://avatars.githubusercontent.com/u/27995559?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/shuji-oh",
+          "html_url": "https://github.com/shuji-oh",
+          "followers_url": "https://api.github.com/users/shuji-oh/followers",
+          "following_url": "https://api.github.com/users/shuji-oh/following{/other_user}",
+          "gists_url": "https://api.github.com/users/shuji-oh/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/shuji-oh/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/shuji-oh/subscriptions",
+          "organizations_url": "https://api.github.com/users/shuji-oh/orgs",
+          "repos_url": "https://api.github.com/users/shuji-oh/repos",
+          "events_url": "https://api.github.com/users/shuji-oh/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/shuji-oh/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      }
+    ],
+    "comments": 1,
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "score": 7.5
+    }
+  }
+]

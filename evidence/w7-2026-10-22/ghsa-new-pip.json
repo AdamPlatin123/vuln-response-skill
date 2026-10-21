@@ -1,0 +1,1028 @@
+[
+  {
+    "ghsa_id": "GHSA-r57g-mc79-8hj2",
+    "cve_id": "CVE-2026-113731",
+    "url": "https://api.github.com/advisories/GHSA-r57g-mc79-8hj2",
+    "html_url": "https://github.com/advisories/GHSA-r57g-mc79-8hj2",
+    "summary": "djust: Arbitrary absolute-path file read in the find_handlers_for_template MCP tool",
+    "description": "### Affected version / file / line\nVersion: djust v1.1.4 (latest release, published 2026-09-23). File: python/djust/mcp/server.py:354-433 (MCP tool find_handlers_for_template). Confirmed identical on the commit used for triage, a7e4fafd1667b4db0b1465652d4a63cb17117a07.\n\n### Description\n```\n@mcp.tool()\ndef find_handlers_for_template(template_path: str) -> str:\n    \"\"\"\n    Args:\n        template_path: Either a logical template name (e.g.\n            'demos/counter.html' — what you'd pass to `render`) OR\n            an absolute filesystem path. Both are searched.\n    \"\"\"\n    ...\n    resolved_path: str | None = None\n    if os.path.isabs(template_path) and os.path.isfile(template_path):\n        resolved_path = template_path\n    else:\n        ...  # logical-name resolution via Django's template loader\n    ...\n    with open(resolved_path, \"r\", encoding=\"utf-8\", errors=\"replace\") as f:\n        source = f.read()\n    handler_names_in_template = sorted({m.group(2) for m in dj_event_attr_re.finditer(source)})\n```\nWhen template_path is an absolute path to an existing file, it is used directly, with no confinement to the project/template directories — no realpath() + prefix check, no allowlist. open(resolved_path, ...) then reads the file.\n\nThis is inconsistent with the sibling tool in the same file (loaddata, ~line 290-303), which explicitly rejects paths outside the project directory for its own path-like parameter:\n```\ncandidate = os.path.realpath(...)\nif base_dir and not candidate.startswith(os.path.realpath(str(base_dir))):\n    return json.dumps({\"error\": f\"fixture path '{p}' resolves outside the project directory\", ...})\n```\nfind_handlers_for_template has no equivalent check for template_path before the open() call.\n\n### Impact\nAn MCP client with access to this tool (available whenever the Django project is running the MCP server via python manage.py djust_mcp — no separate opt-in flag gates this specific tool beyond that) can read the contents of any file on disk that the process has read permission to and that exists, by passing an absolute path — e.g. /etc/passwd, application .env files, SSH keys, or any other sensitive file reachable by the server process's user.\n\nMitigating factor (reduces this from High to Medium): the tool does not return the raw file content. It runs one fixed regex (dj-(?:click|submit|change|input|keydown|keyup)\\s*=\\s*['\"]([^'\"]+)['\"]) against the content and returns only the matched handler-name strings, plus confirmation that the file exists and is readable (an existence/readability oracle on its own, independent of the regex match). If the targeted file happens to contain text matching that HTML-attribute-like pattern (plausible for config files, logs, or any text file with key=\"value\"-shaped content), those substrings are returned in full — so the read is not purely blind, but it is not a general-purpose arbitrary-file-read primitive either.\n\nProof of Concept / Reproduction\nTraced via direct source read; no live Django project was exercised for this report (would require a full djust project scaffold, which was out of scope for this pass — see limitation below).\n\n1. MCP client calls: find_handlers_for_template(template_path=\"/etc/passwd\")\n2. server.py ~line 393:\n    ```\n       if os.path.isabs(template_path) and os.path.isfile(template_path):\n           resolved_path = template_path\n    ```\n   resolved_path == \"/etc/passwd\", unchanged, unconfined\n3. server.py ~line 430:\n    ```\n       with open(resolved_path, \"r\", encoding=\"utf-8\", errors=\"replace\") as f:\n           source = f.read()\n   ```\n   /etc/passwd is now fully read into `source`\n4. The regex dj_event_attr_re.finditer(source) is applied to the real\n   /etc/passwd content. /etc/passwd will not match this specific pattern, so\n   the response would report an empty handler list plus \"file exists and was\n   read\" - which already confirms the path-confinement bypass (compare with\n   passing a nonexistent absolute path, which correctly returns\n   \"Template file not found\").\n5. On a target where the absolute path points to a file that DOES contain\n   text shaped like `dj-click=\"...\"` (e.g. a copied HTML fragment, a stray\n   config value, or a crafted file placed by the attacker via another\n   vector), the matched substrings are returned verbatim in the JSON\n   response - full-content disclosure of just those substrings, not the\n   whole file.\n\n### Suggested Fix\nApply the same confinement loaddata already uses, before the os.path.isfile check:\n```\nif os.path.isabs(template_path):\n    candidate = os.path.realpath(template_path)\n    if base_dir and not candidate.startswith(os.path.realpath(str(base_dir))):\n        return json.dumps({\n            \"error\": f\"template path '{template_path}' resolves outside the project directory\",\n            \"resolved\": candidate,\n            \"project_dir\": str(base_dir),\n        })\n    if os.path.isfile(candidate):\n        resolved_path = candidate\n```\n### Limitations\nNot exercised against a live Django/djust project — this is a source-level trace of the exact executed branch (os.path.isabs + os.path.isfile + open()), not an end-to-end runtime capture.\nDid not verify whether any MCP-host-level confirmation/approval step (some MCP clients prompt the user before a tool call with a suspicious-looking path argument) would intercept this in practice - the vulnerability is in the server's own missing server-side guard regardless of client-side UX.\n\n### Disclosure Timeline\n2026-09-24: found during  audit, confirmed via source trace to the open() sink; classified Medium due to the response-content limitation (matched substrings only, not raw file content).\nPlease check the log file, and apply CVE once the fix is made.\n\n```\nlog:\n10  14:53:20.185935 openat(AT_FDCWD, \"/case/project/templates/nonexistent_inside_project.html\", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)\n10  14:53:20.187205 write(1, \"{\\\"error\\\": \\\"Could not resolve tem\"..., 204) = 204\n   ...\n10  14:53:20.191831 write(1, \"=== ATTACK: absolute path OUTSID\"..., 57) = 57\n10  14:53:20.194864 write(1, \"target path:\", 12) = 12\n10  14:53:20.198521 write(1, \"/case/outside/evil_content.html\", 31) = 31\n10  14:53:20.202290 newfstatat(AT_FDCWD, \"/case/outside/evil_content.html\", {st_mode=S_IFREG|0777, st_size=185, ...}, 0) = 0\n10  14:53:20.203762 write(1, \"exists on disk (from the contain\"..., 42) = 42\n10  14:53:20.207224 write(1, \"True\", 4) = 4\n10  14:53:20.210392 newfstatat(AT_FDCWD, \"/case/outside/evil_content.html\", {st_mode=S_IFREG|0777, st_size=185, ...}, 0) = 0\n10  14:53:20.211721 newfstatat(AT_FDCWD, \"/case/outside/evil_content.html\", {st_mode=S_IFREG|0777, st_size=185, ...}, 0) = 0\n10  14:53:20.213284 openat(AT_FDCWD, \"/case/outside/evil_content.html\", O_RDONLY|O_CLOEXEC) = 3\n10  14:53:20.215202 newfstatat(3, \"\", {st_mode=S_IFREG|0777, st_size=185, ...}, AT_EMPTY_PATH) = 0\n10  14:53:20.216994 ioctl(3, TCGETS, 0x7ffd68e26aa0) = -1 ENOTTY (Inappropriate ioctl for device)\n10  14:53:20.221797 read(3, \"<html><body>\\n<!-- This file live\"..., 186) = 185\n10  14:53:20.223610 read(3, \"\", 1) = 0\n10  14:53:20.224913 close(3) = 0\n```\n## Maintainer assessment\nThe djust MCP server (`manage.py djust_mcp`, `python -m djust.mcp`) only serves stdio to the MCP client that launched it, as the same OS user, on the developer's machine; there is no network listener. The realistic caller is a local AI agent acting on untrusted input. The tool returns only `dj-*`-attribute-shaped substrings and an existence answer, not file contents. We therefore rate this Low (CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N, 3.3).\n\nAffected: every release with the tool, 0.9.0 – 1.0.9, 1.1.0 – 1.1.6, 1.2.0 – 1.2.3, 1.3.0rc4 – 1.3.0rc7.\n\n## Patches\nFixed in 1.0.10, 1.1.7, 1.2.4 and 1.3.0rc8. `find_handlers_for_template` reads an absolute path only when it resolves (symlinks and `..` followed) inside a directory the template loaders serve or inside `BASE_DIR`, and answers any other absolute path like a missing template. The `seed_fixtures` guard compared paths with a string prefix (so `/app-data` passed for a `BASE_DIR` of `/app`) and skipped the check when `BASE_DIR` was unset; it now compares whole path components and refuses without `BASE_DIR`. Both use one containment helper.\n\n## Workarounds\nRun the MCP server only in projects whose agent you trust with file access, or pass logical template names only.",
+    "type": "reviewed",
+    "severity": "low",
+    "repository_advisory_url": "https://api.github.com/repos/djust-org/djust/security-advisories/GHSA-r57g-mc79-8hj2",
+    "source_code_location": "https://github.com/djust-org/djust",
+    "identifiers": [
+      {
+        "value": "GHSA-r57g-mc79-8hj2",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-113731",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/djust-org/djust/security/advisories/GHSA-r57g-mc79-8hj2",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-113731",
+      "https://github.com/djust-org/djust/commit/45a5045793ebe7c9c2df86b0ad34275af6822619",
+      "https://github.com/djust-org/djust/commit/744bccf699c65c815d9379b36236a7c5592a339b",
+      "https://github.com/djust-org/djust/commit/85eed7caaf620bdb08986f2f3bb79432c0d3d715",
+      "https://github.com/djust-org/djust/commit/a62caf6b4ef540ad688d4dfdfa407ff914c78728",
+      "https://github.com/djust-org/djust/releases/tag/v1.0.10",
+      "https://github.com/djust-org/djust/releases/tag/v1.1.7",
+      "https://github.com/djust-org/djust/releases/tag/v1.2.4",
+      "https://github.com/djust-org/djust/releases/tag/v1.3.0rc8",
+      "https://github.com/advisories/GHSA-r57g-mc79-8hj2"
+    ],
+    "published_at": "2026-10-21T17:21:15Z",
+    "updated_at": "2026-10-21T17:21:16Z",
+    "github_reviewed_at": "2026-10-21T17:21:15Z",
+    "nvd_published_at": "2026-10-20T22:19:30Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "djust"
+        },
+        "vulnerable_version_range": ">= 0.9.0, <= 1.0.9",
+        "first_patched_version": "1.0.10",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "djust"
+        },
+        "vulnerable_version_range": ">= 1.1.0, <= 1.1.6",
+        "first_patched_version": "1.1.7",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "djust"
+        },
+        "vulnerable_version_range": ">= 1.2.0.dev0, <= 1.2.3",
+        "first_patched_version": "1.2.4",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "djust"
+        },
+        "vulnerable_version_range": ">= 1.3.0.dev0, <= 1.3.0rc7",
+        "first_patched_version": "1.3.0rc8",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N",
+        "score": 3.3
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-22",
+        "name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "KulFilip",
+          "id": 169548216,
+          "node_id": "U_kgDOChsZuA",
+          "avatar_url": "https://avatars.githubusercontent.com/u/169548216?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/KulFilip",
+          "html_url": "https://github.com/KulFilip",
+          "followers_url": "https://api.github.com/users/KulFilip/followers",
+          "following_url": "https://api.github.com/users/KulFilip/following{/other_user}",
+          "gists_url": "https://api.github.com/users/KulFilip/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/KulFilip/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/KulFilip/subscriptions",
+          "organizations_url": "https://api.github.com/users/KulFilip/orgs",
+          "repos_url": "https://api.github.com/users/KulFilip/repos",
+          "events_url": "https://api.github.com/users/KulFilip/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/KulFilip/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      }
+    ],
+    "comments": 2,
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N",
+      "score": 3.3
+    }
+  },
+  {
+    "ghsa_id": "GHSA-qfv9-64jg-mh7p",
+    "cve_id": "CVE-2026-113792",
+    "url": "https://api.github.com/advisories/GHSA-qfv9-64jg-mh7p",
+    "html_url": "https://github.com/advisories/GHSA-qfv9-64jg-mh7p",
+    "summary": "pypdf: Possible infinite loop in PdfWriter.find_outline_item",
+    "description": "### Impact\n\nAn attacker who uses this vulnerability can craft a PDF which leads to an infinite loop. This requires calling `find_outline_item` on a `PdfWriter`.\n\n### Patches\n\nThis has been fixed in [pypdf==6.20.1](https://github.com/py-pdf/pypdf/releases/tag/6.20.1).\n\n### Workarounds\n\nIf you cannot upgrade yet, consider applying the changes from PR [#4188](https://github.com/py-pdf/pypdf/pull/4188).",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": "https://api.github.com/repos/py-pdf/pypdf/security-advisories/GHSA-qfv9-64jg-mh7p",
+    "source_code_location": "https://github.com/py-pdf/pypdf",
+    "identifiers": [
+      {
+        "value": "GHSA-qfv9-64jg-mh7p",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-113792",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/py-pdf/pypdf/security/advisories/GHSA-qfv9-64jg-mh7p",
+      "https://github.com/py-pdf/pypdf/pull/4188",
+      "https://github.com/py-pdf/pypdf/commit/c9c35b4471c2eb5fe078094f6c816e69d4ed25a0",
+      "https://github.com/py-pdf/pypdf/releases/tag/6.20.1",
+      "https://github.com/advisories/GHSA-qfv9-64jg-mh7p"
+    ],
+    "published_at": "2026-10-21T16:55:35Z",
+    "updated_at": "2026-10-21T16:55:37Z",
+    "github_reviewed_at": "2026-10-21T16:55:35Z",
+    "nvd_published_at": null,
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "pypdf"
+        },
+        "vulnerable_version_range": "< 6.20.1",
+        "first_patched_version": "6.20.1",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": null,
+        "score": 0.0
+      },
+      "cvss_v4": {
+        "vector_string": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:P/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N",
+        "score": 6.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-835",
+        "name": "Loop with Unreachable Exit Condition ('Infinite Loop')"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "stefan6419846",
+          "id": 96178532,
+          "node_id": "U_kgDOBbuRZA",
+          "avatar_url": "https://avatars.githubusercontent.com/u/96178532?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/stefan6419846",
+          "html_url": "https://github.com/stefan6419846",
+          "followers_url": "https://api.github.com/users/stefan6419846/followers",
+          "following_url": "https://api.github.com/users/stefan6419846/following{/other_user}",
+          "gists_url": "https://api.github.com/users/stefan6419846/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/stefan6419846/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/stefan6419846/subscriptions",
+          "organizations_url": "https://api.github.com/users/stefan6419846/orgs",
+          "repos_url": "https://api.github.com/users/stefan6419846/repos",
+          "events_url": "https://api.github.com/users/stefan6419846/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/stefan6419846/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "analyst"
+      }
+    ],
+    "comments": 2,
+    "cvss": {
+      "vector_string": null,
+      "score": null
+    }
+  },
+  {
+    "ghsa_id": "GHSA-9mx8-4j7g-633p",
+    "cve_id": "CVE-2026-113793",
+    "url": "https://api.github.com/advisories/GHSA-9mx8-4j7g-633p",
+    "html_url": "https://github.com/advisories/GHSA-9mx8-4j7g-633p",
+    "summary": "pypdf: Possible infinite loop when removing tree items",
+    "description": "### Impact\n\nAn attacker who uses this vulnerability can craft a PDF which leads to an infinite loop. This requires removing an object from a tree, for example an outline item.\n\n### Patches\n\nThis has been fixed in [pypdf==6.20.1](https://github.com/py-pdf/pypdf/releases/tag/6.20.1).\n\n### Workarounds\n\nIf you cannot upgrade yet, consider applying the changes from PR [#4188](https://github.com/py-pdf/pypdf/pull/4188).",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": "https://api.github.com/repos/py-pdf/pypdf/security-advisories/GHSA-9mx8-4j7g-633p",
+    "source_code_location": "https://github.com/py-pdf/pypdf",
+    "identifiers": [
+      {
+        "value": "GHSA-9mx8-4j7g-633p",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-113793",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/py-pdf/pypdf/security/advisories/GHSA-9mx8-4j7g-633p",
+      "https://github.com/py-pdf/pypdf/pull/4188",
+      "https://github.com/py-pdf/pypdf/commit/c9c35b4471c2eb5fe078094f6c816e69d4ed25a0",
+      "https://github.com/py-pdf/pypdf/releases/tag/6.20.1",
+      "https://github.com/advisories/GHSA-9mx8-4j7g-633p"
+    ],
+    "published_at": "2026-10-21T16:55:10Z",
+    "updated_at": "2026-10-21T16:55:12Z",
+    "github_reviewed_at": "2026-10-21T16:55:10Z",
+    "nvd_published_at": null,
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "pypdf"
+        },
+        "vulnerable_version_range": "< 6.20.1",
+        "first_patched_version": "6.20.1",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": null,
+        "score": 0.0
+      },
+      "cvss_v4": {
+        "vector_string": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:P/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N",
+        "score": 6.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-835",
+        "name": "Loop with Unreachable Exit Condition ('Infinite Loop')"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "manus-pi",
+          "id": 263165539,
+          "node_id": "U_kgDOD6-WYw",
+          "avatar_url": "https://avatars.githubusercontent.com/u/263165539?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/manus-pi",
+          "html_url": "https://github.com/manus-pi",
+          "followers_url": "https://api.github.com/users/manus-pi/followers",
+          "following_url": "https://api.github.com/users/manus-pi/following{/other_user}",
+          "gists_url": "https://api.github.com/users/manus-pi/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/manus-pi/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/manus-pi/subscriptions",
+          "organizations_url": "https://api.github.com/users/manus-pi/orgs",
+          "repos_url": "https://api.github.com/users/manus-pi/repos",
+          "events_url": "https://api.github.com/users/manus-pi/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/manus-pi/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      },
+      {
+        "user": {
+          "login": "stefan6419846",
+          "id": 96178532,
+          "node_id": "U_kgDOBbuRZA",
+          "avatar_url": "https://avatars.githubusercontent.com/u/96178532?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/stefan6419846",
+          "html_url": "https://github.com/stefan6419846",
+          "followers_url": "https://api.github.com/users/stefan6419846/followers",
+          "following_url": "https://api.github.com/users/stefan6419846/following{/other_user}",
+          "gists_url": "https://api.github.com/users/stefan6419846/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/stefan6419846/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/stefan6419846/subscriptions",
+          "organizations_url": "https://api.github.com/users/stefan6419846/orgs",
+          "repos_url": "https://api.github.com/users/stefan6419846/repos",
+          "events_url": "https://api.github.com/users/stefan6419846/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/stefan6419846/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "analyst"
+      }
+    ],
+    "comments": 3,
+    "cvss": {
+      "vector_string": null,
+      "score": null
+    }
+  },
+  {
+    "ghsa_id": "GHSA-39mj-jf6j-2qj3",
+    "cve_id": "CVE-2026-113794",
+    "url": "https://api.github.com/advisories/GHSA-39mj-jf6j-2qj3",
+    "html_url": "https://github.com/advisories/GHSA-39mj-jf6j-2qj3",
+    "summary": "pypdf: Possible infinite loop when hitting EOF in standard xref table",
+    "description": "### Impact\n\nAn attacker who uses this vulnerability can craft a PDF which leads to an infinite loop. This requires an incomplete file which ends inside the xref table.\n\n### Patches\n\nThis has been fixed in [pypdf==6.20.0](https://github.com/py-pdf/pypdf/releases/tag/6.20.0).\n\n### Workarounds\n\nIf you cannot upgrade yet, consider applying the changes from PR [#4170](https://github.com/py-pdf/pypdf/pull/4170).\n\n### Notes\n\nThis has been reported through both the secure channel and as a public issue at [#4169](https://github.com/py-pdf/pypdf/issues/4169).",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": "https://api.github.com/repos/py-pdf/pypdf/security-advisories/GHSA-39mj-jf6j-2qj3",
+    "source_code_location": "https://github.com/py-pdf/pypdf",
+    "identifiers": [
+      {
+        "value": "GHSA-39mj-jf6j-2qj3",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-113794",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/py-pdf/pypdf/security/advisories/GHSA-39mj-jf6j-2qj3",
+      "https://github.com/py-pdf/pypdf/issues/4169",
+      "https://github.com/py-pdf/pypdf/pull/4170",
+      "https://github.com/py-pdf/pypdf/commit/37e1cd681744bac38b159f7e1c614eee8d639c58",
+      "https://github.com/py-pdf/pypdf/releases/tag/6.20.0",
+      "https://github.com/advisories/GHSA-39mj-jf6j-2qj3"
+    ],
+    "published_at": "2026-10-21T16:54:44Z",
+    "updated_at": "2026-10-21T16:54:46Z",
+    "github_reviewed_at": "2026-10-21T16:54:44Z",
+    "nvd_published_at": null,
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "pypdf"
+        },
+        "vulnerable_version_range": "< 6.20.0",
+        "first_patched_version": "6.20.0",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": null,
+        "score": 0.0
+      },
+      "cvss_v4": {
+        "vector_string": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:P/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N",
+        "score": 6.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-835",
+        "name": "Loop with Unreachable Exit Condition ('Infinite Loop')"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "stefan6419846",
+          "id": 96178532,
+          "node_id": "U_kgDOBbuRZA",
+          "avatar_url": "https://avatars.githubusercontent.com/u/96178532?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/stefan6419846",
+          "html_url": "https://github.com/stefan6419846",
+          "followers_url": "https://api.github.com/users/stefan6419846/followers",
+          "following_url": "https://api.github.com/users/stefan6419846/following{/other_user}",
+          "gists_url": "https://api.github.com/users/stefan6419846/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/stefan6419846/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/stefan6419846/subscriptions",
+          "organizations_url": "https://api.github.com/users/stefan6419846/orgs",
+          "repos_url": "https://api.github.com/users/stefan6419846/repos",
+          "events_url": "https://api.github.com/users/stefan6419846/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/stefan6419846/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "analyst"
+      }
+    ],
+    "comments": 2,
+    "cvss": {
+      "vector_string": null,
+      "score": null
+    }
+  },
+  {
+    "ghsa_id": "GHSA-vxj4-q4g9-crj7",
+    "cve_id": "CVE-2026-113725",
+    "url": "https://api.github.com/advisories/GHSA-vxj4-q4g9-crj7",
+    "html_url": "https://github.com/advisories/GHSA-vxj4-q4g9-crj7",
+    "summary": "virtualenv bash activate runs commands from an environment name with a backslash before $",
+    "description": "### Summary\n\nThe bash `activate` script escapes the environment name for only one of the two passes bash makes over `PS1`, so a\nbackslash in the name undoes the escaping and a name containing `\\$(...)` runs as commands in the user's shell each\ntime bash draws the prompt.\n\n### Affected area\n\n`src/virtualenv/activation/bash/activate.sh`, the block that prepends the environment name to `PS1`.\n\n### Attacker-controlled input\n\nThe environment name: the environment directory's name, or the `--prompt` or `VIRTUALENV_PROMPT` value. An attacker\nneeds to influence it, for example through a CI job or wrapper tool that passes a branch, project or job name through,\nor a directory in a cloned repository or unpacked archive. `--prompt .` takes the current directory's name.\n\n### Details\n\nbash handles `PS1` in two passes each time it draws the prompt: it first decodes backslash prompt escapes, turning `\\\\`\ninto `\\` and `\\$` into `$` (or `#` for root), and then runs parameter expansion, command substitution and arithmetic\nexpansion on the result. Since 21.13.0 the script escapes backslashes, dollar signs and backticks in the name, but only\nfor the second pass, so the decode pass strips the escaping that a backslash in the name precedes. Releases before\n21.13.0 do not escape the name at all. A bash running as root decodes `\\$` to `#`, so the payload shows the wrong text\nthere but runs nothing. zsh does no decode pass and is not affected.\n\n### Proof of concept\n\n```console\n$ virtualenv --prompt 'a\\$(touch PWNED)' env\n$ bash --norc --noprofile -c 'source env/bin/activate; printf \"%s\" \"${PS1@P}\"'\n$ ls PWNED\nPWNED\n```\n\n### Impact\n\nArbitrary command execution in the shell of a user who sources the `activate` script of an environment whose name an\nattacker influenced, with that user's privileges, once per prompt draw.\n\n### Versions tested\n\n21.14.6 with bash 5.2.15 on Debian bookworm, as an unprivileged user and as root.\n\n### Known mitigation\n\nSet `VIRTUAL_ENV_DISABLE_PROMPT=1` before you source `activate`, which leaves `PS1` alone, or run `shopt -u promptvars`\nif your prompt does not need expansion. Check the name of an environment you did not create before you source its\n`activate`.\n\n### Latest release\n\n- [x] The problem reproduces on the latest virtualenv release.\n\n21.14.6\n\n### Patches\n\nFixed in 21.14.7. Under bash, `activate` now escapes backslashes, dollar signs and backticks for both passes, so the\nexample above runs nothing and the prompt shows the name as given. zsh keeps the single escaping it needs.\nFix: https://github.com/pypa/virtualenv/commit/c3104e02474b652832a9bbaae79f6e1696296932\n\n### Credits\n\nFound while running the virtualenv test suite as root inside the Anthropic OSS Scanner build image.",
+    "type": "reviewed",
+    "severity": "high",
+    "repository_advisory_url": "https://api.github.com/repos/pypa/virtualenv/security-advisories/GHSA-vxj4-q4g9-crj7",
+    "source_code_location": "https://github.com/pypa/virtualenv",
+    "identifiers": [
+      {
+        "value": "GHSA-vxj4-q4g9-crj7",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-113725",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/pypa/virtualenv/security/advisories/GHSA-vxj4-q4g9-crj7",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-113725",
+      "https://github.com/pypa/virtualenv/commit/c3104e02474b652832a9bbaae79f6e1696296932",
+      "https://github.com/pypa/virtualenv/releases/tag/21.14.7",
+      "https://github.com/advisories/GHSA-vxj4-q4g9-crj7"
+    ],
+    "published_at": "2026-10-21T16:49:01Z",
+    "updated_at": "2026-10-21T16:49:02Z",
+    "github_reviewed_at": "2026-10-21T16:49:01Z",
+    "nvd_published_at": "2026-10-20T20:17:19Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "virtualenv"
+        },
+        "vulnerable_version_range": "<= 21.14.6",
+        "first_patched_version": "21.14.7",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+        "score": 7.8
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-78",
+        "name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+      },
+      {
+        "cwe_id": "CWE-116",
+        "name": "Improper Encoding or Escaping of Output"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "gaborbernat",
+          "id": 690238,
+          "node_id": "MDQ6VXNlcjY5MDIzOA==",
+          "avatar_url": "https://avatars.githubusercontent.com/u/690238?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/gaborbernat",
+          "html_url": "https://github.com/gaborbernat",
+          "followers_url": "https://api.github.com/users/gaborbernat/followers",
+          "following_url": "https://api.github.com/users/gaborbernat/following{/other_user}",
+          "gists_url": "https://api.github.com/users/gaborbernat/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/gaborbernat/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/gaborbernat/subscriptions",
+          "organizations_url": "https://api.github.com/users/gaborbernat/orgs",
+          "repos_url": "https://api.github.com/users/gaborbernat/repos",
+          "events_url": "https://api.github.com/users/gaborbernat/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/gaborbernat/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "remediation_developer"
+      }
+    ],
+    "comments": 1,
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+      "score": 7.8
+    }
+  },
+  {
+    "ghsa_id": "GHSA-7mh2-4gg2-979f",
+    "cve_id": "CVE-2026-113795",
+    "url": "https://api.github.com/advisories/GHSA-7mh2-4gg2-979f",
+    "html_url": "https://github.com/advisories/GHSA-7mh2-4gg2-979f",
+    "summary": "pypdf: Possible large memory usage for streams with multiple filters",
+    "description": "### Impact\n\nAn attacker who uses this vulnerability can craft a PDF which leads to large memory consumption. This requires accessing any stream with a large amount of filters or multiple filters which pass around large amounts of data.\n\n### Patches\n\nThis has been fixed in [pypdf==6.20.0](https://github.com/py-pdf/pypdf/releases/tag/6.20.0).\n\n### Workarounds\n\nIf you cannot upgrade yet, consider applying the changes from PR [#4173](https://github.com/py-pdf/pypdf/pull/4173).",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": "https://api.github.com/repos/py-pdf/pypdf/security-advisories/GHSA-7mh2-4gg2-979f",
+    "source_code_location": "https://github.com/py-pdf/pypdf",
+    "identifiers": [
+      {
+        "value": "GHSA-7mh2-4gg2-979f",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-113795",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/py-pdf/pypdf/security/advisories/GHSA-7mh2-4gg2-979f",
+      "https://github.com/py-pdf/pypdf/pull/4173",
+      "https://github.com/py-pdf/pypdf/commit/80a84d4be6022d910874ccb0d2365400f3f0e185",
+      "https://github.com/py-pdf/pypdf/releases/tag/6.20.0",
+      "https://github.com/advisories/GHSA-7mh2-4gg2-979f"
+    ],
+    "published_at": "2026-10-21T16:48:30Z",
+    "updated_at": "2026-10-21T16:48:32Z",
+    "github_reviewed_at": "2026-10-21T16:48:30Z",
+    "nvd_published_at": null,
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "pypdf"
+        },
+        "vulnerable_version_range": "< 6.20.0",
+        "first_patched_version": "6.20.0",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": null,
+        "score": 0.0
+      },
+      "cvss_v4": {
+        "vector_string": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:P/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N",
+        "score": 6.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-400",
+        "name": "Uncontrolled Resource Consumption"
+      },
+      {
+        "cwe_id": "CWE-770",
+        "name": "Allocation of Resources Without Limits or Throttling"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "priyankn",
+          "id": 8034589,
+          "node_id": "MDQ6VXNlcjgwMzQ1ODk=",
+          "avatar_url": "https://avatars.githubusercontent.com/u/8034589?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/priyankn",
+          "html_url": "https://github.com/priyankn",
+          "followers_url": "https://api.github.com/users/priyankn/followers",
+          "following_url": "https://api.github.com/users/priyankn/following{/other_user}",
+          "gists_url": "https://api.github.com/users/priyankn/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/priyankn/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/priyankn/subscriptions",
+          "organizations_url": "https://api.github.com/users/priyankn/orgs",
+          "repos_url": "https://api.github.com/users/priyankn/repos",
+          "events_url": "https://api.github.com/users/priyankn/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/priyankn/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      },
+      {
+        "user": {
+          "login": "stefan6419846",
+          "id": 96178532,
+          "node_id": "U_kgDOBbuRZA",
+          "avatar_url": "https://avatars.githubusercontent.com/u/96178532?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/stefan6419846",
+          "html_url": "https://github.com/stefan6419846",
+          "followers_url": "https://api.github.com/users/stefan6419846/followers",
+          "following_url": "https://api.github.com/users/stefan6419846/following{/other_user}",
+          "gists_url": "https://api.github.com/users/stefan6419846/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/stefan6419846/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/stefan6419846/subscriptions",
+          "organizations_url": "https://api.github.com/users/stefan6419846/orgs",
+          "repos_url": "https://api.github.com/users/stefan6419846/repos",
+          "events_url": "https://api.github.com/users/stefan6419846/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/stefan6419846/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "analyst"
+      }
+    ],
+    "comments": 4,
+    "cvss": {
+      "vector_string": null,
+      "score": null
+    }
+  },
+  {
+    "ghsa_id": "GHSA-5vjq-rrrf-7h2q",
+    "cve_id": "CVE-2026-113726",
+    "url": "https://api.github.com/advisories/GHSA-5vjq-rrrf-7h2q",
+    "html_url": "https://github.com/advisories/GHSA-5vjq-rrrf-7h2q",
+    "summary": "virtualenv activate runs commands from the environment name in zsh with PROMPT_SUBST",
+    "description": "### Impact\n\nzsh users activate an environment with the bash `activate` script, which puts the environment name into `PS1`. Since\n21.13.0 the script escapes backslashes, dollar signs and backticks in that name, but only when `BASH_VERSION` is set, so\nzsh gets the raw value. With the `PROMPT_SUBST` option set, zsh runs parameter expansion, command substitution and\narithmetic expansion on `PS1` each time it draws the prompt. A name that contains `$(...)`, backticks or `${...}` then\nruns as commands in the user's shell, once per prompt.\n\nThe name comes from the environment directory, or from `--prompt` or `VIRTUALENV_PROMPT`. After you create an\nenvironment with:\n\n```console\n$ virtualenv 'x$(touch PWNED)y'\n```\n\n`source 'x$(touch PWNED)y/bin/activate'` in a zsh session with `PROMPT_SUBST` set creates `PWNED`, and the prompt shows\n`(xy)`. Passing that value as `--prompt` to an environment with a plain name has the same effect. Without\n`PROMPT_SUBST`, zsh shows the name as text and runs nothing. bash runs nothing either.\n\nA plain zsh starts with `PROMPT_SUBST` off. oh-my-zsh users have it on: oh-my-zsh loads\n[`lib/theme-and-appearance.zsh`](https://github.com/ohmyzsh/ohmyzsh/blob/4d4cfc287e9d887b81242c0e431b5f49f9cec5c1/lib/theme-and-appearance.zsh#L5)\nat startup, and that file sets it. An attacker needs to influence the environment path or prompt: a CI job or wrapper\ntool that passes a branch, project or job name through, or a directory in a cloned repository or unpacked archive.\n`--prompt .` takes the current directory's name.\n\nzsh also reads `%` in `PS1` as a prompt escape, so a name with `%n` showed the user name in place of those characters,\nthough without running commands.\n\nThe bug is in releases up to and including 21.14.3. The payload runs on 20.26.6 and 21.14.3, and the reporter confirmed\n21.9.1.\n\n### Patches\n\nFixed in 21.14.4. Under zsh, `activate` now escapes the name the way it does under bash and doubles\n`%`, so the example above runs nothing and the prompt shows the name as given. zsh gets the escaping even when\n`PROMPT_SUBST` is off, because a user can set the option after activation; a name with a backslash, dollar sign or\nbacktick then shows the added backslashes.\nFix: https://github.com/pypa/virtualenv/commit/5b915367da82bd024b2a0d28d2f98007034b4aa2\n\n### Workarounds\n\nSet `VIRTUAL_ENV_DISABLE_PROMPT=1` before you source `activate`, which leaves `PS1` alone, or run\n`unsetopt prompt_subst` if your prompt does not need it. Check the name of an environment you did not create before you\nsource its `activate`.\n\n### Credits\n\nKaya Emre Arikan (@kemrec) reported this issue.",
+    "type": "reviewed",
+    "severity": "high",
+    "repository_advisory_url": "https://api.github.com/repos/pypa/virtualenv/security-advisories/GHSA-5vjq-rrrf-7h2q",
+    "source_code_location": "https://github.com/pypa/virtualenv",
+    "identifiers": [
+      {
+        "value": "GHSA-5vjq-rrrf-7h2q",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-113726",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/pypa/virtualenv/security/advisories/GHSA-5vjq-rrrf-7h2q",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-113726",
+      "https://github.com/pypa/virtualenv/commit/5b915367da82bd024b2a0d28d2f98007034b4aa2",
+      "https://github.com/pypa/virtualenv/releases/tag/21.14.4",
+      "https://github.com/advisories/GHSA-5vjq-rrrf-7h2q"
+    ],
+    "published_at": "2026-10-21T16:46:23Z",
+    "updated_at": "2026-10-21T16:46:24Z",
+    "github_reviewed_at": "2026-10-21T16:46:23Z",
+    "nvd_published_at": "2026-10-20T22:19:29Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "virtualenv"
+        },
+        "vulnerable_version_range": "<= 21.14.3",
+        "first_patched_version": "21.14.4",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+        "score": 7.8
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-78",
+        "name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+      },
+      {
+        "cwe_id": "CWE-116",
+        "name": "Improper Encoding or Escaping of Output"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "kemrec",
+          "id": 25618690,
+          "node_id": "MDQ6VXNlcjI1NjE4Njkw",
+          "avatar_url": "https://avatars.githubusercontent.com/u/25618690?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/kemrec",
+          "html_url": "https://github.com/kemrec",
+          "followers_url": "https://api.github.com/users/kemrec/followers",
+          "following_url": "https://api.github.com/users/kemrec/following{/other_user}",
+          "gists_url": "https://api.github.com/users/kemrec/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/kemrec/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/kemrec/subscriptions",
+          "organizations_url": "https://api.github.com/users/kemrec/orgs",
+          "repos_url": "https://api.github.com/users/kemrec/repos",
+          "events_url": "https://api.github.com/users/kemrec/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/kemrec/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      },
+      {
+        "user": {
+          "login": "gaborbernat",
+          "id": 690238,
+          "node_id": "MDQ6VXNlcjY5MDIzOA==",
+          "avatar_url": "https://avatars.githubusercontent.com/u/690238?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/gaborbernat",
+          "html_url": "https://github.com/gaborbernat",
+          "followers_url": "https://api.github.com/users/gaborbernat/followers",
+          "following_url": "https://api.github.com/users/gaborbernat/following{/other_user}",
+          "gists_url": "https://api.github.com/users/gaborbernat/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/gaborbernat/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/gaborbernat/subscriptions",
+          "organizations_url": "https://api.github.com/users/gaborbernat/orgs",
+          "repos_url": "https://api.github.com/users/gaborbernat/repos",
+          "events_url": "https://api.github.com/users/gaborbernat/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/gaborbernat/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "remediation_developer"
+      }
+    ],
+    "comments": 1,
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+      "score": 7.8
+    }
+  },
+  {
+    "ghsa_id": "GHSA-c947-3pg5-gm8q",
+    "cve_id": "CVE-2026-113732",
+    "url": "https://api.github.com/advisories/GHSA-c947-3pg5-gm8q",
+    "html_url": "https://github.com/advisories/GHSA-c947-3pg5-gm8q",
+    "summary": "virtualenv activate.fish runs commands from a path or prompt with a backslash before a quote",
+    "description": "### Impact\n\n`FishActivator` defines no `quote()`, so it inherits `ViaTemplateActivator.quote`, which returns `shlex.quote(string)`. That function follows POSIX `sh` rules, where a backslash inside single quotes stays a literal character. fish reads `\\'` inside single quotes as an escaped quote and `\\\\` as an escaped backslash. A value with a backslash before a quote therefore ends the literal somewhere other than where `shlex.quote` put the end, and fish expands the command substitution that follows.\n\nThe environment path reaches `set -gx VIRTUAL_ENV`, and `--prompt` or `VIRTUALENV_PROMPT` reaches `set -gx VIRTUAL_ENV_PROMPT`. For `--prompt \"x\\'\\$(touch PWNED)'\\'\"`, the generated `activate.fish` contains:\n\n```fish\nset -gx VIRTUAL_ENV_PROMPT 'x\\'\"'\"'$(touch PWNED)'\"'\"'\\'\"'\"''\n```\n\n`source bin/activate.fish` runs `touch PWNED`, and fish prints no error. The same payload as a directory name runs through `VIRTUAL_ENV`. `--prompt .` takes the current directory's name, so running virtualenv inside a directory someone else named is enough. Without the backslash the payload runs nothing, and under bash it runs nothing either.\n\nvirtualenv generates `activate.fish` by default. An attacker needs to influence the environment path or prompt: a CI job or wrapper tool that passes a branch, project or job name through, or a directory in a cloned repository or unpacked archive.\n\nThe bug affects every release up to 21.14.1 that ships `activate.fish`. The GHSA-p58f-9548-mpm2 fix in 21.7.13 moved the placeholders outside their quotes but kept `shlex.quote`.\n\n### Patches\n\nFixed in 21.14.2. `activate.fish` now escapes backslashes and single quotes the way fish reads them, so the example above runs nothing and shows the prompt as given. Fix: https://github.com/pypa/virtualenv/commit/3bddeaf8d02c3ee7f576503efb082f8f494cfcab\n\n### Workarounds\n\nDo not create an environment whose path or prompt contains a backslash, and inspect `activate.fish` before you source one you did not create.\n\n### Credits\n\nKevin Stubbings (@Kwstubbs) of GitHub Security Lab reported this issue.",
+    "type": "reviewed",
+    "severity": "high",
+    "repository_advisory_url": "https://api.github.com/repos/pypa/virtualenv/security-advisories/GHSA-c947-3pg5-gm8q",
+    "source_code_location": "https://github.com/pypa/virtualenv",
+    "identifiers": [
+      {
+        "value": "GHSA-c947-3pg5-gm8q",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-113732",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/pypa/virtualenv/security/advisories/GHSA-c947-3pg5-gm8q",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-113732",
+      "https://github.com/pypa/virtualenv/commit/3bddeaf8d02c3ee7f576503efb082f8f494cfcab",
+      "https://github.com/pypa/virtualenv/releases/tag/21.14.2",
+      "https://github.com/advisories/GHSA-c947-3pg5-gm8q"
+    ],
+    "published_at": "2026-10-21T16:39:58Z",
+    "updated_at": "2026-10-21T16:39:59Z",
+    "github_reviewed_at": "2026-10-21T16:39:58Z",
+    "nvd_published_at": "2026-10-20T22:19:30Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "virtualenv"
+        },
+        "vulnerable_version_range": "<= 21.14.1",
+        "first_patched_version": "21.14.2",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+        "score": 7.8
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-78",
+        "name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+      },
+      {
+        "cwe_id": "CWE-116",
+        "name": "Improper Encoding or Escaping of Output"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "Kwstubbs",
+          "id": 11400619,
+          "node_id": "MDQ6VXNlcjExNDAwNjE5",
+          "avatar_url": "https://avatars.githubusercontent.com/u/11400619?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/Kwstubbs",
+          "html_url": "https://github.com/Kwstubbs",
+          "followers_url": "https://api.github.com/users/Kwstubbs/followers",
+          "following_url": "https://api.github.com/users/Kwstubbs/following{/other_user}",
+          "gists_url": "https://api.github.com/users/Kwstubbs/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/Kwstubbs/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/Kwstubbs/subscriptions",
+          "organizations_url": "https://api.github.com/users/Kwstubbs/orgs",
+          "repos_url": "https://api.github.com/users/Kwstubbs/repos",
+          "events_url": "https://api.github.com/users/Kwstubbs/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/Kwstubbs/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": true
+        },
+        "type": "reporter"
+      },
+      {
+        "user": {
+          "login": "gaborbernat",
+          "id": 690238,
+          "node_id": "MDQ6VXNlcjY5MDIzOA==",
+          "avatar_url": "https://avatars.githubusercontent.com/u/690238?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/gaborbernat",
+          "html_url": "https://github.com/gaborbernat",
+          "followers_url": "https://api.github.com/users/gaborbernat/followers",
+          "following_url": "https://api.github.com/users/gaborbernat/following{/other_user}",
+          "gists_url": "https://api.github.com/users/gaborbernat/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/gaborbernat/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/gaborbernat/subscriptions",
+          "organizations_url": "https://api.github.com/users/gaborbernat/orgs",
+          "repos_url": "https://api.github.com/users/gaborbernat/repos",
+          "events_url": "https://api.github.com/users/gaborbernat/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/gaborbernat/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "remediation_developer"
+      }
+    ],
+    "comments": 1,
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+      "score": 7.8
+    }
+  },
+  {
+    "ghsa_id": "GHSA-8rjx-v5ww-45pp",
+    "cve_id": "CVE-2026-113776",
+    "url": "https://api.github.com/advisories/GHSA-8rjx-v5ww-45pp",
+    "html_url": "https://github.com/advisories/GHSA-8rjx-v5ww-45pp",
+    "summary": "virtualenv activation scripts run code from a path that contains a placeholder name",
+    "description": "### Impact\n\n`ViaTemplateActivator.instantiate_template` replaces the placeholders in an activation template one key at a time, each across the whole text. When a value that it already substituted and quoted contains the name of a later placeholder, the later pass rewrites that name inside the quoted literal. The inserted value brings its own quotes, which close the outer literal, and the rest of the path runs as code when a user activates the environment.\n\n`__VIRTUAL_NAME__` holds the environment's directory name, so a destination such as `A__VIRTUAL_NAME__B/x'$(touch PWNED)'y` is enough. In the default `activate` for bash, the `VIRTUAL_ENV` line renders as:\n\n```sh\nVIRTUAL_ENV='/tmp/t/A'x'\"'\"'$(touch PWNED)'\"'\"'y'B/x'\"'\"'$(touch PWNED)'\"'\"'y'\n```\n\nSourcing that script runs `touch PWNED`. The same payload in a path without the placeholder name runs nothing. `activate.fish` runs the command the same way, and the reporter also showed Python code execution through `activate.xsh` and `bin/activate_this.py`. In `activate.csh`, a directory named after a prompt display placeholder, such as `__VIRTUAL_PROMPT_DISPLAY_TCSH__`, breaks the script with `Unmatched '''`.\n\nNo change to `quote()` can stop this, because the rewrite happens after `quote()` ran; it defeats `shlex.quote` and `repr()` alike.\n\nAn attacker needs to influence the destination path or `--prompt`: a CI job or wrapper tool that builds the path from a branch or project name, or a directory in a cloned repository or unpacked archive.\n\nThe bug affects versions 20.26.6 through 21.14.1. Version 20.26.6 first quoted template values (#2768) and introduced the per-key loop.\n\n### Patches\n\nFixed in 21.14.2. Activation scripts now keep a placeholder name in the environment's path or prompt as plain text, and activating the example above runs nothing. Fix: https://github.com/pypa/virtualenv/commit/602b26623a724827ff171bf11fef4ad186d01f74\n\n### Workarounds\n\nDo not create an environment whose path or `--prompt` contains a placeholder name such as `__VIRTUAL_NAME__`, `__VIRTUAL_ENV__` or `__VIRTUAL_PROMPT__`, and inspect the generated activation script before you source one you did not create.\n\n### Credits\n\nKevin Stubbings (@Kwstubbs) of GitHub Security Lab reported this issue.",
+    "type": "reviewed",
+    "severity": "high",
+    "repository_advisory_url": "https://api.github.com/repos/pypa/virtualenv/security-advisories/GHSA-8rjx-v5ww-45pp",
+    "source_code_location": "https://github.com/pypa/virtualenv",
+    "identifiers": [
+      {
+        "value": "GHSA-8rjx-v5ww-45pp",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2026-113776",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/pypa/virtualenv/security/advisories/GHSA-8rjx-v5ww-45pp",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-113776",
+      "https://github.com/pypa/virtualenv/commit/602b26623a724827ff171bf11fef4ad186d01f74",
+      "https://github.com/pypa/virtualenv/releases/tag/21.14.2",
+      "https://github.com/advisories/GHSA-8rjx-v5ww-45pp"
+    ],
+    "published_at": "2026-10-21T16:39:38Z",
+    "updated_at": "2026-10-21T16:39:39Z",
+    "github_reviewed_at": "2026-10-21T16:39:38Z",
+    "nvd_published_at": "2026-10-20T22:19:30Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "virtualenv"
+        },
+        "vulnerable_version_range": ">= 20.26.6, <= 21.14.1",
+        "first_patched_version": "21.14.2",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+        "score": 7.8
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-78",
+        "name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+      },
+      {
+        "cwe_id": "CWE-94",
+        "name": "Improper Control of Generation of Code ('Code Injection')"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "Kwstubbs",
+          "id": 11400619,
+          "node_id": "MDQ6VXNlcjExNDAwNjE5",
+          "avatar_url": "https://avatars.githubusercontent.com/u/11400619?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/Kwstubbs",
+          "html_url": "https://github.com/Kwstubbs",
+          "followers_url": "https://api.github.com/users/Kwstubbs/followers",
+          "following_url": "https://api.github.com/users/Kwstubbs/following{/other_user}",
+          "gists_url": "https://api.github.com/users/Kwstubbs/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/Kwstubbs/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/Kwstubbs/subscriptions",
+          "organizations_url": "https://api.github.com/users/Kwstubbs/orgs",
+          "repos_url": "https://api.github.com/users/Kwstubbs/repos",
+          "events_url": "https://api.github.com/users/Kwstubbs/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/Kwstubbs/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": true
+        },
+        "type": "reporter"
+      },
+      {
+        "user": {
+          "login": "gaborbernat",
+          "id": 690238,
+          "node_id": "MDQ6VXNlcjY5MDIzOA==",
+          "avatar_url": "https://avatars.githubusercontent.com/u/690238?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/gaborbernat",
+          "html_url": "https://github.com/gaborbernat",
+          "followers_url": "https://api.github.com/users/gaborbernat/followers",
+          "following_url": "https://api.github.com/users/gaborbernat/following{/other_user}",
+          "gists_url": "https://api.github.com/users/gaborbernat/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/gaborbernat/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/gaborbernat/subscriptions",
+          "organizations_url": "https://api.github.com/users/gaborbernat/orgs",
+          "repos_url": "https://api.github.com/users/gaborbernat/repos",
+          "events_url": "https://api.github.com/users/gaborbernat/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/gaborbernat/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "remediation_developer"
+      }
+    ],
+    "comments": 1,
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+      "score": 7.8
+    }
+  }
+]

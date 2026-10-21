@@ -1,0 +1,1232 @@
+[
+  {
+    "sha": "4b587f00996ebe5c05a73eaef105ef241e876414",
+    "node_id": "C_kwDOBPTSmdoAKDRiNTg3ZjAwOTk2ZWJlNWMwNWE3M2VhZWYxMDVlZjI0MWU4NzY0MTQ",
+    "commit": {
+      "author": {
+        "name": "Kai Aldag",
+        "email": "kaialdag@icloud.com",
+        "date": "2026-10-20T21:54:18Z"
+      },
+      "committer": {
+        "name": "Dirkjan Ochtman",
+        "email": "dirkjan@ochtman.nl",
+        "date": "2026-10-21T06:20:38Z"
+      },
+      "message": "Classify the webpki-root-certs compatibility wrapper",
+      "tree": {
+        "sha": "523058420679c8a4901e43e8e5fcb1e1406e7436",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/git/trees/523058420679c8a4901e43e8e5fcb1e1406e7436"
+      },
+      "url": "https://api.github.com/repos/rustsec/advisory-db/git/commits/4b587f00996ebe5c05a73eaef105ef241e876414",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/rustsec/advisory-db/commits/4b587f00996ebe5c05a73eaef105ef241e876414",
+    "html_url": "https://github.com/rustsec/advisory-db/commit/4b587f00996ebe5c05a73eaef105ef241e876414",
+    "comments_url": "https://api.github.com/repos/rustsec/advisory-db/commits/4b587f00996ebe5c05a73eaef105ef241e876414/comments",
+    "author": {
+      "login": "KaiCode2",
+      "id": 7867183,
+      "node_id": "MDQ6VXNlcjc4NjcxODM=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7867183?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/KaiCode2",
+      "html_url": "https://github.com/KaiCode2",
+      "followers_url": "https://api.github.com/users/KaiCode2/followers",
+      "following_url": "https://api.github.com/users/KaiCode2/following{/other_user}",
+      "gists_url": "https://api.github.com/users/KaiCode2/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/KaiCode2/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/KaiCode2/subscriptions",
+      "organizations_url": "https://api.github.com/users/KaiCode2/orgs",
+      "repos_url": "https://api.github.com/users/KaiCode2/repos",
+      "events_url": "https://api.github.com/users/KaiCode2/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/KaiCode2/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "djc",
+      "id": 158471,
+      "node_id": "MDQ6VXNlcjE1ODQ3MQ==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/158471?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/djc",
+      "html_url": "https://github.com/djc",
+      "followers_url": "https://api.github.com/users/djc/followers",
+      "following_url": "https://api.github.com/users/djc/following{/other_user}",
+      "gists_url": "https://api.github.com/users/djc/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/djc/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/djc/subscriptions",
+      "organizations_url": "https://api.github.com/users/djc/orgs",
+      "repos_url": "https://api.github.com/users/djc/repos",
+      "events_url": "https://api.github.com/users/djc/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/djc/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "8c25400939ad3954d97553d4dc48664c0771e1a7",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/commits/8c25400939ad3954d97553d4dc48664c0771e1a7",
+        "html_url": "https://github.com/rustsec/advisory-db/commit/8c25400939ad3954d97553d4dc48664c0771e1a7"
+      }
+    ]
+  },
+  {
+    "sha": "8c25400939ad3954d97553d4dc48664c0771e1a7",
+    "node_id": "C_kwDOBPTSmdoAKDhjMjU0MDA5MzlhZDM5NTRkOTc1NTNkNGRjNDg2NjRjMDc3MWUxYTc",
+    "commit": {
+      "author": {
+        "name": "Kai Aldag",
+        "email": "kaialdag@icloud.com",
+        "date": "2026-10-20T21:02:03Z"
+      },
+      "committer": {
+        "name": "Dirkjan Ochtman",
+        "email": "dirkjan@ochtman.nl",
+        "date": "2026-10-21T06:20:38Z"
+      },
+      "message": "Clarify webpki-roots 0.26.11 compatibility wrapper status",
+      "tree": {
+        "sha": "944e97a4f59718f158475575edc46f5079f28a3b",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/git/trees/944e97a4f59718f158475575edc46f5079f28a3b"
+      },
+      "url": "https://api.github.com/repos/rustsec/advisory-db/git/commits/8c25400939ad3954d97553d4dc48664c0771e1a7",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/rustsec/advisory-db/commits/8c25400939ad3954d97553d4dc48664c0771e1a7",
+    "html_url": "https://github.com/rustsec/advisory-db/commit/8c25400939ad3954d97553d4dc48664c0771e1a7",
+    "comments_url": "https://api.github.com/repos/rustsec/advisory-db/commits/8c25400939ad3954d97553d4dc48664c0771e1a7/comments",
+    "author": {
+      "login": "KaiCode2",
+      "id": 7867183,
+      "node_id": "MDQ6VXNlcjc4NjcxODM=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7867183?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/KaiCode2",
+      "html_url": "https://github.com/KaiCode2",
+      "followers_url": "https://api.github.com/users/KaiCode2/followers",
+      "following_url": "https://api.github.com/users/KaiCode2/following{/other_user}",
+      "gists_url": "https://api.github.com/users/KaiCode2/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/KaiCode2/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/KaiCode2/subscriptions",
+      "organizations_url": "https://api.github.com/users/KaiCode2/orgs",
+      "repos_url": "https://api.github.com/users/KaiCode2/repos",
+      "events_url": "https://api.github.com/users/KaiCode2/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/KaiCode2/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "djc",
+      "id": 158471,
+      "node_id": "MDQ6VXNlcjE1ODQ3MQ==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/158471?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/djc",
+      "html_url": "https://github.com/djc",
+      "followers_url": "https://api.github.com/users/djc/followers",
+      "following_url": "https://api.github.com/users/djc/following{/other_user}",
+      "gists_url": "https://api.github.com/users/djc/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/djc/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/djc/subscriptions",
+      "organizations_url": "https://api.github.com/users/djc/orgs",
+      "repos_url": "https://api.github.com/users/djc/repos",
+      "events_url": "https://api.github.com/users/djc/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/djc/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "e6f94f3760d5e6c54c1b05f204002263bc025524",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/commits/e6f94f3760d5e6c54c1b05f204002263bc025524",
+        "html_url": "https://github.com/rustsec/advisory-db/commit/e6f94f3760d5e6c54c1b05f204002263bc025524"
+      }
+    ]
+  },
+  {
+    "sha": "e6f94f3760d5e6c54c1b05f204002263bc025524",
+    "node_id": "C_kwDOBPTSmdoAKGU2Zjk0ZjM3NjBkNWU2YzU0YzFiMDVmMjA0MDAyMjYzYmMwMjU1MjQ",
+    "commit": {
+      "author": {
+        "name": "djc",
+        "email": "158471+djc@users.noreply.github.com",
+        "date": "2026-10-20T19:07:46Z"
+      },
+      "committer": {
+        "name": "Dirkjan Ochtman",
+        "email": "dirkjan@ochtman.nl",
+        "date": "2026-10-20T19:24:19Z"
+      },
+      "message": "Assigned RUSTSEC-2026-0381 to webpki-roots, RUSTSEC-2026-0382 to rustls-webpki, RUSTSEC-2026-0383 to webpki-root-certs",
+      "tree": {
+        "sha": "36f251a0f912c8275985e0306e9fe7715c19a4ad",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/git/trees/36f251a0f912c8275985e0306e9fe7715c19a4ad"
+      },
+      "url": "https://api.github.com/repos/rustsec/advisory-db/git/commits/e6f94f3760d5e6c54c1b05f204002263bc025524",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/rustsec/advisory-db/commits/e6f94f3760d5e6c54c1b05f204002263bc025524",
+    "html_url": "https://github.com/rustsec/advisory-db/commit/e6f94f3760d5e6c54c1b05f204002263bc025524",
+    "comments_url": "https://api.github.com/repos/rustsec/advisory-db/commits/e6f94f3760d5e6c54c1b05f204002263bc025524/comments",
+    "author": {
+      "login": "djc",
+      "id": 158471,
+      "node_id": "MDQ6VXNlcjE1ODQ3MQ==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/158471?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/djc",
+      "html_url": "https://github.com/djc",
+      "followers_url": "https://api.github.com/users/djc/followers",
+      "following_url": "https://api.github.com/users/djc/following{/other_user}",
+      "gists_url": "https://api.github.com/users/djc/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/djc/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/djc/subscriptions",
+      "organizations_url": "https://api.github.com/users/djc/orgs",
+      "repos_url": "https://api.github.com/users/djc/repos",
+      "events_url": "https://api.github.com/users/djc/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/djc/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "djc",
+      "id": 158471,
+      "node_id": "MDQ6VXNlcjE1ODQ3MQ==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/158471?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/djc",
+      "html_url": "https://github.com/djc",
+      "followers_url": "https://api.github.com/users/djc/followers",
+      "following_url": "https://api.github.com/users/djc/following{/other_user}",
+      "gists_url": "https://api.github.com/users/djc/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/djc/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/djc/subscriptions",
+      "organizations_url": "https://api.github.com/users/djc/orgs",
+      "repos_url": "https://api.github.com/users/djc/repos",
+      "events_url": "https://api.github.com/users/djc/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/djc/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "5502dedfaf87df1ef64175116bf516640aab2a7c",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/commits/5502dedfaf87df1ef64175116bf516640aab2a7c",
+        "html_url": "https://github.com/rustsec/advisory-db/commit/5502dedfaf87df1ef64175116bf516640aab2a7c"
+      }
+    ]
+  },
+  {
+    "sha": "5502dedfaf87df1ef64175116bf516640aab2a7c",
+    "node_id": "C_kwDOBPTSmdoAKDU1MDJkZWRmYWY4N2RmMWVmNjQxNzUxMTZiZjUxNjY0MGFhYjJhN2M",
+    "commit": {
+      "author": {
+        "name": "Daniel McCarney",
+        "email": "daniel@binaryparadox.net",
+        "date": "2026-10-20T18:21:27Z"
+      },
+      "committer": {
+        "name": "Dirkjan Ochtman",
+        "email": "dirkjan@ochtman.nl",
+        "date": "2026-10-20T19:07:34Z"
+      },
+      "message": "add rustls-webpki advisories related to CVE-2026-111943",
+      "tree": {
+        "sha": "682c866df77bc3a7bbfe5f22d99ae085766d81c7",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/git/trees/682c866df77bc3a7bbfe5f22d99ae085766d81c7"
+      },
+      "url": "https://api.github.com/repos/rustsec/advisory-db/git/commits/5502dedfaf87df1ef64175116bf516640aab2a7c",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/rustsec/advisory-db/commits/5502dedfaf87df1ef64175116bf516640aab2a7c",
+    "html_url": "https://github.com/rustsec/advisory-db/commit/5502dedfaf87df1ef64175116bf516640aab2a7c",
+    "comments_url": "https://api.github.com/repos/rustsec/advisory-db/commits/5502dedfaf87df1ef64175116bf516640aab2a7c/comments",
+    "author": {
+      "login": "cpu",
+      "id": 292650,
+      "node_id": "MDQ6VXNlcjI5MjY1MA==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/292650?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/cpu",
+      "html_url": "https://github.com/cpu",
+      "followers_url": "https://api.github.com/users/cpu/followers",
+      "following_url": "https://api.github.com/users/cpu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/cpu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/cpu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/cpu/subscriptions",
+      "organizations_url": "https://api.github.com/users/cpu/orgs",
+      "repos_url": "https://api.github.com/users/cpu/repos",
+      "events_url": "https://api.github.com/users/cpu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/cpu/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "djc",
+      "id": 158471,
+      "node_id": "MDQ6VXNlcjE1ODQ3MQ==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/158471?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/djc",
+      "html_url": "https://github.com/djc",
+      "followers_url": "https://api.github.com/users/djc/followers",
+      "following_url": "https://api.github.com/users/djc/following{/other_user}",
+      "gists_url": "https://api.github.com/users/djc/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/djc/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/djc/subscriptions",
+      "organizations_url": "https://api.github.com/users/djc/orgs",
+      "repos_url": "https://api.github.com/users/djc/repos",
+      "events_url": "https://api.github.com/users/djc/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/djc/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "b19b2c83c2493961ccb12f9fc4699a00fb2c6c44",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/commits/b19b2c83c2493961ccb12f9fc4699a00fb2c6c44",
+        "html_url": "https://github.com/rustsec/advisory-db/commit/b19b2c83c2493961ccb12f9fc4699a00fb2c6c44"
+      }
+    ]
+  },
+  {
+    "sha": "b19b2c83c2493961ccb12f9fc4699a00fb2c6c44",
+    "node_id": "C_kwDOBPTSmdoAKGIxOWIyYzgzYzI0OTM5NjFjY2IxMmY5ZmM0Njk5YTAwZmIyYzZjNDQ",
+    "commit": {
+      "author": {
+        "name": "djc",
+        "email": "158471+djc@users.noreply.github.com",
+        "date": "2026-10-20T10:59:56Z"
+      },
+      "committer": {
+        "name": "Dirkjan Ochtman",
+        "email": "dirkjan@ochtman.nl",
+        "date": "2026-10-20T11:02:37Z"
+      },
+      "message": "Assigned RUSTSEC-2026-0374 to basic-toml, RUSTSEC-2026-0375 to wasmtime-wasi-http, RUSTSEC-2026-0376 to wasmtime-wasi-http, RUSTSEC-2026-0377 to wasmtime-wasi-http, RUSTSEC-2026-0378 to wasmtime, RUSTSEC-2026-0379 to wasmtime and 1 more",
+      "tree": {
+        "sha": "7e994c00425eae5cb26b0a0a6e1ae46b7beb5ec0",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/git/trees/7e994c00425eae5cb26b0a0a6e1ae46b7beb5ec0"
+      },
+      "url": "https://api.github.com/repos/rustsec/advisory-db/git/commits/b19b2c83c2493961ccb12f9fc4699a00fb2c6c44",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/rustsec/advisory-db/commits/b19b2c83c2493961ccb12f9fc4699a00fb2c6c44",
+    "html_url": "https://github.com/rustsec/advisory-db/commit/b19b2c83c2493961ccb12f9fc4699a00fb2c6c44",
+    "comments_url": "https://api.github.com/repos/rustsec/advisory-db/commits/b19b2c83c2493961ccb12f9fc4699a00fb2c6c44/comments",
+    "author": {
+      "login": "djc",
+      "id": 158471,
+      "node_id": "MDQ6VXNlcjE1ODQ3MQ==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/158471?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/djc",
+      "html_url": "https://github.com/djc",
+      "followers_url": "https://api.github.com/users/djc/followers",
+      "following_url": "https://api.github.com/users/djc/following{/other_user}",
+      "gists_url": "https://api.github.com/users/djc/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/djc/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/djc/subscriptions",
+      "organizations_url": "https://api.github.com/users/djc/orgs",
+      "repos_url": "https://api.github.com/users/djc/repos",
+      "events_url": "https://api.github.com/users/djc/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/djc/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "djc",
+      "id": 158471,
+      "node_id": "MDQ6VXNlcjE1ODQ3MQ==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/158471?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/djc",
+      "html_url": "https://github.com/djc",
+      "followers_url": "https://api.github.com/users/djc/followers",
+      "following_url": "https://api.github.com/users/djc/following{/other_user}",
+      "gists_url": "https://api.github.com/users/djc/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/djc/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/djc/subscriptions",
+      "organizations_url": "https://api.github.com/users/djc/orgs",
+      "repos_url": "https://api.github.com/users/djc/repos",
+      "events_url": "https://api.github.com/users/djc/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/djc/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "b3180c2cd9d634545a6a29b980b88421aafb760d",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/commits/b3180c2cd9d634545a6a29b980b88421aafb760d",
+        "html_url": "https://github.com/rustsec/advisory-db/commit/b3180c2cd9d634545a6a29b980b88421aafb760d"
+      }
+    ]
+  },
+  {
+    "sha": "b3180c2cd9d634545a6a29b980b88421aafb760d",
+    "node_id": "C_kwDOBPTSmdoAKGIzMTgwYzJjZDlkNjM0NTQ1YTZhMjliOTgwYjg4NDIxYWFmYjc2MGQ",
+    "commit": {
+      "author": {
+        "name": "Erik McClure",
+        "email": "3387013+ErikMcClure@users.noreply.github.com",
+        "date": "2026-10-20T10:59:45Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-10-20T10:59:45Z"
+      },
+      "message": "Update RUSTSEC-2026-0262.md with patched version (#3408)",
+      "tree": {
+        "sha": "d813f3fed6f31c4bbf1e1ce8184ced25a58611b7",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/git/trees/d813f3fed6f31c4bbf1e1ce8184ced25a58611b7"
+      },
+      "url": "https://api.github.com/repos/rustsec/advisory-db/git/commits/b3180c2cd9d634545a6a29b980b88421aafb760d",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJq10mhCRC1aQ7uu5UhlAAAwv8QAHPD+3E560fln9bLereRoWmJ\nLA/Gzg18pTGfsthdk0ExUvARj/OVKZxMnzv10YZBIGcC4t/gpPyufOKz04ghH0lZ\ni82ozSZNsm5xkTtVRKT56FPAsVst4V6Lm260AoAfbUTz/TDESlAA8Z8Fnxd7FRZg\n6ZST+aOwJtr8rIGlP5vWf0imRwDEGXYY53GRCNA37z+m/91Ro4AhomDWqM/N9Vmb\nVIPEUgWg3ggVmbInMieJHdy7lZAM3ASxa4QSNpHa0BuDStbLtEePbzc8mi3IQtJ+\nYoohwnGzL8NJWjl64bFFlzPHwDfFoUpV5vve9tXUtDEcTPMicf1yXqbt/yr7MbAi\nxpKYbiQGm/xroDYCcYVZyX760v3Dd4yAJjDjMjGjlg7I/I5KJk3zOqbTgxZx+mPs\n3NB6uJztweTHBnItbkBQA6Z2ZTE1klYCAlSKvCVAR9XC0PNyKrbSOkP9iwAo0fp6\nqv5IuNEm//tHkD3ULpCUJVadpm9sFDkzBV8J4UKB5FLmQCbxafh/MouumDn5ny9i\nAYNgoJ6clOAnOgxNDfBY0YVdOG4kNG9fHMV1Az65iYqtiYdV3OREnoeHU+2sKYbE\n4V4WcORvGA9EUDFIvKo1T8fVOplI/772rhTXh4UCwTARGLUsqSVNEdZhXyHpDBio\nUL5Nys4P2Pxz8af+TEpY\n=UEnP\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree d813f3fed6f31c4bbf1e1ce8184ced25a58611b7\nparent a78132f4bac598bd8a936f59d980eb4df527d970\nauthor Erik McClure <3387013+ErikMcClure@users.noreply.github.com> 1792493985 -0700\ncommitter GitHub <noreply@github.com> 1792493985 +0200\n\nUpdate RUSTSEC-2026-0262.md with patched version (#3408)",
+        "verified_at": "2026-10-20T10:59:46Z"
+      }
+    },
+    "url": "https://api.github.com/repos/rustsec/advisory-db/commits/b3180c2cd9d634545a6a29b980b88421aafb760d",
+    "html_url": "https://github.com/rustsec/advisory-db/commit/b3180c2cd9d634545a6a29b980b88421aafb760d",
+    "comments_url": "https://api.github.com/repos/rustsec/advisory-db/commits/b3180c2cd9d634545a6a29b980b88421aafb760d/comments",
+    "author": {
+      "login": "ErikMcClure",
+      "id": 3387013,
+      "node_id": "MDQ6VXNlcjMzODcwMTM=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3387013?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/ErikMcClure",
+      "html_url": "https://github.com/ErikMcClure",
+      "followers_url": "https://api.github.com/users/ErikMcClure/followers",
+      "following_url": "https://api.github.com/users/ErikMcClure/following{/other_user}",
+      "gists_url": "https://api.github.com/users/ErikMcClure/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/ErikMcClure/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/ErikMcClure/subscriptions",
+      "organizations_url": "https://api.github.com/users/ErikMcClure/orgs",
+      "repos_url": "https://api.github.com/users/ErikMcClure/repos",
+      "events_url": "https://api.github.com/users/ErikMcClure/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/ErikMcClure/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "a78132f4bac598bd8a936f59d980eb4df527d970",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/commits/a78132f4bac598bd8a936f59d980eb4df527d970",
+        "html_url": "https://github.com/rustsec/advisory-db/commit/a78132f4bac598bd8a936f59d980eb4df527d970"
+      }
+    ]
+  },
+  {
+    "sha": "a78132f4bac598bd8a936f59d980eb4df527d970",
+    "node_id": "C_kwDOBPTSmdoAKGE3ODEzMmY0YmFjNTk4YmQ4YTkzNmY1OWQ5ODBlYjRkZjUyN2Q5NzA",
+    "commit": {
+      "author": {
+        "name": "TechnoPorg",
+        "email": "mail@technop.org",
+        "date": "2026-09-26T15:13:52Z"
+      },
+      "committer": {
+        "name": "Dirkjan Ochtman",
+        "email": "dirkjan@ochtman.nl",
+        "date": "2026-10-20T10:58:43Z"
+      },
+      "message": "Mark basic-toml as unmaintained",
+      "tree": {
+        "sha": "cac0bd98678ff8de7702ba1af6c4ae302448f46e",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/git/trees/cac0bd98678ff8de7702ba1af6c4ae302448f46e"
+      },
+      "url": "https://api.github.com/repos/rustsec/advisory-db/git/commits/a78132f4bac598bd8a936f59d980eb4df527d970",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/rustsec/advisory-db/commits/a78132f4bac598bd8a936f59d980eb4df527d970",
+    "html_url": "https://github.com/rustsec/advisory-db/commit/a78132f4bac598bd8a936f59d980eb4df527d970",
+    "comments_url": "https://api.github.com/repos/rustsec/advisory-db/commits/a78132f4bac598bd8a936f59d980eb4df527d970/comments",
+    "author": {
+      "login": "TechnoPorg",
+      "id": 69441745,
+      "node_id": "MDQ6VXNlcjY5NDQxNzQ1",
+      "avatar_url": "https://avatars.githubusercontent.com/u/69441745?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/TechnoPorg",
+      "html_url": "https://github.com/TechnoPorg",
+      "followers_url": "https://api.github.com/users/TechnoPorg/followers",
+      "following_url": "https://api.github.com/users/TechnoPorg/following{/other_user}",
+      "gists_url": "https://api.github.com/users/TechnoPorg/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/TechnoPorg/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/TechnoPorg/subscriptions",
+      "organizations_url": "https://api.github.com/users/TechnoPorg/orgs",
+      "repos_url": "https://api.github.com/users/TechnoPorg/repos",
+      "events_url": "https://api.github.com/users/TechnoPorg/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/TechnoPorg/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "djc",
+      "id": 158471,
+      "node_id": "MDQ6VXNlcjE1ODQ3MQ==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/158471?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/djc",
+      "html_url": "https://github.com/djc",
+      "followers_url": "https://api.github.com/users/djc/followers",
+      "following_url": "https://api.github.com/users/djc/following{/other_user}",
+      "gists_url": "https://api.github.com/users/djc/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/djc/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/djc/subscriptions",
+      "organizations_url": "https://api.github.com/users/djc/orgs",
+      "repos_url": "https://api.github.com/users/djc/repos",
+      "events_url": "https://api.github.com/users/djc/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/djc/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "33084e1eacef3e48384dc4db32d841211869e423",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/commits/33084e1eacef3e48384dc4db32d841211869e423",
+        "html_url": "https://github.com/rustsec/advisory-db/commit/33084e1eacef3e48384dc4db32d841211869e423"
+      }
+    ]
+  },
+  {
+    "sha": "33084e1eacef3e48384dc4db32d841211869e423",
+    "node_id": "C_kwDOBPTSmdoAKDMzMDg0ZTFlYWNlZjNlNDgzODRkYzRkYjMyZDg0MTIxMTg2OWU0MjM",
+    "commit": {
+      "author": {
+        "name": "Pat Hickey",
+        "email": "p.hickey@f5.com",
+        "date": "2026-10-19T21:41:00Z"
+      },
+      "committer": {
+        "name": "Dirkjan Ochtman",
+        "email": "dirkjan@ochtman.nl",
+        "date": "2026-10-20T10:57:03Z"
+      },
+      "message": "submit RUSTSEC advisories for wasmtime project GHSAs published 2026-10-19",
+      "tree": {
+        "sha": "9e5d349ddcf689fd12ebca6fd740b86bf96e3472",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/git/trees/9e5d349ddcf689fd12ebca6fd740b86bf96e3472"
+      },
+      "url": "https://api.github.com/repos/rustsec/advisory-db/git/commits/33084e1eacef3e48384dc4db32d841211869e423",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/rustsec/advisory-db/commits/33084e1eacef3e48384dc4db32d841211869e423",
+    "html_url": "https://github.com/rustsec/advisory-db/commit/33084e1eacef3e48384dc4db32d841211869e423",
+    "comments_url": "https://api.github.com/repos/rustsec/advisory-db/commits/33084e1eacef3e48384dc4db32d841211869e423/comments",
+    "author": {
+      "login": "pchickey",
+      "id": 118618,
+      "node_id": "MDQ6VXNlcjExODYxOA==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/118618?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/pchickey",
+      "html_url": "https://github.com/pchickey",
+      "followers_url": "https://api.github.com/users/pchickey/followers",
+      "following_url": "https://api.github.com/users/pchickey/following{/other_user}",
+      "gists_url": "https://api.github.com/users/pchickey/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/pchickey/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/pchickey/subscriptions",
+      "organizations_url": "https://api.github.com/users/pchickey/orgs",
+      "repos_url": "https://api.github.com/users/pchickey/repos",
+      "events_url": "https://api.github.com/users/pchickey/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/pchickey/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "djc",
+      "id": 158471,
+      "node_id": "MDQ6VXNlcjE1ODQ3MQ==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/158471?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/djc",
+      "html_url": "https://github.com/djc",
+      "followers_url": "https://api.github.com/users/djc/followers",
+      "following_url": "https://api.github.com/users/djc/following{/other_user}",
+      "gists_url": "https://api.github.com/users/djc/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/djc/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/djc/subscriptions",
+      "organizations_url": "https://api.github.com/users/djc/orgs",
+      "repos_url": "https://api.github.com/users/djc/repos",
+      "events_url": "https://api.github.com/users/djc/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/djc/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "999ec89d5d3f10f20be14750ec8c2d8b44e0ac9b",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/commits/999ec89d5d3f10f20be14750ec8c2d8b44e0ac9b",
+        "html_url": "https://github.com/rustsec/advisory-db/commit/999ec89d5d3f10f20be14750ec8c2d8b44e0ac9b"
+      }
+    ]
+  },
+  {
+    "sha": "999ec89d5d3f10f20be14750ec8c2d8b44e0ac9b",
+    "node_id": "C_kwDOBPTSmdoAKDk5OWVjODlkNWQzZjEwZjIwYmUxNDc1MGVjOGMyZDhiNDRlMGFjOWI",
+    "commit": {
+      "author": {
+        "name": "djc",
+        "email": "158471+djc@users.noreply.github.com",
+        "date": "2026-10-17T15:19:28Z"
+      },
+      "committer": {
+        "name": "Dirkjan Ochtman",
+        "email": "dirkjan@ochtman.nl",
+        "date": "2026-10-17T15:23:59Z"
+      },
+      "message": "Assigned RUSTSEC-2026-0373 to ammonia",
+      "tree": {
+        "sha": "7fab15e592b35835decefbb43f6578c70565e4d9",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/git/trees/7fab15e592b35835decefbb43f6578c70565e4d9"
+      },
+      "url": "https://api.github.com/repos/rustsec/advisory-db/git/commits/999ec89d5d3f10f20be14750ec8c2d8b44e0ac9b",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/rustsec/advisory-db/commits/999ec89d5d3f10f20be14750ec8c2d8b44e0ac9b",
+    "html_url": "https://github.com/rustsec/advisory-db/commit/999ec89d5d3f10f20be14750ec8c2d8b44e0ac9b",
+    "comments_url": "https://api.github.com/repos/rustsec/advisory-db/commits/999ec89d5d3f10f20be14750ec8c2d8b44e0ac9b/comments",
+    "author": {
+      "login": "djc",
+      "id": 158471,
+      "node_id": "MDQ6VXNlcjE1ODQ3MQ==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/158471?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/djc",
+      "html_url": "https://github.com/djc",
+      "followers_url": "https://api.github.com/users/djc/followers",
+      "following_url": "https://api.github.com/users/djc/following{/other_user}",
+      "gists_url": "https://api.github.com/users/djc/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/djc/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/djc/subscriptions",
+      "organizations_url": "https://api.github.com/users/djc/orgs",
+      "repos_url": "https://api.github.com/users/djc/repos",
+      "events_url": "https://api.github.com/users/djc/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/djc/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "djc",
+      "id": 158471,
+      "node_id": "MDQ6VXNlcjE1ODQ3MQ==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/158471?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/djc",
+      "html_url": "https://github.com/djc",
+      "followers_url": "https://api.github.com/users/djc/followers",
+      "following_url": "https://api.github.com/users/djc/following{/other_user}",
+      "gists_url": "https://api.github.com/users/djc/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/djc/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/djc/subscriptions",
+      "organizations_url": "https://api.github.com/users/djc/orgs",
+      "repos_url": "https://api.github.com/users/djc/repos",
+      "events_url": "https://api.github.com/users/djc/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/djc/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "e6e9dd63d3a520c35a3b4695f612018d78f61b72",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/commits/e6e9dd63d3a520c35a3b4695f612018d78f61b72",
+        "html_url": "https://github.com/rustsec/advisory-db/commit/e6e9dd63d3a520c35a3b4695f612018d78f61b72"
+      }
+    ]
+  },
+  {
+    "sha": "e6e9dd63d3a520c35a3b4695f612018d78f61b72",
+    "node_id": "C_kwDOBPTSmdoAKGU2ZTlkZDYzZDNhNTIwYzM1YTNiNDY5NWY2MTIwMThkNzhmNjFiNzI",
+    "commit": {
+      "author": {
+        "name": "Michael Howell",
+        "email": "michael@notriddle.com",
+        "date": "2026-10-17T03:55:41Z"
+      },
+      "committer": {
+        "name": "Dirkjan Ochtman",
+        "email": "dirkjan@ochtman.nl",
+        "date": "2026-10-17T15:19:17Z"
+      },
+      "message": "Another vuln for busted CSS URL escaping",
+      "tree": {
+        "sha": "f7853c03d2cba97659a2b38a5d6898b3e7e54e8c",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/git/trees/f7853c03d2cba97659a2b38a5d6898b3e7e54e8c"
+      },
+      "url": "https://api.github.com/repos/rustsec/advisory-db/git/commits/e6e9dd63d3a520c35a3b4695f612018d78f61b72",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/rustsec/advisory-db/commits/e6e9dd63d3a520c35a3b4695f612018d78f61b72",
+    "html_url": "https://github.com/rustsec/advisory-db/commit/e6e9dd63d3a520c35a3b4695f612018d78f61b72",
+    "comments_url": "https://api.github.com/repos/rustsec/advisory-db/commits/e6e9dd63d3a520c35a3b4695f612018d78f61b72/comments",
+    "author": {
+      "login": "notriddle",
+      "id": 1593513,
+      "node_id": "MDQ6VXNlcjE1OTM1MTM=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1593513?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/notriddle",
+      "html_url": "https://github.com/notriddle",
+      "followers_url": "https://api.github.com/users/notriddle/followers",
+      "following_url": "https://api.github.com/users/notriddle/following{/other_user}",
+      "gists_url": "https://api.github.com/users/notriddle/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/notriddle/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/notriddle/subscriptions",
+      "organizations_url": "https://api.github.com/users/notriddle/orgs",
+      "repos_url": "https://api.github.com/users/notriddle/repos",
+      "events_url": "https://api.github.com/users/notriddle/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/notriddle/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "djc",
+      "id": 158471,
+      "node_id": "MDQ6VXNlcjE1ODQ3MQ==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/158471?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/djc",
+      "html_url": "https://github.com/djc",
+      "followers_url": "https://api.github.com/users/djc/followers",
+      "following_url": "https://api.github.com/users/djc/following{/other_user}",
+      "gists_url": "https://api.github.com/users/djc/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/djc/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/djc/subscriptions",
+      "organizations_url": "https://api.github.com/users/djc/orgs",
+      "repos_url": "https://api.github.com/users/djc/repos",
+      "events_url": "https://api.github.com/users/djc/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/djc/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "20b78deb42ef0a6ab34539b5ad2a188d9a97c8cf",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/commits/20b78deb42ef0a6ab34539b5ad2a188d9a97c8cf",
+        "html_url": "https://github.com/rustsec/advisory-db/commit/20b78deb42ef0a6ab34539b5ad2a188d9a97c8cf"
+      }
+    ]
+  },
+  {
+    "sha": "20b78deb42ef0a6ab34539b5ad2a188d9a97c8cf",
+    "node_id": "C_kwDOBPTSmdoAKDIwYjc4ZGViNDJlZjBhNmFiMzQ1MzliNWFkMmExODhkOWE5N2M4Y2Y",
+    "commit": {
+      "author": {
+        "name": "djc",
+        "email": "158471+djc@users.noreply.github.com",
+        "date": "2026-10-17T15:05:49Z"
+      },
+      "committer": {
+        "name": "Dirkjan Ochtman",
+        "email": "dirkjan@ochtman.nl",
+        "date": "2026-10-17T15:17:59Z"
+      },
+      "message": "Assigned RUSTSEC-2026-0370 to zvariant, RUSTSEC-2026-0371 to zbus_names, RUSTSEC-2026-0372 to zvariant_derive",
+      "tree": {
+        "sha": "0bf07fd4d5c139b2239d2565a7a392454e16d8e7",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/git/trees/0bf07fd4d5c139b2239d2565a7a392454e16d8e7"
+      },
+      "url": "https://api.github.com/repos/rustsec/advisory-db/git/commits/20b78deb42ef0a6ab34539b5ad2a188d9a97c8cf",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/rustsec/advisory-db/commits/20b78deb42ef0a6ab34539b5ad2a188d9a97c8cf",
+    "html_url": "https://github.com/rustsec/advisory-db/commit/20b78deb42ef0a6ab34539b5ad2a188d9a97c8cf",
+    "comments_url": "https://api.github.com/repos/rustsec/advisory-db/commits/20b78deb42ef0a6ab34539b5ad2a188d9a97c8cf/comments",
+    "author": {
+      "login": "djc",
+      "id": 158471,
+      "node_id": "MDQ6VXNlcjE1ODQ3MQ==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/158471?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/djc",
+      "html_url": "https://github.com/djc",
+      "followers_url": "https://api.github.com/users/djc/followers",
+      "following_url": "https://api.github.com/users/djc/following{/other_user}",
+      "gists_url": "https://api.github.com/users/djc/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/djc/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/djc/subscriptions",
+      "organizations_url": "https://api.github.com/users/djc/orgs",
+      "repos_url": "https://api.github.com/users/djc/repos",
+      "events_url": "https://api.github.com/users/djc/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/djc/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "djc",
+      "id": 158471,
+      "node_id": "MDQ6VXNlcjE1ODQ3MQ==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/158471?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/djc",
+      "html_url": "https://github.com/djc",
+      "followers_url": "https://api.github.com/users/djc/followers",
+      "following_url": "https://api.github.com/users/djc/following{/other_user}",
+      "gists_url": "https://api.github.com/users/djc/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/djc/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/djc/subscriptions",
+      "organizations_url": "https://api.github.com/users/djc/orgs",
+      "repos_url": "https://api.github.com/users/djc/repos",
+      "events_url": "https://api.github.com/users/djc/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/djc/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "cc76a4d599f5e87373a903873b2377219266b431",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/commits/cc76a4d599f5e87373a903873b2377219266b431",
+        "html_url": "https://github.com/rustsec/advisory-db/commit/cc76a4d599f5e87373a903873b2377219266b431"
+      }
+    ]
+  },
+  {
+    "sha": "cc76a4d599f5e87373a903873b2377219266b431",
+    "node_id": "C_kwDOBPTSmdoAKGNjNzZhNGQ1OTlmNWU4NzM3M2E5MDM4NzNiMjM3NzIxOTI2NmI0MzE",
+    "commit": {
+      "author": {
+        "name": "Zeeshan Ali Khan",
+        "email": "zeenix@gmail.com",
+        "date": "2026-10-16T15:03:28Z"
+      },
+      "committer": {
+        "name": "Dirkjan Ochtman",
+        "email": "dirkjan@ochtman.nl",
+        "date": "2026-10-17T15:05:38Z"
+      },
+      "message": "Add unmaintained advisories for zvariant, zvariant_derive, and zbus_names\n\nAssisted-by: Claude Opus 5.5 (claude-opus-5-5)",
+      "tree": {
+        "sha": "e25d927c4296009055676787fbee27776e8009ff",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/git/trees/e25d927c4296009055676787fbee27776e8009ff"
+      },
+      "url": "https://api.github.com/repos/rustsec/advisory-db/git/commits/cc76a4d599f5e87373a903873b2377219266b431",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/rustsec/advisory-db/commits/cc76a4d599f5e87373a903873b2377219266b431",
+    "html_url": "https://github.com/rustsec/advisory-db/commit/cc76a4d599f5e87373a903873b2377219266b431",
+    "comments_url": "https://api.github.com/repos/rustsec/advisory-db/commits/cc76a4d599f5e87373a903873b2377219266b431/comments",
+    "author": {
+      "login": "zeenix",
+      "id": 2027,
+      "node_id": "MDQ6VXNlcjIwMjc=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2027?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/zeenix",
+      "html_url": "https://github.com/zeenix",
+      "followers_url": "https://api.github.com/users/zeenix/followers",
+      "following_url": "https://api.github.com/users/zeenix/following{/other_user}",
+      "gists_url": "https://api.github.com/users/zeenix/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/zeenix/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/zeenix/subscriptions",
+      "organizations_url": "https://api.github.com/users/zeenix/orgs",
+      "repos_url": "https://api.github.com/users/zeenix/repos",
+      "events_url": "https://api.github.com/users/zeenix/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/zeenix/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "djc",
+      "id": 158471,
+      "node_id": "MDQ6VXNlcjE1ODQ3MQ==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/158471?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/djc",
+      "html_url": "https://github.com/djc",
+      "followers_url": "https://api.github.com/users/djc/followers",
+      "following_url": "https://api.github.com/users/djc/following{/other_user}",
+      "gists_url": "https://api.github.com/users/djc/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/djc/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/djc/subscriptions",
+      "organizations_url": "https://api.github.com/users/djc/orgs",
+      "repos_url": "https://api.github.com/users/djc/repos",
+      "events_url": "https://api.github.com/users/djc/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/djc/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "016e018909a1544ddbdd4bebffe3711fc42d9780",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/commits/016e018909a1544ddbdd4bebffe3711fc42d9780",
+        "html_url": "https://github.com/rustsec/advisory-db/commit/016e018909a1544ddbdd4bebffe3711fc42d9780"
+      }
+    ]
+  },
+  {
+    "sha": "016e018909a1544ddbdd4bebffe3711fc42d9780",
+    "node_id": "C_kwDOBPTSmdoAKDAxNmUwMTg5MDlhMTU0NGRkYmRkNGJlYmZmZTM3MTFmYzQyZDk3ODA",
+    "commit": {
+      "author": {
+        "name": "djc",
+        "email": "158471+djc@users.noreply.github.com",
+        "date": "2026-10-17T05:49:59Z"
+      },
+      "committer": {
+        "name": "Dirkjan Ochtman",
+        "email": "dirkjan@ochtman.nl",
+        "date": "2026-10-17T15:04:44Z"
+      },
+      "message": "Synchronize IDs (2026-10-17)",
+      "tree": {
+        "sha": "d2943b3c9cd2bd6a573931515481f08145569da8",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/git/trees/d2943b3c9cd2bd6a573931515481f08145569da8"
+      },
+      "url": "https://api.github.com/repos/rustsec/advisory-db/git/commits/016e018909a1544ddbdd4bebffe3711fc42d9780",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/rustsec/advisory-db/commits/016e018909a1544ddbdd4bebffe3711fc42d9780",
+    "html_url": "https://github.com/rustsec/advisory-db/commit/016e018909a1544ddbdd4bebffe3711fc42d9780",
+    "comments_url": "https://api.github.com/repos/rustsec/advisory-db/commits/016e018909a1544ddbdd4bebffe3711fc42d9780/comments",
+    "author": {
+      "login": "djc",
+      "id": 158471,
+      "node_id": "MDQ6VXNlcjE1ODQ3MQ==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/158471?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/djc",
+      "html_url": "https://github.com/djc",
+      "followers_url": "https://api.github.com/users/djc/followers",
+      "following_url": "https://api.github.com/users/djc/following{/other_user}",
+      "gists_url": "https://api.github.com/users/djc/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/djc/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/djc/subscriptions",
+      "organizations_url": "https://api.github.com/users/djc/orgs",
+      "repos_url": "https://api.github.com/users/djc/repos",
+      "events_url": "https://api.github.com/users/djc/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/djc/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "djc",
+      "id": 158471,
+      "node_id": "MDQ6VXNlcjE1ODQ3MQ==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/158471?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/djc",
+      "html_url": "https://github.com/djc",
+      "followers_url": "https://api.github.com/users/djc/followers",
+      "following_url": "https://api.github.com/users/djc/following{/other_user}",
+      "gists_url": "https://api.github.com/users/djc/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/djc/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/djc/subscriptions",
+      "organizations_url": "https://api.github.com/users/djc/orgs",
+      "repos_url": "https://api.github.com/users/djc/repos",
+      "events_url": "https://api.github.com/users/djc/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/djc/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "64f92cdc64401fab47baa10e2e11fe382aa57155",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/commits/64f92cdc64401fab47baa10e2e11fe382aa57155",
+        "html_url": "https://github.com/rustsec/advisory-db/commit/64f92cdc64401fab47baa10e2e11fe382aa57155"
+      }
+    ]
+  },
+  {
+    "sha": "64f92cdc64401fab47baa10e2e11fe382aa57155",
+    "node_id": "C_kwDOBPTSmdoAKDY0ZjkyY2RjNjQ0MDFmYWI0N2JhYTEwZTJlMTFmZTM4MmFhNTcxNTU",
+    "commit": {
+      "author": {
+        "name": "djc",
+        "email": "158471+djc@users.noreply.github.com",
+        "date": "2026-10-16T19:44:19Z"
+      },
+      "committer": {
+        "name": "Dirkjan Ochtman",
+        "email": "dirkjan@ochtman.nl",
+        "date": "2026-10-16T23:27:42Z"
+      },
+      "message": "Assigned RUSTSEC-2026-0365 to negentropy, RUSTSEC-2026-0366 to pest_grammars, RUSTSEC-2026-0367 to zip, RUSTSEC-2026-0368 to zip, RUSTSEC-2026-0369 to zip",
+      "tree": {
+        "sha": "0ca3c2554480410c6fa88311868929ab884cae4f",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/git/trees/0ca3c2554480410c6fa88311868929ab884cae4f"
+      },
+      "url": "https://api.github.com/repos/rustsec/advisory-db/git/commits/64f92cdc64401fab47baa10e2e11fe382aa57155",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/rustsec/advisory-db/commits/64f92cdc64401fab47baa10e2e11fe382aa57155",
+    "html_url": "https://github.com/rustsec/advisory-db/commit/64f92cdc64401fab47baa10e2e11fe382aa57155",
+    "comments_url": "https://api.github.com/repos/rustsec/advisory-db/commits/64f92cdc64401fab47baa10e2e11fe382aa57155/comments",
+    "author": {
+      "login": "djc",
+      "id": 158471,
+      "node_id": "MDQ6VXNlcjE1ODQ3MQ==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/158471?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/djc",
+      "html_url": "https://github.com/djc",
+      "followers_url": "https://api.github.com/users/djc/followers",
+      "following_url": "https://api.github.com/users/djc/following{/other_user}",
+      "gists_url": "https://api.github.com/users/djc/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/djc/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/djc/subscriptions",
+      "organizations_url": "https://api.github.com/users/djc/orgs",
+      "repos_url": "https://api.github.com/users/djc/repos",
+      "events_url": "https://api.github.com/users/djc/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/djc/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "djc",
+      "id": 158471,
+      "node_id": "MDQ6VXNlcjE1ODQ3MQ==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/158471?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/djc",
+      "html_url": "https://github.com/djc",
+      "followers_url": "https://api.github.com/users/djc/followers",
+      "following_url": "https://api.github.com/users/djc/following{/other_user}",
+      "gists_url": "https://api.github.com/users/djc/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/djc/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/djc/subscriptions",
+      "organizations_url": "https://api.github.com/users/djc/orgs",
+      "repos_url": "https://api.github.com/users/djc/repos",
+      "events_url": "https://api.github.com/users/djc/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/djc/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "f28da8c5d386e507fac79153655184056a20c054",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/commits/f28da8c5d386e507fac79153655184056a20c054",
+        "html_url": "https://github.com/rustsec/advisory-db/commit/f28da8c5d386e507fac79153655184056a20c054"
+      }
+    ]
+  },
+  {
+    "sha": "f28da8c5d386e507fac79153655184056a20c054",
+    "node_id": "C_kwDOBPTSmdoAKGYyOGRhOGM1ZDM4NmU1MDdmYWM3OTE1MzY1NTE4NDA1NmEyMGMwNTQ",
+    "commit": {
+      "author": {
+        "name": "Brian Campbell",
+        "email": "unlambda@gmail.com",
+        "date": "2026-10-16T19:34:20Z"
+      },
+      "committer": {
+        "name": "Dirkjan Ochtman",
+        "email": "dirkjan@ochtman.nl",
+        "date": "2026-10-16T19:44:09Z"
+      },
+      "message": "Add CVSS info for two advisories that contain it",
+      "tree": {
+        "sha": "bc465087e81fe02c01941ed0122a021d753878b5",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/git/trees/bc465087e81fe02c01941ed0122a021d753878b5"
+      },
+      "url": "https://api.github.com/repos/rustsec/advisory-db/git/commits/f28da8c5d386e507fac79153655184056a20c054",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/rustsec/advisory-db/commits/f28da8c5d386e507fac79153655184056a20c054",
+    "html_url": "https://github.com/rustsec/advisory-db/commit/f28da8c5d386e507fac79153655184056a20c054",
+    "comments_url": "https://api.github.com/repos/rustsec/advisory-db/commits/f28da8c5d386e507fac79153655184056a20c054/comments",
+    "author": {
+      "login": "lambda",
+      "id": 37398,
+      "node_id": "MDQ6VXNlcjM3Mzk4",
+      "avatar_url": "https://avatars.githubusercontent.com/u/37398?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/lambda",
+      "html_url": "https://github.com/lambda",
+      "followers_url": "https://api.github.com/users/lambda/followers",
+      "following_url": "https://api.github.com/users/lambda/following{/other_user}",
+      "gists_url": "https://api.github.com/users/lambda/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/lambda/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/lambda/subscriptions",
+      "organizations_url": "https://api.github.com/users/lambda/orgs",
+      "repos_url": "https://api.github.com/users/lambda/repos",
+      "events_url": "https://api.github.com/users/lambda/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/lambda/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "djc",
+      "id": 158471,
+      "node_id": "MDQ6VXNlcjE1ODQ3MQ==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/158471?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/djc",
+      "html_url": "https://github.com/djc",
+      "followers_url": "https://api.github.com/users/djc/followers",
+      "following_url": "https://api.github.com/users/djc/following{/other_user}",
+      "gists_url": "https://api.github.com/users/djc/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/djc/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/djc/subscriptions",
+      "organizations_url": "https://api.github.com/users/djc/orgs",
+      "repos_url": "https://api.github.com/users/djc/repos",
+      "events_url": "https://api.github.com/users/djc/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/djc/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "9a9ee65f184117d1aa48e2ded248177ee254f7ac",
+        "url": "https://api.github.com/repos/rustsec/advisory-db/commits/9a9ee65f184117d1aa48e2ded248177ee254f7ac",
+        "html_url": "https://github.com/rustsec/advisory-db/commit/9a9ee65f184117d1aa48e2ded248177ee254f7ac"
+      }
+    ]
+  }
+]
