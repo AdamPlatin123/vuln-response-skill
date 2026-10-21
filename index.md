@@ -96,7 +96,13 @@
 |---|---|---|---|---|---|
 | CVE-2026-90553 | vLLM（LlavaOnevision2 loader，可绕过 `trust_remote_code=False`） | `<0.28.0` | `0.28.0` | S301 | 一手 |
 | CVE-2026-105192 | LMCache（ZMQ 未认证 pickle RCE） | `0.3.9–0.5.5`（含 `0.5.6rc`） | `0.5.6` | S304 | 一手 |
-| CVE-2026-105752 | vLLM（跨租户前缀缓存泄露，low） | `≤0.25.1` | `0.30.0` | S302 | 一手 |
+| CVE-2026-105752 | vLLM（跨租户前缀缓存泄露，low） | `<0.30.0` | `0.30.0` | S302 | 一手（W7 修正：原写 `≤0.25.1` 漏 0.26–0.29） |
+| CVE-2026-105753 | vLLM（多模态 IPC 缓存不同步） | `<0.28.0` | `0.28.0` | S436 | 一手（OSV/GHSA） |
+| CVE-2026-105754 | vLLM（多模态传输信任调用方特征） | `<0.30.0` | `0.30.0` | S437 | 一手（原 observe，GHSA 到位升 verified） |
+| CVE-2026-105756 | vLLM（`cache_salt` 弱校验 → 单请求杀 EngineCore） | `<0.30.0` | `0.30.0` | S438 | 一手（OSV/GHSA） |
+| CVE-2026-105758 | vLLM（Qwen2/3-VL 视频采样 `max_frames` 无界） | `>=0.24.0 <0.30.0` | `0.30.0` | S439 | 一手（OSV/GHSA） |
+| CVE-2026-105760 | vLLM（GLMGA 视频采样 CPU/内存耗尽） | `>=0.23.0rc2 <0.30.0` | `0.30.0` | S440 | 一手（OSV/GHSA） |
+| CVE-2026-105922 | vLLM（Penalty Handler DoS） | `<0.32.0` | **`0.32.0`**（总修复线） | S441 | 一手（OSV/PYSEC） |
 | CVE-2026-103663 | Ollama（`/api/pull` 路径穿越 → root RCE） | `>=0.34.2 <0.35.0`（cvelistV5 原文） | `0.35.0` | S305 / S315 | **一手（CNA 记录）**；条件 CVSS：默认 root **9.4** / 无写权限 **6.9**；SSVC `Exploitation: none`（未在野利用）；Ollama release note 静默 |
 | CVE-2026-90970 | GitLab **Self-Hosted** AI Gateway（模板沙箱逃逸 → 命令执行） | `18.1.6–<19.2.4` / `19.3.0–<19.3.2` / `19.4.0–<19.4.1` | `19.2.4` / `19.3.2` / `19.4.1` | S308 | **一手（GitLab 官方）**；**CVSS 9.9 但 `PR:L` 需认证**；GitLab.com/Dedicated 不受影响 |
 
@@ -104,7 +110,7 @@
 
 > **观察项（未进 05 的 cve 列表）**：`CVE-2026-105775` vLLM mamba_mixer2——issue #57266 是普通崩溃 bug（越界 slice 杀 EngineCore），无 GHSA、无修复 commit，不写升级命令。
 
-> `CVE-2026-114053`（AutoProcessor RCE）、`CVE-2026-105754` 只有二手候选，**未核实到官方 GHSA，不进结论**。
+> `CVE-2026-114053`（AutoProcessor RCE）只有二手候选，**未核实到官方 GHSA，不进结论**。（`CVE-2026-105754` 已于 W7 取得一手 GHSA，见 S437，升 verified。）
 
 > cert.pl：CERT Polska 是 `CVE-2026-103663` 的 **CNA（CVE 分配方）**，其公告属 CVE 官方记录，记「一手」。但 Ollama 自己的 release note 未提该 CVE——**「CNA 记录了修复版本」≠「厂商声明确认」**，两件事分开写。
 
