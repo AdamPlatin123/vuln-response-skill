@@ -8,7 +8,7 @@ fixed: ["vLLM 0.28.0", "vLLM 0.30.0", "LMCache 0.5.6", "Ollama 0.35.0", "GitLab 
 severity: "严重（LMCache 9.8 未认证 RCE；GitLab AI Gateway 9.9 需认证 PR:L；Ollama 条件 CVSS 9.4 / 6.9）"
 status: verified
 sources: ["https://github.com/vllm-project/vllm/security/advisories/GHSA-3c86-2m5g-59q7", "https://github.com/LMCache/LMCache/security/advisories/GHSA-w5f2-9q9c-ff4h", "https://cert.pl/en/posts/2026/10/CVE-2026-103663/", "https://github.com/vllm-project/vllm/security/advisories/GHSA-935w-9g4m-p28p"]
-updated: 2026-10-21
+updated: 2026-10-22
 ---
 
 # Python / LLM 基建漏洞处置

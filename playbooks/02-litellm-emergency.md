@@ -9,7 +9,7 @@ fixed: ["1.83.0", "1.83.7", "1.83.9", "1.88.6", "1.89.7", "1.90.7", "1.91.5", "1
 severity: "严重（42208 未认证 9.8 + KEV；其余需已认证 key，含 RCE 与凭据外泄）"
 status: verified
 sources: ["https://github.com/advisories/GHSA-r75f-5x8p-qvmc", "https://github.com/advisories/GHSA-3cv6-jpf6-8222", "https://github.com/advisories/GHSA-hx8v-g79f-8w5f", "https://docs.litellm.ai/blog/security-update-march-2026"]
-updated: 2026-10-21
+updated: 2026-10-22
 ---
 
 # LiteLLM 多 CVE 升级矩阵与供应链事故

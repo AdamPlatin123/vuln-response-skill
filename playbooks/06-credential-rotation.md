@@ -8,7 +8,7 @@ fixed: ["不适用（流程件）：目标状态 = 旧凭据全部禁用且引�
 severity: "流程型（P0 已泄露 / P1 可能泄露 / P2 例行轮换）"
 status: verified
 sources: ["https://www.cisa.gov/known-exploited-vulnerabilities-catalog", "https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html", "https://www.postgresql.org/docs/current/sql-alterrole.html"]
-updated: 2026-10-21
+updated: 2026-10-22
 ---
 
 # 凭据与密钥轮换

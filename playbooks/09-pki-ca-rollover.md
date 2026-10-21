@@ -9,7 +9,7 @@ fixed: ["Go 1.26.10", "Go 1.27.3", "webpki-roots 1.0.10", "webpki-root-certs 1.0
 severity: "高危（伪造 HTTPS 证书做中间人；私钥已广为人知，CT 日志暂未见签发记录，但厂商明确「近期很可能被滥用」）；另含两条应用层 TLS 校验关断：gist 4.0 **9.1** / Thrift 4.0 **6.9**"
 status: verified
 sources: ["https://www.openwall.com/lists/oss-security/2026/10/20/1", "https://blog.mozilla.org/security/2026/10/20/protecting-firefox-users-following-the-compromise-of-emudhra-intermediate-certificates/", "https://raw.githubusercontent.com/rustsec/advisory-db/main/crates/webpki-roots/RUSTSEC-2026-0381.md", "https://osv.dev/vulnerability/GO-2026-6809"]
-updated: 2026-10-21
+updated: 2026-10-22
 ---
 
 # eMudhra 中间 CA 弱密钥 · PKI 处置

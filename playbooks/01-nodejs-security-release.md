@@ -8,7 +8,7 @@ fixed: ["22.23.4", "24.22.1", "26.12.1"]
 severity: "高危（官方公告标 HIGH，未给 CVSS 分数）"
 status: verified
 sources: ["https://nodejs.org/en/blog/vulnerability/october-2026-security-releases"]
-updated: 2026-10-21
+updated: 2026-10-22
 ---
 
 # Node.js 2026-10-21 安全版本升级

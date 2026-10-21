@@ -8,7 +8,7 @@ fixed: ["8.2.35", "8.3.36", "8.4.27", "8.5.12"]
 severity: "严重 CVSS 9.2（官方口径；泄露传播的 10.0 是错的）"
 status: verified
 sources: ["https://www.php.net/archive/2026.php#2026-10-21-5", "https://thephp.foundation/blog/2026/10/21/todays-php-security-release-and-how-were-strengthening-php-security/", "https://github.com/php/php-src/security/advisories/GHSA-w8hw-w9fx-j79w", "https://github.com/php/php-src/security/advisories/GHSA-6wmf-4rv5-p3rp"]
-updated: 2026-10-21
+updated: 2026-10-22
 ---
 
 # PHP 运行时 RCE 应急

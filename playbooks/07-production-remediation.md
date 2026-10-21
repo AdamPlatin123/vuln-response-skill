@@ -8,7 +8,7 @@ fixed: ["按具体漏洞 playbook（01–06、08、09）的 fixed 字段执行"]
 severity: "流程型（P0 在野利用 / P1 公网可达 / P2 内网或需认证 / P3 计划变更）"
 status: verified
 sources: ["https://www.cisa.gov/known-exploited-vulnerabilities-catalog", "https://github.com/advisories", "https://nodejs.org/en/security/"]
-updated: 2026-10-21
+updated: 2026-10-22
 ---
 
 # 生产环境漏洞修复 Runbook
