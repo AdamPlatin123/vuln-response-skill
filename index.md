@@ -35,7 +35,7 @@
 | CVE-2026-59823 | `user_config` 嵌套 `api_base` → SSRF | 有效 virtual key | `<1.83.9` | `1.83.9` | S311 | 一手 |
 | CVE-2026-84377 | 已认证 SSRF + **provider 凭据外泄** | 认证（`PR:L`） | `<1.88.6`；1.89–1.96 共 **9 条分支**（见下表，**不是双分支**） | 分支表 | S312 | 一手 |
 | PyPI 投毒（非 CVE） | `litellm==1.82.7` / `1.82.8` 凭据窃取器 | — | 2026-03-24 **10:39–16:00 UTC** 窗口内安装 | 最低 `1.83.0`；两版已下架 | S313 | 一手 |
-| Check Point 研究 | 网关攻击面综述 | — | 2026-10-13 | — | S314 | **正文未抓，暂不入结论** |
+| Check Point 研究 | 网关攻击面综述 | — | 2026-10-13 | — | S314 | 正文已抓（W3，`evidence/w3-2026-10-22/checkpoint-body.html`）；02 作佐证 |
 
 **CVE-2026-84377 分支修复表**（OSV 原文）：`<1.89`→`1.88.6`｜`1.89.x`→`1.89.7`｜`1.90.x`→`1.90.7`｜`1.91.x`→`1.91.5`｜`1.92.x`→`1.92.2`｜`1.93.x`→`1.93.2`｜`1.94.x`→`1.94.3`｜`1.95.x`→`1.95.1`｜`1.96.x`→`1.96.2`。
 
@@ -202,7 +202,7 @@ KEV 收录 = **已被利用**，不是「有补丁待升级」。全部 9 条已
 | `playbooks/07-production-remediation.md` | 修复策略 | **verified**，入口件（内存/连接取证、failover、双读窗口、四种修复状态已补） |
 | `playbooks/08-php-runtime.md` | 修复策略 | **verified**，两条 CVE 一手齐（S400–S403） |
 | `playbooks/09-pki-ca-rollover.md` | 修复策略 | **verified**（S501–S507 + SPKI 锚点） |
-| `ingest/2026-10-21/`（4 件） | Chief → Skill工坊 | 原件已归档，**编号未入表**，等侦察回件 |
+| `ingest/2026-10-21/`（4 件） | Chief → Skill工坊 | 原件已归档，**编号未入表**；侦察 W1–W4 已回件并入表/入件（`inventory.tsv` 101 行） |
 | `playbooks/06-credential-rotation.md` | 修复策略 | **verified**，凭据轮换流程（覆盖 02/03 的轮换清单） |
 
 ## 6. 未闭环清单（写报告时必须带上）
@@ -221,8 +221,8 @@ KEV 收录 = **已被利用**，不是「有补丁待升级」。全部 9 条已
 | G10 | Sysdig LiteLLM 披露博客 | 「披露日 2026-04-30」仍无链接；02 在补 URL 前不得写该日期 | 漏洞侦察 |
 | G11 | ~~05 的 GitLab 判定降级~~ | **已闭环**：05 已改「Self-Hosted + PR:L 需认证 + GitLab.com 不受影响」 | — |
 | G12 | ~~`S305` 的 CNA 证据要可点开~~ | **已闭环**：S315 = cvelistV5 原始 JSON（实抓存档，`assignerShortName` = CERT-PL） | — |
-| G13 | GPT 情报集吸收（分批） | **D1 已吸收**：LiteLLM 6 条 + PyPI 事故 → S309–S316，02 扩成 7 条 + 分支表。**未吸收**：eMudhra CA 两份厂商公告、PHP 2 条、Go 15 项、在野利用簇 5 家 | 漏洞侦察 → Skill工坊 |
-| G14 | Check Point 研究正文（S314） | 只登记了 URL，正文未抓；引用了也没法核 | 漏洞侦察 |
+| G13 | GPT 情报集吸收（分批） | **D1 已吸收**：LiteLLM 6 条 + PyPI 事故 → S309–S316，02 扩成 7 条 + 分支表。**已全部吸收**：PHP 2 条→08（S400–S403）、在野簇 9 条→10、eMudhra 公告→09（S501/S506）、Go 15 项→定口径交 `govulncheck` | 漏洞侦察 → Skill工坊 |
+| G14 | Check Point 研究正文（S314） | **已闭环**：W3 已抓正文（`S314`，`evidence/w3-2026-10-22/checkpoint-body.html`），02 作佐证 | 漏洞侦察 |
 | G15 | 内核 `c6e50df8` 映射 | 8 位缩写**无法唯一映射**到 CVE（已查 10 月内核 CVE 与修复 commit 均不符）→ 标「未确认」，别拿 commit 猜 | 漏洞侦察 |
 | G16 | ~~09 标题与根因措辞~~ | **已闭环**：09 标题已改为「eMudhra 中间 CA 弱密钥（P384 私钥可秒级恢复）」，正文结论未动 | — |
 
@@ -244,7 +244,7 @@ KEV 收录 = **已被利用**，不是「有补丁待升级」。全部 9 条已
 | **HTTPS 证书（eMudhra/emSign）** | INC-EMUDHRA-202610 | 根因是**弱密钥**（KGC 生成脚本缺陷）；① 换 CA 重签全部对外证书 ② 各 trust store 移除 ③ SPKI 自查 | 已核实（S501–S507） |
 | Node 24.x Brotli 网关 | CVE-2026-111497 | 公网 + 不可信压缩体 = 最急；先 nginx 拦 br 再升 `24.22.1` | 已核实（S006） |
 | Go 微服务 | CVE-2026-111943 + 10-08 批次 | **信任库随二进制走，升 `go` 命令没用**：用 `1.26.10`/`1.27.3` 工具链重编译；x/net `0.60.0` | 已核实（S100–S103） |
-| Java GraalVM | 无本队条目 | `cacerts` 独立于系统；**native image 把 trust store 烤进二进制**，必须重建 | 待核实（缺口） |
+| Java GraalVM | **无厂商修复版本**；发行版随 OS 包（Debian/Ubuntu `ca-certificates-java` 钩子、RHEL 指向 `/etc/pki/java/cacerts`），Oracle JDK 只能 `keytool`/trustStore，GraalVM 须重编译 | `cacerts` 独立于系统；**native image 把 trust store 烤进二进制**，必须重建 | 已核实（S433/S434；Oracle 无版本） |
 | Rust TLS 校验层 | RUSTSEC-2026-0381/0382/0383 | 根证书**编译进二进制**，升级后重编译 | 已核实（S502–S504） |
 | Python + LiteLLM 1.107.0 | 5 条 CVE，修复线上限 `1.96.2` | `1.107.0` 高于全部修复线，版本大概率没事；**但 venv 的 `certifi` 要单独换**；逐条对 02 §0 矩阵 | 已核实（S309–S313） |
 | CI（昨晚拉新包） | PyPI 1.82.7/1.82.8 投毒（历史） | 冻结 CI → 锁文件 diff → `.pth` 扫描 → 可疑环境**别用它自己的 python/pip 自查** | 已核实（S313） |
