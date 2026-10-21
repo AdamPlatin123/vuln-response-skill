@@ -4,7 +4,7 @@ title: Python / LLM 基建漏洞处置（vLLM / LMCache / Ollama / GitLab AI Gat
 ecosystem: python-llm
 cve: ["CVE-2026-90553", "CVE-2026-105192", "CVE-2026-103663", "CVE-2026-90970", "CVE-2026-105752", "CVE-2026-105753", "CVE-2026-105754", "CVE-2026-105756", "CVE-2026-105758", "CVE-2026-105760", "CVE-2026-105922"]
 aliases: ["GHSA-ph3r-5jfg-f84f", "GHSA-ph72-cqr5-qpp7", "GHSA-2823-qmq8-rwvj", "GHSA-x6mc-67gf-chw4", "GHSA-58v5-2m8f-94pr", "PYSEC-2026-4319"]
-affects: "vLLM <0.28.0（loader RCE）、≤0.25.1、10-15 批：<0.28.0（105753）、<0.30.0（105754/105756）、>=0.24.0 <0.30.0（105758）、>=0.23.0rc2 <0.30.0（105760）、<0.32.0（105922）；LMCache 0.3.9–0.5.5（含 0.5.6rc）；Ollama >=0.34.2 <0.35.0；GitLab AI Gateway 18.1.6–<19.2.4 / 19.3.0–<19.3.2 / 19.4.0–<19.4.1"
+affects: "vLLM <0.28.0（loader RCE）、<0.30.0（105752）、10-15 批：<0.28.0（105753）、<0.30.0（105754/105756）、>=0.24.0 <0.30.0（105758）、>=0.23.0rc2 <0.30.0（105760）、<0.32.0（105922）；LMCache 0.3.9–0.5.5（含 0.5.6rc）；Ollama >=0.34.2 <0.35.0；GitLab AI Gateway 18.1.6–<19.2.4 / 19.3.0–<19.3.2 / 19.4.0–<19.4.1"
 fixed: ["vLLM 0.28.0", "vLLM 0.30.0", "vLLM 0.32.0", "LMCache 0.5.6", "Ollama 0.35.0", "GitLab 19.2.4", "GitLab 19.3.2", "GitLab 19.4.1"]
 severity: "严重（LMCache 9.8 未认证 RCE；GitLab AI Gateway 9.9 需认证 PR:L；Ollama 条件 CVSS 9.4 / 6.9）"
 status: verified
@@ -34,7 +34,7 @@ updated: 2026-10-22
 | 组件 | 受影响 | 修复 |
 |---|---|---|
 | vLLM | `<0.28.0`（LlavaOnevision2 loader） | `0.28.0` |
-| vLLM | `≤0.25.1`（Harmony 工具续轮丢 `cache_salt`） | `0.30.0` |
+| vLLM | `<0.30.0`（Harmony 工具续轮丢 `cache_salt`，CVE-2026-105752） | `0.30.0` |
 | vLLM | `≤0.31.0`（mamba_mixer2 越界读） | **未确认**；已降为观察项，见文末 |
 | vLLM | `<0.28.0`（多模态 IPC 缓存不同步） | `0.28.0`（CVE-2026-105753） |
 | vLLM | `<0.30.0`（多模态传输信任调用方特征） | `0.30.0`（CVE-2026-105754，原 observe 升 verified） |
@@ -225,7 +225,7 @@ docker pull "$(sed -n 4p "/secure/change/$CHG/pre-llm.txt")"   # RepoDigests 已
 | CVE-2026-105192 | LMCache（ZMQ pickle） | `0.3.9–0.5.5`（含 `0.5.6rc`） | `0.5.6` | https://github.com/LMCache/LMCache/security/advisories/GHSA-w5f2-9q9c-ff4h |
 | CVE-2026-103663 | Ollama（`/api/pull` 路径穿越，CWE-23） | `>=0.34.2 <0.35.0` | `0.35.0`（CNA = CERT-PL） | https://cert.pl/en/posts/2026/10/CVE-2026-103663/ |
 | CVE-2026-90970 | GitLab AI Gateway（模板沙箱逃逸） | `18.1.6–<19.2.4` / `19.3.0–<19.3.2` / `19.4.0–<19.4.1` | `19.2.4` / `19.3.2` / `19.4.1`（官方，CVSS 9.9 `PR:L`） | https://docs.gitlab.com/releases/patches/other-patches/patch-release-gitlab-ai-gateway-19-4-1-released/ |
-| CVE-2026-105752 | vLLM（跨租户缓存泄露，low） | `≤0.25.1` | `0.30.0` | https://github.com/vllm-project/vllm/security/advisories/GHSA-935w-9g4m-p28p |
+| CVE-2026-105752 | vLLM（跨租户缓存泄露，low） | `<0.30.0` | `0.30.0` | https://github.com/vllm-project/vllm/security/advisories/GHSA-935w-9g4m-p28p |
 
 **未确认（不进结论，只跟进）**：CVE-2026-114053（AutoProcessor RCE）、CVE-2026-105754（多模态传输信任调用方特征）均为二手候选，未核实到官方 GHSA。
 
