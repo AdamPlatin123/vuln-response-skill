@@ -3,10 +3,29 @@
 把「收到一条 CVE / 公告 → 判断我受不受影响 → 修复 → 验证 → 留证」压成可执行流程的 Agent Skill。
 不是漏洞库，是**处置流程**：每条结论带一手 URL，每个修复步骤带能直接跑的验证命令。
 
-- 状态：`v0.4.2`（W7 最终版：vLLM 6 条 + 决策树并行件/条件标签 + 105752/升格残留清扫），情报快照 **2026-10-22**（滚动窗口 2026-09-23 ~ 2026-10-23）
+- 状态：`v0.4.3`（W8：近 3 天已确认漏洞声明 + 日期窗口口径），情报快照 **2026-10-22**（滚动窗口 2026-09-23 ~ 2026-10-23）
 - 许可：Apache-2.0（见 `LICENSE`、`NOTICE`）
 - 语言：中文
 - 覆盖：Node/npm、Go、Python/LLM 基建、PHP、PKI/CA、**.NET/ASP.NET Core**、边界设备、**Vyper 源码闸门**、通用生产修复与凭据轮换
+
+## 近 3 天已确认漏洞（2026-10-20T00:00Z → 2026-10-22）
+
+窗口按 advisory / 公告 `published` 时间（UTC）计，不按核查日。共 26 条，全部 verified：
+
+| 批次 | 条数 | 日期锚点 |
+|---|---|---|
+| CISA KEV 10-20 批：SiteGuard CVE-2026-106931、Plex 96652/96654/96655/96656、Siemens CVE-2026-110936 | 6 | KEV added 2026-10-20 |
+| Node.js 安全发布（Brotli / TLS 绕过 / crypto 熵缓存等 10 条） | 10 | 公告日 2026-10-21 |
+| PHP CVE-2026-109618 / 109619（mod_php·FPM） | 2 | 公告日 2026-10-21 |
+| eMudhra 中间 CA 弱密钥：Firefox 113470、Mozilla::CA 113812、certifi GHSA-6q48-6c7w-9gw2、uv GHSA-hq85-5cpj-mr62、RUSTSEC-2026-0382 | 5 | published 10-20T12:00–21:07Z |
+| Coraza GO-2026-6668 | 1 | OSV 2026-10-20T00:20Z |
+| Go x509 GO-2026-6809 | 1 | OSV 2026-10-21T00:27Z |
+| Debian DSA-6572-1 ca-certificates | 1 | DSA 2026-10-20 |
+
+窗口外：RUSTSEC-2026-0381 / 0383 published 2026-10-19T12:00Z（事件日 10-17），不入本窗口，仍保留在 09。
+
+> 逐条对应 `inventory.tsv` 的 `verified` 行：`W1-009…018`（Node 10）、`W1-044/045`（PHP）、`W1-046…051`（KEV 6）、`W1-025`（Go x509）、`W1-026`（Coraza）、`W1-028`（RUSTSEC-0382）、`W1-030/031`（Firefox / Mozilla::CA）、`W1-071/072`（certifi / uv）、`W1-101`（Debian，`advisory_ids=NONE`）。
+
 
 ## 它是怎么被加载的
 

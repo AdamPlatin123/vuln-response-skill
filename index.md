@@ -5,6 +5,24 @@
 > 来源行号统一编号 `Sxxx`，对应 [sources.md](sources.md)。
 > **编号已定死**（2026-10-21 最终版，Chief 亲手落刀）：`07` 生产修复编排（**入口件，先读它**）、`08` PHP、`09` PKI/CA、`10` 边界设备（**定稿 verified**，五家厂商 fixed 逐分支）；`01–06` 为漏洞件，不复用、不重排。
 
+## 近 3 天已确认漏洞（2026-10-20T00:00Z → 2026-10-22）
+
+窗口按 advisory / 公告 `published` 时间（UTC）计，不按核查日。共 26 条，全部 verified：
+
+| 批次 | 条数 | 日期锚点 |
+|---|---|---|
+| CISA KEV 10-20 批：SiteGuard CVE-2026-106931、Plex 96652/96654/96655/96656、Siemens CVE-2026-110936 | 6 | KEV added 2026-10-20 |
+| Node.js 安全发布（Brotli / TLS 绕过 / crypto 熵缓存等 10 条） | 10 | 公告日 2026-10-21 |
+| PHP CVE-2026-109618 / 109619（mod_php·FPM） | 2 | 公告日 2026-10-21 |
+| eMudhra 中间 CA 弱密钥：Firefox 113470、Mozilla::CA 113812、certifi GHSA-6q48-6c7w-9gw2、uv GHSA-hq85-5cpj-mr62、RUSTSEC-2026-0382 | 5 | published 10-20T12:00–21:07Z |
+| Coraza GO-2026-6668 | 1 | OSV 2026-10-20T00:20Z |
+| Go x509 GO-2026-6809 | 1 | OSV 2026-10-21T00:27Z |
+| Debian DSA-6572-1 ca-certificates | 1 | DSA 2026-10-20 |
+
+窗口外：RUSTSEC-2026-0381 / 0383 published 2026-10-19T12:00Z（事件日 10-17），不入本窗口，仍保留在 09。
+
+> 逐条对应 `inventory.tsv` 的 `verified` 行：`W1-009…018`（Node 10）、`W1-044/045`（PHP）、`W1-046…051`（KEV 6）、`W1-025`（Go x509）、`W1-026`（Coraza）、`W1-028`（RUSTSEC-0382）、`W1-030/031`（Firefox / Mozilla::CA）、`W1-071/072`（certifi / uv）、`W1-101`（Debian，`advisory_ids=NONE`）。
+
 ## 1. 按生态
 
 | 生态 | 说明 | playbook | 状态 |
